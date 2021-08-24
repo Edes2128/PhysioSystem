@@ -1,0 +1,158 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Work Sans";
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background-color: $purple-dark;
+}
+.img-res {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+.fs-12 {
+  font-size: 12px;
+}
+
+.fs-14 {
+  font-size: 14px;
+}
+
+.fs-15 {
+  font-size: 15px;
+}
+
+.fs-16 {
+  font-size: 16px;
+}
+
+.fs-18 {
+  font-size: 18px;
+}
+
+.fs-20 {
+  font-size: 20px;
+}
+
+.fs-22 {
+  font-size: 22px;
+}
+
+.fs-24 {
+  font-size: 24px;
+}
+
+.fs-26 {
+  font-size: 26px;
+}
+
+.fs-28 {
+  font-size: 28px;
+}
+
+.fs-30 {
+  font-size: 30px;
+}
+
+.fs-40 {
+  font-size: 40px;
+}
+
+.fs-50 {
+  font-size: 50px;
+}
+
+.fs-60 {
+  font-size: 60px;
+}
+
+.fs-70 {
+  font-size: 70px;
+}
+
+.fw-light {
+  font-weight: 300;
+}
+
+.fw-medium {
+  font-weight: 500;
+}
+
+.fw-bold {
+  font-weight: bold;
+}
+
+.fw-regular {
+  font-weight: normal;
+}
+
+.fw-semib {
+  font-weight: 600;
+}
+
+.flex {
+  display: flex;
+}
+
+.fd-column {
+  flex-direction: column;
+}
+
+.fd-column-reverse {
+  flex-direction: column-reverse;
+}
+
+.ai-center {
+  align-items: center;
+}
+
+.ai-start {
+  align-items: flex-start;
+}
+
+.ai-end {
+  align-items: flex-end;
+}
+
+.jc-center {
+  justify-content: center;
+}
+
+.jc-end {
+  justify-content: flex-end;
+}
+
+.jc-start {
+  justify-content: flex-start;
+}
+
+.jc-spaceb {
+  justify-content: space-between;
+}
+
+.jc-spacea {
+  justify-content: space-around;
+}
+
+.jc-spaceevenly {
+  justify-content: space-evenly;
+}
+
+.txt-align-center {
+  text-align: center;
+}
+
+.txt-align-start {
+  text-align: start;
+}
+
+.txt-align-end {
+  text-align: end;
+}

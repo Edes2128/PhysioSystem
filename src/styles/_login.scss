@@ -1,0 +1,54 @@
+.login {
+  width: 100%;
+  background-image: linear-gradient(150deg, $orange, $purple-dark);
+  height: 100vh;
+  &-form {
+    padding: 40px;
+    background-color: rgba(255, 255, 255, 1);
+    max-width: 500px;
+    width: 100%;
+    backdrop-filter: blur(10px);
+    &-logo {
+      margin-bottom: 20px;
+    }
+    &-inputs {
+      width: 100%;
+      margin-bottom: 30px;
+      input {
+        width: 100%;
+        outline: none;
+        padding: 10px 0 10px 10px;
+        background-color: unset;
+        border: 1px solid black;
+        &:focus {
+          box-shadow: 0 0 5px 1px rgba(113, 105, 163, 0.6);
+        }
+      }
+      label {
+        margin-bottom: 10px;
+      }
+    }
+    &-login {
+      width: 100%;
+      outline: none;
+      border: 0;
+      background-color: $orange;
+      color: white;
+      padding: 14px 0;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    &-links {
+      width: 100%;
+      margin-top: 17px;
+      &-register-link {
+        color: $purple-ligt;
+      }
+      &-password-forget {
+        color: $purple-ligt;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+  }
+}

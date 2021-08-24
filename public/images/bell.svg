@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="31" height="30.131" viewBox="0 0 31 30.131">
+  <g id="Group_1172" data-name="Group 1172" transform="translate(1 -1)">
+    <g id="ICON_-_notifications" data-name="ICON - notifications" transform="translate(0 0)">
+      <g id="Vector_Smart_Object" data-name="Vector Smart Object" transform="translate(0 0)">
+        <path id="Path_25" data-name="Path 25" d="M23.543,10.217a8.217,8.217,0,1,0-16.435,0C7.109,19.8,3,22.543,3,22.543H27.652S23.543,19.8,23.543,10.217Z" transform="translate(-3 0.739)" fill="none" stroke="#c9ced6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <path id="Path_26" data-name="Path 26" d="M15.009,21a2.74,2.74,0,0,1-4.739,0" transform="translate(-0.313 7.761)" fill="none" stroke="#c9ced6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        <ellipse id="Ellipse_1" data-name="Ellipse 1" cx="8.5" cy="8" rx="8.5" ry="8" transform="translate(13 1)" fill="red"/>
+      </g>
+    </g>
+    <text id="_3" data-name="3" transform="translate(25 12)" fill="#fff" font-size="10" font-family="Poppins-Regular, Poppins"><tspan x="-5.89" y="0">3</tspan></text>
+  </g>
+</svg>
