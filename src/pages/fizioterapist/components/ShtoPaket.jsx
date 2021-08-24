@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 export default function ShtoPaket() {
 
-
     const [title, setTitle] = useState('')
     const [image, setImage] = useState('')
     const [previewImage, setPreviewImage] = useState('')
@@ -11,30 +10,27 @@ export default function ShtoPaket() {
     const [kategoria, setKategoria] = useState('')
     const [videoPreview, setVideoPreview] = useState([])
 
-
     console.log(videoPreview)
     console.log(videos)
 
     const addPackage = (e) => {
         e.preventDefault('');
+        alert('Sokoli eshte legen')
+        const formdata = new FormData();
+        formdata.append('cover', image);
     }
-
 
     const removeVideo = (index2, video) => {
         let newdata = [...videoPreview];
         setVideoPreview(newdata.filter(item => item !== video))
-
-
         let newdata2 = [...videos];
-
         setVideos(newdata2.filter((item, index) => index !== index2))
-
     }
 
     return (
         <div className="shtopaket" >
             <p className="shtopaket-title fs-30 fw-semib" >Shto Paket</p>
-            <form className="shtopaket-form" onSubmit={addPackage}>
+            <form className="shtopaket-form flex fd-column ai-start" onSubmit={addPackage}>
 
                 <div className="shtopaket-form-inputs flex jc-spaceb">
                     <div className="shtopaket-form-inputs-item flex fd-column ai-start">
@@ -130,7 +126,55 @@ export default function ShtoPaket() {
                     }
                 </div>
                 <div className="shtopaket-form-video flex fd-column ai-start">
-                    <p className="fs-18 fw-regular" >Shto Videot e Paketes</p>
+                    <div className="flex ai-center" >
+                        <p style={{ marginRight: '20px' }} className="fs-18 fw-regular" >Shto Videot e Paketes</p>
+                        {videoPreview.length !== 0 && videos.length !== 0 && <>
+                            <label style={{ marginTop: '0' }} className="shtopaket-form-video-upload-btn fs-18 fw-regular flex ai-center" htmlFor="add-video">
+                                Shto video te tjera
+                                <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                    width="20" height="20" viewBox="0 0 235.000000 214.000000"
+                                    preserveAspectRatio="xMidYMid meet">
+                                    <metadata>
+                                        Created by potrace 1.16, written by Peter Selinger 2001-2019
+                                    </metadata>
+                                    <g transform="translate(0.000000,214.000000) scale(0.100000,-0.100000)"
+                                        fill="#ffffff" stroke="none">
+                                        <path d="M315 2112 c-78 -27 -138 -66 -193 -127 -59 -65 -96 -137 -111 -219
+                                            -15 -83 -15 -1325 0 -1398 29 -136 121 -253 247 -315 l76 -38 840 0 841 0 68
+                                            32 c80 38 173 122 210 191 55 102 57 120 57 823 0 425 -4 666 -11 705 -25 138
+                                            -117 257 -247 321 l-76 38 -825 2 c-764 2 -830 1 -876 -15z m265 -119 c-1 -5
+                                            -38 -87 -84 -183 l-83 -175 -136 -3 -137 -3 0 49 c0 151 113 287 257 312 63
+                                            10 183 12 183 3z m610 -2 c0 -5 -38 -88 -84 -185 l-85 -176 -240 0 c-133 0
+                                            -241 2 -241 4 0 3 21 49 46 103 25 54 63 135 85 181 l38 82 241 0 c136 0 240
+                                            -4 240 -9z m600 2 c-1 -5 -38 -87 -84 -183 l-83 -175 -236 -3 c-131 -1 -237 0
+                                            -237 2 0 3 32 71 71 153 39 81 77 163 85 181 l14 32 235 0 c129 0 235 -3 235
+                                            -7z m265 -42 c92 -51 155 -162 155 -273 l0 -48 -230 0 c-126 0 -230 2 -230 5
+                                            0 2 23 53 51 112 28 59 66 140 84 180 l34 71 43 -9 c24 -6 66 -23 93 -38z
+                                            m155 -999 c0 -601 0 -598 -68 -687 -27 -36 -57 -60 -106 -85 l-69 -35 -791 0
+                                            -791 0 -56 26 c-69 33 -127 89 -160 155 l-24 49 -3 558 -3 557 1036 0 1035 0
+                                            0 -538z"/>
+                                        <path d="M936 1208 c-14 -19 -16 -73 -16 -385 0 -500 -21 -487 356 -225 141
+                                            97 261 187 267 199 21 47 -4 71 -268 256 -211 146 -261 177 -289 177 -25 0
+                                            -39 -7 -50 -22z"/>
+                                    </g>
+                                </svg>
+                            </label>
+                            <input
+                                type="file"
+                                hidden
+                                multiple
+                                id="add-video"
+                                accept="video/*"
+                                onChange={(e) => {
+                                    for (let i = 0; i < e.target.files.length; i++) {
+                                        setVideos(prev => [...prev, e.target.files[i]])
+                                        setVideoPreview(prev => [...prev, URL.createObjectURL(e.target.files[i])])
+                                    }
+                                }}
+                            />
+                        </>}
+
+                    </div>
                     {videoPreview.length === 0 && videos.length === 0 ?
                         <>
                             <label className="shtopaket-form-video-upload-btn fs-18 fw-regular flex ai-center" htmlFor="video-files">Ngarko Videot
@@ -184,7 +228,7 @@ export default function ShtoPaket() {
                                 {videoPreview.map((video, index) => (
                                     <div key={index} className="shtopaket-form-video-preview-item flex fd-column ai-center" >
                                         <div className="flex" >
-                                            <video className="img-res" autoPlay controls src={video}></video>
+                                            <video className="img-res" controls src={video}></video>
                                         </div>
                                         <button className="shtopaket-form-video-preview-item-fshi-btn fs-18 fw-regular flex ai-center"
                                             onClick={() => {
@@ -225,6 +269,35 @@ export default function ShtoPaket() {
                         </>
                     }
                 </div>
+                <button className="shtopaket-form-submit-btn fs-18 fw-medium flex ai-center" type="submit"> Ruaj
+                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                        width="20" height="20" viewBox="0 0 452.000000 452.000000"
+                        preserveAspectRatio="xMidYMid meet">
+                        <metadata>
+                            Created by potrace 1.16, written by Peter Selinger 2001-2019
+                        </metadata>
+                        <g transform="translate(0.000000,452.000000) scale(0.100000,-0.100000)"
+                            fill="#ffffff" stroke="none">
+                            <path d="M520 4139 c-60 -27 -107 -74 -136 -134 l-24 -50 0 -1695 0 -1695 24
+                        -50 c29 -60 76 -107 136 -134 45 -20 57 -21 1741 -21 l1695 0 52 26 c58 29
+                        106 79 133 138 18 39 19 102 19 1446 l0 1405 -393 392 -392 393 -1405 0
+                        c-1391 0 -1405 -1 -1450 -21z m562 -746 l3 -578 30 -54 c35 -63 82 -105 144
+                        -126 66 -22 1846 -23 1911 0 61 21 112 66 146 127 l29 53 3 545 3 544 309
+                        -309 310 -310 0 -1343 0 -1343 -25 -24 -24 -25 -241 0 -240 0 0 693 c0 769 1
+                        757 -65 834 -19 23 -58 53 -87 67 l-52 26 -976 0 -976 0 -52 -26 c-29 -14 -68
+                        -44 -87 -67 -66 -77 -65 -65 -65 -834 l0 -693 -240 0 -241 0 -24 25 -25 24 0
+                        1661 0 1661 25 24 24 25 240 0 240 0 3 -577z m2078 28 l0 -549 -26 -31 -26
+                        -31 -893 0 -893 0 -26 31 -26 31 0 549 0 549 945 0 945 0 0 -549z m51 -1454
+                        c39 -30 39 -37 39 -736 l0 -681 -990 0 -990 0 0 681 c0 699 0 706 39 736 23
+                        18 1879 18 1902 0z"/>
+                            <path d="M720 815 l0 -95 95 0 95 0 0 95 0 95 -95 0 -95 0 0 -95z" />
+                            <path d="M3610 815 l0 -95 95 0 95 0 0 95 0 95 -95 0 -95 0 0 -95z" />
+                            <path d="M2555 3775 l-25 -24 0 -361 0 -361 26 -24 c26 -25 30 -25 200 -25
+                        168 0 174 1 201 24 l28 24 0 362 0 362 -28 24 c-27 23 -33 24 -203 24 -172 0
+                        -175 0 -199 -25z m245 -385 l0 -220 -40 0 -40 0 0 220 0 220 40 0 40 0 0 -220z"/>
+                        </g>
+                    </svg>
+                </button>
             </form>
         </div>
     )

@@ -299,5 +299,19 @@
         }
       }
     }
+    &-submit-btn {
+      border: 0;
+      outline: none;
+      background-color: green;
+      color: white;
+      padding: 15px 40px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 80px;
+      align-self: flex-end;
+      svg {
+        margin-left: 20px;
+      }
+    }
   }
 }
