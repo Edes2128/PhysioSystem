@@ -10,9 +10,6 @@ export default function ShtoPaket() {
     const [kategoria, setKategoria] = useState('')
     const [videoPreview, setVideoPreview] = useState([])
 
-    console.log(videoPreview)
-    console.log(videos)
-
     const addPackage = (e) => {
         e.preventDefault('');
         alert('Sokoli eshte legen')
@@ -219,24 +216,22 @@ export default function ShtoPaket() {
                                         videos2.push(URL.createObjectURL(e.target.files[i]))
                                     }
                                     setVideoPreview(videos2)
-                                    console.log(videoPreview)
                                 }} />
                         </>
                         :
                         <>
-                            <div className="shtopaket-form-video-preview flex ai-center" >
+                            <div className="shtopaket-form-video-preview flex ai-center " >
                                 {videoPreview.map((video, index) => (
                                     <div key={index} className="shtopaket-form-video-preview-item flex fd-column ai-center" >
                                         <div className="flex" >
                                             <video className="img-res" controls src={video}></video>
                                         </div>
-                                        <button className="shtopaket-form-video-preview-item-fshi-btn fs-18 fw-regular flex ai-center"
+                                        <button type="button" className="shtopaket-form-video-preview-item-fshi-btn fs-18 fw-regular flex ai-center"
                                             onClick={() => {
                                                 removeVideo(index, video)
                                             }}
                                         >
                                             Fshi Videon
-
                                             <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                                                 width="20" height="20" viewBox="0 0 788.000000 980.000000"
                                                 preserveAspectRatio="xMidYMid meet">

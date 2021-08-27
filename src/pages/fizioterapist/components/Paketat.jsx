@@ -59,7 +59,7 @@ export default function Paketat() {
                             <p className="fizio-paketat-body-item-texts-title fs-30 fw-semib">{paket.title}</p>
                             <p className="fizio-paketat-body-item-texts-price fs-24 fw-regular">{paket.price}</p>
                         </div>
-                        <div className="fizio-paketat-body-item-actions" >
+                        <div className="fizio-paketat-body-item-actions flex ai-center jc-center" >
                             <div className="fizio-paketat-body-item-actions-dots" onClick={() => {
                                 if (activeAction === index) {
                                     setActiveAction(-1)

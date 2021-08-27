@@ -6,6 +6,7 @@ import Oferta from './Oferta'
 import Klientet from './Klientet'
 import Profili from './Profili'
 import ShtoPaket from './ShtoPaket'
+import ShtoOfert from './ShtoOfert'
 
 export default function FizioBody() {
     return (
@@ -17,6 +18,7 @@ export default function FizioBody() {
                 <Route path="/fizio/klientet" component={Klientet} />
                 <Route path="/fizio/profili" component={Profili} />
                 <Route path="/fizio/shtopaket" component={ShtoPaket} />
+                <Route path="/fizio/addoffer" component={ShtoOfert} />
             </Switch>
         </div>
     )
