@@ -393,7 +393,7 @@
             color: white;
             padding: 10px 0 10px 5px;
             outline: none;
-            &:focus{
+            &:focus {
               border: 1px solid $orange;
             }
             option {
@@ -412,7 +412,7 @@
             background-color: transparent;
             color: white;
             width: 100%;
-            &:focus{
+            &:focus {
               border: 1px solid $orange;
             }
           }
@@ -422,18 +422,36 @@
           }
         }
       }
-      &-multi{
+      &-multi {
         width: 100%;
-        label{
+        label {
           color: white;
         }
-        &-input{
+        &-input {
           width: 100%;
           border: 1px solid $purple-ligt;
-          padding: 20px 5px;
+          padding: 20px 10px;
           margin-top: 12px;
           position: relative;
-          &-list{
+          &-items {
+            &-item {
+              background-color: $purple-ligt;
+              padding: 15px 20px;
+              border-radius: 20px;
+              margin-right: 10px;
+              &:last-child{
+                margin-right: 0;
+              }
+              p {
+                color: white;
+                margin-right: 10px;
+              }
+              svg {
+                cursor: pointer;
+              }
+            }
+          }
+          &-list {
             position: absolute;
             top: 100%;
             left: 0;
@@ -441,7 +459,39 @@
             max-height: 200px;
             overflow: auto;
             background-color: $purple-ligt;
+            padding: 10px;
+            &-item {
+              margin-bottom: 10px;
+              p {
+                color: white;
+                cursor: pointer;
+              }
+            }
           }
+        }
+      }
+      &-image{
+        &-btn{
+          border: 0;
+          outline: none;
+          color: white;
+          background-color: $purple-ligt;
+          padding: 15px 40px;
+          border-radius: 20px;
+          cursor: pointer;
+        }
+        &-preview{
+          max-width: 500px;
+        &-delete-btn{
+          color: white;
+          background-color: red;
+          outline: none;
+          border: 0;
+          padding: 15px 40px;
+          margin-top: 20px;
+          cursor: pointer;
+          border-radius: 20px;
+        }
         }
       }
     }
