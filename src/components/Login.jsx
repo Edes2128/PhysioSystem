@@ -1,13 +1,27 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
-export default function Login() {
+export default function Login({ history }) {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
     const login = (e) => {
         e.preventDefault();
+
+        let payload = {
+            username,
+            password
+        }
+
+        axios.post('http://localhost/physiosystem/server/user/login', payload).then(res => {
+            if (res.data.status === 1 && res.data.role === 2) {
+                history.push('/fizio')
+            } else if (res.data.status === 1 && res.data.role === 3) {
+                history.push('/client')
+            }
+        })
     }
 
     return (

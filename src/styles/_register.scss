@@ -4,9 +4,11 @@
   height: 100vh;
   &-form {
     background-color: white;
-    padding: 40px;
+    padding: 20px 40px;
     max-width: 600px;
     width: 100%;
+    overflow: auto;
+    max-height: 98%;
     &-logo {
       margin-bottom: 30px;
     }

@@ -1,16 +1,36 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
-export default function Register() {
+
+export default function Register({history}) {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [country ,setCountry] = useState('')
+    const [city,setCity] = useState('')
+    const [postalCode,setPostalCode] = useState('')
 
 
     const register = (e) => {
         e.preventDefault()
+        let payload = {
+            username,
+            name,
+            email,
+            password,
+            country,
+            city,
+            postal_code : postalCode
+        }
+
+        axios.post('http://localhost/physiosystem/server/user/addClient' , payload ).then(res => {
+            if(res.data.status === 1){
+                history.push('/client')
+            }
+        })
     }
 
     return (
@@ -35,6 +55,22 @@ export default function Register() {
                     <label className="fs-16 fw-regular" htmlFor="#">Password</label>
                     <input className="fs-16 fw-regular" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
+
+                <div className="register-form-inputs flex ai-start fd-column">
+                    <label className="fs-16 fw-regular" htmlFor="#">Country</label>
+                    <input className="fs-16 fw-regular" type="text" value={country} onChange={(e) => setCountry(e.target.value)} />
+                </div>
+
+                <div className="register-form-inputs flex ai-start fd-column">
+                    <label className="fs-16 fw-regular" htmlFor="#">City</label>
+                    <input className="fs-16 fw-regular" type="text" value={city} onChange={(e) => setCity(e.target.value)} />
+                </div>
+
+                <div className="register-form-inputs flex ai-start fd-column">
+                    <label className="fs-16 fw-regular" htmlFor="#">Postal Code</label>
+                    <input className="fs-16 fw-regular" type="text" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} />
+                </div>
+
                 <button className="register-form-submit-btn fs-16 fw-regular" >Register</button>
                 <div className="register-form-links flex ai-center jc-start">
                     <Link className="fs-14 fw-medium" to="/" >Already a member?</Link>
