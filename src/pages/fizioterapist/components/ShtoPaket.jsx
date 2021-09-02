@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 
 export default function ShtoPaket() {
 
@@ -9,12 +10,50 @@ export default function ShtoPaket() {
     const [videos, setVideos] = useState([])
     const [kategoria, setKategoria] = useState('')
     const [videoPreview, setVideoPreview] = useState([])
+    const [days, setDays] = useState([
+        {
+            titulli: '',
+            pershkrimi: '',
+            pdf: '',
+            pdf_name : '',
+            day_videos: [],
+            day_videos_local: [],
+            day_videos_names: []
+        }
+    ])
+
+    let dayVideos = days.map(item => item.day_videos);
+    let daysPdf = days.map(item =>item.pdf);
+
+    console.log(daysPdf)
 
     const addPackage = (e) => {
         e.preventDefault('');
-        alert('Sokoli eshte legen')
         const formdata = new FormData();
+        formdata.append('title', title);
+        formdata.append('price', price);
         formdata.append('cover', image);
+
+        Array.from(videos).forEach((videoFile, index) => {
+            formdata.append(`video_demo[]`, videoFile);
+        })
+
+        let dayss = JSON.stringify(days)
+        formdata.append('days', dayss)
+        dayVideos.forEach((arrs, index) => {
+            arrs.forEach(item2 => {
+                formdata.append(`video-day[]`, item2)
+            })
+        })
+
+
+        Array.from(daysPdf).forEach(pdf => {
+            formdata.append(`days-pdf[]`, pdf)
+        })
+
+
+
+        axios.post('http://localhost/physiosystem/server/fizio/addPackage', formdata)
     }
 
     const removeVideo = (index2, video) => {
@@ -22,6 +61,25 @@ export default function ShtoPaket() {
         setVideoPreview(newdata.filter(item => item !== video))
         let newdata2 = [...videos];
         setVideos(newdata2.filter((item, index) => index !== index2))
+    }
+
+    const removeVideoDay = (index, index2, video) => {
+        let newdata = [...days];
+        let item = newdata[index]
+        item.day_videos_local.splice(index2, 1)
+        item.day_videos.splice(index2, 1)
+        item.day_videos_names.splice(index2, 1)
+        setDays(prev => [...prev], item)
+    }
+    const addDay = () => {
+        setDays(prev => [...prev, { titulli: '', pershkrimi: '', pdf: '',pdf_name : '', day_videos: [], day_videos_local: [], day_videos_names: [] }])
+    }
+
+    const removeDay = (indexItem) => {
+        const newData = [...days]
+        const itemToRemove = days[indexItem];
+        setDays(newData.filter(item => item !== itemToRemove))
+
     }
 
     return (
@@ -79,7 +137,7 @@ export default function ShtoPaket() {
                                 </svg>
                             </label>
                             <input type="file" accept="image/*" hidden id="foto-cover" onChange={(e) => {
-                                setImage(e.target.files)
+                                setImage(e.target.files[0])
                                 setPreviewImage(URL.createObjectURL(e.target.files[0]))
                             }} />
                         </>
@@ -124,7 +182,7 @@ export default function ShtoPaket() {
                 </div>
                 <div className="shtopaket-form-video flex fd-column ai-start">
                     <div className="flex ai-center" >
-                        <p style={{ marginRight: '20px' }} className="fs-18 fw-regular" >Shto Videot e Paketes</p>
+                        <p style={{ marginRight: '20px' }} className="fs-18 fw-regular" >Shto Videot Demo</p>
                         {videoPreview.length !== 0 && videos.length !== 0 && <>
                             <label style={{ marginTop: '0' }} className="shtopaket-form-video-upload-btn fs-18 fw-regular flex ai-center" htmlFor="add-video">
                                 Shto video te tjera
@@ -263,6 +321,154 @@ export default function ShtoPaket() {
                             </div>
                         </>
                     }
+                </div>
+
+                <div className="shtopaket-form-days flex fd-column ai-start">
+
+                    <p className="shtopaket-form-days-title fs-20 fw-regular" >Ditet e Paktes</p>
+                    {days.map((day, index) => (
+                        <div className="shtopaket-form-days-item" >
+                            <div
+                                onClick={() => addDay()}
+                                className="shtopaket-form-days-item-add flex ai-center jc-center fs-30"
+                                style={{ display: days.length === index + 1 ? 'flex' : 'none' }}
+                            >+
+                            </div>
+                            <div
+                                onClick={() => removeDay(index)}
+                                className="shtopaket-form-days-item-remove flex ai-center jc-center fs-30"
+                                style={{ display: days.length === 1 ? 'none' : 'flex' }}
+                            >
+                                -
+                            </div>
+
+                            <div className="shtopaket-form-days-item-top flex ai-end jc-spaceb">
+                                <div className="shtopaket-form-days-item-top-input flex fd-column ai-start">
+                                    <label className="fs-18 fw-regular" htmlFor="#">Titulli</label>
+                                    <input
+                                        className="fs-18 fw-regular"
+                                        type="text"
+                                        placeholder="Dita 1"
+                                        value={day.titulli}
+                                        onChange={(e) => {
+                                            let newdata = [...days];
+                                            const item = newdata[index];
+                                            item.titulli = e.target.value;
+                                            setDays(prev => [...prev], item)
+                                        }}
+                                    />
+                                </div>
+                                <div className="shtopaket-form-days-item-top-input flex fd-column ai-start">
+                                    <label className="fs-18 fw-regular" htmlFor="#">Pershkrimi</label>
+                                    <input
+                                        value={day.pershkrimi}
+                                        onChange={(e) => {
+                                            let newdata = [...days];
+                                            const item = newdata[index];
+                                            item.pershkrimi = e.target.value;
+                                            setDays(prev => [...prev], item)
+                                        }}
+                                        className="fs-18 fw-regular" type="text" placeholder="Blabla..." />
+                                </div>
+                                <div className="shtopaket-form-days-item-top-btn flex " >
+
+                                    {day.pdf === "" ?
+                                        <>
+                                            <label htmlFor={`pdf-day-${index}`}>Shto PDF</label>
+                                            <input onChange={(e) => {
+                                                const newData = [...days];
+                                                const item = newData[index]
+                                                item.pdf = e.target.files[0]
+                                                item.pdf_name = e.target.files[0].name 
+                                                setDays(prev => [...prev], item)
+                                            }}
+                                                type="file"
+                                                accept="application/pdf, .pdf"
+                                                hidden
+                                                id={`pdf-day-${index}`}
+                                            />
+                                        </>
+                                        :
+                                        <div className="shtopaket-form-days-item-top-btn-preview flex fd-column ai-center" >
+                                            <button
+                                                onClick={() => {
+                                                    const data = [...days]
+                                                    const item = data[index]
+                                                    item.pdf = ''
+                                                    item.pdf_name = ''
+                                                    setDays(prev => [...prev], item)
+                                                }}
+                                                type="button" >X</button>
+                                            <div className="flex" >
+                                                <img src="/images/pdf.png" className="img-res" alt="" />
+                                            </div>
+                                            <p className="fs-16 fw-light" >{day.pdf.name}</p>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div className="shtopaket-form-days-item-bottom flex fd-column ai-start ">
+                                {day.day_videos.length === 0 && day.day_videos_local.length === 0 ?
+                                    <>
+                                        <label htmlFor={`video-day-${index}`}>Ngarko Videot</label>
+                                        <input
+                                            type="file"
+                                            accept="video/*"
+                                            id={`video-day-${index}`}
+                                            multiple
+                                            hidden
+                                            onChange={(e) => {
+                                                for (let i = 0; i < e.target.files.length; i++) {
+                                                    const newdata = [...days];
+                                                    const item = newdata[index]
+                                                    item.day_videos.push(e.target.files[i])
+                                                    item.day_videos_local.push(URL.createObjectURL(e.target.files[i]))
+                                                    item.day_videos_names.push(e.target.files[i].name)
+                                                    setDays(prev => [...prev], item)
+                                                }
+                                            }}
+                                        />
+                                    </>
+                                    :
+                                    <>
+                                        <label htmlFor={`video-extra-day-${index}`}>Shto Video Te Tjera</label>
+                                        <input onChange={(e) => {
+
+                                            for (let i = 0; i < e.target.files.length; i++) {
+                                                const newdata = [...days];
+                                                const item = newdata[index]
+                                                item.day_videos.push(e.target.files[i])
+                                                item.day_videos_local.push(URL.createObjectURL(e.target.files[i]))
+                                                item.day_videos_names.push(e.target.files[i].name)
+                                                setDays(prev => [...prev], item)
+                                            }
+
+                                        }} type="file" multiple accept="video/*" id={`video-extra-day-${index}`} hidden />
+                                    </>
+                                }
+
+                                {day.day_videos.length !== 0 && day.day_videos_local.length !== 0 &&
+
+                                    <div className="shtopaket-form-days-item-bottom-preview flex  ai-end" >
+
+                                        {day.day_videos_local.map((video, index2) => (
+                                            <div className="shtopaket-form-days-item-bottom-preview-item flex fd-column ai-center">
+                                                <div className="flex" >
+                                                    <video controls src={video} className="img-res" ></video>
+                                                </div>
+                                                <button
+                                                    onClick={() => {
+                                                        removeVideoDay(index, index2, video)
+                                                    }}
+                                                    className="fs-16 fw-regular" type="button" >Fshi Videon </button>
+                                            </div>
+                                        ))}
+
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    ))}
                 </div>
                 <button className="shtopaket-form-submit-btn fs-18 fw-medium flex ai-center" type="submit"> Ruaj
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"

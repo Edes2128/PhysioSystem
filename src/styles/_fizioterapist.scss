@@ -324,6 +324,129 @@
         margin-left: 20px;
       }
     }
+
+    &-days {
+      width: 100%;
+      margin-top: 40px;
+      margin-bottom: 30px;
+      &-title {
+        color: $orange;
+      }
+      &-item {
+        &:nth-child(odd) {
+          background-color: black;
+        }
+        width: 100%;
+        box-shadow: 0 0px 5px rgba(252, 79, 70, 0.4);
+        margin-top: 40px;
+        padding: 40px 10px;
+        position: relative;
+        &-remove {
+          position: absolute;
+          top: -30px;
+          right: 100px;
+          height: 50px;
+          width: 50px;
+          background-color: $purple-ligt;
+          color: white;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+        &-add {
+          position: absolute;
+          top: -30px;
+          right: 20px;
+          color: white;
+          height: 50px;
+          width: 50px;
+          background-color: $orange;
+          border-radius: 50%;
+          cursor: pointer;
+        }
+        &-top {
+          width: 100%;
+          &-btn {
+            label {
+              color: white;
+              background-color: $purple-ligt;
+              padding: 14px 32px;
+              border-radius: 20px;
+              cursor: pointer;
+            }
+            &-preview {
+              position: relative;
+              button {
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                top: 0;
+                left: 0;
+                background-color: red;
+                color: white;
+                cursor: pointer;
+                border: 0;
+                outline: none;
+              }
+              p {
+                color: white;
+                margin-top: 10px;
+              }
+            }
+          }
+          &-input {
+            width: 30%;
+            input {
+              width: 100%;
+              padding: 10px 5px 10px 10px;
+              color: white;
+              border: 1px solid $purple-ligt;
+              background-color: transparent;
+              outline: none;
+              &::placeholder {
+                color: rgba(255, 255, 255, 0.534);
+              }
+            }
+            label {
+              margin-bottom: 10px;
+              color: white;
+            }
+          }
+        }
+        &-bottom {
+          margin-top: 40px;
+          &-preview {
+            width: 100%;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            &-item {
+              max-width: 400px;
+              margin-right: 140px;
+              &:nth-child(3n) {
+                margin-right: 0;
+              }
+              button {
+                margin-top: 15px;
+                background-color: red;
+                color: white;
+                border: 0;
+                outline: none;
+                padding: 14px 0;
+                width: 50%;
+                border-radius: 20px;
+                cursor: pointer;
+              }
+            }
+          }
+          label {
+            color: white;
+            padding: 14px 40px;
+            background-color: $purple-ligt;
+            border-radius: 20px;
+            cursor: pointer;
+          }
+        }
+      }
+    }
   }
 }
 .oferta {
@@ -439,7 +562,7 @@
               padding: 15px 20px;
               border-radius: 20px;
               margin-right: 10px;
-              &:last-child{
+              &:last-child {
                 margin-right: 0;
               }
               p {
@@ -470,8 +593,8 @@
           }
         }
       }
-      &-image{
-        &-btn{
+      &-image {
+        &-btn {
           border: 0;
           outline: none;
           color: white;
@@ -480,18 +603,18 @@
           border-radius: 20px;
           cursor: pointer;
         }
-        &-preview{
+        &-preview {
           max-width: 500px;
-        &-delete-btn{
-          color: white;
-          background-color: red;
-          outline: none;
-          border: 0;
-          padding: 15px 40px;
-          margin-top: 20px;
-          cursor: pointer;
-          border-radius: 20px;
-        }
+          &-delete-btn {
+            color: white;
+            background-color: red;
+            outline: none;
+            border: 0;
+            padding: 15px 40px;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 20px;
+          }
         }
       }
     }
