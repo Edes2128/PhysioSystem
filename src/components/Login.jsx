@@ -19,7 +19,7 @@ export default function Login({ history }) {
             if (res.data.status === 1 && res.data.role === 2) {
                 history.push('/fizio')
             } else if (res.data.status === 1 && res.data.role === 3) {
-                history.push('/client')
+                history.push('/shop')
             }
         })
     }

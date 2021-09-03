@@ -12,19 +12,22 @@ html {
 body {
   background-color: $purple-dark;
 }
+.white-body {
+  background-color: white;
+}
 
-table{
+table {
   background-color: $purple-ligt;
   border-collapse: separate !important;
   border-spacing: 0 20px !important;
 }
 
-thead tr th{
+thead tr th {
   color: $orange !important;
   font-family: "Work Sans" !important;
 }
 
-tbody tr td{
+tbody tr td {
   color: white !important;
   font-family: "Work Sans" !important;
 }

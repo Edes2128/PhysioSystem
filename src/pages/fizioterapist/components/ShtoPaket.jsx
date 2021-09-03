@@ -8,24 +8,23 @@ export default function ShtoPaket() {
     const [previewImage, setPreviewImage] = useState('')
     const [price, setPrice] = useState('')
     const [videos, setVideos] = useState([])
-    const [kategoria, setKategoria] = useState('')
     const [videoPreview, setVideoPreview] = useState([])
     const [days, setDays] = useState([
         {
             titulli: '',
             pershkrimi: '',
             pdf: '',
-            pdf_name : '',
+            pdf_name: '',
             day_videos: [],
             day_videos_local: [],
             day_videos_names: []
         }
     ])
+    const [btnSub, setBtnSub] = useState(false)
 
     let dayVideos = days.map(item => item.day_videos);
-    let daysPdf = days.map(item =>item.pdf);
+    let daysPdf = days.map(item => item.pdf);
 
-    console.log(daysPdf)
 
     const addPackage = (e) => {
         e.preventDefault('');
@@ -53,7 +52,29 @@ export default function ShtoPaket() {
 
 
 
-        axios.post('http://localhost/physiosystem/server/fizio/addPackage', formdata)
+        axios.post('http://localhost/physiosystem/server/fizio/addPackage', formdata).then(res => {
+            if (res.status === 200) {
+
+                setTitle('');
+                setImage('')
+                setPreviewImage('')
+                setPrice('')
+                setVideos([])
+                setVideoPreview([])
+                setDays([{
+                    titulli: '',
+                    pershkrimi: '',
+                    pdf: '',
+                    pdf_name: '',
+                    day_videos: [],
+                    day_videos_local: [],
+                    day_videos_names: []
+                }])
+                setBtnSub(false)
+            } else {
+                setBtnSub(false)
+            }
+        })
     }
 
     const removeVideo = (index2, video) => {
@@ -72,7 +93,7 @@ export default function ShtoPaket() {
         setDays(prev => [...prev], item)
     }
     const addDay = () => {
-        setDays(prev => [...prev, { titulli: '', pershkrimi: '', pdf: '',pdf_name : '', day_videos: [], day_videos_local: [], day_videos_names: [] }])
+        setDays(prev => [...prev, { titulli: '', pershkrimi: '', pdf: '', pdf_name: '', day_videos: [], day_videos_local: [], day_videos_names: [] }])
     }
 
     const removeDay = (indexItem) => {
@@ -96,15 +117,7 @@ export default function ShtoPaket() {
                         <label className="fs-18 fw-regular" htmlFor="#">Cmimi</label>
                         <input className="fs-18 fw-regular" type="number" name="" id="" value={price} onChange={(e) => setPrice(e.target.value)} />
                     </div>
-                    <div className="shtopaket-form-inputs-item flex fd-column ai-start">
-                        <label className="fs-18 fw-regular" value={kategoria} onChange={(e) => setKategoria(e.target.value)} htmlFor="#">Kategoria</label>
-                        <select className="fs-18 fw-regular" >
-                            <option className="fs-18 fw-regular" value="1">Kategoria 1</option>
-                            <option className="fs-18 fw-regular" value="2">Kategoria 2</option>
-                            <option className="fs-18 fw-regular" value="3">Kategoria 3</option>
-                            <option className="fs-18 fw-regular" value="4">Kategoria 4</option>
-                        </select>
-                    </div>
+             
                 </div>
                 <div className="shtopaket-form-image flex fd-column ai-start" >
                     <label className="shtopaket-form-image-title fs-18 fw-regular" htmlFor="#">Fotoja e paketes</label>
@@ -379,7 +392,7 @@ export default function ShtoPaket() {
                                                 const newData = [...days];
                                                 const item = newData[index]
                                                 item.pdf = e.target.files[0]
-                                                item.pdf_name = e.target.files[0].name 
+                                                item.pdf_name = e.target.files[0].name
                                                 setDays(prev => [...prev], item)
                                             }}
                                                 type="file"
@@ -470,7 +483,7 @@ export default function ShtoPaket() {
                         </div>
                     ))}
                 </div>
-                <button className="shtopaket-form-submit-btn fs-18 fw-medium flex ai-center" type="submit"> Ruaj
+                <button onClick={() => setBtnSub(true)} style={{ display: btnSub ? 'none' : 'flex' }} className="shtopaket-form-submit-btn fs-18 fw-medium flex ai-center" type="submit"> Ruaj
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                         width="20" height="20" viewBox="0 0 452.000000 452.000000"
                         preserveAspectRatio="xMidYMid meet">

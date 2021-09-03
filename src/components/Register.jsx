@@ -28,7 +28,7 @@ export default function Register({history}) {
 
         axios.post('http://localhost/physiosystem/server/user/addClient' , payload ).then(res => {
             if(res.data.status === 1){
-                history.push('/client')
+                history.push('/shop')
             }
         })
     }
