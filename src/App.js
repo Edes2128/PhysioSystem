@@ -9,7 +9,7 @@ function App() {
   const path = useLocation();
   useEffect(() => {
     const body = document.querySelector('#body');
-    if (path.pathname === "/shop") {
+    if (path.pathname !== "/fizio") {
       body.classList.add('white-body')
     } else {
       body.classList.remove('white-body')

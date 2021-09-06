@@ -1,0 +1,135 @@
+.kient-sidebar {
+  position: fixed;
+  width: 297px;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #ecf0f1;
+  padding: 50px 37px 82px;
+  overflow: auto;
+  &-top {
+    width: 100%;
+    &-links {
+      list-style: none;
+      width: 100%;
+      margin-top: 80px;
+      &-item {
+        padding: 18px 0 18px 40px;
+        margin-bottom: 25px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+        &-link {
+          color: black;
+          text-decoration: none;
+          margin-left: 22px;
+        }
+      }
+    }
+  }
+  &-bottom {
+    width: 100%;
+    margin-top: 50px;
+    p {
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  }
+}
+.link-active {
+  background-color: $orange;
+  border-radius: 14px;
+  a {
+    color: white;
+  }
+  svg {
+    path {
+      fill: white;
+    }
+  }
+}
+.headerbanner {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 449px;
+  background-color: #ecf0f1;
+  height: 100%;
+  padding: 42px 36px 48px;
+  overflow: auto;
+  &-top {
+    width: 100%;
+    &-left {
+      margin-right: 27px;
+      &-widget {
+        background-color: white;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        margin-right: 12px;
+        cursor: pointer;
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+    &-right {
+      margin-left: 25px;
+      &-logo {
+        width: 52px;
+        height: 52px;
+        position: relative;
+        margin-right: 20px;
+        border-radius: 50%;
+        img {
+          object-fit: cover;
+          border-radius: 50%;
+        }
+        &::after {
+          content: "";
+          position: absolute;
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          background-color: $orange;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: -1;
+        }
+      }
+    }
+  }
+}
+
+.klient-body {
+  width: calc(100% - 449px - 297px);
+  margin: 0 449px 0 297px;
+  padding: 42px 43px;
+}
+.shop-header {
+  width: 100%;
+}
+.header-search {
+  max-width: 336px;
+  width: 100%;
+  background-color: #eff2f3;
+  border-radius: 8px;
+  padding: 0px 0px 0px 22px;
+  input {
+    width: 100%;
+    height: 100%;
+    padding: 10px 10px 10px 12px;
+    outline: none;
+    background-color: transparent;
+    border: 0;
+  }
+}
+
+.shop-packages {
+  width: 100%;
+  margin-top: 60px;
+  &-item {
+    max-width: 335px;
+  }
+}
