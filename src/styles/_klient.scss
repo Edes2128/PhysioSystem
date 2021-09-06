@@ -129,7 +129,136 @@
 .shop-packages {
   width: 100%;
   margin-top: 60px;
+  flex-wrap: wrap;
   &-item {
     max-width: 335px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #f1f2f5;
+    margin-right: 33px;
+    margin-bottom: 60px;
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+    &-top {
+      width: 100%;
+      position: relative;
+      &-image {
+        img {
+          border-radius: 10px;
+        }
+      }
+      &-wish {
+        width: 32px;
+        height: 32px;
+        background-color: #393939;
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+    &-bottom {
+      width: 100%;
+
+      padding: 24px 26px 33px;
+      &-details {
+        width: 100%;
+        &-left {
+          &-title {
+            margin-bottom: 8px;
+          }
+        }
+      }
+      &-add-btn {
+        width: 100%;
+        text-align: center;
+        color: white;
+        background-color: $orange;
+        outline: none;
+        border: 0;
+        border-radius: 9px;
+        padding: 10px 0;
+        margin-top: 19px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+.mypackages {
+  width: 100%;
+  &-header {
+    width: 100%;
+  }
+  &-paketat {
+    width: 100%;
+    margin-top: 60px;
+    flex-wrap: wrap;
+    &-item {
+      max-width: 335px;
+      width: 100%;
+      margin-right: 33px;
+      margin-bottom: 60px;
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+      &-title {
+        margin-top: 18px;
+      }
+    }
+  }
+}
+.orders {
+  width: 100%;
+  &-header {
+    width: 100%;
+  }
+  &-datatable {
+    margin-top: 60px;
+    table {
+      border-collapse: separate !important;
+      border-spacing: 0px  15px !important;
+      background-color: white !important;
+
+    }
+    thead {
+      background-color: #eff0f3 !important;
+    }
+
+    thead tr th {
+      color: black !important;
+      font-family: "Work Sans" !important;
+      border: 0 !important;
+      font-size: 20px !important;
+      font-weight: 600 !important;
+    }
+
+    tbody {
+      background-color: white !important;
+    }
+
+    tbody tr td {
+      color: black !important;
+      font-family: "Work Sans" !important;
+      font-size: 16px !important;
+      font-weight: normal !important;
+    }
+  }
+  .pagination {
+    margin-top: 80px;
+    .MuiPaginationItem-root {
+      color: black !important;
+    }
+    .MuiPaginationItem-page.Mui-selected {
+      border-radius: 5px;
+      color: white !important;
+    }
+  }
+}
+.wishlist{
+  width: 100%;
+  &-header{
+    width: 100%;
   }
 }

@@ -86,7 +86,7 @@ export default function Oferta() {
                             <TableCell>
                                 Aktive
                             </TableCell>
-                            
+
                         </TableRow>
 
                         <TableRow>
@@ -108,7 +108,7 @@ export default function Oferta() {
                             <TableCell>
                                 Aktive
                             </TableCell>
-                            
+
                         </TableRow>
 
                         <TableRow>
@@ -130,7 +130,7 @@ export default function Oferta() {
                             <TableCell>
                                 Aktive
                             </TableCell>
-                            
+
                         </TableRow>
 
                         <TableRow>
@@ -152,7 +152,7 @@ export default function Oferta() {
                             <TableCell>
                                 Aktive
                             </TableCell>
-                            
+
                         </TableRow>
 
                         <TableRow>
@@ -174,7 +174,7 @@ export default function Oferta() {
                             <TableCell>
                                 Aktive
                             </TableCell>
-                            
+
                         </TableRow>
 
                         <TableRow>
@@ -196,7 +196,7 @@ export default function Oferta() {
                             <TableCell>
                                 Aktive
                             </TableCell>
-                            
+
                         </TableRow>
 
                         <TableRow>
@@ -218,15 +218,15 @@ export default function Oferta() {
                             <TableCell>
                                 Aktive
                             </TableCell>
-                            
+
                         </TableRow>
-               
-       
+
+
                     </TableBody>
                 </Table>
             </div>
             <div className="oferta-datatable-pagination flex jc-end">
-                <Pagination count={5}  />
+                <Pagination count={5} />
             </div>
         </div>
     )
