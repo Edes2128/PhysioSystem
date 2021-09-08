@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
+
 export default function Login({ history }) {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+
 
     const login = (e) => {
         e.preventDefault();
@@ -20,6 +22,7 @@ export default function Login({ history }) {
                 history.push('/fizio')
             } else if (res.data.status === 1 && res.data.role === 3) {
                 history.push('/shop')
+                localStorage.setItem("token", JSON.stringify(res.data.token));
             }
         })
     }

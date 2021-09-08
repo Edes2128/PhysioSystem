@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="21.51" height="19.725" viewBox="0 0 21.51 19.725">
+  <g id="Group_97" data-name="Group 97" transform="translate(-795 -228.137)">
+    <g id="eye" transform="translate(795 133.275)">
+      <path id="Path_55" data-name="Path 55" d="M10.755,98.725c-4.11,0-7.836,2.248-10.586,5.9a.851.851,0,0,0,0,1.016c2.75,3.656,6.477,5.9,10.586,5.9s7.836-2.248,10.586-5.9a.851.851,0,0,0,0-1.016C18.591,100.973,14.864,98.725,10.755,98.725Zm.295,10.925a4.524,4.524,0,1,1,4.22-4.22A4.527,4.527,0,0,1,11.05,109.65Zm-.136-2.086a2.436,2.436,0,1,1,2.275-2.275A2.432,2.432,0,0,1,10.913,107.565Z" transform="translate(0)" fill="#aeaeae"/>
+    </g>
+    <line id="Line_39" data-name="Line 39" x2="20" y2="19" transform="translate(795.5 228.5)" fill="none" stroke="#aeaeae" stroke-width="1"/>
+  </g>
+</svg>

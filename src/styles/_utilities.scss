@@ -15,7 +15,18 @@ body {
 .white-body {
   background-color: white;
 }
-
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: #39364d;
+}
+::-webkit-scrollbar-thumb {
+  background: #524c7b;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #fc4f46;
+}
 table {
   background-color: $purple-ligt;
   border-collapse: separate !important;
@@ -82,12 +93,15 @@ tbody tr td {
 .fs-28 {
   font-size: 28px;
 }
+.fs-29 {
+  font-size: 29px;
+}
 
 .fs-30 {
   font-size: 30px;
 }
 
-.fs-38{
+.fs-38 {
   font-size: 38px;
 }
 

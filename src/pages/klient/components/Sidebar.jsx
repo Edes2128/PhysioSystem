@@ -7,7 +7,7 @@ import { ReactComponent as Like } from '../../../images/like.svg'
 import { ReactComponent as Cart } from '../../../images/cart.svg'
 import { ReactComponent as Profile } from '../../../images/profile.svg'
 import { ReactComponent as Logout } from '../../../images/logout.svg'
-export default function Sidebar() {
+export default function Sidebar({ logout }) {
     const path = useLocation();
     const links = [
         {
@@ -55,7 +55,7 @@ export default function Sidebar() {
                 </div>
                 <ul className="kient-sidebar-top-links">
                     {links.map(link => (
-                        <li className={link.active ? "kient-sidebar-top-links-item  link-active flex ai-center" : "kient-sidebar-top-links-item flex ai-center"} >
+                        <li key={link.path} className={link.active ? "kient-sidebar-top-links-item  link-active flex ai-center" : "kient-sidebar-top-links-item flex ai-center"} >
                             {link.icon}
                             <Link to={link.path} className="kient-sidebar-top-links-item-link fs-16 fw-medium" >{link.text}</Link>
                         </li>
@@ -63,7 +63,7 @@ export default function Sidebar() {
                 </ul>
             </div>
             <div className="kient-sidebar-bottom flex jc-center ai-center">
-                <Logout /> <p className="fs-18 fw-regular" >Logout</p>
+                <Logout onClick={logout} /> <p className="fs-18 fw-regular" onClick={logout} >Logout</p>
             </div>
         </div>
     )
