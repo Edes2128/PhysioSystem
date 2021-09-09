@@ -23,6 +23,7 @@ export default function Login({ history }) {
             } else if (res.data.status === 1 && res.data.role === 3) {
                 history.push('/shop')
                 localStorage.setItem("token", JSON.stringify(res.data.token));
+                localStorage.setItem("op", res.data.id);
             }
         })
     }

@@ -137,6 +137,8 @@
     background-color: #f1f2f5;
     margin-right: 33px;
     margin-bottom: 60px;
+    text-decoration: none;
+    color: inherit;
     &:nth-child(3n) {
       margin-right: 0;
     }
@@ -568,6 +570,76 @@
           cursor: pointer;
           border-radius: 10px;
           padding: 10px 0;
+        }
+      }
+    }
+  }
+}
+.singlepackage {
+  &-links {
+    svg {
+      margin: 0 12px;
+    }
+  }
+  &-details {
+    width: 100%;
+    margin-top: 50px;
+    box-shadow: 0 0 0 1px rgba(236, 240, 241, 1);
+    border-radius: 10px;
+    &-left {
+      width: 50%;
+      img {
+        border-radius: 10px;
+      }
+    }
+    &-right {
+      width: 50%;
+      padding: 32px 36px 20px;
+      &-text {
+        margin-top: 33px;
+      }
+    }
+  }
+  &-demo {
+    width: 100%;
+    margin-top: 40px;
+    flex-wrap: wrap;
+    &-item {
+      max-width: 300px;
+      margin-right: 89px;
+      &:nth-child(3n) {
+        margin-right: 0;
+      }
+    }
+    &-title {
+      margin-top: 40px;
+    }
+  }
+  &-days {
+    margin-top: 50px;
+    width: 100%;
+    &-link {
+      text-decoration: none;
+      color: black;
+    }
+    &-items {
+      width: 100%;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      &-content {
+        max-width: 160px;
+        width: 100%;
+        margin-right: 23.8px;
+        margin-bottom: 10px;
+        position: relative;
+        &:nth-child(6n) {
+          margin-right: 0;
+        }
+        &-shape {
+          position: absolute;
+          height: 100%;
+          width: 100%;
+          background-color: rgba(0, 0, 0, 0.7);
         }
       }
     }

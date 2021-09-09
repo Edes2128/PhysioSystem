@@ -6,7 +6,7 @@ import Orders from './Orders'
 import Wishlist from './Wishlist'
 import Cart from './Cart'
 import Profile from './Profile'
-
+import SinglePackage from './SinglePackage'
 export default function Body() {
     return (
         <div className="klient-body" >
@@ -16,7 +16,8 @@ export default function Body() {
                 <Route path="/shop/orders" component={Orders} />
                 <Route path="/shop/wishlist" component={Wishlist} />
                 <Route path="/shop/profile" component={Profile} />
-                <Route paht="/shop/cart" component={Cart} />
+                <Route path="/shop/cart" component={Cart} />
+                <Route path="/shop/:id" component={SinglePackage} />
             </Switch>
             </div>
     )

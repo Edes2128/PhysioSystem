@@ -4,6 +4,7 @@ import axios from 'axios'
 export default function ShtoPaket() {
 
     const [title, setTitle] = useState('')
+    const [pershkrimi, setPershkrimi] = useState('')
     const [image, setImage] = useState('')
     const [previewImage, setPreviewImage] = useState('')
     const [price, setPrice] = useState('')
@@ -30,6 +31,7 @@ export default function ShtoPaket() {
         e.preventDefault('');
         const formdata = new FormData();
         formdata.append('title', title);
+        formdata.append('pershkrimi', pershkrimi);
         formdata.append('price', price);
         formdata.append('cover', image);
 
@@ -114,10 +116,14 @@ export default function ShtoPaket() {
                         <input className="fs-18 fw-regular" type="text" name="" id="" value={title} onChange={(e) => setTitle(e.target.value)} />
                     </div>
                     <div className="shtopaket-form-inputs-item flex fd-column ai-start">
+                        <label className="fs-18 fw-regular" htmlFor="#">Pershkrimi</label>
+                        <input className="fs-18 fw-regular" type="text" name="" id="" value={pershkrimi} onChange={(e) => setPershkrimi(e.target.value)} />
+                    </div>
+                    <div className="shtopaket-form-inputs-item flex fd-column ai-start">
                         <label className="fs-18 fw-regular" htmlFor="#">Cmimi</label>
                         <input className="fs-18 fw-regular" type="number" name="" id="" value={price} onChange={(e) => setPrice(e.target.value)} />
                     </div>
-             
+
                 </div>
                 <div className="shtopaket-form-image flex fd-column ai-start" >
                     <label className="shtopaket-form-image-title fs-18 fw-regular" htmlFor="#">Fotoja e paketes</label>

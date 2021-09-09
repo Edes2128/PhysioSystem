@@ -1,23 +1,14 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { ReactComponent as Search } from '../../../images/loupe.svg'
 import { ReactComponent as LikeUnfill } from '../../../images/like-unfill.svg'
-// import { ReactComponent as LikeFill } from '../../../images/like-fill.svg'
-import axios from 'axios'
+import { ReactComponent as LikeFill } from '../../../images/like-fill.svg'
 import ClientContext from '../../../context/klient/klientContext'
-
+import { Link } from 'react-router-dom'
+import axios from 'axios'
 export default function Shop() {
 
-    const [packages, setPackages] = useState([]);
-
     const clientContext = useContext(ClientContext)
-
-    console.log(clientContext.currentUser)
-
-    useEffect(() => {
-        axios.get('http://localhost/physiosystem/server/client/getTrialPackages').then(res => {
-            setPackages(res.data)
-        })
-    }, [])
+    const { trialPackages, currentUser, wishlist, getWishtlist } = clientContext
 
     return (
         <div className="shop" >
@@ -29,15 +20,34 @@ export default function Shop() {
                 </div>
             </div>
             <div className="shop-packages flex ai-start">
-                {packages.map(paket => (
+                {trialPackages.map(paket => (
                     <div className="shop-packages-item flex fd-column ai-center">
                         <div className="shop-packages-item-top">
-                            <div className="shop-packages-item-top-image flex">
+                            <Link to={`/shop/${paket.id}`} className="shop-packages-item-top-image flex" onClick={() => {
+
+                            }} >
                                 <img src={`http://localhost/physiosystem/server/files/${paket.photo}`} className="img-res" alt="" />
-                            </div>
-                            <div className="shop-packages-item-top-wish flex ai-center jc-center">
-                                <LikeUnfill />
-                            </div>
+                            </Link>
+                            {wishlist.some((wish) => wish.package_id === paket.id) === true ?
+                                <>
+                                    <div className="shop-packages-item-top-wish flex ai-center jc-center" onClick={() => {
+                                        axios.post('http://localhost/physiosystem/server/client/removeWishlist', { user_id: localStorage.getItem('op'), id: paket.id }).then(res => {
+                                            getWishtlist()
+                                        })
+                                    }} >
+                                        <LikeFill />
+                                    </div>
+                                </>
+                                :
+                                <div className="shop-packages-item-top-wish flex ai-center jc-center" onClick={() => {
+                                    axios.post('http://localhost/physiosystem/server/client/addWishlist', { package_id: paket.id, user_id: currentUser.id }).then(res => {
+                                        getWishtlist()
+                                    })
+
+                                }} >
+                                    <LikeUnfill />
+                                </div>
+                            }
                         </div>
                         <div className="shop-packages-item-bottom flex fd-column ai-start">
                             <div className="shop-packages-item-bottom-details  flex ai-center jc-spaceb" >
