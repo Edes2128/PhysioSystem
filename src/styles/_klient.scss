@@ -196,6 +196,19 @@
         margin-top: 19px;
         cursor: pointer;
       }
+      &-view-btn{
+        width: 100%;
+        text-align: center;
+        color: white;
+        background-color: $orange;
+        outline: none;
+        border: 0;
+        border-radius: 9px;
+        padding: 10px 0;
+        margin-top: 19px;
+        cursor: pointer;
+        text-decoration: none;
+      }
     }
   }
 }

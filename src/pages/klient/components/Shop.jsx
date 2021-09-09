@@ -8,7 +8,7 @@ import axios from 'axios'
 export default function Shop() {
 
     const clientContext = useContext(ClientContext)
-    const { trialPackages, currentUser, wishlist, getWishtlist } = clientContext
+    const { trialPackages, currentUser, wishlist, getWishtlist, cart, getCart } = clientContext
 
     return (
         <div className="shop" >
@@ -57,7 +57,22 @@ export default function Shop() {
                                 </div>
                                 <p className="shop-packages-item-bottom-details-price fs-22 fw-semib"> $ {paket.price} </p>
                             </div>
-                            <button className="shop-packages-item-bottom-add-btn fs-16 fw-medium" type="button">Add to Cart</button>
+
+                            {cart.some(cart1 => cart1.package_id === paket.id) === true ?
+                                <Link to="/shop/cart" className="shop-packages-item-bottom-view-btn" >View Cart</Link>
+                                :
+                                <button
+                                    className="shop-packages-item-bottom-add-btn fs-16 fw-medium"
+                                    type="button"
+                                    onClick={() => {
+                                        axios.post('http://localhost/physiosystem/server/client/addCart', { user_id: localStorage.getItem('op'), package_id: paket.id }).then(res => {
+                                            getCart()
+                                        })
+                                    }}
+                                >
+                                    Add to Cart
+                                </button>
+                            }
                         </div>
                     </div>
                 ))}

@@ -47,6 +47,13 @@ export default function KlientProvider({ children }) {
     }, [])
 
 
+    const getCart = () => {
+        axios.post('http://localhost/physiosystem/server/client/getCart', { user_id: localStorage.getItem('op') }).then(res => {
+            setCart(res.data)
+        })
+    }
+
+
     return (
         <>
             <ClientContext.Provider
@@ -58,7 +65,8 @@ export default function KlientProvider({ children }) {
                     wishlist,
                     setWishlist,
                     getWishtlist,
-                    cart
+                    cart,
+                    getCart
                 }} >
                 {children}
             </ClientContext.Provider>
