@@ -1,22 +1,18 @@
 import React, { useContext } from 'react'
-import { ReactComponent as Search } from '../../../images/loupe.svg'
 import { ReactComponent as CartWhite } from '../../../images/cart-white-fill.svg'
 import { ReactComponent as RemoveWish } from '../../../images/remove-wish.svg'
 import ClientContext from '../../../context/klient/klientContext'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 export default function Wishlist() {
 
     const clientContext = useContext(ClientContext);
-    const { wishlist, getWishtlist } = clientContext
+    const { wishlist, getWishtlist, cart, getCart } = clientContext
     return (
         <div className="wishlist" >
             <div className="wishlist-header flex ai-center jc-spaceb">
                 <p className="wishlist-header-title fs-38 fw-semib">Wishlist</p>
-                <div className="header-search flex ai-center">
-                    <Search />
-                    <input className="fs-16 fw-regular" type="text" placeholder="Search..." />
-                </div>
             </div>
             <div className="wishlist-paketat flex ai-start">
 
@@ -44,10 +40,23 @@ export default function Wishlist() {
                                 Remove
                             </button>
 
-                            <button type="button" className="wishlist-paketat-item-bottom-add-btn flex ai-center jc-center fs-16 fw-medium" >
-                                <CartWhite />
-                                Add to Cart
-                            </button>
+
+                            {cart.some(item => item.package_id === wish.package_id) === true ? <Link className="wishlist-paketat-item-bottom-view-btn flex ai-center jc-center fs-16 fw-medium" to="/shop/cart" >View Cart</Link>
+                                :
+                                <button
+                                    type="button"
+                                    className="wishlist-paketat-item-bottom-add-btn flex ai-center jc-center fs-16 fw-medium"
+                                    onClick={() => {
+                                        axios.post('http://localhost/physiosystem/server/client/addCart', { user_id: localStorage.getItem('op'), package_id: wish.package_id }).then(res => {
+                                            getCart()
+                                        })
+                                    }}
+                                >
+                                    <CartWhite />
+                                    Add to Cart
+
+                                </button>
+                            }
                         </div>
                     </div>
                 ))}
