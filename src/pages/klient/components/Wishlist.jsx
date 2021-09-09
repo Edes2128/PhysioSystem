@@ -39,8 +39,6 @@ export default function Wishlist() {
                                 <RemoveWish />
                                 Remove
                             </button>
-
-
                             {cart.some(item => item.package_id === wish.package_id) === true ? <Link className="wishlist-paketat-item-bottom-view-btn flex ai-center jc-center fs-16 fw-medium" to="/shop/cart" >View Cart</Link>
                                 :
                                 <button
@@ -49,7 +47,11 @@ export default function Wishlist() {
                                     onClick={() => {
                                         axios.post('http://localhost/physiosystem/server/client/addCart', { user_id: localStorage.getItem('op'), package_id: wish.package_id }).then(res => {
                                             getCart()
+                                            axios.post('http://localhost/physiosystem/server/client/removeWishlist', { user_id: localStorage.getItem('op'), id: wish.package_id }).then(res => {
+                                                getWishtlist()
+                                            })
                                         })
+
                                     }}
                                 >
                                     <CartWhite />

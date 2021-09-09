@@ -9,7 +9,6 @@ export default function KlientProvider({ children }) {
     const [wishlist, setWishlist] = useState([]);
     const [cart, setCart] = useState([]);
 
-
     useEffect(() => {
         axios.post('http://localhost/physiosystem/server/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
             setCurrentUser(res.data[0])

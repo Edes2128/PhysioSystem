@@ -9,22 +9,26 @@ export default function Cart() {
 
     const clientContext = useContext(ClientContext);
     const { cart, getCart } = clientContext;
+    const packages = cart.map(item => item.package[0]);
+    const prices = packages.map(cmim => parseInt(cmim.price));
+    const reducer = (accumulator, curr) => accumulator + curr;
+    if (cart.length !== 0) {
+        var total = prices.reduce(reducer);
+    }
 
     return (
         <div className="shopping-cart" >
             <div className="shopping-cart-header flex ai-center jc-spaceb">
                 <p className="shopping-cart-header-title fs-38 fw-semib" >Shopping Cart</p>
             </div>
-
             {cart.length !== 0 ?
-
                 <div className="shopping-cart-form flex fd-column ai-start">
                     <p className="shopping-cart-form-title fs-22 fw-semib">Your listing</p>
                     <div className="shopping-cart-form-items flex ai-start">
                         <div className="shopping-cart-form-items-left flex fd-column ai-start">
                             {cart.map(item => (
 
-                                <div className="shopping-cart-form-items-left-item flex ai-ceter jc-spaceb">
+                                <div key={item.id} className="shopping-cart-form-items-left-item flex ai-ceter jc-spaceb">
                                     <div className="shopping-cart-form-items-left-item-texts flex ai-center">
                                         <div className="shopping-cart-form-items-left-item-image">
                                             <img src={`http://localhost/physiosystem/server/files/${item.package[0].photo}`} className="img-res" alt="" />
@@ -47,7 +51,7 @@ export default function Cart() {
                             <p className="shopping-cart-form-items-right-title fs-22 fw-semib">Order Summary</p>
                             <div className="shopping-cart-form-items-right-details flex fd-column">
                                 {cart.map(item => (
-                                    <div className="shopping-cart-form-items-right-details-package flex ai-center">
+                                    <div key={item.id} className="shopping-cart-form-items-right-details-package flex ai-center">
 
                                         <div className="shopping-cart-form-items-right-details-package-image">
                                             <img src={`http://localhost/physiosystem/server/files/${item.package[0].photo}`} className="img-res" alt="" />
@@ -65,7 +69,7 @@ export default function Cart() {
 
                                 <div className="shopping-cart-form-items-right-details-total flex ai-center jc-spaceb">
                                     <p className="shopping-cart-form-items-right-details-total-title fs-24 fw-bold">Total </p>
-                                    <p className="shopping-cart-form-items-right-details-total-vlera  fs-22 fw-semib">$ 120</p>
+                                    <p className="shopping-cart-form-items-right-details-total-vlera  fs-22 fw-semib">$ {total}</p>
                                 </div>
 
                                 <button className="shopping-cart-form-items-right-details-btn flex ai-center jc-center" >
@@ -78,7 +82,6 @@ export default function Cart() {
                 :
                 <p className="fs-20 fw-medium" style={{ marginTop: '60px' }} >Cart is empty!</p>
             }
-
         </div>
     )
 }
