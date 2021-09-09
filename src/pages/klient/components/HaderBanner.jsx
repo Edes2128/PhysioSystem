@@ -14,6 +14,7 @@ export default function HaderBanner() {
             <div className="headerbanner-top flex ai-center jc-center">
                 <div className="headerbanner-top-left flex ai-center">
                     <div className="headerbanner-top-left-widget flex ai-center jc-center">
+                        <div className="headerbanner-top-left-widget-nof flex ai-center jc-center"> <p className="fs-14 fw-light" >2</p> </div>
                         <Cart />
                     </div>
                     <div className="headerbanner-top-left-widget flex ai-center jc-center">

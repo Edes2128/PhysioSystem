@@ -68,6 +68,17 @@
         border-radius: 50%;
         margin-right: 12px;
         cursor: pointer;
+        position: relative;
+        &-nof {
+          width: 19px;
+          height: 19px;
+          position: absolute;
+          top: -5px;
+          right: -5px;
+          background-color: $orange;
+          border-radius: 50%;
+          color: white;
+        }
         &:last-child {
           margin-right: 0;
         }
