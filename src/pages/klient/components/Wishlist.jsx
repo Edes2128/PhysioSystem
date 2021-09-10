@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { ReactComponent as CartWhite } from '../../../images/cart-white-fill.svg'
 import { ReactComponent as RemoveWish } from '../../../images/remove-wish.svg'
 import ClientContext from '../../../context/klient/klientContext'
@@ -9,6 +9,13 @@ export default function Wishlist() {
 
     const clientContext = useContext(ClientContext);
     const { wishlist, getWishtlist, cart, getCart } = clientContext
+
+
+    useEffect(() => {
+        getWishtlist()
+
+    }, [])
+
     return (
         <div className="wishlist" >
             <div className="wishlist-header flex ai-center jc-spaceb">

@@ -8,6 +8,8 @@ export default function Klient({ history }) {
 
     const logout = () => {
         history.push('/')
+        localStorage.removeItem('token')
+        localStorage.removeItem('op')
     }
 
 

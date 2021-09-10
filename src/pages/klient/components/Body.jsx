@@ -7,18 +7,23 @@ import Wishlist from './Wishlist'
 import Cart from './Cart'
 import Profile from './Profile'
 import SinglePackage from './SinglePackage'
+import SingleBought from './SingleBought'
+import SingleDay from './SingleDay'
+
 export default function Body() {
     return (
         <div className="klient-body" >
             <Switch>
                 <Route exact path="/shop" component={Shop} />
-                <Route path="/shop/mypackages" component={MyPackages} />
-                <Route path="/shop/orders" component={Orders} />
-                <Route path="/shop/wishlist" component={Wishlist} />
-                <Route path="/shop/profile" component={Profile} />
-                <Route path="/shop/cart" component={Cart} />
-                <Route path="/shop/:id" component={SinglePackage} />
+                <Route exact path="/shop/mypackages" component={MyPackages} />
+                <Route exact path="/shop/orders" component={Orders} />
+                <Route exact path="/shop/wishlist" component={Wishlist} />
+                <Route exact path="/shop/profile" component={Profile} />
+                <Route exact path="/shop/cart" component={Cart} />
+                <Route exact path="/shop/:id" component={SinglePackage} />
+                <Route exact path="/shop/mypackages/:id" component={SingleBought} />
+                <Route exact path="/shop/mypackages/:id/days/:dayid" component={SingleDay} />
             </Switch>
-            </div>
+        </div>
     )
 }

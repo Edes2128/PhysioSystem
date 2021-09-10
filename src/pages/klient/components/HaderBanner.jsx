@@ -28,7 +28,7 @@ export default function HaderBanner() {
                     <div className="headerbanner-top-right-logo flex">
                         <img src="/images/profile-image.jpg" className="img-res" alt="" />
                     </div>
-                    <p className="fs-16 fw-medium" >{currentUser.name}</p>
+                    <p className="fs-16 fw-medium" >{currentUser && currentUser.name}</p>
                 </div>
             </div>
         </div>

@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import ClientContext from '../context/klient/klientContext'
 
 
 export default function Login({ history }) {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-
+    const clientContext = useContext(ClientContext);
+    const { setCurrentUser } = clientContext;
 
     const login = (e) => {
         e.preventDefault();
@@ -24,6 +26,9 @@ export default function Login({ history }) {
                 history.push('/shop')
                 localStorage.setItem("token", JSON.stringify(res.data.token));
                 localStorage.setItem("op", res.data.id);
+                axios.post('http://localhost/physiosystem/server/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
+                    setCurrentUser(res.data[0])
+                })
             }
         })
     }

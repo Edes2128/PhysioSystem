@@ -1,18 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import ClientContext from '../context/klient/klientContext';
 
-
-export default function Register({history}) {
+export default function Register({ history }) {
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [country ,setCountry] = useState('')
-    const [city,setCity] = useState('')
-    const [postalCode,setPostalCode] = useState('')
-
+    const [country, setCountry] = useState('')
+    const [city, setCity] = useState('')
+    const [postalCode, setPostalCode] = useState('')
+    const clientContext = useContext(ClientContext);
+    const { setCurrentUser } = clientContext;
 
     const register = (e) => {
         e.preventDefault()
@@ -23,12 +24,18 @@ export default function Register({history}) {
             password,
             country,
             city,
-            postal_code : postalCode
+            postal_code: postalCode
         }
 
-        axios.post('http://localhost/physiosystem/server/user/addClient' , payload ).then(res => {
-            if(res.data.status === 1){
+        axios.post('http://localhost/physiosystem/server/user/addClient', payload).then(res => {
+            if (res.data.status === 1) {
                 history.push('/shop')
+                localStorage.setItem("token", JSON.stringify(res.data.token));
+                localStorage.setItem("op", res.data.id);
+                axios.post('http://localhost/physiosystem/server/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
+                    setCurrentUser(res.data[0])
+                })
+
             }
         })
     }

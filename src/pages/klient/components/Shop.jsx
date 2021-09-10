@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { ReactComponent as Search } from '../../../images/loupe.svg'
 import { ReactComponent as LikeUnfill } from '../../../images/like-unfill.svg'
 import { ReactComponent as LikeFill } from '../../../images/like-fill.svg'
@@ -8,7 +8,15 @@ import axios from 'axios'
 export default function Shop() {
 
     const clientContext = useContext(ClientContext)
-    const { trialPackages, currentUser, wishlist, getWishtlist, cart, getCart } = clientContext
+    const { trialPackages, currentUser, wishlist, getWishtlist, cart, getCart, setTrialPackages } = clientContext
+
+
+    useEffect(() => {
+        getWishtlist()
+        axios.get('http://localhost/physiosystem/server/client/getTrialPackages').then(res => {
+            setTrialPackages(res.data)
+        })
+    }, [])
 
     return (
         <div className="shop" >
@@ -40,7 +48,7 @@ export default function Shop() {
                                 </>
                                 :
                                 <div className="shop-packages-item-top-wish flex ai-center jc-center" onClick={() => {
-                                    axios.post('http://localhost/physiosystem/server/client/addWishlist', { package_id: paket.id, user_id: currentUser.id }).then(res => {
+                                    axios.post('http://localhost/physiosystem/server/client/addWishlist', { package_id: paket.id, user_id: localStorage.getItem('op') }).then(res => {
                                         getWishtlist()
                                     })
 

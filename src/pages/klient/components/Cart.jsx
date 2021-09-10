@@ -1,7 +1,6 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { ReactComponent as Separator } from '../../../images/separator.svg'
 import { ReactComponent as RemoveCart } from '../../../images/remove-cart.svg'
-import { ReactComponent as PayPal } from '../../../images/paypal-2.svg'
 import axios from 'axios'
 import ClientContext from '../../../context/klient/klientContext'
 
@@ -15,6 +14,43 @@ export default function Cart() {
     if (cart.length !== 0) {
         var total = prices.reduce(reducer);
     }
+    const paypal = useRef()
+
+    useEffect(() => {
+        getCart()
+    }, [])
+
+    useEffect(() => {
+        window.paypal.Buttons({
+            createOrder: (data, actions, err) => {
+                return actions.order.create({
+                    intent: "CAPTURE",
+                    purchase_units: [
+                        {
+                            description: "Cool Video",
+                            amount: {
+                                value: total,
+                                currency_code: "USD"
+                            }
+                        }
+                    ]
+                })
+            },
+            onApprove: async (data, actions) => {
+                const order = await actions.order.capture();
+                console.log(order)
+                axios.post('http://localhost/physiosystem/server/client/buyPackage', { user_id: localStorage.getItem('op'), packages, total }).then(res => {
+                    axios.post('http://localhost/physiosystem/server/client/removeAllCart', { user_id: localStorage.getItem('op') }).then(res => {
+                        getCart()
+                    })
+                })
+
+            },
+            onError: (err) => {
+                console.log(err)
+            }
+        }).render(paypal.current)
+    }, [])
 
     return (
         <div className="shopping-cart" >
@@ -72,9 +108,9 @@ export default function Cart() {
                                     <p className="shopping-cart-form-items-right-details-total-vlera  fs-22 fw-semib">$ {total}</p>
                                 </div>
 
-                                <button className="shopping-cart-form-items-right-details-btn flex ai-center jc-center" >
-                                    <PayPal />
-                                </button>
+                                <div ref={paypal} className="shopping-cart-form-items-right-details-btn" >
+
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -14,13 +14,13 @@ export default function Sidebar({ logout }) {
             path: '/shop',
             icon: <Bag />,
             text: 'Shop',
-            active: path.pathname === "/shop"  ? true : false
+            active: path.pathname === "/shop" ? true : false
         },
         {
             path: '/shop/mypackages',
             icon: <Box />,
             text: 'My Packages',
-            active: path.pathname === "/shop/mypackages"  ? true : false
+            active: path.pathname === "/shop/mypackages" ? true : false
         },
         {
             path: '/shop/orders',
@@ -44,7 +44,7 @@ export default function Sidebar({ logout }) {
             path: '/shop/profile',
             icon: <Profile />,
             text: 'Profile',
-            active: path.pathname === "/shop/profile"  ? true : false
+            active: path.pathname === "/shop/profile" ? true : false
         }
     ]
     return (
