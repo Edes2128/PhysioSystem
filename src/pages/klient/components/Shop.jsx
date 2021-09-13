@@ -33,6 +33,9 @@ export default function Shop() {
                 </div>
             </div>
             <div className="shop-packages flex ai-start">
+                {trialPackages.length === packages.length &&
+                    <p className="fs-24 fw-medium" >Wow you have bought all packages!</p>
+                }
                 {trialPackages.map(paket => (
                     <>
                         {packages.some(item => item.id === paket.id) === true ?

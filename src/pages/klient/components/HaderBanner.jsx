@@ -26,7 +26,7 @@ export default function HaderBanner() {
                 <Line />
                 <div className="headerbanner-top-right flex ai-center">
                     <div className="headerbanner-top-right-logo flex">
-                        <img src="/images/profile-image.jpg" className="img-res" alt="" />
+                        <img src={currentUser && `http://localhost/physiosystem/server/files/${currentUser.image_profile}`} className="img-res" alt="" />
                     </div>
                     <p className="fs-16 fw-medium" >{currentUser && currentUser.name}</p>
                 </div>
