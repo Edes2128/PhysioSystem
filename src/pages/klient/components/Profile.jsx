@@ -4,12 +4,55 @@ import { ReactComponent as HidePass } from '../../../images/hide-pass.svg'
 import { ReactComponent as Pencil } from '../../../images/pencil.svg'
 import ClientContext from '../../../context/klient/klientContext';
 import axios from 'axios';
+import AlertContext from '../../../context/alerts/AlertContext';
 
 export default function Profile() {
     const [activeTab, setActiveTab] = useState('general')
     const clientContext = useContext(ClientContext)
+    const alertContext = useContext(AlertContext);
+    const { setAlert } = alertContext;
     const { currentUser, setCurrentUser } = clientContext;
+    const [oldPassword, setOldPassword] = useState('')
+    const [newPassword, setNewPassword] = useState('')
+    const [image, setImage] = useState('')
+    const [preview, setPreview] = useState('')
 
+    const changePas = () => {
+        axios.post('http://localhost/physiosystem/server/user/changePassword', { oldPassword, newPassword, token: JSON.parse(localStorage.getItem('token')) }).then(res => {
+            if (res.data.status === 1) {
+                setAlert(`${res.data.message}`, 'success')
+                setOldPassword('')
+                setNewPassword('')
+            } else {
+                setAlert(`${res.data.message}`, 'error')
+            }
+        })
+    }
+
+    const changeGeneral = () => {
+        const fd = new FormData();
+        fd.append('name', currentUser.name)
+        fd.append('email', currentUser.email)
+        fd.append('country', currentUser.country)
+        fd.append('city', currentUser.city)
+        fd.append('postal_code', currentUser.postal_code)
+        fd.append('image', image)
+        fd.append('token', JSON.parse(localStorage.getItem('token')))
+        fd.append('image_name', currentUser.image_profile)
+
+        axios.post('http://localhost/physiosystem/server/user/changeGeneral', fd).then(res => {
+            if (res.data.status === 1) {
+                setAlert(`${res.data.message}`, 'success')
+                setPreview('')
+                setImage('')
+                axios.post('http://localhost/physiosystem/server/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
+                    setCurrentUser(res.data[0])
+                })
+            } else {
+                setAlert(`${res.data.message}`, 'error')
+            }
+        })
+    }
 
     useEffect(() => {
         axios.post('http://localhost/physiosystem/server/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
@@ -39,10 +82,28 @@ export default function Profile() {
                 {activeTab === "general" ?
                     <div className="profile-general flex fd-column ai-center">
                         <div className="profile-general-image flex jc-center ai-center">
-                            <img src="/images/profile-big.jpg" className="img-res" alt="" />
-                            <div className="profile-general-image-edit flex ai-center jc-center">
+                            {preview !== "" && image !== "" ?
+
+                                <img src={preview} className="img-res" alt="" />
+                                :
+                                <img src={currentUser.image_profile === "" ? "/images/profile-big.jpg" : `http://localhost/physiosystem/server/files/${currentUser.image_profile}`} className="img-res" alt="" />
+
+                            }
+
+                            <label htmlFor="image-profile" className="profile-general-image-edit flex ai-center jc-center">
                                 <Pencil />
-                            </div>
+                            </label>
+                            <input type="file" hidden accept="image/*" id="image-profile"
+                                onChange={(e) => {
+                                    setImage(e.target.files[0])
+                                    setPreview(URL.createObjectURL(e.target.files[0]))
+                                    setCurrentUser(prev => ({
+                                        ...prev,
+                                        image_profile: ""
+                                    }))
+
+                                }}
+                            />
                         </div>
                         <div className="profile-general-inputs flex ai-center jc-spaceb">
                             <div className="profile-general-inputs-item flex fd-column ai-start">
@@ -109,7 +170,7 @@ export default function Profile() {
                             </div>
 
                             <div className="profile-general-inputs-item flex fd-column ai-start">
-                                <button className="profile-general-inputs-item-btn-save fs-20 fw-regular">Save</button>
+                                <button onClick={changeGeneral} className="profile-general-inputs-item-btn-save fs-20 fw-regular">Save</button>
                             </div>
                         </div>
                     </div>
@@ -119,19 +180,25 @@ export default function Profile() {
                             <div className="profile-password-inputs-item flex fd-column ai-start">
                                 <label htmlFor="#">Old Password</label>
                                 <div className="profile-password-inputs-item-pass flex ai-center jc-spaceb" >
-                                    <input className="fs-20 fw-regular" type="password" />
+                                    <input className="fs-20 fw-regular" type="password" onChange={(e) => {
+                                        setOldPassword(e.target.value)
+                                    }} />
                                     <HidePass />
                                 </div>
                             </div>
                             <div className="profile-password-inputs-item flex fd-column ai-start">
                                 <label htmlFor="#">New Password</label>
                                 <div className="profile-password-inputs-item-pass flex ai-center jc-spaceb" >
-                                    <input className="fs-20 fw-regular" type="password" />
+                                    <input className="fs-20 fw-regular" type="password"
+                                        onChange={(e) => {
+                                            setNewPassword(e.target.value)
+                                        }}
+                                    />
                                     <HidePass />
                                 </div>
                             </div>
                         </div>
-                        <button type="button" className="profile-password-btn-ruaj fs-20 fw-regular">Save</button>
+                        <button onClick={changePas} type="button" className="profile-password-btn-ruaj fs-20 fw-regular">Save</button>
                     </div>
                 }
             </div>

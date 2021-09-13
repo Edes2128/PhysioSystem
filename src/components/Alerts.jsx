@@ -14,7 +14,7 @@ export default function Alerts() {
         <Snackbar
           anchorOrigin={{
             vertical: "bottom",
-            horizontal: "left",
+            horizontal: "right",
           }}
           open={alerts !== null ? true : false}
           autoHideDuration={6000}

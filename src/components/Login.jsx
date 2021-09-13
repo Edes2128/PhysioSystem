@@ -19,9 +19,11 @@ export default function Login({ history }) {
             password
         }
 
+        const body = document.querySelector('#body');
         axios.post('http://localhost/physiosystem/server/user/login', payload).then(res => {
             if (res.data.status === 1 && res.data.role === 2) {
                 history.push('/fizio')
+                body.classList.remove('white-body')
             } else if (res.data.status === 1 && res.data.role === 3) {
                 history.push('/shop')
                 localStorage.setItem("token", JSON.stringify(res.data.token));
@@ -29,6 +31,7 @@ export default function Login({ history }) {
                 axios.post('http://localhost/physiosystem/server/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
                     setCurrentUser(res.data[0])
                 })
+                body.classList.add('white-body')
             }
         })
     }
