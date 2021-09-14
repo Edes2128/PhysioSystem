@@ -14,7 +14,7 @@ export default function Orders() {
     const clientContext = useContext(ClientContext)
     const { getMyPackages, mypackages } = clientContext;
     const [page, setPage] = useState(1);
-    const [itemPage, setItempage] = useState(10);
+    const itemPage = 10;
     const start = (page - 1) * itemPage;
     const end = page * itemPage;
     useEffect(() => {

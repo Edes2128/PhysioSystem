@@ -7,6 +7,8 @@ import Fizioterapist from './pages/fizioterapist/Fizioterapist';
 import KlientProvider from './context/klient/KlientProvider';
 import AlertState from './context/alerts/AlertState';
 import Alerts from './components/Alerts';
+import Media from './components/Media';
+import MediaState from './context/media/MediaState';
 
 function App() {
   const path = useLocation();
@@ -22,15 +24,18 @@ function App() {
   return (
     <>
       <KlientProvider>
-        <AlertState>
-          <Alerts />
-          <Switch>
-            <Route exact path="/" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path="/shop" component={Klient} />
-            <Route path="/fizio" component={Fizioterapist} />
-          </Switch>
-        </AlertState>
+        <MediaState>
+          <AlertState>
+            <Alerts />
+            <Media />
+            <Switch>
+              <Route exact path="/" component={Login} />
+              <Route path="/register" component={Register} />
+              <Route path="/shop" component={Klient} />
+              <Route path="/fizio" component={Fizioterapist} />
+            </Switch>
+          </AlertState>
+        </MediaState>
       </KlientProvider>
     </>
   );

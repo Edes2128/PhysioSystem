@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import ClientContext from '../context/klient/klientContext'
-
+import AlertContext from '../context/alerts/AlertContext'
 
 export default function Login({ history }) {
 
@@ -10,7 +10,8 @@ export default function Login({ history }) {
     const [password, setPassword] = useState('')
     const clientContext = useContext(ClientContext);
     const { setCurrentUser } = clientContext;
-
+    const alertContext = useContext(AlertContext);
+    const {setAlert} = alertContext;
     const login = (e) => {
         e.preventDefault();
 
@@ -24,6 +25,10 @@ export default function Login({ history }) {
             if (res.data.status === 1 && res.data.role === 2) {
                 history.push('/fizio')
                 body.classList.remove('white-body')
+                localStorage.setItem("token", JSON.stringify(res.data.token));
+                localStorage.setItem("op", res.data.id);
+                localStorage.setItem("el", res.data.role);
+                setAlert(`${res.data.message}`,'success')
             } else if (res.data.status === 1 && res.data.role === 3) {
                 history.push('/shop')
                 localStorage.setItem("token", JSON.stringify(res.data.token));
@@ -31,7 +36,11 @@ export default function Login({ history }) {
                 axios.post('http://localhost/physiosystem/server/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
                     setCurrentUser(res.data[0])
                 })
+                localStorage.setItem("el", res.data.role);
                 body.classList.add('white-body')
+                setAlert(`${res.data.message}`,'succes')
+            }else{
+                setAlert(`${res.data.message}`,'error')
             }
         })
     }
