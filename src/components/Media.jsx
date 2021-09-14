@@ -6,7 +6,7 @@ import { ReactComponent as Check } from '../images/check.svg'
 import { ReactComponent as Minus } from '../images/minus.svg'
 
 export default function Media() {
-    const [activeTab, setActiveTab] = useState('get')
+    const [activeTab, setActiveTab] = useState('post')
     const mediaContext = useContext(MediaContext);
     const {
         files,
@@ -18,9 +18,11 @@ export default function Media() {
         arrCompare,
         setArrCompare,
         setShowMedia,
-        showMedia
+        showMedia,
+        setArrName,
     } = mediaContext
-    
+
+
     const uploadVideos = () => {
         const fd = new FormData();
         Array.from(files).forEach(file => {
@@ -32,6 +34,7 @@ export default function Media() {
                 setLocalFiles([])
                 axios.get('http://localhost/physiosystem/server/fizio/getVideos').then(res => {
                     setVideos(res.data)
+                    setActiveTab('get')
                 })
             }
         })
@@ -61,7 +64,12 @@ export default function Media() {
                             </div>
                         }
                         <div className="media-library-content-tabs flex ai-center">
-                            <Close onClick={() => setShowMedia(false)} />
+                            <Close onClick={() => {
+                                setShowMedia(false)
+                           setTimeout(() =>  setArrName([]),1000)    
+                           setArrCompare([])   
+                            }
+                            } />
                             <p
                                 onClick={() => setActiveTab('post')}
                                 className={activeTab === "post" ? "media-library-content-tabs-active fs-20 fw-medium" : "fs-20 fw-medium"} >Upload Videos</p>
@@ -99,19 +107,31 @@ export default function Media() {
                             </div>
                         }
                         {activeTab === 'get' &&
-
                             <div className="media-library-content-get flex ai-center jc-spaceb">
+                                {videos.map((video, index) => (
+                                    <>
+                                        <div
+                                            onClick={() => {
+                                                if (arrCompare.some(item => item === video) === false) {
+                                                    setArrCompare(prev => [...prev, video])
+                                                } else {
+                                                    let newData = [...arrCompare];
+                                                    setArrCompare(newData.filter(item => item !== video))
 
-                                {videos.map(video => (
-                                    <div className="media-library-content-get-item active flex">
-                                        <div className="media-library-content-get-item-check flex ai-center jc-center">
-                                            <Check />
-                                            <Minus />
+                                                }
+                                            }}
+                                            className={arrCompare.some(item => item === video) === true ? "media-library-content-get-item active flex" : "media-library-content-get-item  flex"}>
+                                            {arrCompare.some(item => item === video) === true &&
+                                                <div
+                                                    className="media-library-content-get-item-check flex ai-center jc-center">
+                                                    <Check />
+                                                    <Minus />
+                                                </div>
+                                            }
+                                            <video loading="lazy" className="img-res" src={`http://localhost/physiosystem/server/files/${video.src}`}></video>
                                         </div>
-                                        <video className="img-res" src={`http://localhost/physiosystem/server/files/${video.src}`}></video>
-                                    </div>
+                                    </>
                                 ))}
-
                             </div>
                         }
                     </div>

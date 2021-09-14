@@ -1,15 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
+import AlertContext from '../../../context/alerts/AlertContext';
+import MediaContext from '../../../context/media/MediaContext';
 
 export default function ShtoPaket() {
-
+    const alertContext = useContext(AlertContext);
+    const mediaContext = useContext(MediaContext);
+    const {
+        setShowMedia,
+        setArrCompare,
+        arrCompare,
+        arrName,
+        setArrName,
+    } = mediaContext;
     const [title, setTitle] = useState('')
     const [pershkrimi, setPershkrimi] = useState('')
     const [image, setImage] = useState('')
     const [previewImage, setPreviewImage] = useState('')
     const [price, setPrice] = useState('')
     const [videos, setVideos] = useState([])
-    const [videoPreview, setVideoPreview] = useState([])
     const [days, setDays] = useState([
         {
             titulli: '',
@@ -17,15 +26,22 @@ export default function ShtoPaket() {
             pdf: '',
             pdf_name: '',
             day_videos: [],
-            day_videos_local: [],
-            day_videos_names: []
         }
     ])
     const [btnSub, setBtnSub] = useState(false)
+    useEffect(() => {
+        if (arrName !== '' && arrCompare.length !== 0) {
+            if (arrName === true) {
+                setVideos(arrCompare)
+            } else {
+                const item = days[arrName].day_videos = arrCompare
+                setDays(prev => [...prev], item)
+            }
+        }
+    }, [arrName, arrCompare])
 
     let dayVideos = days.map(item => item.day_videos);
     let daysPdf = days.map(item => item.pdf);
-
 
     const addPackage = (e) => {
         e.preventDefault('');
@@ -34,19 +50,15 @@ export default function ShtoPaket() {
         formdata.append('pershkrimi', pershkrimi);
         formdata.append('price', price);
         formdata.append('cover', image);
+        // const videos_day2 = JSON.stringify(dayVideos)
+        // formdata.append(`video_days[]`, JSON.stringify(videos_day2));
 
-        Array.from(videos).forEach((videoFile, index) => {
-            formdata.append(`video_demo[]`, videoFile);
-        })
+        const demo2 = JSON.stringify(videos)
+        formdata.append(`video_demo[]`, demo2);
+
 
         let dayss = JSON.stringify(days)
         formdata.append('days', dayss)
-        dayVideos.forEach((arrs, index) => {
-            arrs.forEach(item2 => {
-                formdata.append(`video-day[]`, item2)
-            })
-        })
-
 
         Array.from(daysPdf).forEach(pdf => {
             formdata.append(`days-pdf[]`, pdf)
@@ -58,11 +70,11 @@ export default function ShtoPaket() {
             if (res.status === 200) {
 
                 setTitle('');
+                setPershkrimi('')
                 setImage('')
                 setPreviewImage('')
                 setPrice('')
                 setVideos([])
-                setVideoPreview([])
                 setDays([{
                     titulli: '',
                     pershkrimi: '',
@@ -80,8 +92,6 @@ export default function ShtoPaket() {
     }
 
     const removeVideo = (index2, video) => {
-        let newdata = [...videoPreview];
-        setVideoPreview(newdata.filter(item => item !== video))
         let newdata2 = [...videos];
         setVideos(newdata2.filter((item, index) => index !== index2))
     }
@@ -89,11 +99,10 @@ export default function ShtoPaket() {
     const removeVideoDay = (index, index2, video) => {
         let newdata = [...days];
         let item = newdata[index]
-        item.day_videos_local.splice(index2, 1)
         item.day_videos.splice(index2, 1)
-        item.day_videos_names.splice(index2, 1)
         setDays(prev => [...prev], item)
     }
+
     const addDay = () => {
         setDays(prev => [...prev, { titulli: '', pershkrimi: '', pdf: '', pdf_name: '', day_videos: [], day_videos_local: [], day_videos_names: [] }])
     }
@@ -102,7 +111,6 @@ export default function ShtoPaket() {
         const newData = [...days]
         const itemToRemove = days[indexItem];
         setDays(newData.filter(item => item !== itemToRemove))
-
     }
 
     return (
@@ -202,8 +210,14 @@ export default function ShtoPaket() {
                 <div className="shtopaket-form-video flex fd-column ai-start">
                     <div className="flex ai-center" >
                         <p style={{ marginRight: '20px' }} className="fs-18 fw-regular" >Shto Videot Demo</p>
-                        {videoPreview.length !== 0 && videos.length !== 0 && <>
-                            <label style={{ marginTop: '0' }} className="shtopaket-form-video-upload-btn fs-18 fw-regular flex ai-center" htmlFor="add-video">
+                        {videos.length !== 0 && <>
+                            <label
+                                onClick={() => {
+                                    setShowMedia(true)
+                                    setArrCompare(videos)
+                                    setArrName(true)
+                                }}
+                                style={{ marginTop: '0' }} className="shtopaket-form-video-upload-btn fs-18 fw-regular flex ai-center" >
                                 Shto video te tjera
                                 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                                     width="20" height="20" viewBox="0 0 235.000000 214.000000"
@@ -233,25 +247,18 @@ export default function ShtoPaket() {
                                     </g>
                                 </svg>
                             </label>
-                            <input
-                                type="file"
-                                hidden
-                                multiple
-                                id="add-video"
-                                accept="video/*"
-                                onChange={(e) => {
-                                    for (let i = 0; i < e.target.files.length; i++) {
-                                        setVideos(prev => [...prev, e.target.files[i]])
-                                        setVideoPreview(prev => [...prev, URL.createObjectURL(e.target.files[i])])
-                                    }
-                                }}
-                            />
                         </>}
 
                     </div>
-                    {videoPreview.length === 0 && videos.length === 0 ?
+                    {videos.length === 0 ?
                         <>
-                            <label className="shtopaket-form-video-upload-btn fs-18 fw-regular flex ai-center" htmlFor="video-files">Ngarko Videot
+                            <label className="shtopaket-form-video-upload-btn fs-18 fw-regular flex ai-center"
+                                onClick={() => {
+                                    setShowMedia(true)
+                                    setArrCompare(videos)
+                                    setArrName(true)
+                                }}
+                            >Ngarko Videot
                                 <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                                     width="20" height="20" viewBox="0 0 235.000000 214.000000"
                                     preserveAspectRatio="xMidYMid meet">
@@ -280,28 +287,14 @@ export default function ShtoPaket() {
                                     </g>
                                 </svg>
                             </label>
-                            <input
-                                type="file"
-                                accept="video/*"
-                                multiple
-                                hidden
-                                id="video-files"
-                                onChange={(e) => {
-                                    setVideos(e.target.files)
-                                    let videos2 = [];
-                                    for (let i = 0; i < e.target.files.length; i++) {
-                                        videos2.push(URL.createObjectURL(e.target.files[i]))
-                                    }
-                                    setVideoPreview(videos2)
-                                }} />
                         </>
                         :
                         <>
                             <div className="shtopaket-form-video-preview flex ai-center " >
-                                {videoPreview.map((video, index) => (
+                                {videos.map((video, index) => (
                                     <div key={index} className="shtopaket-form-video-preview-item flex fd-column ai-center" >
                                         <div className="flex" >
-                                            <video className="img-res" controls src={video}></video>
+                                            <video className="img-res" controls src={`http://localhost/physiosystem/server/files/${video.src}`}></video>
                                         </div>
                                         <button type="button" className="shtopaket-form-video-preview-item-fshi-btn fs-18 fw-regular flex ai-center"
                                             onClick={() => {
@@ -427,53 +420,37 @@ export default function ShtoPaket() {
                                 </div>
                             </div>
                             <div className="shtopaket-form-days-item-bottom flex fd-column ai-start ">
-                                {day.day_videos.length === 0 && day.day_videos_local.length === 0 ?
+                                {day.day_videos.length === 0 ?
                                     <>
-                                        <label htmlFor={`video-day-${index}`}>Ngarko Videot</label>
-                                        <input
-                                            type="file"
-                                            accept="video/*"
-                                            id={`video-day-${index}`}
-                                            multiple
-                                            hidden
-                                            onChange={(e) => {
-                                                for (let i = 0; i < e.target.files.length; i++) {
-                                                    const newdata = [...days];
-                                                    const item = newdata[index]
-                                                    item.day_videos.push(e.target.files[i])
-                                                    item.day_videos_local.push(URL.createObjectURL(e.target.files[i]))
-                                                    item.day_videos_names.push(e.target.files[i].name)
-                                                    setDays(prev => [...prev], item)
-                                                }
-                                            }}
-                                        />
+                                        <label onClick={() => {
+                                            setShowMedia(true)
+                                            setArrCompare(day.day_videos)
+                                            setArrName(index)
+
+                                        }} >Ngarko Videot</label>
                                     </>
                                     :
                                     <>
-                                        <label htmlFor={`video-extra-day-${index}`}>Shto Video Te Tjera</label>
-                                        <input onChange={(e) => {
+                                        <label
+                                            onClick={() => {
+                                                setShowMedia(true)
+                                                setArrCompare(day.day_videos)
+                                                setArrName(index)
 
-                                            for (let i = 0; i < e.target.files.length; i++) {
-                                                const newdata = [...days];
-                                                const item = newdata[index]
-                                                item.day_videos.push(e.target.files[i])
-                                                item.day_videos_local.push(URL.createObjectURL(e.target.files[i]))
-                                                item.day_videos_names.push(e.target.files[i].name)
-                                                setDays(prev => [...prev], item)
-                                            }
+                                            }}
+                                            htmlFor={`video-extra-day-${index}`}>Shto Video Te Tjera</label>
 
-                                        }} type="file" multiple accept="video/*" id={`video-extra-day-${index}`} hidden />
                                     </>
                                 }
 
-                                {day.day_videos.length !== 0 && day.day_videos_local.length !== 0 &&
+                                {day.day_videos.length !== 0 &&
 
                                     <div className="shtopaket-form-days-item-bottom-preview flex  ai-end" >
 
-                                        {day.day_videos_local.map((video, index2) => (
+                                        {day.day_videos.map((video, index2) => (
                                             <div className="shtopaket-form-days-item-bottom-preview-item flex fd-column ai-center">
                                                 <div className="flex" >
-                                                    <video controls src={video} className="img-res" ></video>
+                                                    <video controls src={`http://localhost/physiosystem/server/files/${video.src}`} className="img-res" ></video>
                                                 </div>
                                                 <button
                                                     onClick={() => {
