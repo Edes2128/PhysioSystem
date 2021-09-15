@@ -37,6 +37,7 @@ export default function Klientet() {
                             <TableCell>Country</TableCell>
                             <TableCell>City</TableCell>
                             <TableCell>Postal Code</TableCell>
+                            <TableCell>Status</TableCell>
                             <TableCell>Veprime</TableCell>
                         </TableRow>
                     </TableHead>
@@ -49,6 +50,15 @@ export default function Klientet() {
                                 <TableCell>{client.contry}</TableCell>
                                 <TableCell>{client.city}</TableCell>
                                 <TableCell>{client.postal_code}</TableCell>
+                                <TableCell>
+                                    <span style={{
+                                        color: client.status === 1 ? 'black' : 'white',
+                                        backgroundColor: client.status === 1 ? '#28FFBF' : '#FF4848',
+                                        padding: '10px 15px',
+                                    }} >
+                                        {client.status === 1 ? 'Active' : 'Close'}
+                                    </span>
+                                </TableCell>
                                 <TableCell>Veprime</TableCell>
                             </TableRow>
                         ))}
