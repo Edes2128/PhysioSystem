@@ -25,13 +25,12 @@
     &-item {
       padding: 14px 0;
       width: 100%;
-      padding: 20px 35px ;
+      padding: 20px 35px;
       margin-bottom: 20px;
       &-active {
         background-color: #363348;
         position: relative;
         border-radius: 14px;
-
       }
       &:last-child {
         margin-bottom: 0;
@@ -161,14 +160,14 @@
         width: 100px;
         background-color: #363348;
         p {
-          color:white;
+          color: white;
           cursor: pointer;
           margin-bottom: 5px;
           &:last-child {
             margin-bottom: 0;
           }
           &:hover {
-            color:$orange;
+            color: $orange;
           }
         }
       }
@@ -765,5 +764,25 @@
         }
       }
     }
+  }
+}
+.klientet {
+  width: 100%;
+  margin-top: 20px;
+  &-top {
+    width: 100%;
+    &-title {
+      color: white;
+    }
+    .header-search {
+      background-color: #363348;
+      input {
+        color: white;
+      }
+    }
+  }
+  &-datatable {
+    width: 100%;
+    overflow: auto;
   }
 }
