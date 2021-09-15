@@ -28,19 +28,25 @@ body {
   background: #fc4f46;
 }
 table {
-  background-color: $purple-ligt;
   border-collapse: separate !important;
   border-spacing: 0 20px !important;
 }
 
 thead tr th {
   color: $orange !important;
+  background-color: #39364d;
   font-family: "Work Sans" !important;
+  border: 0 !important;
+  font-size: 20px !important;
+  font-weight: 500 !important;
 }
 
 tbody tr td {
   color: white !important;
   font-family: "Work Sans" !important;
+  border-bottom: 1px solid #39364d !important ;
+  font-size: 16px !important;
+  font-weight: normal !important;
 }
 .MuiPaginationItem-root {
   color: white !important;

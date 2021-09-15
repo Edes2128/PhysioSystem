@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
+import FizioContext from '../../../context/fizioterapist/FizioContext'
 
 export default function Paketat() {
 
     const [activeAction, setActiveAction] = useState(-1)
-    const [packages, setPackages] = useState([]);
+    const fizioContext = useContext(FizioContext);
+    const { packages, getPackages } = fizioContext;
 
     useEffect(() => {
-        axios.get('http://localhost/physiosystem/server/fizio/getPackages').then(res => {
-            setPackages(res.data)
-        })
+        getPackages()
     }, [])
 
     return (
