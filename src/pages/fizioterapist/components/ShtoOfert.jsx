@@ -1,44 +1,66 @@
-import React, { useState, useEffect } from 'react'
-
+import React, { useState, useEffect, useContext } from 'react'
+import axios from 'axios';
+import AlertContext from '../../../context/alerts/AlertContext';
 
 export default function ShtoOfert() {
 
+    const alertContext = useContext(AlertContext);
+    const { setAlert } = alertContext;
+    const [titulli, setTitulli] = useState('');
+    const [ulja, setUlja] = useState('');
+    const [dataMbarimit, setDataMbarimit] = useState('')
     const [list, setList] = useState([])
     const [listDrejtuar, setListDretuar] = useState([])
+    const [tipiUljes, setTipiUljes] = useState(1)
     const [activeList, setActiveList] = useState(false)
     const [baner, setBaner] = useState("")
     const [banerLocal, setBanerLocal] = useState("")
 
-
     const addOffer = (e) => {
-        e.preventDefault();
+        if (titulli === "" || ulja === "" || dataMbarimit === "" || tipiUljes === "") {
+            setAlert(`Plotesoni fushat`, 'error')
+            e.preventDefault();
+        } else {
+            e.preventDefault();
+            const formData = new FormData();
+            formData.append('titulli', titulli);
+            formData.append('ulja', ulja);
+            formData.append('tipi_uljes', tipiUljes);
+            formData.append('data_mbarimit', dataMbarimit);
+            formData.append('drejtuar[]', JSON.stringify(listDrejtuar));
+            formData.append('image', baner);
+
+            axios.post('http://localhost/physiosystem/server/fizio/addOffer', formData).then(res => {
+                if (res.status === 200) {
+                    setAlert(`Oferta u shtua`, 'success')
+                    setTitulli('')
+                    setUlja('')
+                    setTipiUljes(1)
+                    setDataMbarimit('')
+                    setListDretuar([])
+                    setBaner('')
+                    setBanerLocal('')
+                }
+            })
+        }
+
     }
 
     useEffect(() => {
-        setList([
-            {
-                id: 1,
-                titulli: "Back Pain"
-            },
-            {
-                id: 2,
-                titulli: "Head Pain"
-            },
-            {
-                id: 3,
-                titulli: "Shoulder Pain"
-            },
-            {
-                id: 4,
-                titulli: "Low Pain"
-            },
-            {
-                id: 5,
-                titulli: "Neck Pain"
-            },
-        ])
-    }, [])
+        axios.get('http://localhost/physiosystem/server/fizio/getPackages').then(res => {
 
+            const newdata = res.data.map(item => {
+                const obj = {
+                    id: item.id,
+                    titulli: item.titulli
+                };
+                return obj;
+
+            })
+
+            setList(newdata)
+        })
+    }, [])
 
     const selectPack = (item) => {
         setListDretuar(prev => [...prev, item])
@@ -61,24 +83,30 @@ export default function ShtoOfert() {
                 <div className="add-offer-form-inputs flex jc-spaceb ai-center">
                     <div className="add-offer-form-inputs-item flex fd-column ai-start">
                         <label className="fs-18 fw-regular" htmlFor="#">Titulli</label>
-                        <input className="fs-18 fw-regular" type="text" />
+                        <input className="fs-18 fw-regular" type="text" value={titulli} onChange={(e) => {
+                            setTitulli(e.target.value)
+                        }} />
                     </div>
                     <div className="add-offer-form-inputs-item-select flex ai-center">
                         <div className="add-offer-form-inputs-item-select-input flex fd-column ai-start">
                             <label className="fs-18 fw-regular" htmlFor="#">Ulja</label>
-                            <input className='fs-18 fw-regular' type="number" />
+                            <input className='fs-18 fw-regular' type="number" value={ulja} onChange={(e) => {
+                                setUlja(e.target.value)
+                            }} />
                         </div>
                         <div className="add-offer-form-inputs-item-select-input flex fd-column ai-start">
                             <label className="fs-18 fw-regular" htmlFor="#">Tipi Uljes</label>
-                            <select className="fs-18 fw-regular" name="#" id="#">
-                                <option value="1">%</option>
-                                <option value="1">Money</option>
+                            <select className="fs-18 fw-regular" name="#" id="#" value={tipiUljes} onChange={(e) => setTipiUljes(e.target.value)} >
+                                <option value={1}>%</option>
+                                <option value={2}>Money</option>
                             </select>
                         </div>
                     </div>
                     <div className="add-offer-form-inputs-item flex fd-column ai-start">
                         <label className="fs-18 fw-regular" htmlFor="#">Data Mbarimit</label>
-                        <input className="fs-18 fw-regular" type="date" />
+                        <input className="fs-18 fw-regular" type="date" value={dataMbarimit} onChange={(e) => {
+                            setDataMbarimit(e.target.value)
+                        }} />
                     </div>
                 </div>
 
@@ -132,7 +160,7 @@ export default function ShtoOfert() {
                             </svg>
                             {activeList &&
                                 <div className="add-offer-form-inputs-multi-input-list flex fd-column ai-start">
-                                    {list.map(item => (
+                                    {list.length !== 0 && list.map(item => (
                                         <div onClick={() => selectPack(item)} className="add-offer-form-inputs-multi-input-list-item">
                                             <p className="fs-20 fw-medium" >{item.titulli}</p>
                                         </div>
@@ -148,7 +176,7 @@ export default function ShtoOfert() {
                         <>
                             <label htmlFor="oferta-baner" className="add-offer-form-inputs-image-btn fs-18 fw-regular" >Upload Banner</label>
                             <input type="file" hidden id="oferta-baner" onChange={(e) => {
-                                setBaner(e.target.files)
+                                setBaner(e.target.files[0])
                                 setBanerLocal(URL.createObjectURL(e.target.files[0]))
                             }} />
                         </>
@@ -162,6 +190,8 @@ export default function ShtoOfert() {
                         </div>
                     }
                 </div>
+
+                <button className="add-offer-form-btn fs-18 fw-regular" type="submit" >Krijo Oferte</button>
             </form>
         </div>
     )

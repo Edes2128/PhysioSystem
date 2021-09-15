@@ -19,7 +19,6 @@ export default function Paketat() {
                 <Link to="/fizio/shtopaket" className="fs-18 fw-regular fizio-paketat-top-button">Shto Paket</Link>
             </div>
             <div className="fizio-paketat-body flex  jc-spaceb  ai-start">
-
                 {packages.map((paket, index) => (
                     <div key={paket.id} className="fizio-paketat-body-item flex fd-column ai-center">
                         <div className="fizio-paketat-body-item-image flex">

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -6,8 +6,14 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Pagination from '@material-ui/lab/Pagination';
+import FizioContext from '../../../context/fizioterapist/FizioContext';
 
 export default function Oferta() {
+    const fizioContext = useContext(FizioContext)
+    const { offers, getOffers } = fizioContext;
+    useEffect(() => {
+        getOffers()
+    }, [])
     return (
         <div className="oferta" >
             <div className="oferta-top flex jc-spaceb ai-center">
@@ -62,166 +68,23 @@ export default function Oferta() {
                             <TableCell>Titulli Ofertes</TableCell>
                             <TableCell>Data Krijimit</TableCell>
                             <TableCell>Data Mbarimit</TableCell>
+                            <TableCell>Ulja</TableCell>
                             <TableCell>Status</TableCell>
                             <TableCell>Veprime</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        <TableRow>
-                            <TableCell>
-                                #1
-                            </TableCell>
-                            <TableCell>
-                                Test
-                            </TableCell>
-                            <TableCell>
-                                20/08/2021
-                            </TableCell>
-                            <TableCell>
-                                30/09/2021
-                            </TableCell>
-                            <TableCell>
-                                Aktive
-                            </TableCell>
-                            <TableCell>
-                                Aktive
-                            </TableCell>
-
-                        </TableRow>
-
-                        <TableRow>
-                            <TableCell>
-                                #1
-                            </TableCell>
-                            <TableCell>
-                                Test
-                            </TableCell>
-                            <TableCell>
-                                20/08/2021
-                            </TableCell>
-                            <TableCell>
-                                30/09/2021
-                            </TableCell>
-                            <TableCell>
-                                Aktive
-                            </TableCell>
-                            <TableCell>
-                                Aktive
-                            </TableCell>
-
-                        </TableRow>
-
-                        <TableRow>
-                            <TableCell>
-                                #1
-                            </TableCell>
-                            <TableCell>
-                                Test
-                            </TableCell>
-                            <TableCell>
-                                20/08/2021
-                            </TableCell>
-                            <TableCell>
-                                30/09/2021
-                            </TableCell>
-                            <TableCell>
-                                Aktive
-                            </TableCell>
-                            <TableCell>
-                                Aktive
-                            </TableCell>
-
-                        </TableRow>
-
-                        <TableRow>
-                            <TableCell>
-                                #1
-                            </TableCell>
-                            <TableCell>
-                                Test
-                            </TableCell>
-                            <TableCell>
-                                20/08/2021
-                            </TableCell>
-                            <TableCell>
-                                30/09/2021
-                            </TableCell>
-                            <TableCell>
-                                Aktive
-                            </TableCell>
-                            <TableCell>
-                                Aktive
-                            </TableCell>
-
-                        </TableRow>
-
-                        <TableRow>
-                            <TableCell>
-                                #1
-                            </TableCell>
-                            <TableCell>
-                                Test
-                            </TableCell>
-                            <TableCell>
-                                20/08/2021
-                            </TableCell>
-                            <TableCell>
-                                30/09/2021
-                            </TableCell>
-                            <TableCell>
-                                Aktive
-                            </TableCell>
-                            <TableCell>
-                                Aktive
-                            </TableCell>
-
-                        </TableRow>
-
-                        <TableRow>
-                            <TableCell>
-                                #1
-                            </TableCell>
-                            <TableCell>
-                                Test
-                            </TableCell>
-                            <TableCell>
-                                20/08/2021
-                            </TableCell>
-                            <TableCell>
-                                30/09/2021
-                            </TableCell>
-                            <TableCell>
-                                Aktive
-                            </TableCell>
-                            <TableCell>
-                                Aktive
-                            </TableCell>
-
-                        </TableRow>
-
-                        <TableRow>
-                            <TableCell>
-                                #1
-                            </TableCell>
-                            <TableCell>
-                                Test
-                            </TableCell>
-                            <TableCell>
-                                20/08/2021
-                            </TableCell>
-                            <TableCell>
-                                30/09/2021
-                            </TableCell>
-                            <TableCell>
-                                Aktive
-                            </TableCell>
-                            <TableCell>
-                                Aktive
-                            </TableCell>
-
-                        </TableRow>
-
-
+                        {offers.map((ofert, index) => (
+                            <TableRow>
+                                <TableCell>#{index + 1}</TableCell>
+                                <TableCell>{ofert.titulli}</TableCell>
+                                <TableCell>{ofert.date_created}</TableCell>
+                                <TableCell>{ofert.end_date}</TableCell>
+                                <TableCell>{ofert.ulja}{ofert.ulja_type === 1 ? '%' : '$'}</TableCell>
+                                <TableCell>{ofert.status}</TableCell>
+                                <TableCell>Veprime</TableCell>
+                            </TableRow>
+                        ))}
                     </TableBody>
                 </Table>
             </div>

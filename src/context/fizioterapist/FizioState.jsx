@@ -7,6 +7,7 @@ export default function FizioState({ children }) {
     const [clients, setClients] = useState([])
     const [orders, setOrders] = useState([])
     const [packages, setPackages] = useState([])
+    const [offers, setOffers] = useState([])
 
     const getClients = () => {
         axios.get('http://localhost/physiosystem/server/fizio/getAllClients').then(res => {
@@ -25,6 +26,12 @@ export default function FizioState({ children }) {
         })
     }
 
+    const getOffers = () => {
+        axios.get('http://localhost/physiosystem/server/fizio/getAllOffers').then(res => {
+            setOffers(res.data)
+        })
+    }
+
     return (
         <>
             <FizioContext.Provider value={{
@@ -33,7 +40,9 @@ export default function FizioState({ children }) {
                 orders,
                 getOrders,
                 packages,
-                getPackages
+                getPackages,
+                offers,
+                getOffers
             }} >
                 {children}
             </FizioContext.Provider>
