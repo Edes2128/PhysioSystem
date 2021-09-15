@@ -11,15 +11,15 @@ import Media from './components/Media';
 import MediaState from './context/media/MediaState';
 
 function App() {
-  const path = useLocation();
-  useEffect(() => {
-    const body = document.querySelector('#body');
-    if (path.pathname !== "/fizio") {
-      body.classList.add('white-body')
-    } else {
-      body.classList.remove('white-body')
-    }
-  }, [path])
+  // const path = useLocation();
+  // useEffect(() => {
+  //   const body = document.querySelector('#body');
+  //   if (path.pathname !== "/fizio") {
+  //     body.classList.add('white-body')
+  //   } else {
+  //     body.classList.remove('white-body')
+  //   }
+  // }, [path])
 
   return (
     <>

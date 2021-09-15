@@ -11,7 +11,7 @@ export default function Login({ history }) {
     const clientContext = useContext(ClientContext);
     const { setCurrentUser } = clientContext;
     const alertContext = useContext(AlertContext);
-    const {setAlert} = alertContext;
+    const { setAlert } = alertContext;
     const login = (e) => {
         e.preventDefault();
 
@@ -28,7 +28,8 @@ export default function Login({ history }) {
                 localStorage.setItem("token", JSON.stringify(res.data.token));
                 localStorage.setItem("op", res.data.id);
                 localStorage.setItem("el", res.data.role);
-                setAlert(`${res.data.message}`,'success')
+                setAlert(`${res.data.message}`, 'success')
+                body.classList.remove('white-body')
             } else if (res.data.status === 1 && res.data.role === 3) {
                 history.push('/shop')
                 localStorage.setItem("token", JSON.stringify(res.data.token));
@@ -38,9 +39,9 @@ export default function Login({ history }) {
                 })
                 localStorage.setItem("el", res.data.role);
                 body.classList.add('white-body')
-                setAlert(`${res.data.message}`,'succes')
-            }else{
-                setAlert(`${res.data.message}`,'error')
+                setAlert(`${res.data.message}`, 'succes')
+            } else {
+                setAlert(`${res.data.message}`, 'error')
             }
         })
     }
