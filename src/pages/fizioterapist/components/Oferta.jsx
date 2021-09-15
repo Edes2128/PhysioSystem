@@ -81,7 +81,15 @@ export default function Oferta() {
                                 <TableCell>{ofert.date_created}</TableCell>
                                 <TableCell>{ofert.end_date}</TableCell>
                                 <TableCell>{ofert.ulja}{ofert.ulja_type === 1 ? '%' : '$'}</TableCell>
-                                <TableCell>{ofert.status}</TableCell>
+                                <TableCell>
+                                    <span style={{
+                                        color: ofert.status === 1 ? 'black' : 'white',
+                                        backgroundColor: ofert.status === 1 ? '#28FFBF' : '#FF4848',
+                                        padding: '10px 15px',
+                                    }} >
+                                        {ofert.status === 1 ? 'Active' : 'Expire'}
+                                    </span>
+                                </TableCell>
                                 <TableCell>Veprime</TableCell>
                             </TableRow>
                         ))}
