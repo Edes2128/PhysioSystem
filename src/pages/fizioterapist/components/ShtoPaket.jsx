@@ -4,8 +4,9 @@ import AlertContext from '../../../context/alerts/AlertContext';
 import MediaContext from '../../../context/media/MediaContext';
 
 export default function ShtoPaket() {
-    const alertContext = useContext(AlertContext);
-    const mediaContext = useContext(MediaContext);
+    
+    const alertContext = useContext(AlertContext)
+    const mediaContext = useContext(MediaContext)
     const {
         setShowMedia,
         setArrCompare,
@@ -81,8 +82,6 @@ export default function ShtoPaket() {
                     pdf: '',
                     pdf_name: '',
                     day_videos: [],
-                    day_videos_local: [],
-                    day_videos_names: []
                 }])
                 setBtnSub(false)
             } else {
