@@ -7,6 +7,9 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Pagination from '@material-ui/lab/Pagination';
 import FizioContext from '../../../context/fizioterapist/FizioContext';
+import { ReactComponent as Edit } from '../../../images/edit-icon.svg'
+import { ReactComponent as View } from '../../../images/view-icon.svg'
+import { ReactComponent as Delete } from '../../../images/delete-icon.svg'
 
 export default function Oferta() {
     const fizioContext = useContext(FizioContext)
@@ -90,7 +93,19 @@ export default function Oferta() {
                                         {ofert.status === 1 ? 'Active' : 'Expire'}
                                     </span>
                                 </TableCell>
-                                <TableCell>Veprime</TableCell>
+                                <TableCell >
+                                    <div className="flex ai-center">
+                                        <div className="table-action flex ai-center jc-center">
+                                            <View />
+                                        </div>
+                                        <div className="table-action flex ai-center jc-center">
+                                            <Edit />
+                                        </div>
+                                        <div className="table-action flex ai-center jc-center">
+                                            <Delete />
+                                        </div>
+                                    </div>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

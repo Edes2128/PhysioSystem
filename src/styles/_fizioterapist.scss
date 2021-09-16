@@ -819,3 +819,13 @@
     margin-top: 60px;
   }
 }
+.table-action {
+  background-color: #363348;
+  padding: 8px;
+  border-radius: 5px;
+  margin-right: 10px;
+  cursor: pointer;
+  &:last-child {
+    margin-right: 0;
+  }
+}
