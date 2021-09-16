@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,19 +8,21 @@ import TableRow from '@material-ui/core/TableRow';
 import Pagination from '@material-ui/lab/Pagination';
 import FizioContext from '../../../context/fizioterapist/FizioContext';
 import { ReactComponent as Edit } from '../../../images/edit-icon.svg'
-import { ReactComponent as View } from '../../../images/view-icon.svg'
 import { ReactComponent as Delete } from '../../../images/delete-icon.svg'
 
 export default function Oferta() {
     const fizioContext = useContext(FizioContext)
     const { offers, getOffers } = fizioContext;
+    const [activeIndex, setActiveIndex] = useState(-1)
+
+
     useEffect(() => {
         getOffers()
     }, [])
     return (
         <div className="oferta" >
             <div className="oferta-top flex jc-spaceb ai-center">
-                <p className="fs-30 fw-semib" >Oferta <sup className="fs-20" >(20)</sup> </p>
+                <p className="fs-30 fw-semib" >Oferta <sup className="fs-20" >({offers.length})</sup> </p>
                 <Link to="/fizio/addoffer" className="oferta-top-btn-add  flex ai-center fs-18 fw-regular" >Shto Oferte
 
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
@@ -87,17 +89,14 @@ export default function Oferta() {
                                 <TableCell>
                                     <span style={{
                                         color: ofert.status === 1 ? 'black' : 'white',
-                                        backgroundColor: ofert.status === 1 ? '#28FFBF' : '#FF4848',
+                                        backgroundColor: ofert.status === 1 ? '#9BFFC3' : '#FF4848',
                                         padding: '10px 15px',
                                     }} >
                                         {ofert.status === 1 ? 'Active' : 'Expire'}
                                     </span>
                                 </TableCell>
                                 <TableCell >
-                                    <div className="flex ai-center">
-                                        <div className="table-action flex ai-center jc-center">
-                                            <View />
-                                        </div>
+                                    <div className="flex ai-center" style={{ position: 'relative' }} >
                                         <div className="table-action flex ai-center jc-center">
                                             <Edit />
                                         </div>
