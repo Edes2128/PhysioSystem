@@ -829,3 +829,96 @@
     margin-right: 0;
   }
 }
+.edit-offer {
+  width: 100%;
+  &-links {
+    a {
+      text-decoration: none;
+      color: white;
+    }
+    svg {
+      margin: 0 15px;
+    }
+    p {
+      color: white;
+    }
+  }
+  &-packages {
+    width: 100%;
+    margin-bottom: 50px;
+    &-titulli {
+      color: white;
+    }
+    &-items {
+      width: 100%;
+      margin-top: 30px;
+      flex-wrap: wrap;
+      &-item {
+        max-width: 400px;
+        width: 100%;
+        margin-right: 40px;
+        &-texts {
+          background-color: #363348;
+          padding: 20px 30px;
+          width: 100%;
+          &-titulli {
+            color: white;
+          }
+          &-prices {
+            p {
+              color: white;
+              margin-right: 10px;
+            }
+            del {
+              color: red;
+            }
+          }
+        }
+        button {
+          margin-top: 20px;
+          border: 0;
+          outline: none;
+          background-color: red;
+          color: white;
+          border-radius: 10px;
+          padding: 10px 30px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  &-add-packages {
+    margin-bottom: 50px;
+    width: 100%;
+    &-title {
+      color: white;
+    }
+    &-items {
+      flex-wrap: wrap;
+      margin-top: 30px;
+      &-item {
+        max-width: 400px;
+        width: 100%;
+        margin-right: 40px;
+        &-texts {
+          background-color: #363348;
+          padding: 20px 30px;
+          width: 100%;
+          p {
+            color: white;
+          }
+        }
+        button{
+          color: white;
+          background-color: green;
+          border: 0;
+          border-radius: 10px;
+          outline: none;
+          margin-top: 20px;
+          padding: 10px 30px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

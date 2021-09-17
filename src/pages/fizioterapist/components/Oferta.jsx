@@ -97,9 +97,9 @@ export default function Oferta() {
                                 </TableCell>
                                 <TableCell >
                                     <div className="flex ai-center" style={{ position: 'relative' }} >
-                                        <div className="table-action flex ai-center jc-center">
+                                        <Link to={`/fizio/oferta/${ofert.id}`} className="table-action flex ai-center jc-center">
                                             <Edit />
-                                        </div>
+                                        </Link>
                                         <div className="table-action flex ai-center jc-center">
                                             <Delete />
                                         </div>

@@ -7,18 +7,20 @@ import Klientet from './Klientet'
 import Profili from './Profili'
 import ShtoPaket from './ShtoPaket'
 import ShtoOfert from './ShtoOfert'
+import EditOferta from './EditOferta'
 
 export default function FizioBody() {
     return (
         <div className="fizio-body" >
             <Switch>
                 <Route exact path="/fizio" component={Paketat} />
-                <Route path="/fizio/porosit" component={Porosit} />
-                <Route path="/fizio/oferta" component={Oferta} />
-                <Route path="/fizio/klientet" component={Klientet} />
-                <Route path="/fizio/profili" component={Profili} />
-                <Route path="/fizio/shtopaket" component={ShtoPaket} />
-                <Route path="/fizio/addoffer" component={ShtoOfert} />
+                <Route exact path="/fizio/porosit" component={Porosit} />
+                <Route exact path="/fizio/oferta" component={Oferta} />
+                <Route exact path="/fizio/klientet" component={Klientet} />
+                <Route exact path="/fizio/profili" component={Profili} />
+                <Route exact path="/fizio/shtopaket" component={ShtoPaket} />
+                <Route exact path="/fizio/addoffer" component={ShtoOfert} />
+                <Route exact path="/fizio/oferta/:offer_id" component={EditOferta} />
             </Switch>
         </div>
     )
