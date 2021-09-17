@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import AlertContext from '../../../context/alerts/AlertContext';
 
 
 export default function EditOferta({ match }) {
-
+    const alertContext = useContext(AlertContext)
+    const { setAlert } = alertContext;
     const [offer, setOffer] = useState('')
     const [titulli, setTitulli] = useState('');
     const [ulja, setUlja] = useState('');
@@ -37,6 +39,31 @@ export default function EditOferta({ match }) {
     const updateOffer = (e) => {
         e.preventDefault();
 
+        const fd = new FormData();
+        fd.append('id', match.params.offer_id)
+        fd.append('titulli', titulli);
+        fd.append('ulja', ulja);
+        fd.append('tipi_uljes', tipiUljes);
+        fd.append('data_mbarimit', dataMbarimit);
+        fd.append('baner', baner)
+        fd.append('baner_name', image)
+
+        axios.post('http://localhost/physiosystem/server/fizio/updateOffer', fd).then(res => {
+            if (res.data.status === 1) {
+                setAlert(`${res.data.message}`, 'success')
+                axios.post('http://localhost/physiosystem/server/fizio/getSingleOffer', { id: match.params.offer_id }).then(res => {
+                    setOffer(res.data[0])
+                    setTitulli(res.data[0].titulli)
+                    setUlja(res.data[0].ulja)
+                    setTipiUljes(res.data[0].ulja_type)
+                    setDataMbarimit(res.data[0].end_date_2)
+                    setImage(res.data[0].baner)
+                })
+
+            } else {
+                setAlert(`${res.data.message}`, 'error')
+            }
+        })
 
     }
 
