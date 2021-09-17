@@ -66,8 +66,9 @@ export default function Media() {
                         <div className="media-library-content-tabs flex ai-center">
                             <Close onClick={() => {
                                 setShowMedia(false)
-                           setTimeout(() =>  setArrName([]),1000)    
-                           setArrCompare([])   
+                                setTimeout(() => setArrName([]), 1000)
+                                setArrCompare([])
+                                setActiveTab('post')
                             }
                             } />
                             <p
@@ -111,6 +112,7 @@ export default function Media() {
                                 {videos.map((video, index) => (
                                     <>
                                         <div
+                                            key={video.id}
                                             onClick={() => {
                                                 if (arrCompare.some(item => item === video) === false) {
                                                     setArrCompare(prev => [...prev, video])

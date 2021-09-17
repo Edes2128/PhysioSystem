@@ -10,10 +10,10 @@ export default function EditOferta({ match }) {
     const [ulja, setUlja] = useState('');
     const [dataMbarimit, setDataMbarimit] = useState('')
     const [list, setList] = useState([])
-    const [listDrejtuar, setListDretuar] = useState([])
     const [tipiUljes, setTipiUljes] = useState(1)
     const [baner, setBaner] = useState("")
     const [banerLocal, setBanerLocal] = useState("")
+    const [image, setImage] = useState('')
 
     useEffect(() => {
 
@@ -23,7 +23,7 @@ export default function EditOferta({ match }) {
             setUlja(res.data[0].ulja)
             setTipiUljes(res.data[0].ulja_type)
             setDataMbarimit(res.data[0].end_date_2)
-            setListDretuar(res.data[0].products)
+            setImage(res.data[0].baner)
         })
 
         axios.get('http://localhost/physiosystem/server/fizio/getPackages').then(res => {
@@ -32,6 +32,13 @@ export default function EditOferta({ match }) {
 
 
     }, [match.params.offer_id])
+
+
+    const updateOffer = (e) => {
+        e.preventDefault();
+
+
+    }
 
     return (
         <div className="edit-offer flex fd-column ai-start" >
@@ -42,7 +49,7 @@ export default function EditOferta({ match }) {
                 </svg>
                 <p className="fs-20 fw-regular" >{offer.titulli}</p>
             </div>
-            <form className="add-offer-form flex fd-column ai-start" >
+            <form className="add-offer-form flex fd-column ai-start" onSubmit={updateOffer} >
 
                 <div className="add-offer-form-inputs flex jc-spaceb ai-center">
                     <div className="add-offer-form-inputs-item flex fd-column ai-start">
@@ -127,13 +134,15 @@ export default function EditOferta({ match }) {
                                             <p>{item.price} $</p>
                                         </div>
                                         <button type="button" className="fs-18 fw-regular" onClick={() => {
-                                            axios.post('http://localhost/physiosystem/server/fizio/addPackOffer', { offer_id: match.params.offer_id, package_id: item.id }).then(res => {
-                                                if (res.data.status === 1) {
-                                                    axios.post('http://localhost/physiosystem/server/fizio/getSingleOffer', { id: match.params.offer_id }).then(res => {
-                                                        setOffer(res.data[0])
-                                                    })
-                                                }
-                                            })
+                                            axios.post('http://localhost/physiosystem/server/fizio/addPackOffer',
+                                                { offer_id: match.params.offer_id, package_id: item.id }).then(res => {
+                                                    if (res.data.status === 1) {
+                                                        axios.post('http://localhost/physiosystem/server/fizio/getSingleOffer',
+                                                            { id: match.params.offer_id }).then(res => {
+                                                                setOffer(res.data[0])
+                                                            })
+                                                    }
+                                                })
                                         }} >Shto Paket</button>
                                     </div>
                                 }
@@ -141,25 +150,34 @@ export default function EditOferta({ match }) {
                         ))}
                     </div>
                 </div>
-
-
                 <div className="add-offer-form-inputs-image  flex jc-start">
-                    {banerLocal === "" && baner === "" ?
-                        <>
-                            <label htmlFor="oferta-baner" className="add-offer-form-inputs-image-btn fs-18 fw-regular" >Upload Banner</label>
-                            <input type="file" hidden id="oferta-baner" onChange={(e) => {
-                                setBaner(e.target.files[0])
-                                setBanerLocal(URL.createObjectURL(e.target.files[0]))
-                            }} />
-                        </>
-                        :
+                    {image !== '' ?
                         <div className="add-offer-form-inputs-image-preview flex fd-column ai-center" >
-                            <img src={banerLocal} className="img-res" alt="" />
+                            <img src={`http://localhost/physiosystem/server/files/${image}`} className="img-res" alt="" />
                             <button onClick={() => {
-                                setBanerLocal("")
-                                setBaner("")
+                                setImage('')
                             }} className="add-offer-form-inputs-image-preview-delete-btn fs-18 fw-regular" >Delete Banner</button>
                         </div>
+                        :
+                        <>
+                            {banerLocal === "" && baner === "" ?
+                                <>
+                                    <label htmlFor="oferta-baner" className="add-offer-form-inputs-image-btn fs-18 fw-regular" >Upload Banner</label>
+                                    <input type="file" hidden id="oferta-baner" onChange={(e) => {
+                                        setBaner(e.target.files[0])
+                                        setBanerLocal(URL.createObjectURL(e.target.files[0]))
+                                    }} />
+                                </>
+                                :
+                                <div className="add-offer-form-inputs-image-preview flex fd-column ai-center" >
+                                    <img src={banerLocal} className="img-res" alt="" />
+                                    <button onClick={() => {
+                                        setBanerLocal("")
+                                        setBaner("")
+                                    }} className="add-offer-form-inputs-image-preview-delete-btn fs-18 fw-regular" >Delete Banner</button>
+                                </div>
+                            }
+                        </>
                     }
                 </div>
                 <button className="add-offer-form-btn fs-18 fw-regular" type="submit" >Update</button>
