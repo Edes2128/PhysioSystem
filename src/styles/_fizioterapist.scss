@@ -978,3 +978,62 @@
     }
   }
 }
+.singleclient {
+  width: 100%;
+  &-links {
+    width: 100%;
+    svg {
+      margin: 0 15px;
+    }
+    a {
+      color: white;
+      text-decoration: none;
+    }
+    p {
+      color: white;
+    }
+  }
+  &-actions {
+    width: 100%;
+    margin-top: 60px;
+    &-pass {
+      input {
+        border: 1px solid #363348;
+        background-color: transparent;
+        color: white;
+        outline: none;
+        padding: 10px 5px 10px 10px;
+      }
+      button {
+        margin-top: 20px;
+        padding: 10px 40px;
+        border: 0;
+        outline: none;
+        background-color: #363348;
+        color: white;
+        cursor: pointer;
+      }
+    }
+    &-status {
+      color: white;
+      &-buttons {
+        margin-top: 20px;
+        button {
+          background-color: green;
+          border: 0;
+          outline: none;
+          color: white;
+          padding: 10px 30px;
+          cursor: pointer;
+        }
+        a {
+          color: white;
+          background-color: red;
+          text-decoration: none;
+          padding: 10px 30px;
+          margin-left: 15px;
+        }
+      }
+    }
+  }
+}
