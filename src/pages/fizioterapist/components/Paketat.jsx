@@ -15,7 +15,7 @@ export default function Paketat() {
     return (
         <div className="fizio-paketat">
             <div className="fizio-paketat-top flex ai-center jc-spaceb">
-                <p className="fs-30 fw-bold" >Paketat <sup className="fs-20" >(20)</sup> </p>
+                <p className="fs-30 fw-bold" >Paketat <sup className="fs-20" >({packages.length})</sup> </p>
                 <Link to="/fizio/shtopaket" className="fs-18 fw-regular fizio-paketat-top-button">Shto Paket</Link>
             </div>
             <div className="fizio-paketat-body flex  jc-spaceb  ai-start">

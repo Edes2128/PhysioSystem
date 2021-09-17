@@ -1,11 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
-import AlertContext from '../../../context/alerts/AlertContext';
 import MediaContext from '../../../context/media/MediaContext';
 
 export default function ShtoPaket() {
     
-    const alertContext = useContext(AlertContext)
     const mediaContext = useContext(MediaContext)
     const {
         setShowMedia,
@@ -41,7 +39,6 @@ export default function ShtoPaket() {
         }
     }, [arrName, arrCompare])
 
-    let dayVideos = days.map(item => item.day_videos);
     let daysPdf = days.map(item => item.pdf);
 
     const addPackage = (e) => {
@@ -51,21 +48,14 @@ export default function ShtoPaket() {
         formdata.append('pershkrimi', pershkrimi);
         formdata.append('price', price);
         formdata.append('cover', image);
-        // const videos_day2 = JSON.stringify(dayVideos)
-        // formdata.append(`video_days[]`, JSON.stringify(videos_day2));
 
         const demo2 = JSON.stringify(videos)
         formdata.append(`video_demo[]`, demo2);
-
-
         let dayss = JSON.stringify(days)
         formdata.append('days', dayss)
-
         Array.from(daysPdf).forEach(pdf => {
             formdata.append(`days-pdf[]`, pdf)
         })
-
-
 
         axios.post('http://localhost/physiosystem/server/fizio/addPackage', formdata).then(res => {
             if (res.status === 200) {

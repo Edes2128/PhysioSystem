@@ -1037,3 +1037,39 @@
     }
   }
 }
+.coach-profili {
+  width: 100%;
+  &-title {
+    color: white;
+  }
+  &-pass {
+    width: 100%;
+    margin-top: 60px;
+    &-item {
+      max-width: 30%;
+      width: 100%;
+      label {
+        color: white;
+        margin-bottom: 15px;
+      }
+      input {
+        width: 100%;
+        background-color: transparent;
+        border: 1px solid #363348;
+        outline: none;
+        padding: 10px 5px 10px 10px;
+        color: white;
+      }
+    }
+    button {
+      max-width: 30%;
+      width: 100%;
+      padding: 10px 0;
+      background-color: #363348;
+      color: white;
+      outline: none;
+      border: 0;
+      cursor: pointer;
+    }
+  }
+}
