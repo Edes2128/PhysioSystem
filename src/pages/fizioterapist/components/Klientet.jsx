@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import { ReactComponent as Search } from '../../../images/loupe.svg'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,6 +12,14 @@ export default function Klientet() {
 
     const fizioContext = useContext(FizioContext);
     const { clients, getClients } = fizioContext;
+    const [page, setPage] = useState(1);
+    const itemPage = 10;
+    const start = (page - 1) * itemPage;
+    const end = page * itemPage;
+    const handleChange = (event, value) => {
+        setPage(value);
+    };
+
     useEffect(() => {
         getClients()
     }, [])
@@ -42,7 +50,7 @@ export default function Klientet() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {clients.map((client, index) => (
+                        {clients.slice(start, end).map((client, index) => (
                             <TableRow>
                                 <TableCell>#{index + 1}</TableCell>
                                 <TableCell>{client.name}</TableCell>
@@ -66,7 +74,7 @@ export default function Klientet() {
                 </Table>
             </div>
             <div className="oferta-datatable-pagination flex jc-end">
-                <Pagination count={5} />
+                <Pagination count={Math.ceil(clients.length / itemPage)} onChange={handleChange} />
             </div>
         </div>
     )

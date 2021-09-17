@@ -9,13 +9,19 @@ import Pagination from '@material-ui/lab/Pagination';
 import FizioContext from '../../../context/fizioterapist/FizioContext';
 import { ReactComponent as Edit } from '../../../images/edit-icon.svg'
 import { ReactComponent as Delete } from '../../../images/delete-icon.svg'
+import axios from 'axios'
 
 export default function Oferta() {
     const fizioContext = useContext(FizioContext)
     const { offers, getOffers } = fizioContext;
     const [activeIndex, setActiveIndex] = useState(-1)
-
-
+    const [page, setPage] = useState(1);
+    const itemPage = 10;
+    const start = (page - 1) * itemPage;
+    const end = page * itemPage;
+    const handleChange = (event, value) => {
+        setPage(value);
+    };
     useEffect(() => {
         getOffers()
     }, [])
@@ -79,7 +85,7 @@ export default function Oferta() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {offers.map((ofert, index) => (
+                        {offers.slice(start, end).map((ofert, index) => (
                             <TableRow>
                                 <TableCell>#{index + 1}</TableCell>
                                 <TableCell>{ofert.titulli}</TableCell>
@@ -100,9 +106,31 @@ export default function Oferta() {
                                         <Link to={`/fizio/oferta/${ofert.id}`} className="table-action flex ai-center jc-center">
                                             <Edit />
                                         </Link>
-                                        <div className="table-action flex ai-center jc-center">
-                                            <Delete />
-                                        </div>
+                                        {ofert.status !== 0 &&
+                                            <div className="table-action flex ai-center jc-center"  >
+                                                {activeIndex === index &&
+                                                    <div className="table-action-del-offer flex fd-column ai-center">
+                                                        <p className="table-action-del-offer-title">Doni te fshini kete ofert?</p>
+                                                        <div className="table-action-del-offer-buttons">
+                                                            <button onClick={() => {
+                                                                axios.post('http://localhost/physiosystem/server/fizio/deleteOffer',
+                                                                    { id: ofert.id }).then(res => {
+                                                                        if (res.data.status === 1) {
+                                                                            getOffers();
+                                                                            setActiveIndex(-1)
+                                                                        }
+                                                                    })
+                                                            }} >Po</button>
+                                                            <button onClick={() => {
+                                                                setActiveIndex(-1)
+                                                            }} >Jo</button>
+                                                        </div>
+                                                    </div>}
+                                                <Delete onClick={() => {
+                                                    setActiveIndex(index)
+                                                }} />
+                                            </div>
+                                        }
                                     </div>
                                 </TableCell>
                             </TableRow>
@@ -111,7 +139,7 @@ export default function Oferta() {
                 </Table>
             </div>
             <div className="oferta-datatable-pagination flex jc-end">
-                <Pagination count={5} />
+                <Pagination count={Math.ceil(offers.length / itemPage)} onChange={handleChange} />
             </div>
         </div>
     )

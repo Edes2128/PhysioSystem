@@ -825,6 +825,36 @@
   border-radius: 5px;
   margin-right: 10px;
   cursor: pointer;
+  position: relative;
+  &-del-offer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 240px;
+    padding: 10px;
+    background-color: white;
+    z-index: 100;
+    &-title {
+      color: black;
+    }
+    &-buttons {
+      margin-top: 20px;
+      button {
+        border: 0;
+        outline: none;
+        padding: 5px 20px;
+        margin-right: 20px;
+        background-color: green;
+        cursor: pointer;
+        color: white;
+        &:last-child {
+          margin-right: 0;
+          background-color: red;
+        }
+      }
+    }
+  }
+
   &:last-child {
     margin-right: 0;
   }
@@ -918,6 +948,32 @@
           padding: 10px 30px;
           cursor: pointer;
         }
+      }
+    }
+  }
+  &-avtivate {
+    margin-top: 50px;
+    width: 100%;
+    &-title {
+      color: white;
+    }
+    &-buttons {
+      margin-top: 30px;
+      button {
+        background-color: green;
+        padding: 13px 40px;
+        border: 0;
+        outline: none;
+        color: white;
+        cursor: pointer;
+      }
+      a {
+        background-color: red;
+        text-decoration: none;
+        color: white;
+        padding: 13px 40px;
+        margin-left: 20px;
+        cursor: pointer;
       }
     }
   }

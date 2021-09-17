@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import FizioContext from '../../../context/fizioterapist/FizioContext'
 import { ReactComponent as Search } from '../../../images/loupe.svg'
 import Table from '@material-ui/core/Table';
@@ -12,6 +12,13 @@ export default function Porosit() {
 
     const fizioContext = useContext(FizioContext);
     const { orders, getOrders } = fizioContext;
+    const [page, setPage] = useState(1);
+    const itemPage = 10;
+    const start = (page - 1) * itemPage;
+    const end = page * itemPage;
+    const handleChange = (event, value) => {
+        setPage(value);
+    };
 
     useEffect(() => {
         getOrders()
@@ -40,7 +47,7 @@ export default function Porosit() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {orders.map((order, index) => (
+                            {orders.slice(start, end).map((order, index) => (
                                 <TableRow>
                                     <TableCell>#{index + 1}</TableCell>
                                     <TableCell>{order.user}</TableCell>
@@ -54,7 +61,7 @@ export default function Porosit() {
                     </Table>
                 </div>
                 <div className="oferta-datatable-pagination flex jc-end">
-                    <Pagination count={5} />
+                    <Pagination count={Math.ceil(orders.length / itemPage)} onChange={handleChange} />
                 </div>
             </div>
         </>
