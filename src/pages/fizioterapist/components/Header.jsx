@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Header() {
+export default function Header({ logout }) {
     return (
         <div className="fizio-header flex jc-spaceb ai-center" >
             <div className="fizio-header-collapse">
@@ -32,7 +32,7 @@ export default function Header() {
                         </g>
                     </svg>
                 </div>
-                <div className="fizio-header-widgets-item flex jc-center ai-center">
+                <div className="fizio-header-widgets-item flex jc-center ai-center" onClick={logout} >
                     <svg xmlns="http://www.w3.org/2000/svg" width="17.98" height="18.038" viewBox="0 0 17.98 18.038">
                         <g id="Vector_Smart_Object" data-name="Vector Smart Object" transform="translate(1.019 1.019)">
                             <path id="Path_35" data-name="Path 35" d="M6.346,17H2.808a1.774,1.774,0,0,1-1.77-1.778V2.778A1.774,1.774,0,0,1,2.808,1H6.346" transform="translate(-1.038 -1)" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.038" />
