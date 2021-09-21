@@ -8,17 +8,23 @@ export default function Cart() {
 
     const clientContext = useContext(ClientContext);
     const { cart, getCart } = clientContext;
-    const packages = cart.map(item => item.package[0]);
-    const prices = packages.map(cmim => parseInt(cmim.price));
+
     const reducer = (accumulator, curr) => accumulator + curr;
     if (cart.length !== 0) {
+        var packages = cart.map(item => item.package[0]);
+        var prices = packages.map(cmim => parseInt(cmim.price));
         var total = prices.reduce(reducer);
+
     }
     const paypal = useRef()
+
+    console.log(total)
+    console.log(packages)
 
     useEffect(() => {
         getCart()
     }, [])
+
 
     useEffect(() => {
         window.paypal.Buttons({

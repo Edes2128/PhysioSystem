@@ -49,7 +49,7 @@ export default function Porosit() {
                         <TableBody>
                             {orders.slice(start, end).map((order, index) => (
                                 <TableRow>
-                                    <TableCell>#{index + 1}</TableCell>
+                                    <TableCell>#{order.id}</TableCell>
                                     <TableCell>{order.user}</TableCell>
                                     <TableCell>{order.package}</TableCell>
                                     <TableCell>{order.bought_at}</TableCell>

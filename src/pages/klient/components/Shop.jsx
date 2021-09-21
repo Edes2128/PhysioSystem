@@ -23,6 +23,7 @@ export default function Shop() {
         var packages = mypackages.map(item => item.packages[0]);
     }
 
+
     return (
         <div className="shop" >
             <div className="shop-header flex ai-center jc-spaceb">
@@ -75,7 +76,16 @@ export default function Shop() {
                                             <p className="shop-packages-item-bottom-details-left-title fs-22 fw-bold">{paket.package_name}</p>
                                             <p className="fs-16 fw-light" >{paket.days.length} days</p>
                                         </div>
-                                        <p className="shop-packages-item-bottom-details-price fs-22 fw-semib"> $ {paket.price} </p>
+                                        {paket.oferta === false ?
+                                            <p className="shop-packages-item-bottom-details-price fs-22 fw-semib"> $ {paket.price} </p>
+                                            :
+
+                                            <p className="shop-packages-item-bottom-details-price fs-22 fw-semib" > $ {paket.oferta.new_price}
+                                                <sup className="fs-14 fw-regular" >
+                                                    <del>$ {paket.price}</del></sup>
+                                            </p>
+                                        }
+
                                     </div>
 
                                     {cart.some(cart1 => cart1.package_id === paket.id) === true ?

@@ -57,7 +57,7 @@ export default function Klientet() {
                     <TableBody>
                         {clients.slice(start, end).map((client, index) => (
                             <TableRow key={client.id} >
-                                <TableCell>#{index + 1}</TableCell>
+                                <TableCell>#{client.id}</TableCell>
                                 <TableCell>{client.name}</TableCell>
                                 <TableCell> {client.email} </TableCell>
                                 <TableCell>{client.contry}</TableCell>
