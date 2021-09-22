@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom'
 import Login from './components/Login';
 import Register from './components/Register';
@@ -12,6 +12,19 @@ import MediaState from './context/media/MediaState';
 import FizioState from './context/fizioterapist/FizioState'
 
 function App() {
+
+
+  useEffect(() => {
+
+    const role = JSON.parse(localStorage.getItem('el'))
+    const body = document.querySelector('#body')
+    if (role === 3) {
+      body.classList.add('white-body')
+    } else {
+      body.classList.remove('white-body')
+    }
+
+  }, [])
 
   return (
     <>

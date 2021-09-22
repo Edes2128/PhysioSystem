@@ -76,7 +76,7 @@ export default function Shop() {
                                             <p className="shop-packages-item-bottom-details-left-title fs-22 fw-bold">{paket.package_name}</p>
                                             <p className="fs-16 fw-light" >{paket.days.length} days</p>
                                         </div>
-                                        {paket.oferta === false ?
+                                        {paket.oferta === false || paket.oferta.offer_status === 0 ?
                                             <p className="shop-packages-item-bottom-details-price fs-22 fw-semib"> $ {paket.price} </p>
                                             :
 
