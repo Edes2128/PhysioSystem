@@ -12,13 +12,14 @@ import ClientContext from '../../../context/klient/klientContext';
 export default function Orders() {
 
     const clientContext = useContext(ClientContext)
-    const { getMyPackages, mypackages } = clientContext;
+    const { getOrders, orders, expireMyPackage } = clientContext;
     const [page, setPage] = useState(1);
     const itemPage = 10;
     const start = (page - 1) * itemPage;
     const end = page * itemPage;
     useEffect(() => {
-        getMyPackages()
+        getOrders()
+        expireMyPackage()
     }, [])
 
     const handleChange = (event, value) => {
@@ -47,7 +48,7 @@ export default function Orders() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {mypackages && mypackages.slice(start, end).map((item, index) => (
+                        {orders && orders.slice(start, end).map((item, index) => (
                             <TableRow>
                                 <TableCell>#{index + 1}</TableCell>
                                 <TableCell>{item.packages[0].name}</TableCell>
@@ -61,7 +62,7 @@ export default function Orders() {
             </div>
 
             <div className="pagination flex jc-end">
-                <Pagination count={Math.ceil(mypackages.length / itemPage)} size="medium" onChange={handleChange} />
+                <Pagination count={Math.ceil(orders.length / itemPage)} size="medium" onChange={handleChange} />
             </div>
 
         </div>

@@ -9,13 +9,15 @@ import axios from 'axios'
 export default function Shop() {
 
     const clientContext = useContext(ClientContext)
-    const { trialPackages, wishlist, getWishtlist, cart, getCart, setTrialPackages, getMyPackages, mypackages } = clientContext
+    const { trialPackages, wishlist, getWishtlist, cart, getCart, setTrialPackages, getMyPackages, mypackages ,expireMyPackage} = clientContext
 
     useEffect(() => {
         getWishtlist()
         getMyPackages()
+        expireMyPackage()
         axios.get('http://localhost/physiosystem/server/client/getTrialPackages').then(res => {
             setTrialPackages(res.data)
+
         })
     }, [])
 

@@ -6,9 +6,10 @@ import { Link } from 'react-router-dom';
 export default function MyPackages() {
 
     const clientContext = useContext(ClientContext);
-    const { getMyPackages, mypackages } = clientContext;
+    const { getMyPackages, mypackages , expireMyPackage } = clientContext;
     useEffect(() => {
         getMyPackages()
+        expireMyPackage()
     }, [])
     if (mypackages.length !== 0) {
         var packages = mypackages.map(item => item.packages[0])

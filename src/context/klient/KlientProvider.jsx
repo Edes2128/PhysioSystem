@@ -9,6 +9,7 @@ export default function KlientProvider({ children }) {
     const [wishlist, setWishlist] = useState([]);
     const [cart, setCart] = useState([]);
     const [mypackages, setMypackages] = useState([])
+    const [orders, setOrders] = useState([])
 
     useEffect(() => {
         axios.post('http://localhost/physiosystem/server/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
@@ -16,6 +17,12 @@ export default function KlientProvider({ children }) {
         })
     }, [])
 
+
+    const getOrders = () => {
+        axios.post('http://localhost/physiosystem/server/client/getOrders', { user_id: localStorage.getItem('op') }).then(res => {
+            setOrders(res.data)
+        })
+    }
 
     const getWishtlist = () => {
         axios.post('http://localhost/physiosystem/server/client/getWishlist', { user_id: localStorage.getItem('op') }).then(res => {
@@ -61,6 +68,9 @@ export default function KlientProvider({ children }) {
 
     }
 
+    const expireMyPackage = () => {
+        axios.post('http://localhost/physiosystem/server/client/expireMyPackage', { user_id: localStorage.getItem('op') })
+    }
 
     useEffect(() => {
         getMyPackages()
@@ -80,7 +90,10 @@ export default function KlientProvider({ children }) {
                     cart,
                     getCart,
                     getMyPackages,
-                    mypackages
+                    mypackages,
+                    orders,
+                    getOrders,
+                    expireMyPackage
                 }} >
                 {children}
             </ClientContext.Provider>
