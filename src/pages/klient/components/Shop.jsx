@@ -79,13 +79,11 @@ export default function Shop() {
                                         {paket.oferta === false || paket.oferta.offer_status === 0 ?
                                             <p className="shop-packages-item-bottom-details-price fs-22 fw-semib"> $ {paket.price} </p>
                                             :
-
                                             <p className="shop-packages-item-bottom-details-price fs-22 fw-semib" > $ {paket.oferta.new_price}
                                                 <sup className="fs-14 fw-regular" >
                                                     <del>$ {paket.price}</del></sup>
                                             </p>
                                         }
-
                                     </div>
 
                                     {cart.some(cart1 => cart1.package_id === paket.id) === true ?

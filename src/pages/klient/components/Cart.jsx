@@ -11,21 +11,30 @@ export default function Cart() {
 
     const reducer = (accumulator, curr) => accumulator + curr;
     if (cart.length !== 0) {
-        var packages = cart.map(item => item.package[0]);
-        var prices = packages.map(cmim => parseInt(cmim.price));
-        var total = prices.reduce(reducer);
+        var packages = cart.map(item => item.package)
+        var cmimetfillestare = cart.map(item => parseInt(item.package.price))
+        var cmimiPaOfert = cmimetfillestare.reduce(reducer)
+
+
+        var packagesnoOffer = cart.filter(item => item.oferta === false);
+        if (packagesnoOffer.length !== 0) {
+            var prices = packagesnoOffer.map(cmim => parseInt(cmim.package.price));
+            var total = prices.reduce(reducer);
+        }
+        var packagesOffer = cart.filter(item => item.oferta !== false);
+        if (packagesOffer.length !== 0) {
+            var newprices = packagesOffer.map(item => item.oferta.new_price);
+            var newTotal = newprices.reduce(reducer)
+        }
+
+        var finalTotal = (newTotal === undefined ? 0 : newTotal) + (total === undefined ? 0 : total);
 
     }
     const paypal = useRef()
 
-    console.log(total)
-    console.log(packages)
-
     useEffect(() => {
         getCart()
     }, [])
-
-
     useEffect(() => {
         window.paypal.Buttons({
             createOrder: (data, actions, err) => {
@@ -35,7 +44,7 @@ export default function Cart() {
                         {
                             description: "Cool Video",
                             amount: {
-                                value: total,
+                                value: finalTotal,
                                 currency_code: "USD"
                             }
                         }
@@ -45,7 +54,7 @@ export default function Cart() {
             onApprove: async (data, actions) => {
                 const order = await actions.order.capture();
                 console.log(order)
-                axios.post('http://localhost/physiosystem/server/client/buyPackage', { user_id: localStorage.getItem('op'), packages, total }).then(res => {
+                axios.post('http://localhost/physiosystem/server/client/buyPackage', { user_id: localStorage.getItem('op'), packages, total: finalTotal }).then(res => {
                     axios.post('http://localhost/physiosystem/server/client/removeAllCart', { user_id: localStorage.getItem('op') }).then(res => {
                         getCart()
                     })
@@ -73,12 +82,27 @@ export default function Cart() {
                                 <div key={item.id} className="shopping-cart-form-items-left-item flex ai-ceter jc-spaceb">
                                     <div className="shopping-cart-form-items-left-item-texts flex ai-center">
                                         <div className="shopping-cart-form-items-left-item-image">
-                                            <img src={`http://localhost/physiosystem/server/files/${item.package[0].photo}`} className="img-res" alt="" />
+                                            <img src={`http://localhost/physiosystem/server/files/${item.package.photo}`} className="img-res" alt="" />
                                         </div>
-                                        <p className="shopping-cart-form-items-left-item-texts-title fs-22 fw-semib">{item.package[0].name}</p>
+                                        <p className="shopping-cart-form-items-left-item-texts-title fs-22 fw-semib">{item.package.name}</p>
                                     </div>
                                     <div className="shopping-cart-form-items-left-item-actions flex ai-center">
-                                        <p className="shopping-cart-form-items-left-actions-price fs-29 fw-medium" >$ {item.package[0].price}</p>
+
+                                        {item.oferta === false ?
+                                            <p className="shopping-cart-form-items-left-actions-price fs-29 fw-medium" >
+
+                                                $ {item.package.price}
+
+                                            </p>
+                                            :
+                                            <p className="shopping-cart-form-items-left-actions-price fs-29 fw-medium" >
+
+                                                $ {item.oferta.new_price}
+                                                <sup className="fs-18 fw-light" ><del>$ {item.package.price}</del></sup>
+                                            </p>
+                                        }
+
+
                                         <Separator />
                                         <RemoveCart onClick={() => {
                                             axios.post('http://localhost/physiosystem/server/client/removeCart', { user_id: localStorage.getItem('op'), package_id: item.package_id }).then(res => {
@@ -96,22 +120,29 @@ export default function Cart() {
                                     <div key={item.id} className="shopping-cart-form-items-right-details-package flex ai-center">
 
                                         <div className="shopping-cart-form-items-right-details-package-image">
-                                            <img src={`http://localhost/physiosystem/server/files/${item.package[0].photo}`} className="img-res" alt="" />
+                                            <img src={`http://localhost/physiosystem/server/files/${item.package.photo}`} className="img-res" alt="" />
                                         </div>
                                         <div className="shopping-cart-form-items-right-details-package-texts flex fd-column jc-spaceb">
-                                            <p className="shopping-cart-form-items-right-details-package-texts-title fs-18 fw-bold">{item.package[0].name}</p>
-                                            <p className="shopping-cart-form-items-right-details-package-price fs-22 fw-medium">$ {item.package[0].price}</p>
+                                            <p className="shopping-cart-form-items-right-details-package-texts-title fs-18 fw-bold">{item.package.name}</p>
+                                            {item.oferta === false ?
+                                                <p className="shopping-cart-form-items-right-details-package-price fs-22 fw-medium">$ {item.package.price}</p>
+                                                :
+                                                <p className="shopping-cart-form-items-right-details-package-price fs-22 fw-medium">$ {item.oferta.new_price}
+                                                    <sup className="fs-18 fw-light" ><del>$ {item.package.price}</del></sup>
+                                                </p>
+                                            }
+
                                         </div>
                                     </div>
                                 ))}
                                 <div className="shopping-cart-form-items-right-details-discount flex ai-center jc-spaceb">
                                     <p className="shopping-cart-form-items-right-details-discount-title fs-16 fw-medium">Discount</p>
-                                    <p className="shopping-cart-form-items-right-details-discount-ulja fs-16 fw-medium">$ 30</p>
+                                    <p className="shopping-cart-form-items-right-details-discount-ulja fs-16 fw-medium">$ {cmimiPaOfert - finalTotal}</p>
                                 </div>
 
                                 <div className="shopping-cart-form-items-right-details-total flex ai-center jc-spaceb">
                                     <p className="shopping-cart-form-items-right-details-total-title fs-24 fw-bold">Total </p>
-                                    <p className="shopping-cart-form-items-right-details-total-vlera  fs-22 fw-semib">$ {total}</p>
+                                    <p className="shopping-cart-form-items-right-details-total-vlera  fs-22 fw-semib">$ {finalTotal}</p>
                                 </div>
 
                                 <div ref={paypal} className="shopping-cart-form-items-right-details-btn" >

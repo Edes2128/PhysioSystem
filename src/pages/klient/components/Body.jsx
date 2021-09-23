@@ -9,6 +9,8 @@ import Profile from './Profile'
 import SinglePackage from './SinglePackage'
 import SingleBought from './SingleBought'
 import SingleDay from './SingleDay'
+import SingleOffer from './SingleOffer'
+
 
 export default function Body() {
     return (
@@ -23,6 +25,7 @@ export default function Body() {
                 <Route exact path="/shop/:id" component={SinglePackage} />
                 <Route exact path="/shop/mypackages/:id" component={SingleBought} />
                 <Route exact path="/shop/mypackages/:id/days/:dayid" component={SingleDay} />
+                <Route exact path="/shop/offer/:offerid" component={SingleOffer} />
             </Switch>
         </div>
     )
