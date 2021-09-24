@@ -1075,6 +1075,7 @@
 }
 .edit-package {
   width: 100%;
+  padding-bottom: 40px;
   &-links {
     width: 100%;
     a {
@@ -1086,6 +1087,113 @@
     }
     svg {
       margin: 0 15px;
+    }
+  }
+  &-inputs {
+    width: 100%;
+    margin-top: 60px;
+    &-item {
+      max-width: 30%;
+      width: 100%;
+      label {
+        margin-bottom: 10px;
+        color: $orange;
+      }
+      input {
+        width: 100%;
+        border: 1px solid #363348;
+        background-color: transparent;
+        padding: 14px 10px;
+        color: white;
+        outline: none;
+      }
+    }
+  }
+  &-baner {
+    margin-top: 40px;
+    &-title {
+      color: $orange;
+    }
+    &-image {
+      max-width: 500px;
+      margin-top: 20px;
+      button {
+        margin-top: 20px;
+        width: 50%;
+        background-color: red;
+        color: white;
+        outline: none;
+        border: 0;
+        border-radius: 10px;
+        padding: 10px 0;
+        cursor: pointer;
+      }
+    }
+  }
+  &-videodemo {
+    margin-top: 50px;
+    &-title {
+      color: $orange;
+    }
+    &-items {
+      margin-top: 30px;
+      flex-wrap: wrap;
+      &-item {
+        max-width: 400px;
+        margin-right: 166px;
+        &:last-child {
+          margin-right: 0;
+        }
+        button {
+          margin-top: 20px;
+          width: 50%;
+          color: white;
+          background-color: red;
+          border-radius: 10px;
+          border: 0;
+          outline: none;
+          padding: 10px 0;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  &-ditet {
+    margin-top: 50px;
+    width: 100%;
+    &-title {
+      color: $orange;
+    }
+    &-items {
+      width: 100%;
+      margin-top: 30px;
+      &-item {
+        width: 100%;
+        box-shadow: 0 0 0 1px $orange;
+        padding: 20px;
+        margin-bottom: 30px;
+        &:nth-child(even) {
+          box-shadow: 0 0 0 1px $purple-ligt;
+        }
+        &-top {
+          width: 100%;
+          &-input {
+            width: 30%;
+            label {
+              color: white;
+              margin-bottom: 10px;
+            }
+            input {
+              width: 100%;
+              border: 1px solid #363348;
+              background-color: transparent;
+              color: white;
+              padding: 15px 10px;
+              outline: none;
+            }
+          }
+        }
+      }
     }
   }
 }
