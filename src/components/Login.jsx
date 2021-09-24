@@ -39,7 +39,7 @@ export default function Login({ history }) {
                 })
                 localStorage.setItem("el", res.data.role);
                 body.classList.add('white-body')
-                setAlert(`${res.data.message}`, 'succes')
+                setAlert(`${res.data.message}`, 'success')
             } else {
                 setAlert(`${res.data.message}`, 'error')
             }

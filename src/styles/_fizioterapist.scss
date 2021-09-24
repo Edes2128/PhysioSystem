@@ -1073,3 +1073,19 @@
     }
   }
 }
+.edit-package {
+  width: 100%;
+  &-links {
+    width: 100%;
+    a {
+      color: white;
+      text-decoration: none;
+    }
+    p {
+      color: white;
+    }
+    svg {
+      margin: 0 15px;
+    }
+  }
+}

@@ -42,7 +42,7 @@ export default function Paketat() {
                             </div>
                             {activeAction === index &&
                                 <div className="fizio-paketat-body-item-actions-widgets">
-                                    <p className="fs-20 fw-light" >Edit</p>
+                                    <Link style={{ textDecoration: 'none', color: 'white' }} to={`/fizio/package/${paket.id}`} className="fs-20 fw-light" >Edit</Link>
                                     <p className="fs-20 fw-light" >Delete</p>
                                 </div>
                             }

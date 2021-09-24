@@ -9,6 +9,7 @@ import ShtoPaket from './ShtoPaket'
 import ShtoOfert from './ShtoOfert'
 import EditOferta from './EditOferta'
 import SingleClient from './SingleClient'
+import EditPackage from './EditPackage'
 
 export default function FizioBody() {
     return (
@@ -23,6 +24,7 @@ export default function FizioBody() {
                 <Route exact path="/fizio/addoffer" component={ShtoOfert} />
                 <Route exact path="/fizio/oferta/:offer_id" component={EditOferta} />
                 <Route exact path="/fizio/klientet/:client_id" component={SingleClient} />
+                <Route exact path="/fizio/package/:package_id" component={EditPackage} />
             </Switch>
         </div>
     )
