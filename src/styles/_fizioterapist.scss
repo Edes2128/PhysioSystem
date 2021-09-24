@@ -1193,7 +1193,48 @@
             }
           }
         }
+        &-bottom {
+          margin-top: 30px;
+          &-title {
+            color: $orange;
+          }
+          &-videos {
+            flex-wrap: wrap;
+            width: 100%;
+            margin-top: 30px;
+            &-content {
+              max-width: 400px;
+              margin-right: 146px;
+              margin-bottom: 20px;
+              &:nth-child(3n) {
+                margin-right: 0;
+              }
+              button {
+                width: 50%;
+                background-color: red;
+                color: white;
+                border: 0;
+                outline: none;
+                cursor: pointer;
+                margin-top: 20px;
+                padding: 10px 0;
+                border-radius: 10px;
+              }
+            }
+          }
+        }
       }
     }
+  }
+  &-edit-btn {
+    background-color: green;
+    color: white;
+    align-self: end;
+    border: 0;
+    outline: none;
+    padding: 10px 50px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 30px;
   }
 }

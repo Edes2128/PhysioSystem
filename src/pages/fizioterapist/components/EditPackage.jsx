@@ -96,35 +96,44 @@ export default function EditPackage({ match }) {
 
             <div className="edit-package-ditet flex fd-column ai-start">
                 <p className="edit-package-ditet-title fs-18 fw-regular">Ditet e Paketes</p>
-                
-                <div className="edit-package-ditet-items">
-                            {days.map(day => (
-                                <div className="edit-package-ditet-items-item flex fd-column ai-start">
-                                        <div className="edit-package-ditet-items-item-top flex ai-center jc-spaceb ">
-                                                <div className="edit-package-ditet-items-item-top-input flex fd-column ai-start">
-                                                    <label className="fs-18 fw-regular" htmlFor="#">Titulli</label>
-                                                    <input className="fs-18 fw-regular" type="text" />
-                                                </div>
-                                                <div className="edit-package-ditet-items-item-top-input flex fd-column ai-start">
-                                                    <label className="fs-18 fw-regular" htmlFor="#">Pershkrimi</label>
-                                                    <input className="fs-18 fw-regular" type="text" />
-                                                </div>
-                                                <div className="edit-package-ditet-items-item-top-input flex fd-column ai-start">
-                                                    <label className="fs-18 fw-regular" htmlFor="#">Titulli</label>
-                                                    <input className="fs-18 fw-regular"  type="text" />
-                                                </div>
-                                        </div>
-                                        <div className="edit-package-ditet-items-item-bottom">
 
-                                        </div>
+                <div className="edit-package-ditet-items">
+                    {days.map(day => (
+                        <div className="edit-package-ditet-items-item flex fd-column ai-start">
+                            <div className="edit-package-ditet-items-item-top flex ai-center jc-spaceb ">
+                                <div className="edit-package-ditet-items-item-top-input flex fd-column ai-start">
+                                    <label className="fs-18 fw-regular" htmlFor="#">Titulli</label>
+                                    <input className="fs-18 fw-regular" type="text" value={day.day_titulli} />
                                 </div>
-                            ))}
+                                <div className="edit-package-ditet-items-item-top-input flex fd-column ai-start">
+                                    <label className="fs-18 fw-regular" htmlFor="#">Pershkrimi</label>
+                                    <input className="fs-18 fw-regular" type="text" value={day.day_pershkrimi} />
+                                </div>
+                                <div className="edit-package-ditet-items-item-top-input flex fd-column ai-start">
+                                    <label className="fs-18 fw-regular" htmlFor="#">Titulli</label>
+                                    <input className="fs-18 fw-regular" type="text" />
+                                </div>
+                            </div>
+                            <div className="edit-package-ditet-items-item-bottom flex fd-column ai-start">
+                                <p className="edit-package-ditet-items-item-bottom-title fs-18 fw-light">Videot e Dites</p>
+                                <div className="edit-package-ditet-items-item-bottom-videos flex ai-start ">
+                                    {day.videos.map(video => (
+                                        <div className="edit-package-ditet-items-item-bottom-videos-content flex ai-center fd-column">
+                                            <div className="flex" >
+                                                <video controls className="img-res" src={`http://localhost/physiosystem/server/files/${video.video_src}`}></video>
+                                            </div>
+                                            <button className="fs-18 fw-regular" >Fshi</button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
-            
             </div>
 
-            
 
+            <button className="edit-package-edit-btn fs-18 fw-regular">Edit</button>
 
         </div>
     )
