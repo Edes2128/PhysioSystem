@@ -54,8 +54,8 @@ export default function Cart() {
             onApprove: async (data, actions) => {
                 const order = await actions.order.capture();
                 console.log(order)
-                axios.post('http://localhost/physiosystem/server/client/buyPackage', { user_id: localStorage.getItem('op'), packages, total: finalTotal }).then(res => {
-                    axios.post('http://localhost/physiosystem/server/client/removeAllCart', { user_id: localStorage.getItem('op') }).then(res => {
+                axios.post('https://physiosystem.alcodeit.com//client/buyPackage', { user_id: localStorage.getItem('op'), packages, total: finalTotal }).then(res => {
+                    axios.post('https://physiosystem.alcodeit.com//client/removeAllCart', { user_id: localStorage.getItem('op') }).then(res => {
                         getCart()
                     })
                 })
@@ -82,7 +82,7 @@ export default function Cart() {
                                 <div key={item.id} className="shopping-cart-form-items-left-item flex ai-ceter jc-spaceb">
                                     <div className="shopping-cart-form-items-left-item-texts flex ai-center">
                                         <div className="shopping-cart-form-items-left-item-image">
-                                            <img src={`http://localhost/physiosystem/server/files/${item.package.photo}`} className="img-res" alt="" />
+                                            <img src={`https://physiosystem.alcodeit.com//files/${item.package.photo}`} className="img-res" alt="" />
                                         </div>
                                         <p className="shopping-cart-form-items-left-item-texts-title fs-22 fw-semib">{item.package.name}</p>
                                     </div>
@@ -105,7 +105,7 @@ export default function Cart() {
 
                                         <Separator />
                                         <RemoveCart onClick={() => {
-                                            axios.post('http://localhost/physiosystem/server/client/removeCart', { user_id: localStorage.getItem('op'), package_id: item.package_id }).then(res => {
+                                            axios.post('https://physiosystem.alcodeit.com//client/removeCart', { user_id: localStorage.getItem('op'), package_id: item.package_id }).then(res => {
                                                 getCart()
                                             })
                                         }} />
@@ -120,7 +120,7 @@ export default function Cart() {
                                     <div key={item.id} className="shopping-cart-form-items-right-details-package flex ai-center">
 
                                         <div className="shopping-cart-form-items-right-details-package-image">
-                                            <img src={`http://localhost/physiosystem/server/files/${item.package.photo}`} className="img-res" alt="" />
+                                            <img src={`https://physiosystem.alcodeit.com//files/${item.package.photo}`} className="img-res" alt="" />
                                         </div>
                                         <div className="shopping-cart-form-items-right-details-package-texts flex fd-column jc-spaceb">
                                             <p className="shopping-cart-form-items-right-details-package-texts-title fs-18 fw-bold">{item.package.name}</p>

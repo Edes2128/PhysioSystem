@@ -24,7 +24,7 @@ export default function Profili() {
                 </div>
                 <button className="fs-18 fw-regular"
                     onClick={() => {
-                        axios.post('http://localhost/physiosystem/server/user/changePassword', { token: JSON.parse(localStorage.getItem('token')), newPassword, oldPassword }).then(res => {
+                        axios.post('https://physiosystem.alcodeit.com//user/changePassword', { token: JSON.parse(localStorage.getItem('token')), newPassword, oldPassword }).then(res => {
                             if (res.data.status === 1) {
                                 setNewPassword('')
                                 setOldPassword('')

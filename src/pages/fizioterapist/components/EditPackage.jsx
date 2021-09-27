@@ -25,7 +25,7 @@ export default function EditPackage({ match }) {
     } = mediaContext;
 
     useEffect(() => {
-        axios.post('http://localhost/physiosystem/server/fizio/getSinglePackage', { package_id: match.params.package_id }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com//fizio/getSinglePackage', { package_id: match.params.package_id }).then(res => {
             setPackage(res.data)
             setTitulli(res.data.paket_name)
             setPerhkrimi(res.data.paket_pershkrimi)
@@ -55,7 +55,7 @@ export default function EditPackage({ match }) {
         fd.append("price", cmimi);
         fd.append("photo", baner);
         fd.append("baner", cover)
-        axios.post('http://localhost/physiosystem/server/fizio/updatePackage', fd).then(res => {
+        axios.post('https://physiosystem.alcodeit.com//fizio/updatePackage', fd).then(res => {
             if (res.data.status === 1) {
                 setAlert(`${res.data.message}`, 'success')
             } else {
@@ -66,7 +66,7 @@ export default function EditPackage({ match }) {
 
     const updateVideoDemo = () => {
 
-        axios.post('http://localhost/physiosystem/server/fizio/updateDemoVideo', { package_id: match.params.package_id, demoVideos }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com//fizio/updateDemoVideo', { package_id: match.params.package_id, demoVideos }).then(res => {
             if (res.status === 200) {
                 setAlert('Demo updated', "success");
             }
@@ -120,7 +120,7 @@ export default function EditPackage({ match }) {
                 {baner !== "" ?
                     <div className="edit-package-baner-image flex fd-column ai-center" >
                         <div className="flex">
-                            <img src={`http://localhost/physiosystem/server/files/${baner}`} className="img-res" alt="" />
+                            <img src={`https://physiosystem.alcodeit.com//files/${baner}`} className="img-res" alt="" />
                         </div>
                         <button className="fs-18 fw-regular" type="button" onClick={() => {
                             setBaner("")
@@ -176,7 +176,7 @@ export default function EditPackage({ match }) {
                             {demoVideos.map((demo, index) => (
                                 <div className="edit-package-videodemo-items-item flex fd-column ai-center">
                                     <div className="flex" >
-                                        <video className="img-res" src={`http://localhost/physiosystem/server/files/${demo.src}`} controls ></video>
+                                        <video className="img-res" src={`https://physiosystem.alcodeit.com//files/${demo.src}`} controls ></video>
                                     </div>
                                     <button className="fs-18 fw-regular" onClick={() => {
                                         removeVideo(index)
@@ -256,7 +256,7 @@ export default function EditPackage({ match }) {
                                                 <>
                                                     <a
                                                         rel="noreferrer"
-                                                        href={`http://localhost/physiosystem/server/files/${day.day_pdf}`}
+                                                        href={`https://physiosystem.alcodeit.com//files/${day.day_pdf}`}
                                                         target="_blank"
                                                         className=" flex">
                                                         <img src="/images/pdf.png" className="img-res" alt="" />
@@ -295,7 +295,7 @@ export default function EditPackage({ match }) {
                                     {day.videos.map((video, index2) => (
                                         <div className="edit-package-ditet-items-item-bottom-videos-content flex ai-center fd-column">
                                             <div className="flex" >
-                                                <video controls className="img-res" src={`http://localhost/physiosystem/server/files/${video.src}`}></video>
+                                                <video controls className="img-res" src={`https://physiosystem.alcodeit.com//files/${video.src}`}></video>
                                             </div>
                                             <button className="fs-18 fw-regular" onClick={() => {
                                                 removeVideoDay(index, index2, video)
@@ -314,7 +314,7 @@ export default function EditPackage({ match }) {
                                 const videos = JSON.stringify(day.videos)
                                 fd.append("videos[]", videos)
 
-                                axios.post("http://localhost/physiosystem/server/fizio/updateDays", fd).then(res => {
+                                axios.post("https://physiosystem.alcodeit.com//fizio/updateDays", fd).then(res => {
                                     if (res.status === 200) {
                                         setAlert('Day updated', `success`)
                                     }

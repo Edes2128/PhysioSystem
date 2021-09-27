@@ -18,7 +18,7 @@ export default function Profile() {
     const [preview, setPreview] = useState('')
 
     const changePas = () => {
-        axios.post('http://localhost/physiosystem/server/user/changePassword', { oldPassword, newPassword, token: JSON.parse(localStorage.getItem('token')) }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com//user/changePassword', { oldPassword, newPassword, token: JSON.parse(localStorage.getItem('token')) }).then(res => {
             if (res.data.status === 1) {
                 setAlert(`${res.data.message}`, 'success')
                 setOldPassword('')
@@ -40,12 +40,12 @@ export default function Profile() {
         fd.append('token', JSON.parse(localStorage.getItem('token')))
         fd.append('image_name', currentUser.image_profile)
 
-        axios.post('http://localhost/physiosystem/server/user/changeGeneral', fd).then(res => {
+        axios.post('https://physiosystem.alcodeit.com//user/changeGeneral', fd).then(res => {
             if (res.data.status === 1) {
                 setAlert(`${res.data.message}`, 'success')
                 setPreview('')
                 setImage('')
-                axios.post('http://localhost/physiosystem/server/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
+                axios.post('https://physiosystem.alcodeit.com//user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
                     setCurrentUser(res.data[0])
                 })
             } else {
@@ -55,7 +55,7 @@ export default function Profile() {
     }
 
     useEffect(() => {
-        axios.post('http://localhost/physiosystem/server/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com//user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
             setCurrentUser(res.data[0])
         })
     }, [])
@@ -86,7 +86,7 @@ export default function Profile() {
 
                                 <img src={preview} className="img-res" alt="" />
                                 :
-                                <img src={currentUser.image_profile === "" ? "/images/profile-big.jpg" : `http://localhost/physiosystem/server/files/${currentUser.image_profile}`} className="img-res" alt="" />
+                                <img src={currentUser.image_profile === "" ? "/images/profile-big.jpg" : `https://physiosystem.alcodeit.com//files/${currentUser.image_profile}`} className="img-res" alt="" />
 
                             }
 

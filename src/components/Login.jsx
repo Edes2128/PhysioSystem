@@ -21,7 +21,7 @@ export default function Login({ history }) {
         }
 
         const body = document.querySelector('#body');
-        axios.post('http://localhost/physiosystem/server/user/login', payload).then(res => {
+        axios.post('https://physiosystem.alcodeit.com//user/login', payload).then(res => {
             if (res.data.status === 1 && res.data.role === 2) {
                 history.push('/fizio')
                 body.classList.remove('white-body')
@@ -34,7 +34,7 @@ export default function Login({ history }) {
                 history.push('/shop')
                 localStorage.setItem("token", JSON.stringify(res.data.token));
                 localStorage.setItem("op", res.data.id);
-                axios.post('http://localhost/physiosystem/server/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
+                axios.post('https://physiosystem.alcodeit.com//user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
                     setCurrentUser(res.data[0])
                 })
                 localStorage.setItem("el", res.data.role);

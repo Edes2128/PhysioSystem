@@ -15,7 +15,7 @@ export default function SingleOffer({ match }) {
         var pacids = packages.map(item => item.id)
     }
     useEffect(() => {
-        axios.post('http://localhost/physiosystem/server/client/getOfferPackages', { id: match.params.offerid }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com//client/getOfferPackages', { id: match.params.offerid }).then(res => {
             setPackages(res.data)
         })
         getMyPackages()
@@ -37,7 +37,7 @@ export default function SingleOffer({ match }) {
                                     <div className="single-offer-item flex fd-column ai-center">
                                         <div className="single-offer-item-top">
                                             <Link to={`/shop/${paket.id}`} className="single-offer-item-top-image flex">
-                                                <img className="img-res" src={`http://localhost/physiosystem/server/files/${paket.photo}`} alt="" />
+                                                <img className="img-res" src={`https://physiosystem.alcodeit.com//files/${paket.photo}`} alt="" />
                                             </Link>
                                         </div>
                                         <div className="single-offer-item-bottom flex fd-column ai-center">
@@ -54,7 +54,7 @@ export default function SingleOffer({ match }) {
                                                 :
                                                 <button className="fs-18 fw-regular"
                                                     onClick={() => {
-                                                        axios.post('http://localhost/physiosystem/server/client/addCart', { user_id: localStorage.getItem('op'), package_id: paket.id }).then(res => {
+                                                        axios.post('https://physiosystem.alcodeit.com//client/addCart', { user_id: localStorage.getItem('op'), package_id: paket.id }).then(res => {
                                                             getCart()
                                                         })
                                                     }}

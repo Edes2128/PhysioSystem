@@ -27,7 +27,7 @@ export default function Register({ history }) {
             postal_code: postalCode
         }
 
-        axios.post('http://localhost/physiosystem/server/user/addClient', payload).then(res => {
+        axios.post('https://physiosystem.alcodeit.com//user/addClient', payload).then(res => {
             if (res.data.status === 1) {
                 const body = document.querySelector('#body');
                 body.classList.add('white-body')
@@ -35,7 +35,7 @@ export default function Register({ history }) {
                 localStorage.setItem("token", JSON.stringify(res.data.token));
                 localStorage.setItem("op", res.data.id);
                 localStorage.setItem("el", 3);
-                axios.post('http://localhost/physiosystem/server/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
+                axios.post('https://physiosystem.alcodeit.com//user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
                     setCurrentUser(res.data[0])
                 })
 

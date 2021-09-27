@@ -27,7 +27,7 @@ export default function Wishlist() {
                     <div className="wishlist-paketat-item flex fd-column ai-center">
                         <div className="wishlist-paketat-item-top">
                             <div className="wishlist-paketat-item-top-image">
-                                <img src={`http://localhost/physiosystem/server/files/${wish.package[0].photo}`} className="img-res" alt="" />
+                                <img src={`https://physiosystem.alcodeit.com//files/${wish.package[0].photo}`} className="img-res" alt="" />
                             </div>
                         </div>
                         <div className="wishlist-paketat-item-bottom flex fd-column ai-center">
@@ -39,7 +39,7 @@ export default function Wishlist() {
                                 <p className="fs-22 fw-bold" >$ {wish.package[0].price}</p>
                             </div>
                             <button type="button" onClick={() => {
-                                axios.post('http://localhost/physiosystem/server/client/removeWishlist', { user_id: localStorage.getItem('op'), id: wish.package_id }).then(res => {
+                                axios.post('https://physiosystem.alcodeit.com//client/removeWishlist', { user_id: localStorage.getItem('op'), id: wish.package_id }).then(res => {
                                     getWishtlist()
                                 })
                             }} className="wishlist-paketat-item-bottom-remove-btn flex ai-center jc-center fs-16 fw-medium"  >
@@ -52,9 +52,9 @@ export default function Wishlist() {
                                     type="button"
                                     className="wishlist-paketat-item-bottom-add-btn flex ai-center jc-center fs-16 fw-medium"
                                     onClick={() => {
-                                        axios.post('http://localhost/physiosystem/server/client/addCart', { user_id: localStorage.getItem('op'), package_id: wish.package_id }).then(res => {
+                                        axios.post('https://physiosystem.alcodeit.com//client/addCart', { user_id: localStorage.getItem('op'), package_id: wish.package_id }).then(res => {
                                             getCart()
-                                            axios.post('http://localhost/physiosystem/server/client/removeWishlist', { user_id: localStorage.getItem('op'), id: wish.package_id }).then(res => {
+                                            axios.post('https://physiosystem.alcodeit.com//client/removeWishlist', { user_id: localStorage.getItem('op'), id: wish.package_id }).then(res => {
                                                 getWishtlist()
                                             })
                                         })

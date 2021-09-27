@@ -13,7 +13,7 @@ export default function HaderBanner() {
     const [offers, setOffers] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost/physiosystem/server/client/testOfferPackages').then(res => {
+        axios.get('https://physiosystem.alcodeit.com//client/testOfferPackages').then(res => {
             setOffers(res.data)
         })
         getCart()
@@ -36,7 +36,7 @@ export default function HaderBanner() {
                 <Line />
                 <div className="headerbanner-top-right flex ai-center">
                     <div className="headerbanner-top-right-logo flex">
-                        <img src={currentUser && `http://localhost/physiosystem/server/files/${currentUser.image_profile}`} className="img-res" alt="" />
+                        <img src={currentUser && `https://physiosystem.alcodeit.com//files/${currentUser.image_profile}`} className="img-res" alt="" />
                     </div>
                     <p className="fs-16 fw-medium" >{currentUser && currentUser.name}</p>
                 </div>
@@ -52,7 +52,7 @@ export default function HaderBanner() {
                             <p className="fs-16 fw-regular" >{oferta.titulli_ofertes}</p>
                             <span className="fs-32 fw-semib" > - {oferta.ulja}  {oferta.ulja_type === 1 ? '%' : '$'} </span>
                         </div>
-                        <img src={`http://localhost/physiosystem/server/files/${oferta.baner_oferta}`} className="img-res" alt="" />
+                        <img src={`https://physiosystem.alcodeit.com//files/${oferta.baner_oferta}`} className="img-res" alt="" />
                     </Link>
                 ))}
             </div>

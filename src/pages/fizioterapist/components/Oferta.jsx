@@ -113,7 +113,7 @@ export default function Oferta() {
                                                         <p className="table-action-del-offer-title">Doni te fshini kete ofert?</p>
                                                         <div className="table-action-del-offer-buttons">
                                                             <button onClick={() => {
-                                                                axios.post('http://localhost/physiosystem/server/fizio/deleteOffer',
+                                                                axios.post('https://physiosystem.alcodeit.com//fizio/deleteOffer',
                                                                     { id: ofert.id }).then(res => {
                                                                         if (res.data.status === 1) {
                                                                             getOffers();

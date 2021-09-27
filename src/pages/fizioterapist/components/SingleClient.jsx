@@ -11,7 +11,7 @@ export default function SingleClient({ match }) {
     const { setAlert } = alertContext
 
     useEffect(() => {
-        axios.post('http://localhost/physiosystem/server/user/getSingleClient', { id: match.params.client_id }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com//user/getSingleClient', { id: match.params.client_id }).then(res => {
             setUser(res.data)
         })
     }, [match.params.client_id])
@@ -31,7 +31,7 @@ export default function SingleClient({ match }) {
                     <input className="fs-18 fw-regular" onChange={(e) => setPassword(e.target.value)} value={password} type="text" placeholder="Password..." />
                     <button className="fs-18 fw-regular"
                         onClick={() => {
-                            axios.post('http://localhost/physiosystem/server/user/changeUserPass', { id: match.params.client_id, password }).then(res => {
+                            axios.post('https://physiosystem.alcodeit.com//user/changeUserPass', { id: match.params.client_id, password }).then(res => {
                                 if (res.data.status === 1) {
                                     setPassword('')
                                     setAlert(`${res.data.message}`, 'success')
@@ -49,9 +49,9 @@ export default function SingleClient({ match }) {
                         </p>
                         <div className="singleclient-actions-status-buttons">
                             <button className="fs-18 fw-regular" onClick={() => {
-                                axios.post('http://localhost/physiosystem/server/user/activateClient', { id: match.params.client_id }).then(res => {
+                                axios.post('https://physiosystem.alcodeit.com//user/activateClient', { id: match.params.client_id }).then(res => {
                                     if (res.data.status === 1) {
-                                        axios.post('http://localhost/physiosystem/server/user/getSingleClient', { id: match.params.client_id }).then(res => {
+                                        axios.post('https://physiosystem.alcodeit.com//user/getSingleClient', { id: match.params.client_id }).then(res => {
                                             setUser(res.data)
                                         })
                                         setAlert(`${res.data.message}`, 'success')
