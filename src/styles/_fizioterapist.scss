@@ -1129,6 +1129,30 @@
         cursor: pointer;
       }
     }
+    &-upload {
+      margin-top: 40px;
+      label {
+        color: white;
+        background-color: $purple-ligt;
+        border-radius: 10px;
+        padding: 10px 30px;
+        cursor: pointer;
+      }
+      &-preview {
+        max-width: 400px;
+        margin-top: 40px;
+        button {
+          background-color: red;
+          color: white;
+          border: 0;
+          border-radius: 10px;
+          margin-top: 20px;
+          width: 50%;
+          padding: 10px 0;
+          cursor: pointer;
+        }
+      }
+    }
   }
   &-videodemo {
     margin-top: 50px;
@@ -1156,6 +1180,15 @@
           cursor: pointer;
         }
       }
+    }
+    &-btn-add {
+      margin-top: 30px;
+      background-color: $purple-ligt;
+      color: white;
+      border: 0;
+      border-radius: 10px;
+      padding: 10px 40px;
+      cursor: pointer;
     }
   }
   &-ditet {
@@ -1191,6 +1224,37 @@
               padding: 15px 10px;
               outline: none;
             }
+            &-pdf {
+              position: relative;
+              span {
+                background-color: red;
+                width: 30px;
+                height: 30px;
+                color: white;
+                border-radius: 50%;
+                text-align: center;
+                position: absolute;
+                top: 0;
+                right: 0;
+                cursor: pointer;
+              }
+              p {
+                color: white;
+                margin-top: 10px;
+              }
+              a {
+                color: transparent;
+                text-decoration: none;
+              }
+            }
+            &-upload-pdf{
+              label{
+                background-color: $purple-ligt;
+                padding: 10px 30px;
+                border-radius: 10px;
+                cursor: pointer;
+              }
+            }
           }
         }
         &-bottom {
@@ -1221,6 +1285,16 @@
                 border-radius: 10px;
               }
             }
+          }
+          &-add-other{
+            margin-top: 20px;
+            background-color: $purple-ligt;
+            color: white;
+            border-radius: 10px;
+            border: 0;
+            outline: none;
+            padding: 10px 30px;
+            cursor: pointer;
           }
         }
         &-btn-save {

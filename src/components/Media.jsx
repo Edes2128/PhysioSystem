@@ -23,6 +23,8 @@ export default function Media() {
     } = mediaContext
 
 
+    console.log(arrCompare)
+
     const uploadVideos = () => {
         const fd = new FormData();
         Array.from(files).forEach(file => {
