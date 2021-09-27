@@ -12,7 +12,6 @@ export default function EditPackage({ match }) {
     const [baner, setBaner] = useState('')
     const [demoVideos, setDemoVideos] = useState([])
     const [days, setDays] = useState([])
-
     const mediaContext = useContext(MediaContext)
     const {
         setShowMedia,
@@ -62,8 +61,6 @@ export default function EditPackage({ match }) {
                 </div>
             </div>
 
-
-
             <div className="edit-package-baner flex fd-column ai-start ">
                 <p className="edit-package-baner-title fs-18 fw-regular ">Fotoja e Paketes</p>
                 {baner !== "" ?
@@ -77,6 +74,8 @@ export default function EditPackage({ match }) {
                     <div></div>
                 }
             </div>
+
+            <button className="edit-package-edit-btn fs-18 fw-regular">Edit</button>
 
             <div className="edit-package-videodemo flex fd-column ai-start">
 
@@ -110,8 +109,7 @@ export default function EditPackage({ match }) {
                                     <input className="fs-18 fw-regular" type="text" value={day.day_pershkrimi} />
                                 </div>
                                 <div className="edit-package-ditet-items-item-top-input flex fd-column ai-start">
-                                    <label className="fs-18 fw-regular" htmlFor="#">Titulli</label>
-                                    <input className="fs-18 fw-regular" type="text" />
+                                    
                                 </div>
                             </div>
                             <div className="edit-package-ditet-items-item-bottom flex fd-column ai-start">
@@ -127,13 +125,15 @@ export default function EditPackage({ match }) {
                                     ))}
                                 </div>
                             </div>
+
+                            <button className="edit-package-ditet-items-item-btn-save fs-18 fw-regular" >Ruaj</button>
                         </div>
                     ))}
                 </div>
             </div>
 
 
-            <button className="edit-package-edit-btn fs-18 fw-regular">Edit</button>
+     
 
         </div>
     )

@@ -1223,6 +1223,15 @@
             }
           }
         }
+        &-btn-save {
+          background-color: green;
+          color: white;
+          align-self: flex-end;
+          border: 0;
+          outline: none;
+          padding: 10px 30px;
+          cursor: pointer;
+        }
       }
     }
   }
