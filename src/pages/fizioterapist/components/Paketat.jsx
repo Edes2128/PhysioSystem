@@ -22,7 +22,7 @@ export default function Paketat() {
                 {packages.map((paket, index) => (
                     <div key={paket.id} className="fizio-paketat-body-item flex fd-column ai-center">
                         <div className="fizio-paketat-body-item-image flex">
-                            <img className="img-res" src={`https://physiosystem.alcodeit.com//files/${paket.photo}`} alt="Foto Package" />
+                            <img className="img-res" src={`https://physiosystem.alcodeit.com/files/${paket.photo}`} alt="Foto Package" />
                         </div>
                         <div className="fizio-paketat-body-item-texts flex fd-column ai-start">
                             <p className="fizio-paketat-body-item-texts-title fs-30 fw-semib">{paket.titulli}</p>

@@ -84,7 +84,7 @@ export default function Klientet() {
                                                         <p className="table-action-del-offer-title">Doni te fshini kete user?</p>
                                                         <div className="table-action-del-offer-buttons">
                                                             <button onClick={() => {
-                                                                axios.post('https://physiosystem.alcodeit.com//user/deleteUser',
+                                                                axios.post('https://physiosystem.alcodeit.com/user/deleteUser',
                                                                     { id: client.id }).then(res => {
                                                                         if (res.data.status === 1) {
                                                                             getClients()

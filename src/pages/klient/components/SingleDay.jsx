@@ -4,7 +4,7 @@ import axios from 'axios'
 export default function SingleDay({ match }) {
     const [single, setSingle] = useState()
     useEffect(() => {
-        axios.post('https://physiosystem.alcodeit.com//client/getSingleBought', { user_id: localStorage.getItem('op'), package_id: match.params.id }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com/client/getSingleBought', { user_id: localStorage.getItem('op'), package_id: match.params.id }).then(res => {
             setSingle(res.data)
         })
     }, [match.params.id])
@@ -27,7 +27,7 @@ export default function SingleDay({ match }) {
 
             <div className="singleday-details flex ai-start">
                 <div className="singleday-details-left">
-                    <img src={`https://physiosystem.alcodeit.com//files/${single && single.package.photo}`} className="img-res" alt="" />
+                    <img src={`https://physiosystem.alcodeit.com/files/${single && single.package.photo}`} className="img-res" alt="" />
                 </div>
                 <div className="singleday-details-right">
                     <p className="fs-28 fw-semib" >{single && day[0].titulli}</p>
@@ -42,7 +42,7 @@ export default function SingleDay({ match }) {
                 <div className="singleday-videos-items flex ai-center fd-column">
                     {single && day[0].videos.map(video => (
                         <div className="singleday-videos-item">
-                            <video controls className="img-res" src={`https://physiosystem.alcodeit.com//files/${single && video.video_src}`}></video>
+                            <video controls className="img-res" src={`https://physiosystem.alcodeit.com/files/${single && video.video_src}`}></video>
                         </div>
                     ))}
                 </div>

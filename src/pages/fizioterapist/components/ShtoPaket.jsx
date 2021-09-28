@@ -57,7 +57,7 @@ export default function ShtoPaket() {
             formdata.append(`days-pdf[]`, pdf)
         })
 
-        axios.post('https://physiosystem.alcodeit.com//fizio/addPackage', formdata).then(res => {
+        axios.post('https://physiosystem.alcodeit.com/fizio/addPackage', formdata).then(res => {
             if (res.status === 200) {
 
                 setTitle('');
@@ -283,7 +283,7 @@ export default function ShtoPaket() {
                                 {videos.map((video, index) => (
                                     <div key={index} className="shtopaket-form-video-preview-item flex fd-column ai-center" >
                                         <div className="flex" >
-                                            <video className="img-res" controls src={`https://physiosystem.alcodeit.com//files/${video.src}`}></video>
+                                            <video className="img-res" controls src={`https://physiosystem.alcodeit.com/files/${video.src}`}></video>
                                         </div>
                                         <button type="button" className="shtopaket-form-video-preview-item-fshi-btn fs-18 fw-regular flex ai-center"
                                             onClick={() => {
@@ -439,7 +439,7 @@ export default function ShtoPaket() {
                                         {day.day_videos.map((video, index2) => (
                                             <div className="shtopaket-form-days-item-bottom-preview-item flex fd-column ai-center">
                                                 <div className="flex" >
-                                                    <video controls src={`https://physiosystem.alcodeit.com//files/${video.src}`} className="img-res" ></video>
+                                                    <video controls src={`https://physiosystem.alcodeit.com/files/${video.src}`} className="img-res" ></video>
                                                 </div>
                                                 <button
                                                     onClick={() => {

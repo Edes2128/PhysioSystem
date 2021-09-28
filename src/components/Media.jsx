@@ -30,11 +30,11 @@ export default function Media() {
         Array.from(files).forEach(file => {
             fd.append('files[]', file)
         })
-        axios.post('https://physiosystem.alcodeit.com//fizio/uploadVideos', fd).then(res => {
+        axios.post('https://physiosystem.alcodeit.com/fizio/uploadVideos', fd).then(res => {
             if (res.status === 200) {
                 setFiles([])
                 setLocalFiles([])
-                axios.get('https://physiosystem.alcodeit.com//fizio/getVideos').then(res => {
+                axios.get('https://physiosystem.alcodeit.com/fizio/getVideos').then(res => {
                     setVideos(res.data)
                     setActiveTab('get')
                 })
@@ -42,7 +42,7 @@ export default function Media() {
         })
     }
     useEffect(() => {
-        axios.get('https://physiosystem.alcodeit.com//fizio/getVideos').then(res => {
+        axios.get('https://physiosystem.alcodeit.com/fizio/getVideos').then(res => {
             setVideos(res.data)
         })
     }, [])
@@ -132,7 +132,7 @@ export default function Media() {
                                                     <Minus />
                                                 </div>
                                             }
-                                            <video loading="lazy" className="img-res" src={`https://physiosystem.alcodeit.com//files/${video.src}`}></video>
+                                            <video loading="lazy" className="img-res" src={`https://physiosystem.alcodeit.com/files/${video.src}`}></video>
                                         </div>
                                     </>
                                 ))}

@@ -27,7 +27,7 @@ export default function MyPackages() {
                 {packages && packages.map(paket => (
                     <div className="mypackages-paketat-item  flex fd-column ai-center">
                         <Link to={`/shop/mypackages/${paket.id}`} className="mypackages-paketat-item-image">
-                            <img src={`https://physiosystem.alcodeit.com//files/${paket.photo}`} className="img-res" alt="" />
+                            <img src={`https://physiosystem.alcodeit.com/files/${paket.photo}`} className="img-res" alt="" />
                         </Link>
                         <p className="mypackages-paketat-item-title fs-22 fw-bold">{paket.name}</p>
                     </div>

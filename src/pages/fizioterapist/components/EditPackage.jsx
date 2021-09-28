@@ -15,6 +15,7 @@ export default function EditPackage({ match }) {
     const [localCover, setLocalCover] = useState('')
     const [demoVideos, setDemoVideos] = useState([])
     const [days, setDays] = useState([])
+    const [newDays, setNewDays] = useState([])
     const mediaContext = useContext(MediaContext)
     const {
         setShowMedia,
@@ -22,10 +23,14 @@ export default function EditPackage({ match }) {
         arrCompare,
         arrName,
         setArrName,
+        setType,
+        type
     } = mediaContext;
 
+
+
     useEffect(() => {
-        axios.post('https://physiosystem.alcodeit.com//fizio/getSinglePackage', { package_id: match.params.package_id }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com/fizio/getSinglePackage', { package_id: match.params.package_id }).then(res => {
             setPackage(res.data)
             setTitulli(res.data.paket_name)
             setPerhkrimi(res.data.paket_pershkrimi)
@@ -38,10 +43,13 @@ export default function EditPackage({ match }) {
 
     useEffect(() => {
         if (arrName !== '' && arrCompare.length !== 0) {
-            if (arrName === true) {
+            if (type === 1) {
                 setDemoVideos(arrCompare)
-            } else {
+            } else if (type === 2) {
                 const item = days[arrName].videos = arrCompare
+                setDays(prev => [...prev], item)
+            } else {
+                const item = newDays[arrName].day_videos = arrCompare
                 setDays(prev => [...prev], item)
             }
         }
@@ -55,7 +63,7 @@ export default function EditPackage({ match }) {
         fd.append("price", cmimi);
         fd.append("photo", baner);
         fd.append("baner", cover)
-        axios.post('https://physiosystem.alcodeit.com//fizio/updatePackage', fd).then(res => {
+        axios.post('https://physiosystem.alcodeit.com/fizio/updatePackage', fd).then(res => {
             if (res.data.status === 1) {
                 setAlert(`${res.data.message}`, 'success')
             } else {
@@ -66,7 +74,7 @@ export default function EditPackage({ match }) {
 
     const updateVideoDemo = () => {
 
-        axios.post('https://physiosystem.alcodeit.com//fizio/updateDemoVideo', { package_id: match.params.package_id, demoVideos }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com/fizio/updateDemoVideo', { package_id: match.params.package_id, demoVideos }).then(res => {
             if (res.status === 200) {
                 setAlert('Demo updated', "success");
             }
@@ -85,9 +93,6 @@ export default function EditPackage({ match }) {
         item.videos.splice(index2, 1)
         setDays(prev => [...prev], item)
     }
-
-
-    console.log(days)
 
     return (
         <div className="edit-package flex fd-column ai-start">
@@ -120,7 +125,7 @@ export default function EditPackage({ match }) {
                 {baner !== "" ?
                     <div className="edit-package-baner-image flex fd-column ai-center" >
                         <div className="flex">
-                            <img src={`https://physiosystem.alcodeit.com//files/${baner}`} className="img-res" alt="" />
+                            <img src={`https://physiosystem.alcodeit.com/files/${baner}`} className="img-res" alt="" />
                         </div>
                         <button className="fs-18 fw-regular" type="button" onClick={() => {
                             setBaner("")
@@ -164,6 +169,7 @@ export default function EditPackage({ match }) {
                         setShowMedia(true)
                         setArrCompare(demoVideos)
                         setArrName(true)
+                        setType(1)
                     }} >Shto video</button>
                     :
                     <>
@@ -171,12 +177,13 @@ export default function EditPackage({ match }) {
                             setShowMedia(true)
                             setArrCompare(demoVideos)
                             setArrName(true)
+                            setType(1)
                         }} >Shto video te tjera</button>
                         <div className="edit-package-videodemo-items flex ai-start">
                             {demoVideos.map((demo, index) => (
                                 <div className="edit-package-videodemo-items-item flex fd-column ai-center">
                                     <div className="flex" >
-                                        <video className="img-res" src={`https://physiosystem.alcodeit.com//files/${demo.src}`} controls ></video>
+                                        <video className="img-res" src={`https://physiosystem.alcodeit.com/files/${demo.src}`} controls ></video>
                                     </div>
                                     <button className="fs-18 fw-regular" onClick={() => {
                                         removeVideo(index)
@@ -256,7 +263,7 @@ export default function EditPackage({ match }) {
                                                 <>
                                                     <a
                                                         rel="noreferrer"
-                                                        href={`https://physiosystem.alcodeit.com//files/${day.day_pdf}`}
+                                                        href={`https://physiosystem.alcodeit.com/files/${day.day_pdf}`}
                                                         target="_blank"
                                                         className=" flex">
                                                         <img src="/images/pdf.png" className="img-res" alt="" />
@@ -288,6 +295,7 @@ export default function EditPackage({ match }) {
                                         setShowMedia(true)
                                         setArrCompare(day.videos)
                                         setArrName(index)
+                                        setType(2)
 
                                     }}
                                 >Shto video te tjera</button>
@@ -295,7 +303,7 @@ export default function EditPackage({ match }) {
                                     {day.videos.map((video, index2) => (
                                         <div className="edit-package-ditet-items-item-bottom-videos-content flex ai-center fd-column">
                                             <div className="flex" >
-                                                <video controls className="img-res" src={`https://physiosystem.alcodeit.com//files/${video.src}`}></video>
+                                                <video controls className="img-res" src={`https://physiosystem.alcodeit.com/files/${video.src}`}></video>
                                             </div>
                                             <button className="fs-18 fw-regular" onClick={() => {
                                                 removeVideoDay(index, index2, video)
@@ -314,7 +322,7 @@ export default function EditPackage({ match }) {
                                 const videos = JSON.stringify(day.videos)
                                 fd.append("videos[]", videos)
 
-                                axios.post("https://physiosystem.alcodeit.com//fizio/updateDays", fd).then(res => {
+                                axios.post("https://physiosystem.alcodeit.com/fizio/updateDays", fd).then(res => {
                                     if (res.status === 200) {
                                         setAlert('Day updated', `success`)
                                     }
@@ -323,6 +331,157 @@ export default function EditPackage({ match }) {
                         </div>
                     ))}
                 </div>
+            </div>
+
+            <div className="edit-package-add-days flex fd-column ai-start">
+                <p className="edit-package-add-days-title fs-18 fw-regular" >Ditet e reja</p>
+                {newDays.length === 0 &&
+                    <button
+                        className="edit-package-add-days-btn fs-18 fw-regular"
+                        onClick={() => {
+                            setNewDays(prev => [...prev,
+                            {
+                                titulli: '',
+                                pershkrimi: '',
+                                pdf: '',
+                                day_videos: [],
+                            }
+                            ]
+                            )
+                        }}
+                    >
+                        Shto dit
+                    </button>
+                }
+                {newDays.map((newDay, index) => (
+                    <div className="edit-package-add-days-item flex fd-column">
+                        <div className="edit-package-add-days-item-actions flex ai-center ">
+                            {newDays.length === 1 ?
+                                <>
+
+                                    <div className="edit-package-add-days-item-actions-remove flex ai-center jc-center">
+                                        <p className="fs-24 fw-regular" >-</p>
+                                    </div>
+                                </>
+                                :
+                                <>
+                                    <div
+                                        className="edit-package-add-days-item-actions-add flex jc-center ai-center"
+                                        onClick={() => {
+                                            setNewDays(prev => [...prev,
+                                            {
+                                                titulli: '',
+                                                pershkrimi: '',
+                                                pdf: '',
+                                                day_videos: [],
+                                            }
+                                            ]
+                                            )
+                                        }}
+                                    >
+                                        <p className="fs-26 fw-regular" >+</p>
+                                    </div>
+                                    <div className="edit-package-add-days-item-actions-remove flex ai-center jc-center">
+                                        <p className="fs-24 fw-regular" >-</p>
+                                    </div>
+                                </>
+                            }
+
+                        </div>
+                        <div className="edit-package-add-days-item-top flex ai-center jc-spaceb">
+                            <div className="edit-package-add-days-item-top-inputs flex fd-column ai-start">
+                                <label className="fs-16 fw-regular" htmlFor="#">Titulli</label>
+                                <input
+                                    className="fs-16 fw-regular"
+                                    value={newDay.titulli}
+                                    type="text"
+                                    onChange={(e) => {
+                                        let newdata = [...newDays];
+                                        const item = newdata[index];
+                                        item.titulli = e.target.value;
+                                        setDays(prev => [...prev], item)
+                                    }}
+                                />
+                            </div>
+                            <div className="edit-package-add-days-item-top-inputs flex fd-column ai-start">
+                                <label className="fs-16 fw-regular" htmlFor="#">Pershkrimi</label>
+                                <input
+                                    className="fs-16 fw-regular"
+                                    value={newDay.pershkrimi}
+                                    type="text"
+                                    onChange={(e) => {
+                                        let newdata = [...newDays];
+                                        const item = newdata[index];
+                                        item.pershkrimi = e.target.value;
+                                        setDays(prev => [...prev], item)
+                                    }}
+                                />
+                            </div>
+                            <div className="edit-package-add-days-item-top-inputs flex fd-column ai-center">
+                                {newDay.pdf === "" ?
+                                    <>
+                                        <label className="edit-package-add-days-item-top-inputs-pdfadd fs-16 fw-regular" htmlFor={`pdf-${index}`}>Upload PDF</label>
+                                        <input type="file" hidden id={`pdf-${index}`} accept="application/pdf, .pdf"
+                                            onChange={(e) => {
+                                                let newdata = [...newDays];
+                                                const item = newdata[index];
+                                                item.pdf = e.target.files[0];
+                                                setDays(prev => [...prev], item)
+                                            }}
+
+                                        />
+                                    </>
+                                    :
+                                    <div className="edit-package-add-days-item-top-inputs-pdf flex fd-column ai-center" >
+                                        <span
+                                            className="edit-package-add-days-item-top-inputs-pdf-remove flex jc-center ai-center"
+                                            onClick={(e) => {
+                                                let newdata = [...newDays];
+                                                const item = newdata[index];
+                                                item.pdf = "";
+                                                setDays(prev => [...prev], item)
+                                            }}
+                                        >
+                                            X
+                                        </span>
+                                        <a href={URL.createObjectURL(newDay.pdf)} target="_blank" rel="noreferrer" className="flex" >
+                                            <img src="/images/pdf.png" className="img-res" alt="" />
+                                        </a>
+                                        <p className="fs-18 fw-light" > {newDay.pdf.name} </p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div className="edit-package-add-days-item-bottom flex fd-column ai-start">
+                            <p className="edit-package-add-days-item-bottom-title fs-18 fw-regular">Day Videos</p>
+
+                            {newDay.day_videos.length === 0 ?
+                                <button className="edit-package-add-days-item-bottom-addvideos fs-18 fw-regular" onClick={() => {
+                                    setShowMedia(true)
+                                    setArrCompare(newDay.day_videos)
+                                    setArrName(index)
+                                    setType(3)
+                                }} >Upload Other Videos</button>
+                                :
+                                <>
+                                    <button className="edit-package-add-days-item-bottom-addvideos fs-18 fw-regular" onClick={() => {
+                                        setShowMedia(true)
+                                        setArrCompare(newDay.day_videos)
+                                        setArrName(index)
+                                        setType(3)
+                                    }} >Upload Videos</button>
+                                    <div className="edit-package-add-days-item-bottom-items flex ai-start">
+                                        {newDay.day_videos.map(video => (
+                                            <div className="edit-package-add-days-item-bottom-items-video">
+                                                <video controls className="img-res" src={`https://physiosystem.alcodeit.com/files/${video.src}`}></video>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </>
+                            }
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     )

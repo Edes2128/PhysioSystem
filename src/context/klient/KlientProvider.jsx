@@ -12,33 +12,33 @@ export default function KlientProvider({ children }) {
     const [orders, setOrders] = useState([])
 
     useEffect(() => {
-        axios.post('https://physiosystem.alcodeit.com//user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
             setCurrentUser(res.data[0])
         })
     }, [])
 
 
     const getOrders = () => {
-        axios.post('https://physiosystem.alcodeit.com//client/getOrders', { user_id: localStorage.getItem('op') }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com/client/getOrders', { user_id: localStorage.getItem('op') }).then(res => {
             setOrders(res.data)
         })
     }
 
     const getWishtlist = () => {
-        axios.post('https://physiosystem.alcodeit.com//client/getWishlist', { user_id: localStorage.getItem('op') }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com/client/getWishlist', { user_id: localStorage.getItem('op') }).then(res => {
             setWishlist(res.data)
         })
     }
 
     useEffect(() => {
-        axios.get('https://physiosystem.alcodeit.com//client/getTrialPackages').then(res => {
+        axios.get('https://physiosystem.alcodeit.com/client/getTrialPackages').then(res => {
             setTrialPackages(res.data)
         })
     }, [])
 
     useEffect(() => {
 
-        axios.post('https://physiosystem.alcodeit.com//client/getWishlist', { user_id: localStorage.getItem('op') }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com/client/getWishlist', { user_id: localStorage.getItem('op') }).then(res => {
             setWishlist(res.data)
         })
 
@@ -47,7 +47,7 @@ export default function KlientProvider({ children }) {
 
     useEffect(() => {
 
-        axios.post('https://physiosystem.alcodeit.com//client/getCart', { user_id: localStorage.getItem('op') }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com/client/getCart', { user_id: localStorage.getItem('op') }).then(res => {
             setCart(res.data)
         })
 
@@ -55,21 +55,21 @@ export default function KlientProvider({ children }) {
 
 
     const getCart = () => {
-        axios.post('https://physiosystem.alcodeit.com//client/getCart', { user_id: localStorage.getItem('op') }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com/client/getCart', { user_id: localStorage.getItem('op') }).then(res => {
             setCart(res.data)
         })
     }
 
     const getMyPackages = () => {
 
-        axios.post('https://physiosystem.alcodeit.com//client/getMyPackages', { user_id: localStorage.getItem('op') }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com/client/getMyPackages', { user_id: localStorage.getItem('op') }).then(res => {
             setMypackages(res.data)
         })
 
     }
 
     const expireMyPackage = () => {
-        axios.post('https://physiosystem.alcodeit.com//client/expireMyPackage', { user_id: localStorage.getItem('op') })
+        axios.post('https://physiosystem.alcodeit.com/client/expireMyPackage', { user_id: localStorage.getItem('op') })
     }
 
     useEffect(() => {

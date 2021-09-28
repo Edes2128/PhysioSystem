@@ -8,6 +8,7 @@ export default function MediaState({ children }) {
     const [videos, setVideos] = useState([])
     const [arrCompare, setArrCompare] = useState([])
     const [arrName, setArrName] = useState('')
+    const [type, setType] = useState(0)
 
     return (
         <>
@@ -25,6 +26,8 @@ export default function MediaState({ children }) {
                     setArrCompare,
                     setArrName,
                     arrName,
+                    setType,
+                    type
                 }} >
                 {children}
             </MediaContext.Provider>

@@ -1247,8 +1247,8 @@
                 text-decoration: none;
               }
             }
-            &-upload-pdf{
-              label{
+            &-upload-pdf {
+              label {
                 background-color: $purple-ligt;
                 padding: 10px 30px;
                 border-radius: 10px;
@@ -1286,7 +1286,7 @@
               }
             }
           }
-          &-add-other{
+          &-add-other {
             margin-top: 20px;
             background-color: $purple-ligt;
             color: white;
@@ -1319,5 +1319,127 @@
     border-radius: 10px;
     cursor: pointer;
     margin-top: 30px;
+  }
+  &-add-days {
+    width: 100%;
+    &-title {
+      color: $orange;
+    }
+    &-btn {
+      border: 0;
+      border-radius: 10px;
+      outline: none;
+      background-color: $purple-ligt;
+      color: white;
+      padding: 10px 40px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    &-item {
+      width: 100%;
+      box-shadow: 0 0 0 1px $purple-ligt;
+      padding: 20px;
+      margin-top: 30px;
+      position: relative;
+      &-actions {
+        position: absolute;
+        top: -20px;
+        right: 0;
+        &-add {
+          width: 40px;
+          height: 40px;
+          background-color: green;
+          border-radius: 50%;
+          cursor: pointer;
+          p {
+            color: white;
+          }
+        }
+        &-remove {
+          background-color: red;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          margin-left: 20px;
+          cursor: pointer;
+          p {
+            color: white;
+          }
+        }
+      }
+      &-top {
+        width: 100%;
+        &-inputs {
+          width: 30%;
+          label {
+            color: $orange;
+            margin-bottom: 10px;
+          }
+          input {
+            width: 100%;
+            background-color: transparent;
+            border: 1px solid $purple-ligt;
+            padding: 10px;
+            outline: none;
+            color: white;
+          }
+          &-pdfadd {
+            color: white !important;
+            background-color: $purple-ligt;
+            padding: 10px 40px;
+            border-radius: 10px;
+            cursor: pointer;
+          }
+          &-pdf {
+            position: relative;
+            &-remove {
+              background-color: red;
+              border-radius: 50%;
+              height: 30px;
+              width: 30px;
+              text-align: center;
+              color: white;
+              position: absolute;
+              top: 0;
+              right: 0;
+              cursor: pointer;
+            }
+            p {
+              color: white;
+              margin-top: 10px;
+            }
+          }
+        }
+      }
+      &-bottom {
+        margin-top: 30px;
+        &-title {
+          color: $orange;
+        }
+        &-items {
+          flex-wrap: wrap;
+          width: 100%;
+          margin-top: 20px;
+          &-video {
+            max-width: 400px;
+            margin-right: 145px;
+            margin-bottom: 20px;
+            &:nth-child(3n) {
+              margin-right: 0;
+            }
+          }
+        }
+        &-addvideos {
+          margin-top: 20px;
+          background-color: $purple-ligt;
+          color: white;
+          border: 0;
+          outline: none;
+          padding: 10px 30px;
+          border-radius: 10px;
+          cursor: pointer;
+        }
+      }
+    }
   }
 }

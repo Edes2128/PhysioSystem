@@ -10,24 +10,24 @@ export default function FizioState({ children }) {
     const [offers, setOffers] = useState([])
 
     const getClients = () => {
-        axios.get('https://physiosystem.alcodeit.com//fizio/getAllClients').then(res => {
+        axios.get('https://physiosystem.alcodeit.com/fizio/getAllClients').then(res => {
             setClients(res.data)
         })
     }
     const getOrders = () => {
-        axios.get('https://physiosystem.alcodeit.com//fizio/getOrders').then(res => {
+        axios.get('https://physiosystem.alcodeit.com/fizio/getOrders').then(res => {
             setOrders(res.data)
         })
     }
 
     const getPackages = () => {
-        axios.get('https://physiosystem.alcodeit.com//fizio/getPackages').then(res => {
+        axios.get('https://physiosystem.alcodeit.com/fizio/getPackages').then(res => {
             setPackages(res.data)
         })
     }
 
     const getOffers = () => {
-        axios.get('https://physiosystem.alcodeit.com//fizio/getAllOffers').then(res => {
+        axios.get('https://physiosystem.alcodeit.com/fizio/getAllOffers').then(res => {
             setOffers(res.data)
         })
     }

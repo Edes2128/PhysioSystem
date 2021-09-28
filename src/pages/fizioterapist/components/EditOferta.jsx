@@ -18,7 +18,7 @@ export default function EditOferta({ match }) {
     const [image, setImage] = useState('')
 
     useEffect(() => {
-        axios.post('https://physiosystem.alcodeit.com//fizio/getSingleOffer', { id: match.params.offer_id }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com/fizio/getSingleOffer', { id: match.params.offer_id }).then(res => {
             setOffer(res.data[0])
             setTitulli(res.data[0].titulli)
             setUlja(res.data[0].ulja)
@@ -26,7 +26,7 @@ export default function EditOferta({ match }) {
             setDataMbarimit(res.data[0].end_date_2)
             setImage(res.data[0].baner)
         })
-        axios.get('https://physiosystem.alcodeit.com//fizio/getPackages').then(res => {
+        axios.get('https://physiosystem.alcodeit.com/fizio/getPackages').then(res => {
             setList(res.data)
         })
     }, [match.params.offer_id])
@@ -43,10 +43,10 @@ export default function EditOferta({ match }) {
         fd.append('baner', baner)
         fd.append('baner_name', image)
 
-        axios.post('https://physiosystem.alcodeit.com//fizio/updateOffer', fd).then(res => {
+        axios.post('https://physiosystem.alcodeit.com/fizio/updateOffer', fd).then(res => {
             if (res.data.status === 1) {
                 setAlert(`${res.data.message}`, 'success')
-                axios.post('https://physiosystem.alcodeit.com//fizio/getSingleOffer', { id: match.params.offer_id }).then(res => {
+                axios.post('https://physiosystem.alcodeit.com/fizio/getSingleOffer', { id: match.params.offer_id }).then(res => {
                     setOffer(res.data[0])
                     setTitulli(res.data[0].titulli)
                     setUlja(res.data[0].ulja)
@@ -113,7 +113,7 @@ export default function EditOferta({ match }) {
                                     <>
                                         <div className="edit-offer-packages-items-item flex fd-column ai-center">
                                             <div className="flex" >
-                                                <img src={`https://physiosystem.alcodeit.com//files/${paket.photo}`} className="img-res" alt="" />
+                                                <img src={`https://physiosystem.alcodeit.com/files/${paket.photo}`} className="img-res" alt="" />
                                             </div>
                                             <div className="edit-offer-packages-items-item-texts flex ai-center jc-spaceb">
                                                 <p className="edit-offer-packages-items-item-texts-titulli" > {paket.name}</p>
@@ -123,9 +123,9 @@ export default function EditOferta({ match }) {
                                                 </div>
                                             </div>
                                             <button className="fs-18 fw-regular" type="button" onClick={() => {
-                                                axios.post('https://physiosystem.alcodeit.com//fizio/deletePackOffer', { offer_id: match.params.offer_id, package_id: paket.id }).then(res => {
+                                                axios.post('https://physiosystem.alcodeit.com/fizio/deletePackOffer', { offer_id: match.params.offer_id, package_id: paket.id }).then(res => {
                                                     if (res.data.status === 1) {
-                                                        axios.post('https://physiosystem.alcodeit.com//fizio/getSingleOffer', { id: match.params.offer_id }).then(res => {
+                                                        axios.post('https://physiosystem.alcodeit.com/fizio/getSingleOffer', { id: match.params.offer_id }).then(res => {
                                                             setOffer(res.data[0])
                                                         })
                                                     }
@@ -147,17 +147,17 @@ export default function EditOferta({ match }) {
                                             :
                                             <div className="edit-offer-add-packages-items-item flex fd-column ai-center">
                                                 <div className="flex">
-                                                    <img src={`https://physiosystem.alcodeit.com//files/${item.photo}`} className="img-res" alt="" />
+                                                    <img src={`https://physiosystem.alcodeit.com/files/${item.photo}`} className="img-res" alt="" />
                                                 </div>
                                                 <div className="edit-offer-add-packages-items-item-texts flex ai-center jc-spaceb">
                                                     <p>{item.titulli}</p>
                                                     <p>{item.price} $</p>
                                                 </div>
                                                 <button type="button" className="fs-18 fw-regular" onClick={() => {
-                                                    axios.post('https://physiosystem.alcodeit.com//fizio/addPackOffer',
+                                                    axios.post('https://physiosystem.alcodeit.com/fizio/addPackOffer',
                                                         { offer_id: match.params.offer_id, package_id: item.id }).then(res => {
                                                             if (res.data.status === 1) {
-                                                                axios.post('https://physiosystem.alcodeit.com//fizio/getSingleOffer',
+                                                                axios.post('https://physiosystem.alcodeit.com/fizio/getSingleOffer',
                                                                     { id: match.params.offer_id }).then(res => {
                                                                         setOffer(res.data[0])
                                                                     })
@@ -173,7 +173,7 @@ export default function EditOferta({ match }) {
                         <div className="add-offer-form-inputs-image  flex jc-start">
                             {image !== '' ?
                                 <div className="add-offer-form-inputs-image-preview flex fd-column ai-center" >
-                                    <img src={`https://physiosystem.alcodeit.com//files/${image}`} className="img-res" alt="" />
+                                    <img src={`https://physiosystem.alcodeit.com/files/${image}`} className="img-res" alt="" />
                                     <button onClick={() => {
                                         setImage('')
                                     }} className="add-offer-form-inputs-image-preview-delete-btn fs-18 fw-regular" >Delete Banner</button>
@@ -209,9 +209,9 @@ export default function EditOferta({ match }) {
                         </p>
                         <div className="edit-offer-avtivate-buttons">
                             <button className="fs-18 fw-regular" onClick={() => {
-                                axios.post('https://physiosystem.alcodeit.com//fizio/activeOffer', { id: match.params.offer_id }).then(res => {
+                                axios.post('https://physiosystem.alcodeit.com/fizio/activeOffer', { id: match.params.offer_id }).then(res => {
                                     if (res.data.status === 1) {
-                                        axios.post('https://physiosystem.alcodeit.com//fizio/getSingleOffer',
+                                        axios.post('https://physiosystem.alcodeit.com/fizio/getSingleOffer',
                                             { id: match.params.offer_id }).then(res => {
                                                 setOffer(res.data[0])
                                             })

@@ -30,7 +30,7 @@ export default function ShtoOfert() {
             formData.append('drejtuar[]', JSON.stringify(listDrejtuar));
             formData.append('image', baner);
 
-            axios.post('https://physiosystem.alcodeit.com//fizio/addOffer', formData).then(res => {
+            axios.post('https://physiosystem.alcodeit.com/fizio/addOffer', formData).then(res => {
                 if (res.status === 200) {
                     setAlert(`Oferta u shtua`, 'success')
                     setTitulli('')
@@ -47,7 +47,7 @@ export default function ShtoOfert() {
     }
 
     useEffect(() => {
-        axios.get('https://physiosystem.alcodeit.com//fizio/getPackages').then(res => {
+        axios.get('https://physiosystem.alcodeit.com/fizio/getPackages').then(res => {
 
             const newdata = res.data.map(item => {
                 const obj = {
