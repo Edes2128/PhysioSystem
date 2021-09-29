@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import FizioContext from '../../../context/fizioterapist/FizioContext'
@@ -5,12 +6,34 @@ import FizioContext from '../../../context/fizioterapist/FizioContext'
 export default function Paketat() {
 
     const [activeAction, setActiveAction] = useState(-1)
+    const [activeDelete, setActiveDelete] = useState(-1)
+    const [packageExist, setPakcageExist] = useState(false)
     const fizioContext = useContext(FizioContext);
     const { packages, getPackages } = fizioContext;
 
     useEffect(() => {
         getPackages()
     }, [])
+
+    useEffect(() => {
+
+        if (packageExist) {
+            setTimeout(() => setActiveDelete(-1), 4000)
+        }
+
+    }, [packageExist])
+
+    const checkPaackgesIsBought = (id) => {
+        axios.post('https://physiosystem.alcodeit.com/fizio/checkPacakeIsBought', { id }).then(res => {
+            if (res.data.status === 1) {
+                setPakcageExist(true)
+            } else {
+                setPakcageExist(false)
+            }
+        })
+    }
+
+
 
     return (
         <div className="fizio-paketat">
@@ -43,10 +66,35 @@ export default function Paketat() {
                             {activeAction === index &&
                                 <div className="fizio-paketat-body-item-actions-widgets">
                                     <Link style={{ textDecoration: 'none', color: 'white' }} to={`/fizio/package/${paket.id}`} className="fs-20 fw-light" >Edit</Link>
-                                    <p className="fs-20 fw-light" >Delete</p>
+                                    <p className="fs-20 fw-light" onClick={() => {
+                                        checkPaackgesIsBought(paket.id)
+                                        setActiveAction(-1)
+                                        setActiveDelete(index)
+                                    }} >Delete</p>
                                 </div>
                             }
                         </div>
+                        {activeDelete === index &&
+                            <div className="fizio-paketat-body-item-messages">
+                                {packageExist === true ? <p className="fs-18 fw-bold" >Paketa eshte akoma e blere nga dikush</p> :
+                                    <div className="fizio-paketat-body-item-messages-delete flex fd-column ai-center">
+                                        <p className="fs-18 fw-bold" >Jeni te sigurt qe doni te fshni paketen?</p>
+                                        <div className="fizio-paketat-body-item-messages-delete-buttons flex ai-center jc-spaceb">
+                                            <button className="fs-18 fw-regular" onClick={() => {
+                                                axios.post('https://physiosystem.alcodeit.com/fizio/deletePackage', { id: paket.id }).then(res => {
+                                                    getPackages()
+                                                    setActiveDelete(-1)
+                                                })
+                                            }} >Po</button>
+                                            <button className="fs-18 fw-regular" onClick={() => {
+                                                setActiveDelete(-1)
+
+                                            }} >Jo</button>
+                                        </div>
+                                    </div>}
+                            </div>
+                        }
+
                     </div>
                 ))}
             </div>

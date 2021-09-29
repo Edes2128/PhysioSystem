@@ -172,6 +172,37 @@
         }
       }
     }
+    &-messages{
+      margin-top: 10px;
+      p{
+        color: red;
+        margin-bottom: 20px;
+      }
+      &-delete{
+        width: 100%;
+        p{
+          color: white;
+        }
+        &-buttons{
+          width: 100%;
+          margin-top: 20px;
+          margin-bottom: 20px;
+          button{
+            background-color: green;
+            width: 40%;
+            border: 0;
+            outline: none;
+            color: white;
+            padding: 8px 0;
+            cursor: pointer;
+            &:last-child{
+              background-color: red;
+              margin-left: 20px;
+            }
+          }
+        }
+      }
+    }
   }
 }
 .shtopaket {
