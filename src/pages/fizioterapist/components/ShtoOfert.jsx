@@ -108,7 +108,9 @@ export default function ShtoOfert() {
                             setDataMbarimit(e.target.value)
                         }} />
                     </div>
+
                 </div>
+
 
                 <div className="add-offer-form-inputs flex jc-spaceb ai-center">
                     <div className="add-offer-form-inputs-multi">

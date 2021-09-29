@@ -9,7 +9,7 @@ import axios from 'axios'
 export default function Shop() {
 
     const clientContext = useContext(ClientContext)
-    const { trialPackages, wishlist, getWishtlist, cart, getCart, setTrialPackages, getMyPackages, mypackages ,expireMyPackage} = clientContext
+    const { trialPackages, wishlist, getWishtlist, cart, getCart, setTrialPackages, getMyPackages, mypackages, expireMyPackage } = clientContext
 
     useEffect(() => {
         getWishtlist()
@@ -41,9 +41,8 @@ export default function Shop() {
                 }
                 {trialPackages.map(paket => (
                     <>
-                        {packages.some(item => item.id === paket.id) === true ?
-                            <div></div>
-                            :
+                        {packages.some(item => item.id === paket.id) === false &&
+
                             <div className="shop-packages-item flex fd-column ai-center">
                                 <div className="shop-packages-item-top">
                                     <Link to={`/shop/${paket.id}`} className="shop-packages-item-top-image flex" onClick={() => {

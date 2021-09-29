@@ -7,7 +7,7 @@ export default function Paketat() {
 
     const [activeAction, setActiveAction] = useState(-1)
     const [activeDelete, setActiveDelete] = useState(-1)
-    const [packageExist, setPakcageExist] = useState(false)
+    const [packageExist, setPakcageExist] = useState(true)
     const fizioContext = useContext(FizioContext);
     const { packages, getPackages } = fizioContext;
 
@@ -16,11 +16,9 @@ export default function Paketat() {
     }, [])
 
     useEffect(() => {
-
         if (packageExist) {
             setTimeout(() => setActiveDelete(-1), 4000)
         }
-
     }, [packageExist])
 
     const checkPaackgesIsBought = (id) => {

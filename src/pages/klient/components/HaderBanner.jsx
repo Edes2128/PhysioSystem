@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ReactComponent as Line } from '../../../images/Line 5.svg'
-import { ReactComponent as Bell } from '../../../images/bell-2.svg'
 import { ReactComponent as Cart } from '../../../images/cart-2.svg'
 import ClientContext from '../../../context/klient/klientContext'
 import { Link } from 'react-router-dom'
@@ -28,9 +27,6 @@ export default function HaderBanner() {
                             <div className="headerbanner-top-left-widget-nof flex ai-center jc-center"> <p className="fs-14 fw-light" > {cart.length} </p> </div>
                         }
                         <Cart />
-                    </div>
-                    <div className="headerbanner-top-left-widget flex ai-center jc-center">
-                        <Bell />
                     </div>
                 </div>
                 <Line />
