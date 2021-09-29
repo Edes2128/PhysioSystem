@@ -1441,5 +1441,16 @@
         }
       }
     }
+    &-ruaj {
+      align-self: flex-end;
+      margin-top: 40px;
+      background-color: green;
+      color: white;
+      border-radius: 10px;
+      border: 0;
+      outline: none;
+      padding: 10px 40px;
+      cursor: pointer;
+    }
   }
 }

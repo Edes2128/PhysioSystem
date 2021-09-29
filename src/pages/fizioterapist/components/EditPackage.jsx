@@ -94,6 +94,13 @@ export default function EditPackage({ match }) {
         setDays(prev => [...prev], item)
     }
 
+
+    const removeDay = (indexItem) => {
+        const newData = [...newDays]
+        const itemToRemove = newDays[indexItem];
+        setNewDays(newData.filter(item => item !== itemToRemove))
+    }
+
     return (
         <div className="edit-package flex fd-column ai-start">
 
@@ -356,36 +363,25 @@ export default function EditPackage({ match }) {
                 {newDays.map((newDay, index) => (
                     <div className="edit-package-add-days-item flex fd-column">
                         <div className="edit-package-add-days-item-actions flex ai-center ">
-                            {newDays.length === 1 ?
-                                <>
 
-                                    <div className="edit-package-add-days-item-actions-remove flex ai-center jc-center">
-                                        <p className="fs-24 fw-regular" >-</p>
-                                    </div>
-                                </>
-                                :
-                                <>
-                                    <div
-                                        className="edit-package-add-days-item-actions-add flex jc-center ai-center"
-                                        onClick={() => {
-                                            setNewDays(prev => [...prev,
-                                            {
-                                                titulli: '',
-                                                pershkrimi: '',
-                                                pdf: '',
-                                                day_videos: [],
-                                            }
-                                            ]
-                                            )
-                                        }}
-                                    >
-                                        <p className="fs-26 fw-regular" >+</p>
-                                    </div>
-                                    <div className="edit-package-add-days-item-actions-remove flex ai-center jc-center">
-                                        <p className="fs-24 fw-regular" >-</p>
-                                    </div>
-                                </>
-                            }
+                            <div
+                                className="edit-package-add-days-item-actions-add flex jc-center ai-center"
+                                onClick={() => {
+                                    setNewDays(prev => [...prev, { titulli: '', pershkrimi: '', pdf: '', day_videos: [], }])
+                                }}
+                            >
+                                <p className="fs-26 fw-regular" >+</p>
+                            </div>
+                            <div
+                                className="edit-package-add-days-item-actions-remove flex ai-center jc-center"
+                                onClick={() => {
+                                    removeDay(index)
+                                }}
+                            >
+                                <p className="fs-24 fw-regular" >-</p>
+                            </div>
+
+
 
                         </div>
                         <div className="edit-package-add-days-item-top flex ai-center jc-spaceb">
@@ -482,6 +478,28 @@ export default function EditPackage({ match }) {
                         </div>
                     </div>
                 ))}
+                {newDays.length !== 0 &&
+                    <button className="edit-package-add-days-ruaj fs-18 fw-regular" onClick={() => {
+
+                        let daysPdf = newDays.map(item => item.pdf)
+
+                        const fd = new FormData();
+                        fd.append("pacakge_id", match.params.package_id)
+                        fd.append("new_days", JSON.stringify(newDays));
+                        Array.from(daysPdf).forEach(pdf => {
+                            fd.append(`days-pdf[]`, pdf)
+                        })
+
+                        axios.post('https://physiosystem.alcodeit.com/fizio/addNewDaysPackage', fd).then(res => {
+                            if (res.status === 200) {
+                                setNewDays([])
+                                setAlert(`New days added`, 'success')
+                            } else {
+                                setAlert(`${res.data}`, 'error')
+                            }
+                        })
+                    }} >Ruaj Ditet e reja</button>
+                }
             </div>
         </div>
     )
