@@ -72,6 +72,10 @@ export default function KlientProvider({ children }) {
         axios.post('https://physiosystem.alcodeit.com/client/expireMyPackage', { user_id: localStorage.getItem('op') })
     }
 
+    const activateOffer = () => {
+        axios.post('https://physiosystem.alcodeit.com/client/activateSchelduedOffer')
+    }
+
     useEffect(() => {
         getMyPackages()
     }, [])
@@ -93,7 +97,8 @@ export default function KlientProvider({ children }) {
                     mypackages,
                     orders,
                     getOrders,
-                    expireMyPackage
+                    expireMyPackage,
+                    activateOffer
                 }} >
                 {children}
             </ClientContext.Provider>

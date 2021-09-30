@@ -33,6 +33,10 @@ export default function FizioState({ children }) {
         })
     }
 
+    const activateOffer = () => {
+        axios.post('https://physiosystem.alcodeit.com/client/activateSchelduedOffer')
+    }
+
     return (
         <>
             <FizioContext.Provider value={{
@@ -43,7 +47,8 @@ export default function FizioState({ children }) {
                 packages,
                 getPackages,
                 offers,
-                getOffers
+                getOffers,
+                activateOffer
             }} >
                 {children}
             </FizioContext.Provider>

@@ -12,9 +12,10 @@ export default function Shop() {
     const loadingContext = useContext(LoadingContext)
     const { setShow } = loadingContext
     const clientContext = useContext(ClientContext)
-    const { trialPackages, wishlist, getWishtlist, cart, getCart, setTrialPackages, getMyPackages, mypackages, expireMyPackage } = clientContext
+    const { trialPackages, wishlist, getWishtlist, cart, getCart, setTrialPackages, getMyPackages, mypackages, expireMyPackage, activateOffer } = clientContext
 
     useEffect(() => {
+        activateOffer()
         getWishtlist()
         getMyPackages()
         expireMyPackage()

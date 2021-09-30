@@ -9,10 +9,11 @@ export default function Paketat() {
     const [activeDelete, setActiveDelete] = useState(-1)
     const [packageExist, setPakcageExist] = useState(true)
     const fizioContext = useContext(FizioContext);
-    const { packages, getPackages } = fizioContext;
+    const { packages, getPackages , activateOffer } = fizioContext;
 
     useEffect(() => {    
         getPackages()
+        activateOffer()
     }, [])
 
     useEffect(() => {

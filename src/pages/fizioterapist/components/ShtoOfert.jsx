@@ -9,6 +9,7 @@ export default function ShtoOfert() {
     const [titulli, setTitulli] = useState('');
     const [ulja, setUlja] = useState('');
     const [dataMbarimit, setDataMbarimit] = useState('')
+    const [dataFillimi, setDataFillimi] = useState(' ')
     const [list, setList] = useState([])
     const [listDrejtuar, setListDretuar] = useState([])
     const [tipiUljes, setTipiUljes] = useState(1)
@@ -27,6 +28,7 @@ export default function ShtoOfert() {
             formData.append('ulja', ulja);
             formData.append('tipi_uljes', tipiUljes);
             formData.append('data_mbarimit', dataMbarimit);
+            formData.append("data_fillimi", dataFillimi);
             formData.append('drejtuar[]', JSON.stringify(listDrejtuar));
             formData.append('image', baner);
 
@@ -37,6 +39,7 @@ export default function ShtoOfert() {
                     setUlja('')
                     setTipiUljes(1)
                     setDataMbarimit('')
+                    setDataFillimi('')
                     setListDretuar([])
                     setBaner('')
                     setBanerLocal('')
@@ -102,13 +105,23 @@ export default function ShtoOfert() {
                             </select>
                         </div>
                     </div>
+
+
+                </div>
+
+                <div className="add-offer-form-inputs flex jc-spaceb ai-center">
+                    <div className="add-offer-form-inputs-item flex fd-column ai-start">
+                        <label className="fs-18 fw-regular" htmlFor="#">Data Fillmit</label>
+                        <input className="fs-18 fw-regular" type="date" value={dataFillimi} onChange={(e) => {
+                            setDataFillimi(e.target.value)
+                        }} />
+                    </div>
                     <div className="add-offer-form-inputs-item flex fd-column ai-start">
                         <label className="fs-18 fw-regular" htmlFor="#">Data Mbarimit</label>
                         <input className="fs-18 fw-regular" type="date" value={dataMbarimit} onChange={(e) => {
                             setDataMbarimit(e.target.value)
                         }} />
                     </div>
-
                 </div>
 
 

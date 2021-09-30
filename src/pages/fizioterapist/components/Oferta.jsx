@@ -11,6 +11,7 @@ import { ReactComponent as Edit } from '../../../images/edit-icon.svg'
 import { ReactComponent as Delete } from '../../../images/delete-icon.svg'
 import axios from 'axios'
 
+
 export default function Oferta() {
     const fizioContext = useContext(FizioContext)
     const { offers, getOffers } = fizioContext;
@@ -25,6 +26,26 @@ export default function Oferta() {
     useEffect(() => {
         getOffers()
     }, [])
+
+    const colorStat = (status) => {
+        if (status === 1) {
+            return '#9BFFC3';
+        } else if (status === 2) {
+            return '#FFF47D';
+        } else {
+            return '#FF4848';
+        }
+    }
+    const renderButtonStatus = (status) => {
+        if (status === 1) {
+            return 'Aktive';
+        } else if (status === 2) {
+            return 'Scheldued';
+        } else {
+            return 'Expired';
+        }
+    };
+
     return (
         <div className="oferta" >
             <div className="oferta-top flex jc-spaceb ai-center">
@@ -94,11 +115,11 @@ export default function Oferta() {
                                 <TableCell>{ofert.ulja}{ofert.ulja_type === 1 ? '%' : '$'}</TableCell>
                                 <TableCell>
                                     <span style={{
-                                        color: ofert.status === 1 ? 'black' : 'white',
-                                        backgroundColor: ofert.status === 1 ? '#9BFFC3' : '#FF4848',
+                                        color: ofert.status === 1 || ofert.status === 2 ? 'black' : 'white',
+                                        backgroundColor: colorStat(ofert.status),
                                         padding: '10px 15px',
                                     }} >
-                                        {ofert.status === 1 ? 'Active' : 'Expire'}
+                                        {renderButtonStatus(ofert.status)}
                                     </span>
                                 </TableCell>
                                 <TableCell >
