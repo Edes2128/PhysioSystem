@@ -4,12 +4,14 @@ import { ReactComponent as Cart } from '../../../images/cart-2.svg'
 import ClientContext from '../../../context/klient/klientContext'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import MiniCart from './MiniCart'
 
 export default function HaderBanner() {
 
     const clientContext = useContext(ClientContext);
     const { currentUser, cart, getCart } = clientContext;
     const [offers, setOffers] = useState([])
+    const [miniCart, showMiniCart] = useState(false)
 
     useEffect(() => {
         axios.get('https://physiosystem.alcodeit.com/client/testOfferPackages').then(res => {
@@ -22,11 +24,15 @@ export default function HaderBanner() {
         <div className="headerbanner flex fd-column ai-center" >
             <div className="headerbanner-top flex ai-center jc-center">
                 <div className="headerbanner-top-left flex ai-center">
-                    <div className="headerbanner-top-left-widget flex ai-center jc-center">
+                    <div className="headerbanner-top-left-widget flex ai-center jc-center"  >
+                        {miniCart && <MiniCart />}
                         {cart.length > 0 &&
                             <div className="headerbanner-top-left-widget-nof flex ai-center jc-center"> <p className="fs-14 fw-light" > {cart.length} </p> </div>
                         }
-                        <Cart />
+                        <Cart onClick={() => {
+                            showMiniCart(!miniCart)
+                        }
+                        } />
                     </div>
                 </div>
                 <Line />
