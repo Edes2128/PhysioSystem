@@ -11,11 +11,8 @@ import Pagination from '@material-ui/lab/Pagination';
 import { ReactComponent as Edit } from '../../../images/edit-icon.svg'
 import { ReactComponent as Delete } from '../../../images/delete-icon.svg'
 import axios from 'axios';
-import LoadingContext from '../../../context/loading/LoadingContext'
 
 export default function Klientet() {
-    const loadingContext = useContext(LoadingContext)
-    const {setShow} = loadingContext;
     const fizioContext = useContext(FizioContext);
     const { clients, getClients } = fizioContext;
     const [activeIndex, setActiveIndex] = useState(-1)
@@ -28,10 +25,6 @@ export default function Klientet() {
     };
 
     useEffect(() => {
-        setShow(true)
-        if(clients.length !== 0){
-            setTimeout(() => setShow(false),1000)
-        }
         getClients()
     }, [])
 

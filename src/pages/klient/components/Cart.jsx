@@ -3,9 +3,12 @@ import { ReactComponent as Separator } from '../../../images/separator.svg'
 import { ReactComponent as RemoveCart } from '../../../images/remove-cart.svg'
 import axios from 'axios'
 import ClientContext from '../../../context/klient/klientContext'
+import LoadingContext from '../../../context/loading/LoadingContext'
 
 export default function Cart() {
 
+    const loadingContext = useContext(LoadingContext)
+    const { setShow } = loadingContext
     const clientContext = useContext(ClientContext);
     const { cart, getCart } = clientContext;
 
@@ -105,8 +108,13 @@ export default function Cart() {
 
                                         <Separator />
                                         <RemoveCart onClick={() => {
+                                            setShow(true)
                                             axios.post('https://physiosystem.alcodeit.com/client/removeCart', { user_id: localStorage.getItem('op'), package_id: item.package_id }).then(res => {
-                                                getCart()
+                                                if (res.status === 200) {
+                                                    setTimeout(() => setShow(false), 1000)
+                                                    getCart()
+                                                }
+
                                             })
                                         }} />
                                     </div>

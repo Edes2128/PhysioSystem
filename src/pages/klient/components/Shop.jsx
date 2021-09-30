@@ -5,9 +5,12 @@ import { ReactComponent as LikeFill } from '../../../images/like-fill.svg'
 import ClientContext from '../../../context/klient/klientContext'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import LoadingContext from '../../../context/loading/LoadingContext'
 
 export default function Shop() {
 
+    const loadingContext = useContext(LoadingContext)
+    const { setShow } = loadingContext
     const clientContext = useContext(ClientContext)
     const { trialPackages, wishlist, getWishtlist, cart, getCart, setTrialPackages, getMyPackages, mypackages, expireMyPackage } = clientContext
 
@@ -53,8 +56,10 @@ export default function Shop() {
                                     {wishlist.some((wish) => wish.package_id === paket.id) === true ?
                                         <>
                                             <div className="shop-packages-item-top-wish flex ai-center jc-center" onClick={() => {
+                                                setShow(true)
                                                 axios.post('https://physiosystem.alcodeit.com/client/removeWishlist', { user_id: localStorage.getItem('op'), id: paket.id }).then(res => {
                                                     getWishtlist()
+                                                    setTimeout(() => setShow(false), 1000)
                                                 })
                                             }} >
                                                 <LikeFill />
@@ -62,7 +67,9 @@ export default function Shop() {
                                         </>
                                         :
                                         <div className="shop-packages-item-top-wish flex ai-center jc-center" onClick={() => {
+                                            setShow(true)
                                             axios.post('https://physiosystem.alcodeit.com/client/addWishlist', { package_id: paket.id, user_id: localStorage.getItem('op') }).then(res => {
+                                                setTimeout(() => setShow(false), 1000)
                                                 getWishtlist()
                                             })
 
@@ -94,8 +101,14 @@ export default function Shop() {
                                             className="shop-packages-item-bottom-add-btn fs-16 fw-medium"
                                             type="button"
                                             onClick={() => {
+                                                setShow(true)
                                                 axios.post('https://physiosystem.alcodeit.com/client/addCart', { user_id: localStorage.getItem('op'), package_id: paket.id }).then(res => {
-                                                    getCart()
+
+                                                    if (res.status === 200) {
+                                                        setTimeout(() => setShow(false), 1000)
+                                                        getCart()
+                                                    }
+
                                                 })
                                             }}
                                         >

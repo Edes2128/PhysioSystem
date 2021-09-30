@@ -2,23 +2,16 @@ import axios from 'axios'
 import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import FizioContext from '../../../context/fizioterapist/FizioContext'
-import LoadingContext from '../../../context/loading/LoadingContext'
 
 export default function Paketat() {
 
-    const loadingContext = useContext(LoadingContext);
-    const {setShow} = loadingContext
     const [activeAction, setActiveAction] = useState(-1)
     const [activeDelete, setActiveDelete] = useState(-1)
     const [packageExist, setPakcageExist] = useState(true)
     const fizioContext = useContext(FizioContext);
     const { packages, getPackages } = fizioContext;
 
-    useEffect(() => {
-        setShow(true)
-        if(packages.length !== 0){
-            setTimeout(() => setShow(false),1000)
-        }
+    useEffect(() => {    
         getPackages()
     }, [])
 
