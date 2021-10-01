@@ -12,6 +12,7 @@ export default function Porosit() {
 
     const fizioContext = useContext(FizioContext);
     const { orders, getOrders } = fizioContext;
+    const [search, setSearch] = useState('')
     const [page, setPage] = useState(1);
     const itemPage = 10;
     const start = (page - 1) * itemPage;
@@ -23,7 +24,15 @@ export default function Porosit() {
     useEffect(() => {
         getOrders()
     }, [])
-
+    const orderFiltered = orders.filter(
+        (order) =>
+            order.id.toString().toLowerCase().includes(search.toLowerCase()) ||
+            order.user.toLowerCase().includes(search.toLowerCase()) ||
+            order.package.toLowerCase().includes(search.toLowerCase()) ||
+            order.bought_at.toLowerCase().includes(search.toLowerCase()) ||
+            order.expires_at.toString().toLowerCase().includes(search.toLowerCase()) ||
+            order.price_bought.toString().toLowerCase().includes(search.toLowerCase())
+    );
     return (
         <>
             <div className="orders" >
@@ -31,7 +40,7 @@ export default function Porosit() {
                     <p className="orders-top-title fs-30 fw-medium">Porosit <sup className="fs-20" >({orders.length})</sup> </p>
                     <div className="header-search flex ai-center">
                         <Search />
-                        <input className="fs-16 fw-regular" type="text" placeholder="Search..." />
+                        <input className="fs-16 fw-regular" type="text" placeholder="Search..." onChange={(e) => setSearch(e.target.value)} />
                     </div>
                 </div>
                 <div className="orders-table">
@@ -47,7 +56,7 @@ export default function Porosit() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {orders.slice(start, end).map((order, index) => (
+                            {orderFiltered.slice(start, end).map((order, index) => (
                                 <TableRow>
                                     <TableCell>#{order.id}</TableCell>
                                     <TableCell>{order.user}</TableCell>
@@ -61,7 +70,7 @@ export default function Porosit() {
                     </Table>
                 </div>
                 <div className="oferta-datatable-pagination flex jc-end">
-                    <Pagination count={Math.ceil(orders.length / itemPage)} onChange={handleChange} />
+                    <Pagination count={Math.ceil(orderFiltered.length / itemPage)} onChange={handleChange} />
                 </div>
             </div>
         </>

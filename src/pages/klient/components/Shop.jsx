@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { ReactComponent as Search } from '../../../images/loupe.svg'
 import { ReactComponent as LikeUnfill } from '../../../images/like-unfill.svg'
 import { ReactComponent as LikeFill } from '../../../images/like-fill.svg'
@@ -13,6 +13,7 @@ export default function Shop() {
     const { setShow } = loadingContext
     const clientContext = useContext(ClientContext)
     const { trialPackages, wishlist, getWishtlist, cart, getCart, setTrialPackages, getMyPackages, mypackages, expireMyPackage, activateOffer } = clientContext
+    const [search, setSearch] = useState('')
 
     useEffect(() => {
         activateOffer()
@@ -21,7 +22,6 @@ export default function Shop() {
         expireMyPackage()
         axios.get('https://physiosystem.alcodeit.com/client/getTrialPackages').then(res => {
             setTrialPackages(res.data)
-
         })
     }, [])
 
@@ -29,6 +29,7 @@ export default function Shop() {
         var packages = mypackages.map(item => item.packages[0]);
     }
 
+    const packageFiltered = trialPackages.filter((paket) => paket.package_name.toLowerCase().includes(search.toLowerCase()));
 
     return (
         <div className="shop" >
@@ -36,14 +37,14 @@ export default function Shop() {
                 <p className="shop-header-title fs-38 fw-semib">Packages</p>
                 <div className="header-search flex ai-center">
                     <Search />
-                    <input className="fs-16 fw-regular" type="text" placeholder="Search..." />
+                    <input className="fs-16 fw-regular" type="text" placeholder="Search..." onChange={(e) => setSearch(e.target.value)} />
                 </div>
             </div>
             <div className="shop-packages flex ai-start">
                 {trialPackages.length === packages.length &&
                     <p className="fs-24 fw-medium" >Wow you have bought all packages!</p>
                 }
-                {trialPackages.map(paket => (
+                {packageFiltered.map(paket => (
                     <>
                         {packages.some(item => item.id === paket.id) === false &&
 

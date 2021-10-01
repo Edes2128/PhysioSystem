@@ -13,6 +13,7 @@ export default function Orders() {
 
     const clientContext = useContext(ClientContext)
     const { getOrders, orders, expireMyPackage } = clientContext;
+    const [search, setSearch] = useState('')
     const [page, setPage] = useState(1);
     const itemPage = 10;
     const start = (page - 1) * itemPage;
@@ -25,13 +26,19 @@ export default function Orders() {
     const handleChange = (event, value) => {
         setPage(value);
     };
+    var packageFiltered = orders.filter((order) =>
+        order.packages[0].name.toLowerCase().includes(search.toLowerCase()) ||
+        order.bought_at.toLowerCase().includes(search.toLowerCase()) ||
+        order.expires_at.toLowerCase().includes(search.toLowerCase()) ||
+        order.price_bought.toString().toLowerCase().includes(search.toLowerCase())
+    );
     return (
         <div className="orders" >
             <div className="orders-header flex ai-center jc-spaceb">
                 <p className="orders-header-title fs-38 fw-semib">Orders</p>
                 <div className="header-search flex ai-center">
                     <Search />
-                    <input className="fs-16 fw-regular" type="text" placeholder="Search..." />
+                    <input className="fs-16 fw-regular" type="text" placeholder="Search..." onChange={(e) => setSearch(e.target.value)} />
                 </div>
             </div>
 
@@ -48,7 +55,7 @@ export default function Orders() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {orders && orders.slice(start, end).map((item, index) => (
+                        {orders && packageFiltered.slice(start, end).map((item, index) => (
                             <TableRow>
                                 <TableCell>#{index + 1}</TableCell>
                                 <TableCell>{item.packages[0].name}</TableCell>
@@ -62,7 +69,7 @@ export default function Orders() {
             </div>
 
             <div className="pagination flex jc-end">
-                <Pagination count={Math.ceil(orders.length / itemPage)} size="medium" onChange={handleChange} />
+                <Pagination count={Math.ceil(packageFiltered.length / itemPage)} size="medium" onChange={handleChange} />
             </div>
 
         </div>

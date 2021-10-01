@@ -15,6 +15,7 @@ import axios from 'axios';
 export default function Klientet() {
     const fizioContext = useContext(FizioContext);
     const { clients, getClients } = fizioContext;
+    const [search, setSearch] = useState('')
     const [activeIndex, setActiveIndex] = useState(-1)
     const [page, setPage] = useState(1);
     const itemPage = 10;
@@ -27,6 +28,15 @@ export default function Klientet() {
     useEffect(() => {
         getClients()
     }, [])
+    const klientetFiltered = clients.filter(
+        (order) =>
+            order.id.toString().toLowerCase().includes(search.toLowerCase()) ||
+            order.name.toLowerCase().includes(search.toLowerCase()) ||
+            order.email.toLowerCase().includes(search.toLowerCase()) ||
+            order.contry.toLowerCase().includes(search.toLowerCase()) ||
+            order.postal_code.toString().toLowerCase().includes(search.toLowerCase()) ||
+            order.city.toString().toLowerCase().includes(search.toLowerCase())
+    );
 
     return (
         <div className="klientet flex fd-column ai-start">
@@ -35,7 +45,7 @@ export default function Klientet() {
                 <p className="klientet-top-title fs-30 fw-medium" >Klientet <sup className="fs-20">({clients.length})</sup></p>
                 <div className="header-search flex ai-center">
                     <Search />
-                    <input className="fs-16 fw-regular" type="text" placeholder="Search..." />
+                    <input className="fs-16 fw-regular" type="text" placeholder="Search..." onChange={(e) => setSearch(e.target.value)} />
                 </div>
             </div>
 
@@ -54,7 +64,7 @@ export default function Klientet() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {clients.slice(start, end).map((client, index) => (
+                        {klientetFiltered.slice(start, end).map((client, index) => (
                             <TableRow key={client.id} >
                                 <TableCell>#{client.id}</TableCell>
                                 <TableCell>{client.name}</TableCell>
@@ -111,7 +121,7 @@ export default function Klientet() {
                 </Table>
             </div>
             <div className="oferta-datatable-pagination flex jc-end">
-                <Pagination count={Math.ceil(clients.length / itemPage)} onChange={handleChange} />
+                <Pagination count={Math.ceil(klientetFiltered.length / itemPage)} onChange={handleChange} />
             </div>
         </div>
     )
