@@ -80,6 +80,10 @@
       margin-right: 0;
     }
   }
+  &-menu {
+    margin-left: 20px;
+    display: none;
+  }
 }
 .fizio-body {
   margin-top: 100px;
@@ -176,22 +180,22 @@
         }
       }
     }
-    &-messages{
+    &-messages {
       margin-top: 10px;
-      p{
+      p {
         color: red;
         margin-bottom: 20px;
       }
-      &-delete{
+      &-delete {
         width: 100%;
-        p{
+        p {
           color: white;
         }
-        &-buttons{
+        &-buttons {
           width: 100%;
           margin-top: 20px;
           margin-bottom: 20px;
-          button{
+          button {
             background-color: green;
             width: 40%;
             border: 0;
@@ -199,7 +203,7 @@
             color: white;
             padding: 8px 0;
             cursor: pointer;
-            &:last-child{
+            &:last-child {
               background-color: red;
               margin-left: 20px;
             }
@@ -1490,34 +1494,36 @@
   }
 }
 
-@media (max-width:1300px){
-  .fizio-paketat-body{
+@media (max-width: 1300px) {
+  .fizio-paketat-body {
     grid-template-columns: repeat(2, 1fr);
-    &-item{
+    &-item {
       max-width: 500px;
     }
   }
-  
 }
-@media (max-width:1000px){
-  .fizio-sidebar{
+@media (max-width: 1000px) {
+  .fizio-sidebar {
     left: unset;
     right: 0;
     transform: translateX(200%);
   }
-  .fizio-body{
+  .fizio-body {
     max-width: 100%;
     margin-left: 0;
   }
-  .fizio-header{
-  margin-left: 0;
-  max-width: 100%;
+  .fizio-header {
+    margin-left: 0;
+    max-width: 100%;
+    &-menu {
+      display: block;
+    }
   }
 }
-@media (max-width:750px){
-  .fizio-paketat-body{
+@media (max-width: 750px) {
+  .fizio-paketat-body {
     grid-template-columns: repeat(1, 1fr);
-    &-item{
+    &-item {
       max-width: 100%;
     }
   }
