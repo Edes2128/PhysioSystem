@@ -10,6 +10,7 @@ export default function EditOferta({ match }) {
     const [offer, setOffer] = useState('')
     const [titulli, setTitulli] = useState('');
     const [ulja, setUlja] = useState('');
+    const [dataFillimit,setDataFillimit] = useState('')
     const [dataMbarimit, setDataMbarimit] = useState('')
     const [list, setList] = useState([])
     const [tipiUljes, setTipiUljes] = useState(1)
@@ -24,6 +25,7 @@ export default function EditOferta({ match }) {
             setUlja(res.data[0].ulja)
             setTipiUljes(res.data[0].ulja_type)
             setDataMbarimit(res.data[0].end_date_2)
+            setDataFillimit(res.data[0].date_created_2)
             setImage(res.data[0].baner)
         })
         axios.get('https://physiosystem.alcodeit.com/fizio/getPackages').then(res => {
@@ -40,6 +42,7 @@ export default function EditOferta({ match }) {
         fd.append('ulja', ulja);
         fd.append('tipi_uljes', tipiUljes);
         fd.append('data_mbarimit', dataMbarimit);
+        fd.append('data_fillimit',dataFillimit)
         fd.append('baner', baner)
         fd.append('baner_name', image)
 
@@ -72,7 +75,7 @@ export default function EditOferta({ match }) {
                     </svg>
                     <p className="fs-20 fw-regular" >{offer.titulli}</p>
                 </div>
-                {offer.status === 1 ?
+                {offer.status === 1 || offer.status === 2  ?
                     <form className="add-offer-form flex fd-column ai-start" onSubmit={updateOffer} >
 
                         <div className="add-offer-form-inputs flex jc-spaceb ai-center">
@@ -97,11 +100,22 @@ export default function EditOferta({ match }) {
                                     </select>
                                 </div>
                             </div>
+
+                        </div>
+                        <div className="add-offer-form-inputs flex jc-spaceb ai-center">
+                            <div className="add-offer-form-inputs-item flex fd-column ai-start">
+                                <label className="fs-18 fw-regular" htmlFor="#">Data Fillimit</label>
+                                <input className="fs-18 fw-regular" type="date" value={dataFillimit} onChange={(e) => {
+                                    setDataFillimit(e.target.value)
+                                }} />
+
+                            </div>
                             <div className="add-offer-form-inputs-item flex fd-column ai-start">
                                 <label className="fs-18 fw-regular" htmlFor="#">Data Mbarimit</label>
                                 <input className="fs-18 fw-regular" type="date" value={dataMbarimit} onChange={(e) => {
                                     setDataMbarimit(e.target.value)
                                 }} />
+
                             </div>
                         </div>
                         <div className="edit-offer-packages flex fd-column ai-start">

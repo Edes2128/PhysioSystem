@@ -14,7 +14,7 @@ import axios from 'axios'
 
 export default function Oferta() {
     const fizioContext = useContext(FizioContext)
-    const { offers, getOffers } = fizioContext;
+    const { offers, getOffers , expireOffer , activateOffer } = fizioContext;
     const [activeIndex, setActiveIndex] = useState(-1)
     const [page, setPage] = useState(1);
     const itemPage = 10;
@@ -25,6 +25,8 @@ export default function Oferta() {
     };
     useEffect(() => {
         getOffers()
+        expireOffer()
+        activateOffer()
     }, [])
 
     const colorStat = (status) => {
