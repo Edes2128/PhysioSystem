@@ -40,11 +40,11 @@ export default function Paketat() {
                 <p className="fs-30 fw-bold" >Paketat <sup className="fs-20" >({packages.length})</sup> </p>
                 <Link to="/fizio/shtopaket" className="fs-18 fw-regular fizio-paketat-top-button">Shto Paket</Link>
             </div>
-            <div className="fizio-paketat-body flex  jc-spaceb  ai-start">
+            <div className="fizio-paketat-body ">
                 {packages.map((paket, index) => (
                     <div key={paket.id} className="fizio-paketat-body-item flex fd-column ai-center">
                         <div className="fizio-paketat-body-item-image flex">
-                            <img className="img-res" src={`https://physiosystem.alcodeit.com/files/${paket.photo}`} alt="Foto Package" />
+                            <img className="img-res" src={`https://physiosystem.alcodeit.com/files/${paket.photo}`} loading="lazy" alt="Foto Package" />
                         </div>
                         <div className="fizio-paketat-body-item-texts flex fd-column ai-start">
                             <p className="fizio-paketat-body-item-texts-title fs-30 fw-semib">{paket.titulli}</p>

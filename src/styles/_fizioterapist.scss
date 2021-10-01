@@ -10,6 +10,7 @@
   overflow: auto;
   background-color: #1f1d2c;
   padding: 43px 37px 83px;
+  z-index: 200;
   &::after {
     content: "";
     position: absolute;
@@ -21,7 +22,6 @@
   }
   &-links {
     width: 100%;
-
     &-item {
       padding: 14px 0;
       width: 100%;
@@ -106,7 +106,11 @@
 .fizio-paketat-body {
   width: 100%;
   margin-top: 80px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 30px;
+  row-gap: 1em;
+  grid-auto-rows: 1fr;
   &-item {
     max-width: 400px;
     width: 100%;
@@ -1482,6 +1486,39 @@
       outline: none;
       padding: 10px 40px;
       cursor: pointer;
+    }
+  }
+}
+
+@media (max-width:1300px){
+  .fizio-paketat-body{
+    grid-template-columns: repeat(2, 1fr);
+    &-item{
+      max-width: 500px;
+    }
+  }
+  
+}
+@media (max-width:1000px){
+  .fizio-sidebar{
+    left: unset;
+    right: 0;
+    transform: translateX(200%);
+  }
+  .fizio-body{
+    max-width: 100%;
+    margin-left: 0;
+  }
+  .fizio-header{
+  margin-left: 0;
+  max-width: 100%;
+  }
+}
+@media (max-width:750px){
+  .fizio-paketat-body{
+    grid-template-columns: repeat(1, 1fr);
+    &-item{
+      max-width: 100%;
     }
   }
 }
