@@ -2,9 +2,12 @@ import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import ClientContext from '../context/klient/klientContext';
+import AlertContext from '../context/alerts/AlertContext'
 
 export default function Register({ history }) {
 
+    const alertContext = useContext(AlertContext);
+    const { setAlert } = alertContext
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
@@ -38,7 +41,10 @@ export default function Register({ history }) {
                 axios.post('https://physiosystem.alcodeit.com/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
                     setCurrentUser(res.data[0])
                 })
+                setAlert(`${res.data.message}`, 'success')
 
+            } else {
+                setAlert(`${res.data.message}`, "error")
             }
         })
     }
