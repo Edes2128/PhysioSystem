@@ -66,6 +66,10 @@
   }
   &-top {
     width: 100%;
+    &-ham-menu {
+      margin-right: 20px;
+      display: none;
+    }
     &-left {
       margin-right: 27px;
       &-widget {
@@ -995,5 +999,30 @@
   .profile-password-btn-ruaj {
     max-width: 100%;
     margin-top: 0px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .kient-sidebar {
+    left: unset;
+    right: 0;
+    z-index: 200;
+    transform: translate(200%);
+    transition: all 0.4s ease;
+  }
+  .show-klient-sidebar {
+    transform: translate(0);
+  }
+  .klient-body {
+    width: calc(100% - 300px);
+    margin: 0 300px 0 0;
+    padding: 42px 10px;
+  }
+  .headerbanner {
+    &-top {
+      &-ham-menu {
+        display: block;
+      }
+    }
   }
 }

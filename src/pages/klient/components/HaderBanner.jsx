@@ -1,13 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ReactComponent as Line } from '../../../images/Line 5.svg'
 import { ReactComponent as Cart } from '../../../images/cart-2.svg'
+import { ReactComponent as MenuIcon } from '../../../images/icons8-menu-orange.svg'
 import ClientContext from '../../../context/klient/klientContext'
+import LoadingContext from '../../../context/loading/LoadingContext'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import MiniCart from './MiniCart'
 
 export default function HaderBanner() {
-
+    const collapseContext = useContext(LoadingContext)
+    const { setCollapse } = collapseContext
     const clientContext = useContext(ClientContext);
     const { currentUser, cart, getCart } = clientContext;
     const [offers, setOffers] = useState([])
@@ -23,6 +26,7 @@ export default function HaderBanner() {
     return (
         <div className="headerbanner flex fd-column ai-center" >
             <div className="headerbanner-top flex ai-center jc-center">
+                <MenuIcon onClick={() => setCollapse(true)} className="headerbanner-top-ham-menu" />
                 <div className="headerbanner-top-left flex ai-center">
                     <div className="headerbanner-top-left-widget flex ai-center jc-center"  >
                         {miniCart && <MiniCart />}
