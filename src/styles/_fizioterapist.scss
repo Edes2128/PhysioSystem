@@ -1,6 +1,19 @@
 .fizioterapist {
   background-color: #1f1d2c;
 }
+.opa{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.486);
+  z-index: 100;
+  display: none;
+}
+.show-opa{
+  display: block;
+}
 .fizio-sidebar {
   width: 298px;
   height: 100%;
@@ -22,6 +35,7 @@
   }
   &-links {
     width: 100%;
+    margin-top: 50px;
     &-item {
       padding: 14px 0;
       width: 100%;
@@ -45,6 +59,7 @@
   &-logout {
     width: 100%;
     padding: 20px 0;
+    margin-top: 20px;
     p {
       margin-left: 13px;
       cursor: pointer;
@@ -509,6 +524,7 @@
   }
   &-datatable {
     margin-top: 70px;
+    overflow-x: auto;
     &-pagination {
       width: 100%;
       margin-top: 40px;
@@ -856,6 +872,7 @@
     width: 100%;
     overflow: auto;
     margin-top: 60px;
+    overflow-x: auto;
   }
 }
 .table-action {
@@ -1506,6 +1523,10 @@
     left: unset;
     right: 0;
     transform: translateX(200%);
+    transition: all 0.4s ease;
+  }
+  .show-fizio-sidebar {
+    transform: translate(0);
   }
   .fizio-body {
     max-width: 100%;

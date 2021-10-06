@@ -1,7 +1,11 @@
-import React from 'react'
+import React , {useContext} from 'react'
 import { ReactComponent as MenuIcon } from '../../../images/icons8-menu.svg'
+import LoadingContext from '../../../context/loading/LoadingContext'
 
 export default function Header({ logout }) {
+
+    const collapseContext = useContext(LoadingContext)
+    const {setCollapse} = collapseContext
     return (
         <div className="fizio-header flex jc-end ai-center" >
             <div className="fizio-header-widgets flex ai-center">
@@ -15,7 +19,7 @@ export default function Header({ logout }) {
                     </svg>
                 </div>
             </div>
-            <MenuIcon className="fizio-header-menu" />
+            <MenuIcon className="fizio-header-menu" onClick={() => setCollapse(true)} />
         </div>
     )
 }

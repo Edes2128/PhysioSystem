@@ -39,6 +39,7 @@ thead tr th {
   border: 0 !important;
   font-size: 20px !important;
   font-weight: 500 !important;
+  white-space: nowrap;
 }
 
 tbody tr td {
@@ -47,6 +48,7 @@ tbody tr td {
   border-bottom: 1px solid #39364d !important ;
   font-size: 16px !important;
   font-weight: normal !important;
+  white-space: nowrap;
 }
 .MuiPaginationItem-root {
   color: white !important;
