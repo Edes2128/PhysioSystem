@@ -16,18 +16,19 @@ export default function Wishlist() {
 
     }, [])
 
+
     return (
         <div className="wishlist" >
             <div className="wishlist-header flex ai-center jc-spaceb">
                 <p className="wishlist-header-title fs-38 fw-semib">Wishlist</p>
             </div>
-            <div className="wishlist-paketat flex ai-start">
+            <div className="wishlist-paketat ">
 
                 {wishlist && wishlist.map((wish, index) => (
                     <div className="wishlist-paketat-item flex fd-column ai-center">
                         <div className="wishlist-paketat-item-top">
                             <div className="wishlist-paketat-item-top-image">
-                                <img src={`https://physiosystem.alcodeit.com/files/${wish.package[0].photo}`} className="img-res" alt="" />
+                                <img src={ wish.package[0].photo ?`https://physiosystem.alcodeit.com/files/${wish.package[0].photo}` : ""} className="img-res" alt="" />
                             </div>
                         </div>
                         <div className="wishlist-paketat-item-bottom flex fd-column ai-center">

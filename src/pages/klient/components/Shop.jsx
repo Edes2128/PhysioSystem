@@ -40,7 +40,7 @@ export default function Shop() {
                     <input className="fs-16 fw-regular" type="text" placeholder="Search..." onChange={(e) => setSearch(e.target.value)} />
                 </div>
             </div>
-            <div className="shop-packages flex ai-start">
+            <div className="shop-packages ">
                 {trialPackages.length === packages.length &&
                     <p className="fs-24 fw-medium" >Wow you have bought all packages!</p>
                 }

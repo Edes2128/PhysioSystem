@@ -26,7 +26,7 @@ export default function MyPackages() {
                     <input className="fs-16 fw-regular" type="text" placeholder="Search..." onChange={(e) => setSearch(e.target.value)} />
                 </div>
             </div>
-            <div className="mypackages-paketat flex ai-start">
+            <div className="mypackages-paketat ">
                 {packages && packageFiltered.map(paket => (
                     <div className="mypackages-paketat-item  flex fd-column ai-center">
                         <Link to={`/shop/mypackages/${paket.id}`} className="mypackages-paketat-item-image">
