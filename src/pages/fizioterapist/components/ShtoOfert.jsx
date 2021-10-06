@@ -83,7 +83,7 @@ export default function ShtoOfert() {
             <p className="add-offer-title fs-30 fw-semib ">Add Offer</p>
             <form className="add-offer-form flex fd-column ai-start" onSubmit={addOffer}>
 
-                <div className="add-offer-form-inputs flex jc-spaceb ai-center">
+                <div className="add-offer-form-inputs flex  ai-center">
                     <div className="add-offer-form-inputs-item flex fd-column ai-start">
                         <label className="fs-18 fw-regular" htmlFor="#">Titulli</label>
                         <input className="fs-18 fw-regular" type="text" value={titulli} onChange={(e) => {
@@ -109,7 +109,7 @@ export default function ShtoOfert() {
 
                 </div>
 
-                <div className="add-offer-form-inputs flex jc-spaceb ai-center">
+                <div className="add-offer-form-inputs flex  ai-center">
                     <div className="add-offer-form-inputs-item flex fd-column ai-start">
                         <label className="fs-18 fw-regular" htmlFor="#">Data Fillmit</label>
                         <input className="fs-18 fw-regular" type="date" value={dataFillimi} onChange={(e) => {
