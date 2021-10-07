@@ -34,7 +34,7 @@ export default function SinglePackage({ match }) {
             </div>
             {singlePackage.videos_demo && <p className="singlepackage-demo-title fs-28 fw-semib">Video Demo</p>}
 
-            <div className="singlepackage-demo flex ai-start">
+            <div className="singlepackage-demo t">
                 {singlePackage.videos_demo && singlePackage.videos_demo.map(video => (
                     <div className="singlepackage-demo-item">
                         <video className="img-res" src={`https://physiosystem.alcodeit.com/files/${video.video_src}`} controls></video>
@@ -43,7 +43,7 @@ export default function SinglePackage({ match }) {
             </div>
             <div className="singlepackage-days flex fd-column ai-start">
                 <p className="singlepackage-days-link fs-30 fw-semib">Days <sup className="fs-18 fw-regular" >({`${singlePackage.days && singlePackage.days.length}`})</sup> </p>
-                <div className="singlepackage-days-items flex">
+                <div className="singlepackage-days-items">
                     {singlePackage.days && singlePackage.days.map(day => (
                         <div className="singlepackage-days-items-content">
                             <div className="singlepackage-days-items-content-shape flex ai-center jc-center">
