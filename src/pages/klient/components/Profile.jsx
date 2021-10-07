@@ -86,7 +86,7 @@ export default function Profile() {
 
                                 <img src={preview} className="img-res" alt="" />
                                 :
-                                <img src={currentUser.image_profile === "" ? "/images/profile-big.jpg" : `https://physiosystem.alcodeit.com/files/${currentUser.image_profile}`} className="img-res" alt="" />
+                                <img src={currentUser.image_profile === "" || currentUser.image_profile === undefined ? "/images/profile-big.jpg" : `https://physiosystem.alcodeit.com/files/${currentUser.image_profile}`} className="img-res" alt="" />
 
                             }
 

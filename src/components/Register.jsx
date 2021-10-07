@@ -53,7 +53,7 @@ export default function Register({ history }) {
         <div className="register flex jc-center ai-center">
             <form onSubmit={register} className="register-form flex fd-column ai-center">
                 <div className="register-form-logo">
-                    <img src="/images/logo-orange.png" alt="" />
+                    <img src="/images/orange.png" alt="" />
                 </div>
                 <div className="register-form-inputs flex ai-start fd-column">
                     <label className="fs-16 fw-regular" htmlFor="#">Name</label>

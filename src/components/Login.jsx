@@ -50,7 +50,7 @@ export default function Login({ history }) {
         <div className="login flex ai-center jc-center" >
             <form onSubmit={login} className="login-form flex fd-column ai-center">
                 <div className="login-form-logo">
-                    <img className="img-res" src="/images/logo-orange.png" alt="" />
+                    <img className="img-res" src="/images/orange.png" alt="" />
                 </div>
                 <div className="login-form-inputs flex fd-column ai-start">
                     <label className="fs-16 fw-regular" htmlFor="#">Username</label>
@@ -62,8 +62,8 @@ export default function Login({ history }) {
                 </div>
                 <button className="login-form-login fs-16 fw-regular" >Login</button>
                 <div className="login-form-links flex jc-spaceb ai-center" >
-                    <Link className="login-form-links-register-link fs-14 fw-medium" to="/register" >Doesnt have an account?</Link>
-                    <p className="login-form-links-password-forget fs-14 fw-medium" >Forget password?</p>
+                    <Link className="login-form-links-register-link fs-14 fw-medium" to="/register" >Doesn't have an account?</Link>
+                    <p className="login-form-links-password-forget fs-14 fw-medium" >Forgot password?</p>
                 </div>
             </form>
         </div>
