@@ -4,8 +4,12 @@ import axios from 'axios'
 import { ReactComponent as Close } from '../images/CLOSE.svg'
 import { ReactComponent as Check } from '../images/check.svg'
 import { ReactComponent as Minus } from '../images/minus.svg'
-
+import Loading from './Loading'
+import LoadingContext from '../context/loading/LoadingContext'
 export default function Media() {
+
+    const loadingContext = useContext(LoadingContext)
+    const {setShow,show} = loadingContext
     const [activeTab, setActiveTab] = useState('post')
     const mediaContext = useContext(MediaContext);
     const {
@@ -26,6 +30,7 @@ export default function Media() {
     console.log(arrCompare)
 
     const uploadVideos = () => {
+        setShow(true)
         const fd = new FormData();
         Array.from(files).forEach(file => {
             fd.append('files[]', file)
@@ -38,6 +43,7 @@ export default function Media() {
                     setVideos(res.data)
                     setActiveTab('get')
                 })
+                setShow(false)
             }
         })
     }
@@ -49,6 +55,7 @@ export default function Media() {
 
     return (
         <>
+        {show && <Loading />}
             {showMedia &&
                 <div className="media-library flex jc-center ai-center" >
                     <div className="media-library-opa"></div>
