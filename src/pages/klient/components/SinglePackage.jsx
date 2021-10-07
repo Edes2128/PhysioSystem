@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 export default function SinglePackage({ match }) {
 
-    const [singlePackage, setSinglePakcage] = useState({ })
+    const [singlePackage, setSinglePakcage] = useState({})
     useEffect(() => {
         axios.post('https://physiosystem.alcodeit.com/client/getSinglePackageTrial', { id: match.params.id }).then(res => {
             setSinglePakcage(res.data[0])

@@ -7,6 +7,7 @@ import { ReactComponent as Like } from '../../../images/like.svg'
 import { ReactComponent as Cart } from '../../../images/cart.svg'
 import { ReactComponent as Profile } from '../../../images/profile.svg'
 import { ReactComponent as Logout } from '../../../images/logout.svg'
+import { ReactComponent as Close } from '../../../images/close-sidebar.svg'
 import LoadingContext from '../../../context/loading/LoadingContext';
 
 
@@ -57,6 +58,7 @@ export default function Sidebar({ logout }) {
         <>
             <div onClick={() => setCollapse(false)} className={collapse ? "opa show-opa" : "opa"} ></div>
             <div className={collapse ? "kient-sidebar show-klient-sidebar flex fd-column ai-center jc-spaceb" : "kient-sidebar flex fd-column ai-center jc-spaceb"}  >
+                <Close onClick={() => setCollapse(false)} className="close-sidebar" />
                 <div className="kient-sidebar-top flex fd-column ai-center">
                     <div className="kient-sidebar-top-logo flex">
                         <img src="/images/care-logo.png" className="img-res" alt="" />
