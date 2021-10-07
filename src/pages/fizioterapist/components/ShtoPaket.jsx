@@ -1,9 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
 import MediaContext from '../../../context/media/MediaContext';
+import AlertContext from '../../../context/alerts/AlertContext';
 
 export default function ShtoPaket() {
-    
+
+    const alertContext = useContext(AlertContext)
+    const { setAlert } = alertContext
     const mediaContext = useContext(MediaContext)
     const {
         setShowMedia,
@@ -42,42 +45,51 @@ export default function ShtoPaket() {
     let daysPdf = days.map(item => item.pdf);
 
     const addPackage = (e) => {
-        e.preventDefault('');
-        const formdata = new FormData();
-        formdata.append('title', title);
-        formdata.append('pershkrimi', pershkrimi);
-        formdata.append('price', price);
-        formdata.append('cover', image);
 
-        const demo2 = JSON.stringify(videos)
-        formdata.append(`video_demo[]`, demo2);
-        let dayss = JSON.stringify(days)
-        formdata.append('days', dayss)
-        Array.from(daysPdf).forEach(pdf => {
-            formdata.append(`days-pdf[]`, pdf)
-        })
 
-        axios.post('https://physiosystem.alcodeit.com/fizio/addPackage', formdata).then(res => {
-            if (res.status === 200) {
+        if (title === "" || pershkrimi === "" || price === "") {
+            setAlert(`Plotesoni fushat`, 'error')
+            e.preventDefault('');
+        } else {
+            e.preventDefault('');
+            const formdata = new FormData();
+            formdata.append('title', title);
+            formdata.append('pershkrimi', pershkrimi);
+            formdata.append('price', price);
+            formdata.append('cover', image);
 
-                setTitle('');
-                setPershkrimi('')
-                setImage('')
-                setPreviewImage('')
-                setPrice('')
-                setVideos([])
-                setDays([{
-                    titulli: '',
-                    pershkrimi: '',
-                    pdf: '',
-                    pdf_name: '',
-                    day_videos: [],
-                }])
-                setBtnSub(false)
-            } else {
-                setBtnSub(false)
-            }
-        })
+            const demo2 = JSON.stringify(videos)
+            formdata.append(`video_demo[]`, demo2);
+            let dayss = JSON.stringify(days)
+            formdata.append('days', dayss)
+            Array.from(daysPdf).forEach(pdf => {
+                formdata.append(`days-pdf[]`, pdf)
+            })
+
+            axios.post('https://physiosystem.alcodeit.com/fizio/addPackage', formdata).then(res => {
+                if (res.status === 200) {
+
+                    setTitle('');
+                    setPershkrimi('')
+                    setImage('')
+                    setPreviewImage('')
+                    setPrice('')
+                    setVideos([])
+                    setDays([{
+                        titulli: '',
+                        pershkrimi: '',
+                        pdf: '',
+                        pdf_name: '',
+                        day_videos: [],
+                    }])
+                    setBtnSub(false)
+                } else {
+                    setBtnSub(false)
+                }
+            })
+        }
+
+
     }
 
     const removeVideo = (index2, video) => {
@@ -455,7 +467,13 @@ export default function ShtoPaket() {
                         </div>
                     ))}
                 </div>
-                <button onClick={() => setBtnSub(true)} style={{ display: btnSub ? 'none' : 'flex' }} className="shtopaket-form-submit-btn fs-18 fw-medium flex ai-center" type="submit"> Ruaj
+                <button onClick={() => {
+
+                    if (title !== "" || pershkrimi !== "" || price !== "") {
+                        setBtnSub(true)
+                    }
+
+                }} style={{ display: btnSub ? 'none' : 'flex' }} className="shtopaket-form-submit-btn fs-18 fw-medium flex ai-center" type="submit"> Ruaj
                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
                         width="20" height="20" viewBox="0 0 452.000000 452.000000"
                         preserveAspectRatio="xMidYMid meet">
