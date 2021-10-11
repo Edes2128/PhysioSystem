@@ -44,7 +44,10 @@ export default function Klientet() {
                 <p className="klientet-top-title fs-30 fw-medium" >Klientet <sup className="fs-20">({clients.length})</sup></p>
                 <div className="header-search flex ai-center">
                     <Search />
-                    <input className="fs-16 fw-regular" type="text" placeholder="Search..." onChange={(e) => setSearch(e.target.value)} />
+                    <input className="fs-16 fw-regular" type="text" placeholder="Search..." onChange={(e) => {
+                        setSearch(e.target.value)
+                        setPage(1)
+                    }} />
                 </div>
             </div>
 
@@ -118,7 +121,7 @@ export default function Klientet() {
                 </Table>
             </div>
             <div className="oferta-datatable-pagination flex jc-end">
-                <Pagination count={Math.ceil(klientetFiltered.length / itemPage)} onChange={handleChange} />
+                <Pagination count={Math.ceil(klientetFiltered.length / itemPage)} onChange={handleChange} page={page} />
             </div>
         </div>
     )

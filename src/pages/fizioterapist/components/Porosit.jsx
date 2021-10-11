@@ -39,7 +39,10 @@ export default function Porosit() {
                     <p className="orders-top-title fs-30 fw-medium">Porosit <sup className="fs-20" >({orders.length})</sup> </p>
                     <div className="header-search flex ai-center">
                         <Search />
-                        <input className="fs-16 fw-regular" type="text" placeholder="Search..." onChange={(e) => setSearch(e.target.value)} />
+                        <input className="fs-16 fw-regular" type="text" placeholder="Search..." onChange={(e) => {
+                            setSearch(e.target.value)
+                            setPage(1)
+                        }} />
                     </div>
                 </div>
                 <div className="orders-table">
@@ -67,7 +70,7 @@ export default function Porosit() {
                     </Table>
                 </div>
                 <div className="oferta-datatable-pagination flex jc-end">
-                    <Pagination count={Math.ceil(orderFiltered.length / itemPage)} onChange={handleChange} />
+                    <Pagination count={Math.ceil(orderFiltered.length / itemPage)} onChange={handleChange} page={page} />
                 </div>
             </div>
 

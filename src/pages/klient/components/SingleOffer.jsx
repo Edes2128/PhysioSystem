@@ -22,7 +22,7 @@ export default function SingleOffer({ match }) {
         getCart()
     }, [match.params.offerid])
     return (
-        <div className="single-offer flex  ai-start" >
+        <div className="single-offer" >
             <>
 
                 {checker(myids, pacids) === true ?
