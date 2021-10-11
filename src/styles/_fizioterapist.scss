@@ -81,6 +81,9 @@
   top: 0;
   right: 0;
   z-index: 100;
+  &-logo {
+    display: none;
+  }
   &-collapse {
     cursor: pointer;
   }
@@ -1537,6 +1540,12 @@
     max-width: 100%;
     &-menu {
       display: block;
+    }
+    &-logo {
+      display: flex;
+      img {
+        max-width: 50%;
+      }
     }
   }
 }
