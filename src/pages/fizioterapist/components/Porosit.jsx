@@ -26,7 +26,6 @@ export default function Porosit() {
     }, [])
     const orderFiltered = orders.filter(
         (order) =>
-            order.id.toString().toLowerCase().includes(search.toLowerCase()) ||
             order.user.toLowerCase().includes(search.toLowerCase()) ||
             order.package.toLowerCase().includes(search.toLowerCase()) ||
             order.bought_at.toLowerCase().includes(search.toLowerCase()) ||
@@ -47,7 +46,6 @@ export default function Porosit() {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>ID</TableCell>
                                 <TableCell>Klient</TableCell>
                                 <TableCell>Package</TableCell>
                                 <TableCell>Bought at</TableCell>
@@ -58,7 +56,6 @@ export default function Porosit() {
                         <TableBody>
                             {orderFiltered.slice(start, end).map((order, index) => (
                                 <TableRow>
-                                    <TableCell>#{order.id}</TableCell>
                                     <TableCell>{order.user}</TableCell>
                                     <TableCell>{order.package}</TableCell>
                                     <TableCell>{order.bought_at}</TableCell>
@@ -73,6 +70,7 @@ export default function Porosit() {
                     <Pagination count={Math.ceil(orderFiltered.length / itemPage)} onChange={handleChange} />
                 </div>
             </div>
+
         </>
     )
 }

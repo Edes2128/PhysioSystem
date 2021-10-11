@@ -30,7 +30,6 @@ export default function Klientet() {
     }, [])
     const klientetFiltered = clients.filter(
         (order) =>
-            order.id.toString().toLowerCase().includes(search.toLowerCase()) ||
             order.name.toLowerCase().includes(search.toLowerCase()) ||
             order.email.toLowerCase().includes(search.toLowerCase()) ||
             order.contry.toLowerCase().includes(search.toLowerCase()) ||
@@ -53,7 +52,6 @@ export default function Klientet() {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>ID</TableCell>
                             <TableCell>Name</TableCell>
                             <TableCell>Email</TableCell>
                             <TableCell>Country</TableCell>
@@ -66,7 +64,6 @@ export default function Klientet() {
                     <TableBody>
                         {klientetFiltered.slice(start, end).map((client, index) => (
                             <TableRow key={client.id} >
-                                <TableCell>#{client.id}</TableCell>
                                 <TableCell>{client.name}</TableCell>
                                 <TableCell> {client.email} </TableCell>
                                 <TableCell>{client.contry}</TableCell>

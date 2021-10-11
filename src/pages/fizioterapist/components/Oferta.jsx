@@ -98,7 +98,6 @@ export default function Oferta() {
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>ID</TableCell>
                             <TableCell>Titulli Ofertes</TableCell>
                             <TableCell>Data Krijimit</TableCell>
                             <TableCell>Data Mbarimit</TableCell>
@@ -110,7 +109,6 @@ export default function Oferta() {
                     <TableBody>
                         {offers.slice(start, end).map((ofert, index) => (
                             <TableRow>
-                                <TableCell>#{index + 1}</TableCell>
                                 <TableCell>{ofert.titulli}</TableCell>
                                 <TableCell>{ofert.date_created}</TableCell>
                                 <TableCell>{ofert.end_date}</TableCell>
