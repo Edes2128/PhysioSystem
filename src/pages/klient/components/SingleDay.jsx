@@ -41,8 +41,8 @@ export default function SingleDay({ match }) {
 
                 <div className="singleday-videos-items flex ai-center fd-column">
                     {single && day[0].videos.map(video => (
-                        <div className="singleday-videos-item">
-                            <video controls className="img-res" src={`https://physiosystem.alcodeit.com/files/${single && video.video_src}`}></video>
+                        <div className="singleday-videos-item" onContextMenu={e => e.preventDefault()} >
+                            <video controls className="img-res" controlsList="nodownload" src={`https://physiosystem.alcodeit.com/files/${single && video.video_src}`}></video>
                         </div>
                     ))}
                 </div>

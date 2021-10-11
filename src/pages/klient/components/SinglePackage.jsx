@@ -36,7 +36,7 @@ export default function SinglePackage({ match }) {
 
             <div className="singlepackage-demo t">
                 {singlePackage.videos_demo && singlePackage.videos_demo.map(video => (
-                    <div className="singlepackage-demo-item">
+                    <div className="singlepackage-demo-item" onContextMenu={e => e.preventDefault()} >
                         <video className="img-res" src={`https://physiosystem.alcodeit.com/files/${video.video_src}`} controls></video>
                     </div>
                 ))}
