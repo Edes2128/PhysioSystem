@@ -67,7 +67,10 @@ export default function Sidebar({ logout }) {
                         {links.map(link => (
                             <li key={link.path} className={link.active ? "kient-sidebar-top-links-item  link-active flex ai-center" : "kient-sidebar-top-links-item flex ai-center"} >
                                 {link.icon}
-                                <Link onClick={() => setCollapse(false)} to={link.path} className="kient-sidebar-top-links-item-link fs-16 fw-medium" >{link.text}</Link>
+                                <Link onClick={() => {
+                                    window.scrollTo(0, 0)
+                                    setCollapse(false)
+                                }} to={link.path} className="kient-sidebar-top-links-item-link fs-16 fw-medium" >{link.text}</Link>
                             </li>
                         ))}
                     </ul>
