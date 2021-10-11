@@ -117,7 +117,7 @@ export default function Media() {
                             </div>
                         }
                         {activeTab === 'get' &&
-                            <div className="media-library-content-get flex ai-center jc-spaceb">
+                            <div className="media-library-content-get ">
                                 {videos.map((video, index) => (
                                     <>
                                         <div
