@@ -4,6 +4,7 @@ import { ReactComponent as RemoveCart } from '../../../images/remove-cart.svg'
 import axios from 'axios'
 import ClientContext from '../../../context/klient/klientContext'
 import LoadingContext from '../../../context/loading/LoadingContext'
+import { Link } from '@material-ui/core'
 
 export default function Cart() {
 
@@ -104,8 +105,6 @@ export default function Cart() {
                                                 <sup className="fs-18 fw-light" ><del>€ {item.package.price}</del></sup>
                                             </p>
                                         }
-
-
                                         <Separator />
                                         <RemoveCart onClick={() => {
                                             setShow(true)
@@ -161,7 +160,10 @@ export default function Cart() {
                     </div>
                 </div>
                 :
-                <p className="fs-20 fw-medium" style={{ marginTop: '60px' }} >Cart is empty!</p>
+                <div className="shopping-cart-empty flex fd-column ai-start" >
+                    <p className="fs-28 fw-light">Cart is empty!</p>
+                    <Link to="/shop" >Go to shop</Link>
+                </div>
             }
         </div>
     )

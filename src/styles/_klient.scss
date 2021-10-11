@@ -364,6 +364,19 @@
     column-gap: 30px;
     row-gap: 1em;
     grid-auto-rows: 1fr;
+    &-empty {
+      width: 100%;
+      margin-top: 40px;
+      a {
+        text-decoration: none;
+        border: 0;
+        outline: none;
+        background-color: $orange;
+        color: white;
+        margin-top: 20px;
+        padding: 10px 50px;
+      }
+    }
     &-item {
       max-width: 335px;
       width: 100%;
@@ -438,6 +451,15 @@
 }
 .shopping-cart {
   width: 100%;
+  &-empty {
+    margin-top: 40px;
+    a {
+      margin-top: 20px;
+      background-color: $orange;
+      color: white;
+      padding: 10px 40px;
+    }
+  }
   &-header {
     width: 100%;
   }
