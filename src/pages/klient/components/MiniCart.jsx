@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from 'react'
 import ClientContext from '../../../context/klient/klientContext'
 import { Link } from 'react-router-dom';
 import { ReactComponent as RemoveCart } from '../../../images/remove-cart.svg'
-import { ReactComponent as Cart } from '../../../images/cart-2.svg'
+import { ReactComponent as CartWhite } from '../../../images/cart-2-white.svg'
 import axios from 'axios';
 
 export default function MiniCart() {
@@ -44,7 +44,7 @@ export default function MiniCart() {
                         </div>
                     ))}
                     <div className="minicart-link flex jc-center ai-center">
-                        <Cart />
+                        <CartWhite />
                         <Link to="/shop/cart" >View Cart</Link>
                     </div>
 
