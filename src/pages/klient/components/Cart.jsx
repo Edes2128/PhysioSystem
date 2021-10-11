@@ -4,7 +4,7 @@ import { ReactComponent as RemoveCart } from '../../../images/remove-cart.svg'
 import axios from 'axios'
 import ClientContext from '../../../context/klient/klientContext'
 import LoadingContext from '../../../context/loading/LoadingContext'
-import { Link } from '@material-ui/core'
+import { Link } from 'react-router-dom'
 
 export default function Cart() {
 
