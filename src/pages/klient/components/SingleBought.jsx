@@ -28,7 +28,7 @@ export default function SingleBought({ match }) {
                 <div className="singlepackage-details-left flex">
                     <img src={`https://physiosystem.alcodeit.com/files/${single && single.package.photo}`} className="img-res" alt="" />
                 </div>
-                <div className="singlepackage-details-right flex fd-column ai-start">
+                <div className="singlepackage-details-right flex fd-column ai-start ">
                     <p className="singlepackage-details-right-title fs-28 fw-semib">{single && single.package.name}</p>
                     <p className="singlepackage-details-right-text">
                         {single && single.package.pershkrimi}
