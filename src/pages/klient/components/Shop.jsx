@@ -87,9 +87,9 @@ export default function Shop() {
                                             <p className="fs-16 fw-light" >{paket.days.length} days</p>
                                         </div>
                                         {paket.oferta === false || paket.oferta.offer_status === 0 ?
-                                            <p className="shop-packages-item-bottom-details-price fs-22 fw-semib"> $ {paket.price} </p>
+                                            <p className="shop-packages-item-bottom-details-price fs-22 fw-semib"> € {paket.price} </p>
                                             :
-                                            <p className="shop-packages-item-bottom-details-price fs-22 fw-semib" > $ {paket.oferta.new_price}
+                                            <p className="shop-packages-item-bottom-details-price fs-22 fw-semib" > € {paket.oferta.new_price}
                                                 <sup className="fs-14 fw-regular" >
                                                     <del>$ {paket.price}</del></sup>
                                             </p>

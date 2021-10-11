@@ -28,7 +28,7 @@ export default function Wishlist() {
                     <div className="wishlist-paketat-item flex fd-column ai-center">
                         <div className="wishlist-paketat-item-top">
                             <div className="wishlist-paketat-item-top-image">
-                                <img src={ wish.package[0].photo ?`https://physiosystem.alcodeit.com/files/${wish.package[0].photo}` : ""} className="img-res" alt="" />
+                                <img src={wish.package[0].photo ? `https://physiosystem.alcodeit.com/files/${wish.package[0].photo}` : ""} className="img-res" alt="" />
                             </div>
                         </div>
                         <div className="wishlist-paketat-item-bottom flex fd-column ai-center">
@@ -37,7 +37,7 @@ export default function Wishlist() {
                                     <p className="wishlist-paketat-item-bottom-details-texts-title fs-22 fw-bold">{wish.package[0].name}</p>
                                     <p className="fs-16 fw-light" >120 videos / 14 days</p>
                                 </div>
-                                <p className="fs-22 fw-bold" >$ {wish.package[0].price}</p>
+                                <p className="fs-22 fw-bold" >€ {wish.package[0].price}</p>
                             </div>
                             <button type="button" onClick={() => {
                                 axios.post('https://physiosystem.alcodeit.com/client/removeWishlist', { user_id: localStorage.getItem('op'), id: wish.package_id }).then(res => {

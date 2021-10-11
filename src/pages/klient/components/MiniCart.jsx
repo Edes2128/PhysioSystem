@@ -30,7 +30,7 @@ export default function MiniCart() {
                                 {item.oferta === false ?
                                     <p>{item.package.price}</p>
                                     :
-                                    <p className="fs-14 fw-light" >{item.oferta.new_price} $ <sup><del>{item.package.price} $</del></sup> </p>
+                                    <p className="fs-14 fw-light" >{item.oferta.new_price} € <sup><del>{item.package.price} €</del></sup> </p>
                                 }
                             </div>
                             <RemoveCart

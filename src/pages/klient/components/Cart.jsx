@@ -48,7 +48,7 @@ export default function Cart() {
                             description: "Cool Video",
                             amount: {
                                 value: finalTotal,
-                                currency_code: "USD"
+                                currency_code: "EUR"
                             }
                         }
                     ]
@@ -94,14 +94,14 @@ export default function Cart() {
                                         {item.oferta === false ?
                                             <p className="shopping-cart-form-items-left-actions-price fs-29 fw-medium" >
 
-                                                $ {item.package.price}
+                                                €   {item.package.price}
 
                                             </p>
                                             :
                                             <p className="shopping-cart-form-items-left-actions-price fs-29 fw-medium" >
 
-                                                $ {item.oferta.new_price}
-                                                <sup className="fs-18 fw-light" ><del>$ {item.package.price}</del></sup>
+                                                € {item.oferta.new_price}
+                                                <sup className="fs-18 fw-light" ><del>€ {item.package.price}</del></sup>
                                             </p>
                                         }
 
@@ -133,10 +133,10 @@ export default function Cart() {
                                         <div className="shopping-cart-form-items-right-details-package-texts flex fd-column jc-spaceb">
                                             <p className="shopping-cart-form-items-right-details-package-texts-title fs-18 fw-bold">{item.package.name}</p>
                                             {item.oferta === false ?
-                                                <p className="shopping-cart-form-items-right-details-package-price fs-22 fw-medium">$ {item.package.price}</p>
+                                                <p className="shopping-cart-form-items-right-details-package-price fs-22 fw-medium">€ {item.package.price}</p>
                                                 :
-                                                <p className="shopping-cart-form-items-right-details-package-price fs-22 fw-medium">$ {item.oferta.new_price}
-                                                    <sup className="fs-18 fw-light" ><del>$ {item.package.price}</del></sup>
+                                                <p className="shopping-cart-form-items-right-details-package-price fs-22 fw-medium">€ {item.oferta.new_price}
+                                                    <sup className="fs-18 fw-light" ><del>€ {item.package.price}</del></sup>
                                                 </p>
                                             }
 
@@ -145,12 +145,12 @@ export default function Cart() {
                                 ))}
                                 <div className="shopping-cart-form-items-right-details-discount flex ai-center jc-spaceb">
                                     <p className="shopping-cart-form-items-right-details-discount-title fs-16 fw-medium">Discount</p>
-                                    <p className="shopping-cart-form-items-right-details-discount-ulja fs-16 fw-medium">$ {cmimiPaOfert - finalTotal}</p>
+                                    <p className="shopping-cart-form-items-right-details-discount-ulja fs-16 fw-medium">€ {cmimiPaOfert - finalTotal}</p>
                                 </div>
 
                                 <div className="shopping-cart-form-items-right-details-total flex ai-center jc-spaceb">
                                     <p className="shopping-cart-form-items-right-details-total-title fs-24 fw-bold">Total </p>
-                                    <p className="shopping-cart-form-items-right-details-total-vlera  fs-22 fw-semib">$ {finalTotal}</p>
+                                    <p className="shopping-cart-form-items-right-details-total-vlera  fs-22 fw-semib">€ {finalTotal}</p>
                                 </div>
 
                                 <div ref={paypal} className="shopping-cart-form-items-right-details-btn" >

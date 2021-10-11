@@ -61,7 +61,7 @@ export default function Orders() {
                                 <TableCell>{item.packages[0].name}</TableCell>
                                 <TableCell>{item.bought_at}</TableCell>
                                 <TableCell>{item.expires_at}</TableCell>
-                                <TableCell> {item.price_bought} $</TableCell>
+                                <TableCell> {item.price_bought} €</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
