@@ -53,7 +53,9 @@ export default function HaderBanner() {
                 <p className="headerbanner-offers-subtitle fs-16 fw-regular">Get a look at our best offers</p>
                 <div className="headerbanner-offers-content" >
                     {offers.length !== 0 && offers.map(oferta => (
-                        <Link to={`/shop/offer/${oferta.id}`} className="headerbanner-offers-item flex">
+                        <Link to={`/shop/offer/${oferta.id}#`} className="headerbanner-offers-item flex" onClick={() => {
+                            window.scrollTo(0, 0)
+                        }} >
                             <div className="headerbanner-offers-item-shape"></div>
                             <div className="headerbanner-offers-item-details">
                                 <p className="fs-16 fw-regular" >{oferta.titulli_ofertes}</p>
