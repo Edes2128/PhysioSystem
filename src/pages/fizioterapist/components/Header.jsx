@@ -8,7 +8,7 @@ export default function Header({ logout }) {
     const collapseContext = useContext(LoadingContext)
     const { setCollapse } = collapseContext
     return (
-        <div className="fizio-header flex jc-spaceb ai-center" >
+        <div className="fizio-header flex jc-end ai-center" >
             <Link to="/fizio" className="fizio-header-logo flex">
                 <img className="img-res" src="/images/care-logo-white.png" alt="" />
             </Link>
