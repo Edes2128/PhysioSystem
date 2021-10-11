@@ -14,7 +14,7 @@ import axios from 'axios'
 
 export default function Oferta() {
     const fizioContext = useContext(FizioContext)
-    const { offers, getOffers , expireOffer , activateOffer } = fizioContext;
+    const { offers, getOffers, expireOffer, activateOffer } = fizioContext;
     const [activeIndex, setActiveIndex] = useState(-1)
     const [page, setPage] = useState(1);
     const itemPage = 10;
@@ -114,7 +114,7 @@ export default function Oferta() {
                                 <TableCell>{ofert.titulli}</TableCell>
                                 <TableCell>{ofert.date_created}</TableCell>
                                 <TableCell>{ofert.end_date}</TableCell>
-                                <TableCell>{ofert.ulja}{ofert.ulja_type === 1 ? '%' : '$'}</TableCell>
+                                <TableCell>{ofert.ulja}{ofert.ulja_type === 1 ? '%' : '€'}</TableCell>
                                 <TableCell>
                                     <span style={{
                                         color: ofert.status === 1 || ofert.status === 2 ? 'black' : 'white',

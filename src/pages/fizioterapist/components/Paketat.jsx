@@ -48,7 +48,7 @@ export default function Paketat() {
                         </div>
                         <div className="fizio-paketat-body-item-texts flex fd-column ai-start">
                             <p className="fizio-paketat-body-item-texts-title fs-30 fw-semib">{paket.titulli}</p>
-                            <p className="fizio-paketat-body-item-texts-price fs-24 fw-regular">{paket.price} $</p>
+                            <p className="fizio-paketat-body-item-texts-price fs-24 fw-regular">{paket.price} € </p>
                         </div>
                         <div className="fizio-paketat-body-item-actions flex ai-center jc-center" >
                             <div className="fizio-paketat-body-item-actions-dots" onClick={() => {

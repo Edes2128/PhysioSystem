@@ -96,7 +96,7 @@ export default function EditOferta({ match }) {
                                     <label className="fs-18 fw-regular" htmlFor="#">Tipi Uljes</label>
                                     <select className="fs-18 fw-regular" name="#" id="#" value={tipiUljes} onChange={(e) => setTipiUljes(e.target.value)} >
                                         <option value={1}>%</option>
-                                        <option value={2}>Money</option>
+                                        <option value={2}>€</option>
                                     </select>
                                 </div>
                             </div>

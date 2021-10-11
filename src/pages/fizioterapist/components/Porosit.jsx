@@ -63,7 +63,7 @@ export default function Porosit() {
                                     <TableCell>{order.package}</TableCell>
                                     <TableCell>{order.bought_at}</TableCell>
                                     <TableCell>{order.expires_at}</TableCell>
-                                    <TableCell>{order.price_bought} $</TableCell>
+                                    <TableCell>{order.price_bought} €</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
