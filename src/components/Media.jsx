@@ -26,9 +26,6 @@ export default function Media() {
         setArrName,
     } = mediaContext
 
-
-    console.log(arrCompare)
-
     const uploadVideos = () => {
         setShow(true)
         const fd = new FormData();
@@ -139,7 +136,7 @@ export default function Media() {
                                                     <Minus />
                                                 </div>
                                             }
-                                            <video loading="lazy" className="img-res" src={`https://physiosystem.alcodeit.com/files/${video.src}`}></video>
+                                            <video  className="img-res" src={`https://physiosystem.alcodeit.com/files/${video.src}`}></video>
                                         </div>
                                     </>
                                 ))}

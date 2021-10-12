@@ -3,14 +3,13 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import AlertContext from '../../../context/alerts/AlertContext';
 
-
 export default function EditOferta({ match }) {
     const alertContext = useContext(AlertContext)
     const { setAlert } = alertContext;
     const [offer, setOffer] = useState('')
     const [titulli, setTitulli] = useState('');
     const [ulja, setUlja] = useState('');
-    const [dataFillimit,setDataFillimit] = useState('')
+    const [dataFillimit, setDataFillimit] = useState('')
     const [dataMbarimit, setDataMbarimit] = useState('')
     const [list, setList] = useState([])
     const [tipiUljes, setTipiUljes] = useState(1)
@@ -42,7 +41,7 @@ export default function EditOferta({ match }) {
         fd.append('ulja', ulja);
         fd.append('tipi_uljes', tipiUljes);
         fd.append('data_mbarimit', dataMbarimit);
-        fd.append('data_fillimit',dataFillimit)
+        fd.append('data_fillimit', dataFillimit)
         fd.append('baner', baner)
         fd.append('baner_name', image)
 
@@ -75,7 +74,7 @@ export default function EditOferta({ match }) {
                     </svg>
                     <p className="fs-20 fw-regular" >{offer.titulli}</p>
                 </div>
-                {offer.status === 1 || offer.status === 2  ?
+                {offer.status === 1 || offer.status === 2 ?
                     <form className="add-offer-form flex fd-column ai-start" onSubmit={updateOffer} >
 
                         <div className="add-offer-form-inputs flex jc-spaceb ai-center">
@@ -115,14 +114,13 @@ export default function EditOferta({ match }) {
                                 <input className="fs-18 fw-regular" type="date" value={dataMbarimit} onChange={(e) => {
                                     setDataMbarimit(e.target.value)
                                 }} />
-
                             </div>
                         </div>
                         <div className="edit-offer-packages flex fd-column ai-start">
                             <p className="edit-offer-packages-titulli fs-20 fw-regular">
                                 Paketat
                             </p>
-                            <div className="edit-offer-packages-items flex ai-start">
+                            <div className="edit-offer-packages-items ">
                                 {offer && offer.products.map(paket => (
                                     <>
                                         <div className="edit-offer-packages-items-item flex fd-column ai-center">
@@ -153,12 +151,11 @@ export default function EditOferta({ match }) {
                         </div>
                         <div className="edit-offer-add-packages flex fd-column ai-start">
                             {offer.products && offer.products.length !== list.length && <p className="edit-offer-add-packages-title fs-20 fw-regular">Shto Paket</p>}
-                            <div className="edit-offer-add-packages-items flex ai-start ">
+                            <div className="edit-offer-add-packages-items ">
                                 {list.map(item => (
                                     <>
-                                        {offer.products && offer.products.some(item2 => item2.id === item.id) === true ?
-                                            <div></div>
-                                            :
+                                        {offer.products && offer.products.some(item2 => item2.id === item.id) === false &&
+
                                             <div className="edit-offer-add-packages-items-item flex fd-column ai-center">
                                                 <div className="flex">
                                                     <img src={`https://physiosystem.alcodeit.com/files/${item.photo}`} className="img-res" alt="" />

@@ -956,11 +956,14 @@
     &-items {
       width: 100%;
       margin-top: 30px;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 30px;
+      row-gap: 1em;
+      grid-auto-rows: 1fr;
       &-item {
-        max-width: 400px;
+        max-width: 500px;
         width: 100%;
-        margin-right: 40px;
         &-texts {
           background-color: #363348;
           padding: 20px 30px;
@@ -998,12 +1001,15 @@
       color: white;
     }
     &-items {
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 30px;
+      row-gap: 1em;
+      grid-auto-rows: 1fr;
       margin-top: 30px;
       &-item {
-        max-width: 400px;
+        max-width: 500px;
         width: 100%;
-        margin-right: 40px;
         &-texts {
           background-color: #363348;
           padding: 20px 30px;
@@ -1537,6 +1543,18 @@
 }
 
 @media (max-width: 1300px) {
+  .edit-offer-packages-items {
+    grid-template-columns: repeat(2, 1fr);
+    &-item {
+      max-width: 100%;
+    }
+  }
+  .edit-offer-add-packages-items {
+    grid-template-columns: repeat(2, 1fr);
+    &-item {
+      max-width: 100%;
+    }
+  }
   .add-offer-form-inputs-multi-input-items {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -1596,6 +1614,12 @@
   }
 }
 @media (max-width: 750px) {
+  .edit-offer-packages-items {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .edit-offer-add-packages-items {
+    grid-template-columns: repeat(1, 1fr);
+  }
   .add-offer-form-inputs-multi-input-items {
     grid-template-columns: repeat(2, 1fr);
   }
