@@ -339,10 +339,13 @@
       &-preview {
         width: 100%;
         margin-top: 30px;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 30px;
+        row-gap: 1em;
+        grid-auto-rows: 1fr;
         &-item {
-          max-width: 480px;
-          margin-right: 30px;
+          max-width: 500px;
           position: relative;
           margin-bottom: 40px;
           &:nth-child(3n) {
@@ -474,13 +477,14 @@
           &-preview {
             width: 100%;
             margin-top: 40px;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            column-gap: 30px;
+            row-gap: 1em;
+            grid-auto-rows: 1fr;
             &-item {
-              max-width: 400px;
-              margin-right: 140px;
-              &:nth-child(3n) {
-                margin-right: 0;
-              }
+              max-width: 500px;
+              margin-bottom: 20px;
               button {
                 margin-top: 15px;
                 background-color: red;
@@ -615,9 +619,17 @@
           margin-top: 12px;
           position: relative;
           &-items {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            column-gap: 30px;
+            row-gap: 1em;
+            grid-auto-rows: 1fr;
+            width: 100%;
             &-item {
               background-color: $purple-ligt;
               padding: 15px 20px;
+              max-width: 400px;
+              width: 100%;
               border-radius: 20px;
               margin-right: 10px;
               &:last-child {
@@ -1517,7 +1529,23 @@
     }
   }
 }
+
+@media (max-width: 1500px) {
+  .add-offer-form-inputs-multi-input-items {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 @media (max-width: 1300px) {
+  .add-offer-form-inputs-multi-input-items {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .shtopaket-form-days-item-bottom-preview {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .shtopaket-form-video-preview {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .fizio-paketat-body {
     grid-template-columns: repeat(2, 1fr);
     &-item {
@@ -1568,6 +1596,9 @@
   }
 }
 @media (max-width: 750px) {
+  .add-offer-form-inputs-multi-input-items {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .media-library-content-get {
     grid-template-columns: repeat(1, 1fr);
     &-item {
@@ -1643,6 +1674,12 @@
   }
 }
 @media (max-width: 500px) {
+  .add-offer-form-inputs-multi-input-items {
+    grid-template-columns: repeat(1, 1fr);
+    &-item {
+      max-width: 100%;
+    }
+  }
   .oferta-top {
     flex-direction: column;
     align-items: flex-start;
@@ -1671,6 +1708,24 @@
     }
   }
   .edit-package-videodemo-items {
+    grid-template-columns: repeat(1, 1fr);
+    &-item {
+      max-width: 100%;
+    }
+  }
+  .shtopaket-form-video-preview {
+    grid-template-columns: repeat(1, 1fr);
+    &-item {
+      max-width: 100%;
+    }
+  }
+  .fizio-paketat-top p {
+    font-size: 20px;
+  }
+  .fizio-paketat-top-button {
+    font-size: 14px;
+  }
+  .shtopaket-form-days-item-bottom-preview {
     grid-template-columns: repeat(1, 1fr);
     &-item {
       max-width: 100%;

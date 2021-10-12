@@ -94,8 +94,6 @@ export default function ShtoPaket() {
                 }
             })
         }
-
-
     }
 
     const removeVideo = (index2, video) => {
@@ -299,7 +297,7 @@ export default function ShtoPaket() {
                             </>
                             :
                             <>
-                                <div className="shtopaket-form-video-preview flex ai-center " >
+                                <div className="shtopaket-form-video-preview  " >
                                     {videos.map((video, index) => (
                                         <div key={index} className="shtopaket-form-video-preview-item flex fd-column ai-center" >
                                             <div className="flex" >
@@ -454,7 +452,7 @@ export default function ShtoPaket() {
 
                                     {day.day_videos.length !== 0 &&
 
-                                        <div className="shtopaket-form-days-item-bottom-preview flex  ai-end" >
+                                        <div className="shtopaket-form-days-item-bottom-preview " >
 
                                             {day.day_videos.map((video, index2) => (
                                                 <div className="shtopaket-form-days-item-bottom-preview-item flex fd-column ai-center">

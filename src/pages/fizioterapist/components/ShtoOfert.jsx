@@ -129,10 +129,10 @@ export default function ShtoOfert() {
                     <div className="add-offer-form-inputs-multi">
                         <label className="fs-18 fw-regular" htmlFor="#">Drejtuar</label>
                         <div className="add-offer-form-inputs-multi-input flex ai-center jc-spaceb" >
-                            <div className="add-offer-form-inputs-multi-input-items flex ai-center">
+                            <div className="add-offer-form-inputs-multi-input-items ">
                                 {listDrejtuar.map(item => (
-                                    <div className="add-offer-form-inputs-multi-input-items-item flex ai-center">
-                                        <p className="fs-16 fw-medium" >{item.titulli}</p>
+                                    <div className="add-offer-form-inputs-multi-input-items-item flex ai-center jc-center">
+                                        <p className="fs-14 fw-medium" >{item.titulli}</p>
                                         <svg
                                             onClick={() => unsselectPack(item)}
                                             version="1.0" xmlns="http://www.w3.org/2000/svg"
