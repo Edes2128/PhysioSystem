@@ -9,7 +9,7 @@ import LoadingContext from '../context/loading/LoadingContext'
 export default function Media() {
 
     const loadingContext = useContext(LoadingContext)
-    const {setShow,show} = loadingContext
+    const { setShow, show } = loadingContext
     const [activeTab, setActiveTab] = useState('post')
     const mediaContext = useContext(MediaContext);
     const {
@@ -45,14 +45,16 @@ export default function Media() {
         })
     }
     useEffect(() => {
+
         axios.get('https://physiosystem.alcodeit.com/fizio/getVideos').then(res => {
             setVideos(res.data)
         })
+
     }, [])
 
     return (
         <>
-        {show && <Loading />}
+            {show && <Loading />}
             {showMedia &&
                 <div className="media-library flex jc-center ai-center" >
                     <div className="media-library-opa"></div>
@@ -136,7 +138,7 @@ export default function Media() {
                                                     <Minus />
                                                 </div>
                                             }
-                                            <video  className="img-res" src={`https://physiosystem.alcodeit.com/files/${video.src}`}></video>
+                                            <video preload="auto" className="img-res" src={`https://physiosystem.alcodeit.com/files/${video.src}`}></video>
                                         </div>
                                     </>
                                 ))}
