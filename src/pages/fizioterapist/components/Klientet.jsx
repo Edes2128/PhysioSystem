@@ -24,7 +24,7 @@ export default function Klientet() {
     const handleChange = (event, value) => {
         setPage(value);
     };
-
+    const [video,setVideo] = useState('')
     useEffect(() => {
         getClients()
     }, [])

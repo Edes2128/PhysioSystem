@@ -1586,9 +1586,16 @@
     right: 0;
     transform: translateX(200%);
     transition: all 0.4s ease;
+    &-logo{
+      width: 50%;
+    }
+    &-links{
+      margin-top: 20px;
+    }
   }
   .show-fizio-sidebar {
     transform: translate(0);
+    
   }
   .fizio-body {
     max-width: 100%;
