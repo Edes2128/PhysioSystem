@@ -198,7 +198,7 @@ export default function EditPackage({ match }) {
                                 setArrName(true)
                                 setType(1)
                             }} >Shto video te tjera</button>
-                            <div className="edit-package-videodemo-items flex ai-start">
+                            <div className="edit-package-videodemo-items ">
                                 {demoVideos.map((demo, index) => (
                                     <div className="edit-package-videodemo-items-item flex fd-column ai-center">
                                         <div className="flex" >
@@ -318,7 +318,7 @@ export default function EditPackage({ match }) {
 
                                         }}
                                     >Shto video te tjera</button>
-                                    <div className="edit-package-ditet-items-item-bottom-videos flex ai-start ">
+                                    <div className="edit-package-ditet-items-item-bottom-videos  ">
                                         {day.videos.map((video, index2) => (
                                             <div className="edit-package-ditet-items-item-bottom-videos-content flex ai-center fd-column">
                                                 <div className="flex" >

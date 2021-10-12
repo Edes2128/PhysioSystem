@@ -1222,14 +1222,15 @@
       color: $orange;
     }
     &-items {
-      margin-top: 30px;
-      flex-wrap: wrap;
+      margin-top: 50px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 30px;
+      row-gap: 1em;
+      grid-auto-rows: 1fr;
       &-item {
-        max-width: 400px;
-        margin-right: 166px;
-        &:last-child {
-          margin-right: 0;
-        }
+        max-width: 500px;
+        margin-bottom: 30px;
         button {
           margin-top: 20px;
           width: 50%;
@@ -1325,16 +1326,16 @@
             color: $orange;
           }
           &-videos {
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            column-gap: 30px;
+            row-gap: 1em;
+            grid-auto-rows: 1fr;
             width: 100%;
             margin-top: 30px;
             &-content {
-              max-width: 400px;
-              margin-right: 146px;
+              max-width: 500px;
               margin-bottom: 20px;
-              &:nth-child(3n) {
-                margin-right: 0;
-              }
               button {
                 width: 50%;
                 background-color: red;
@@ -1523,8 +1524,14 @@
       max-width: 500px;
     }
   }
-  .media-library-content-get{
+  .media-library-content-get {
     grid-template-columns: repeat(3, 1fr);
+  }
+  .edit-package-ditet-items-item-bottom-videos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .edit-package-videodemo-items {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (max-width: 1000px) {
@@ -1556,14 +1563,14 @@
       }
     }
   }
-  .media-library-content-get{
+  .media-library-content-get {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (max-width: 750px) {
-  .media-library-content-get{
+  .media-library-content-get {
     grid-template-columns: repeat(1, 1fr);
-    &-item{
+    &-item {
       max-width: 100%;
     }
   }
@@ -1655,6 +1662,18 @@
     align-items: flex-start;
     .header-search {
       margin-top: 20px;
+    }
+  }
+  .edit-package-ditet-items-item-bottom-videos {
+    grid-template-columns: repeat(1, 1fr);
+    &-content {
+      max-width: 100%;
+    }
+  }
+  .edit-package-videodemo-items {
+    grid-template-columns: repeat(1, 1fr);
+    &-item {
+      max-width: 100%;
     }
   }
 }
