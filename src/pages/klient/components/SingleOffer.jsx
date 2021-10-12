@@ -37,7 +37,7 @@ export default function SingleOffer({ match }) {
                                     <div className="single-offer-item flex fd-column ai-center">
                                         <div className="single-offer-item-top">
                                             <Link to={`/shop/${paket.id}`} className="single-offer-item-top-image flex">
-                                                <img className="img-res" src={`https://physiosystem.alcodeit.com/files/${paket.photo}`} alt="" />
+                                                <img className="img-res" src={`https://physiosystem.alcodeit.com/files/${paket.photo}`} loading='lazy' alt="" />
                                             </Link>
                                         </div>
                                         <div className="single-offer-item-bottom flex fd-column ai-center">

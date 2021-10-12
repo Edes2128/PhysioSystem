@@ -82,11 +82,10 @@ export default function Cart() {
                     <div className="shopping-cart-form-items flex ai-start">
                         <div className="shopping-cart-form-items-left flex fd-column ai-start">
                             {cart.map(item => (
-
                                 <div key={item.id} className="shopping-cart-form-items-left-item flex ai-ceter jc-spaceb">
                                     <div className="shopping-cart-form-items-left-item-texts flex ai-center">
                                         <div className="shopping-cart-form-items-left-item-image">
-                                            <img src={`https://physiosystem.alcodeit.com/files/${item.package.photo}`} className="img-res" alt="" />
+                                            <img src={`https://physiosystem.alcodeit.com/files/${item.package.photo}`} className="img-res" alt="" loading='lazy' />
                                         </div>
                                         <p className="shopping-cart-form-items-left-item-texts-title fs-22 fw-semib">{item.package.name}</p>
                                     </div>
@@ -94,13 +93,10 @@ export default function Cart() {
 
                                         {item.oferta === false ?
                                             <p className="shopping-cart-form-items-left-actions-price fs-29 fw-medium" >
-
                                                 €   {item.package.price}
-
                                             </p>
                                             :
                                             <p className="shopping-cart-form-items-left-actions-price fs-29 fw-medium" >
-
                                                 € {item.oferta.new_price}
                                                 <sup className="fs-18 fw-light" ><del>€ {item.package.price}</del></sup>
                                             </p>
@@ -113,7 +109,6 @@ export default function Cart() {
                                                     setTimeout(() => setShow(false), 1000)
                                                     getCart()
                                                 }
-
                                             })
                                         }} />
                                     </div>
@@ -127,7 +122,7 @@ export default function Cart() {
                                     <div key={item.id} className="shopping-cart-form-items-right-details-package flex ai-center">
 
                                         <div className="shopping-cart-form-items-right-details-package-image">
-                                            <img src={`https://physiosystem.alcodeit.com/files/${item.package.photo}`} className="img-res" alt="" />
+                                            <img src={`https://physiosystem.alcodeit.com/files/${item.package.photo}`} loading='lazy' className="img-res" alt="" />
                                         </div>
                                         <div className="shopping-cart-form-items-right-details-package-texts flex fd-column jc-spaceb">
                                             <p className="shopping-cart-form-items-right-details-package-texts-title fs-18 fw-bold">{item.package.name}</p>
@@ -151,9 +146,7 @@ export default function Cart() {
                                     <p className="shopping-cart-form-items-right-details-total-title fs-24 fw-bold">Total </p>
                                     <p className="shopping-cart-form-items-right-details-total-vlera  fs-22 fw-semib">€ {finalTotal}</p>
                                 </div>
-
                                 <div ref={paypal} className="shopping-cart-form-items-right-details-btn" >
-
                                 </div>
                             </div>
                         </div>

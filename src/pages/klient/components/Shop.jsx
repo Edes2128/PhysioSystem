@@ -53,7 +53,7 @@ export default function Shop() {
                                     <Link to={`/shop/${paket.id}`} className="shop-packages-item-top-image flex" onClick={() => {
 
                                     }} >
-                                        <img src={`https://physiosystem.alcodeit.com/files/${paket.photo}`} className="img-res" alt="" />
+                                        <img src={`https://physiosystem.alcodeit.com/files/${paket.photo}`} loading='lazy' className="img-res" alt="" />
                                     </Link>
                                     {wishlist.some((wish) => wish.package_id === paket.id) === true ?
                                         <>

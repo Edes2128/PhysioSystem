@@ -23,7 +23,7 @@ export default function MiniCart() {
                     {cart.map(item => (
                         <div className="minicart-item flex ai-center jc-spaceb">
                             <div className="minicart-item-image flex">
-                                <img className="img-res" src={`https://physiosystem.alcodeit.com/files/${item.package.photo}`} alt="" />
+                                <img className="img-res" src={`https://physiosystem.alcodeit.com/files/${item.package.photo}`} loading='lazy' alt="" />
                             </div>
                             <div className="minicart-item-texts flex fd-column ai-center">
                                 <p className="fs-14 fw-regular" >{item.package.name}</p>
@@ -47,7 +47,6 @@ export default function MiniCart() {
                         <CartWhite />
                         <Link to="/shop/cart" >View Cart</Link>
                     </div>
-
                 </>
             }
         </div>

@@ -23,7 +23,7 @@ export default function SinglePackage({ match }) {
 
             <div className="singlepackage-details flex ai-start">
                 <div className="singlepackage-details-left flex">
-                    <img src={`https://physiosystem.alcodeit.com/files/${singlePackage.photo}`} className="img-res" alt="" />
+                    <img loading='lazy' src={`https://physiosystem.alcodeit.com/files/${singlePackage.photo}`} className="img-res" alt="" />
                 </div>
                 <div className="singlepackage-details-right flex fd-column ai-start">
                     <p className="singlepackage-details-right-title fs-28 fw-semib">{singlePackage.package_name}</p>
@@ -37,7 +37,7 @@ export default function SinglePackage({ match }) {
             <div className="singlepackage-demo t">
                 {singlePackage.videos_demo && singlePackage.videos_demo.map(video => (
                     <div className="singlepackage-demo-item" onContextMenu={e => e.preventDefault()} >
-                        <video className="img-res" src={`https://physiosystem.alcodeit.com/files/${video.video_src}`} controlsList="nodownload" controls></video>
+                        <video preload='metadata' className="img-res" src={`https://physiosystem.alcodeit.com/files/${video.video_src}`} controlsList="nodownload" controls></video>
                     </div>
                 ))}
             </div>
@@ -55,7 +55,7 @@ export default function SinglePackage({ match }) {
                                     </g>
                                 </svg>
                             </div>
-                            <img src={`https://physiosystem.alcodeit.com/files/${singlePackage.photo}`} className="img-res" alt="" />
+                            <img src={`https://physiosystem.alcodeit.com/files/${singlePackage.photo}`} className="img-res" loading='lazy' alt="" />
                         </div>
                     ))}
                 </div>

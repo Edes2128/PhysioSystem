@@ -32,7 +32,7 @@ export default function Wishlist() {
                         <div className="wishlist-paketat-item flex fd-column ai-center">
                             <div className="wishlist-paketat-item-top">
                                 <div className="wishlist-paketat-item-top-image">
-                                    <img src={wish.package[0].photo ? `https://physiosystem.alcodeit.com/files/${wish.package[0].photo}` : ""} className="img-res" alt="" />
+                                    <img loading='lazy' src={wish.package[0].photo ? `https://physiosystem.alcodeit.com/files/${wish.package[0].photo}` : ""} className="img-res" alt="" />
                                 </div>
                             </div>
                             <div className="wishlist-paketat-item-bottom flex fd-column ai-center">

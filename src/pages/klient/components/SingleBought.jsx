@@ -26,7 +26,7 @@ export default function SingleBought({ match }) {
 
             <div className="singlepackage-details flex ai-start">
                 <div className="singlepackage-details-left flex">
-                    <img src={`https://physiosystem.alcodeit.com/files/${single && single.package.photo}`} className="img-res" alt="" />
+                    <img src={`https://physiosystem.alcodeit.com/files/${single && single.package.photo}`} loading='lazy' className="img-res" alt="" />
                 </div>
                 <div className="singlepackage-details-right flex fd-column ai-start ">
                     <p className="singlepackage-details-right-title fs-28 fw-semib">{single && single.package.name}</p>
@@ -39,8 +39,8 @@ export default function SingleBought({ match }) {
                 <p className="singlepackage-days-link fs-30 fw-semib">Days <sup className="fs-18 fw-regular" >({`${single && single.package.days.length}`})</sup> </p>
                 <div className="singlepackage-days-items flex">
                     {single && single.package.days.map(day => (
-                        <Link style={{ color: 'black', textDecoration: 'none' }} to={`/shop/mypackages/${match.params.id}/days/${day.id}`} className="singlepackage-days-items-content flex ai-center fd-column">
-                            <img src={`https://physiosystem.alcodeit.com/files/${single.package.photo}`} className="img-res" alt="" />
+                        <Link style={{ color: 'black', textDecoration: 'none' }} to={`/shop/mypackages/${match.params.id}/days/${day.id}`}  className="singlepackage-days-items-content flex ai-center fd-column">
+                            <img src={`https://physiosystem.alcodeit.com/files/${single.package.photo}`} className="img-res" alt=""  loading='lazy'/>
                             <p style={{ marginTop: '10px' }} className="fs-20 fw-regular" >{day.titulli}</p>
                         </Link>
                     ))}

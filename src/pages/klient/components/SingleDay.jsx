@@ -53,7 +53,7 @@ export default function SingleDay({ match }) {
                         <div className="singleday-videos-items flex ai-center fd-column">
                             {dita.videos.map(video => (
                                 <div className="singleday-videos-item" onContextMenu={e => e.preventDefault()} >
-                                    <video controls className="img-res" controlsList="nodownload" src={`https://physiosystem.alcodeit.com/files/${single && video.video_src}`}></video>
+                                    <video preload='metadata' controls className="img-res" controlsList="nodownload" src={`https://physiosystem.alcodeit.com/files/${single && video.video_src}`}></video>
                                 </div>
                             ))}
                         </div>

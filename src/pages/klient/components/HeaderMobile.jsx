@@ -40,7 +40,7 @@ export default function HeaderMobile() {
                 <Line />
                 <div className="headerbanner-top-right flex ai-center">
                     <div className="headerbanner-top-right-logo flex">
-                        <img src={currentUser && `https://physiosystem.alcodeit.com/files/${currentUser.image_profile}`} className="img-res" alt="" />
+                        <img src={currentUser && `https://physiosystem.alcodeit.com/files/${currentUser.image_profile}`} loading='lazy' className="img-res" alt="" />
                     </div>
                     <p className="fs-16 fw-medium" >{currentUser && currentUser.name}</p>
                 </div>
