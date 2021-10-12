@@ -6,7 +6,7 @@ import { ReactComponent as Check } from '../images/check.svg'
 import { ReactComponent as Minus } from '../images/minus.svg'
 import Loading from './Loading'
 import LoadingContext from '../context/loading/LoadingContext'
-import VideoPlayer from 'simple-react-video-thumbnail'
+
 export default function Media() {
 
     const loadingContext = useContext(LoadingContext)
@@ -139,15 +139,13 @@ export default function Media() {
                                                     <Minus />
                                                 </div>
                                             }
-                                            {/* <video 
-                                            poster='/images/1.jpg'
-                                            preload="none" 
+                                            <video 
+                                            preload="metadata" 
                                             controls 
                                             className="img-res" 
                                             src={`https://physiosystem.alcodeit.com/files/${video.src}`}
                                             >
-                                            </video> */}
-                                            <VideoPlayer  preload="none" videoUrl={`https://physiosystem.alcodeit.com/files/${video.src}`} snapshot={10} />
+                                            </video>                                           
                                         </div>
                                     </>
                                 ))}

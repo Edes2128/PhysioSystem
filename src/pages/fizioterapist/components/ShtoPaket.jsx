@@ -301,7 +301,7 @@ export default function ShtoPaket() {
                                     {videos.map((video, index) => (
                                         <div key={index} className="shtopaket-form-video-preview-item flex fd-column ai-center" >
                                             <div className="flex" >
-                                                <video preload='none' className="img-res" controls src={`https://physiosystem.alcodeit.com/files/${video.src}`}></video>
+                                                <video preload='metadata' className="img-res" controls src={`https://physiosystem.alcodeit.com/files/${video.src}`}></video>
                                             </div>
                                             <button type="button" className="shtopaket-form-video-preview-item-fshi-btn fs-18 fw-regular flex ai-center"
                                                 onClick={() => {
@@ -457,7 +457,7 @@ export default function ShtoPaket() {
                                             {day.day_videos.map((video, index2) => (
                                                 <div className="shtopaket-form-days-item-bottom-preview-item flex fd-column ai-center">
                                                     <div className="flex" >
-                                                        <video preload='none' controls src={`https://physiosystem.alcodeit.com/files/${video.src}`} className="img-res" ></video>
+                                                        <video preload='metadata' controls src={`https://physiosystem.alcodeit.com/files/${video.src}`} className="img-res" ></video>
                                                     </div>
                                                     <button
                                                         onClick={() => {
