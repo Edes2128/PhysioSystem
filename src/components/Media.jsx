@@ -141,8 +141,9 @@ export default function Media() {
                                             }
                                             <video 
                                             preload="metadata" 
-                                            controls 
                                             className="img-res" 
+                                            muted
+                                            controls
                                             src={`https://physiosystem.alcodeit.com/files/${video.src}`}
                                             >
                                             </video>                                           

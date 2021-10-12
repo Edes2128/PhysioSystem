@@ -4,7 +4,18 @@ import MediaContext from '../../../context/media/MediaContext';
 import AlertContext from '../../../context/alerts/AlertContext';
 import LoadingContext from '../../../context/loading/LoadingContext';
 import Loading from '../../../components/Loading'
+import "react-image-crop/dist/ReactCrop.css";
+import ReactCrop from "react-image-crop";
+
 export default function ShtoPaket() {
+
+    const [crop, setCrop] = useState({
+        unit: 'px', // default, can be 'px' or '%'
+        x: 0,
+        y: 0,
+
+    });
+    const [result, setResult] = useState(null);
 
     const loadingContext = useContext(LoadingContext);
     const { show, setShow } = loadingContext;
@@ -20,7 +31,7 @@ export default function ShtoPaket() {
     } = mediaContext;
     const [title, setTitle] = useState('')
     const [pershkrimi, setPershkrimi] = useState('')
-    const [image, setImage] = useState('')
+    const [image, setImage] = useState(null);
     const [previewImage, setPreviewImage] = useState('')
     const [price, setPrice] = useState('')
     const [videos, setVideos] = useState([])
@@ -47,6 +58,30 @@ export default function ShtoPaket() {
 
     let daysPdf = days.map(item => item.pdf);
 
+    const getCroppedImg = () => {
+        const canvas = document.createElement("canvas");
+        const scaleX = image.naturalWidth / image.width;
+        const scaleY = image.naturalHeight / image.height;
+        canvas.width = crop.width;
+        canvas.height = crop.height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(
+            image,
+            crop.x * scaleX,
+            crop.y * scaleY,
+            crop.width * scaleX,
+            crop.height * scaleY,
+            0,
+            0,
+            crop.width,
+            crop.height
+        );
+
+        const base64Image = canvas.toDataURL("image/jpeg", 1);
+        setResult(base64Image);
+        console.log(result);
+
+    }
     const addPackage = (e) => {
         setShow(true)
 
@@ -61,7 +96,7 @@ export default function ShtoPaket() {
             formdata.append('title', title);
             formdata.append('pershkrimi', pershkrimi);
             formdata.append('price', price);
-            formdata.append('cover', image);
+            formdata.append('cover', result);
 
             const demo2 = JSON.stringify(videos)
             formdata.append(`video_demo[]`, demo2);
@@ -171,47 +206,77 @@ export default function ShtoPaket() {
                                     </svg>
                                 </label>
                                 <input type="file" accept="image/*" hidden id="foto-cover" onChange={(e) => {
-                                    setImage(e.target.files[0])
                                     setPreviewImage(URL.createObjectURL(e.target.files[0]))
                                 }} />
                             </>
                             :
-                            <div className="shtopaket-form-image-preview flex fd-column ai-center" >
-                                <div className="flex" >
-                                    <img src={previewImage} className="img-res" alt="" />
-                                </div>
-                                <button onClick={() => {
-                                    setPreviewImage("")
-                                    setImage("")
-                                }}
-                                    className="shtopaket-form-image-preview-delete fs-18 fw-regular flex ai-center" >Fshi Foton
+                            <>
+                                {
+                                    result ? <div className='shtopaket-form-image-final-cropped flex fd-column ai-center' >
+                                        <div>
+                                            <img src={result} alt="" className='img-res' />
+                                        </div>
+                                        <button className='shtopaket-form-image-preview-delete fs-18 fw-regular'
+                                            onClick={() => {
+                                                setResult(null)
+                                                setImage(null)
+                                                setPreviewImage('')
+                                            }}
+                                        >Fshi Foton</button>
+                                    </div>
+                                        :
+                                        <div className="shtopaket-form-image-preview flex fd-column ai-center" >
+                                            <div className="flex" >
+                                                {/* <img src={previewImage} className="img-res" alt="" /> */}
+                                                <ReactCrop
+                                                    src={previewImage}
+                                                    crop={crop}
+                                                    onChange={setCrop}
+                                                    maxHeight={400}
+                                                    minHeight={400}
+                                                    maxWidth={800}
+                                                    minWidth={800}
+                                                    onImageLoaded={setImage}
+                                                />
+                                            </div>
+                                            <div className='flex ai-center' >
+                                                <button onClick={() => {
+                                                    setPreviewImage("")
+                                                    setImage("")
+                                                }}
+                                                    className="shtopaket-form-image-preview-delete fs-18 fw-regular flex ai-center" >Fshi Foton
 
-                                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
-                                        width="20" height="20" viewBox="0 0 788.000000 980.000000"
-                                        preserveAspectRatio="xMidYMid meet">
-                                        <metadata>
-                                            Created by potrace 1.16, written by Peter Selinger 2001-2019
-                                        </metadata>
-                                        <g transform="translate(0.000000,980.000000) scale(0.100000,-0.100000)"
-                                            fill="#ffffff" stroke="none">
-                                            <path d="M2445 9785 c-232 -51 -410 -208 -493 -437 l-27 -73 -3 -347 -3 -347
+                                                    <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                                        width="20" height="20" viewBox="0 0 788.000000 980.000000"
+                                                        preserveAspectRatio="xMidYMid meet">
+                                                        <metadata>
+                                                            Created by potrace 1.16, written by Peter Selinger 2001-2019
+                                                        </metadata>
+                                                        <g transform="translate(0.000000,980.000000) scale(0.100000,-0.100000)"
+                                                            fill="#ffffff" stroke="none">
+                                                            <path d="M2445 9785 c-232 -51 -410 -208 -493 -437 l-27 -73 -3 -347 -3 -347
                                         -687 -3 -687 -3 -70 -24 c-112 -37 -193 -87 -281 -175 -65 -65 -89 -98 -122
                                         -166 -64 -134 -72 -193 -72 -540 l0 -300 3941 0 3940 0 -3 333 c-4 314 -5 336
                                         -27 402 -36 110 -87 193 -170 276 -85 85 -149 124 -266 166 l-80 28 -592 3
                                         -591 3 -5 332 c-5 373 -8 392 -80 532 -58 114 -172 226 -287 282 -157 77 -56
                                         73 -1757 72 -1219 0 -1530 -3 -1578 -14z m3095 -910 l0 -305 -1512 2 -1513 3
                                         -3 303 -2 302 1515 0 1515 0 0 -305z"/>
-                                            <path d="M612 3643 l3 -3098 23 -70 c40 -118 81 -184 172 -276 70 -71 100 -94
+                                                            <path d="M612 3643 l3 -3098 23 -70 c40 -118 81 -184 172 -276 70 -71 100 -94
                                         170 -127 163 -78 -81 -72 2970 -72 3051 0 2807 -6 2970 72 153 73 283 226 342
                                         403 l23 70 3 3098 2 3097 -3340 0 -3340 0 2 -3097z m1808 -248 l0 -2155 -295
                                         0 -295 0 0 2155 0 2155 295 0 295 0 0 -2155z m1210 0 l0 -2155 -300 0 -300 0
                                         0 2155 0 2155 300 0 300 0 0 -2155z m1210 0 l0 -2155 -295 0 -295 0 0 2155 0
                                         2155 295 0 295 0 0 -2155z m1210 0 l0 -2155 -300 0 -300 0 0 2155 0 2155 300
                                         0 300 0 0 -2155z"/>
-                                        </g>
-                                    </svg>
-                                </button>
-                            </div>
+                                                        </g>
+                                                    </svg>
+                                                </button>
+                                                <button type='button' className='shtopaket-form-image-preview-crop fs-18 fw-regular' onClick={getCroppedImg} >Crop</button>
+                                            </div>
+                                        </div>
+                                }
+                            </>
+
                         }
                     </div>
                     <div className="shtopaket-form-video flex fd-column ai-start">

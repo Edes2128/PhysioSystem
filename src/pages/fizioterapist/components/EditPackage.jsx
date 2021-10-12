@@ -509,6 +509,15 @@ export default function EditPackage({ match }) {
                                     setNewDays([])
                                     setAlert(`New days added`, 'success')
                                     setShow(false)
+                                    axios.post('https://physiosystem.alcodeit.com/fizio/getSinglePackage', { package_id: match.params.package_id }).then(res => {
+                                        setPackage(res.data)
+                                        setTitulli(res.data.paket_name)
+                                        setPerhkrimi(res.data.paket_pershkrimi)
+                                        setCmimi(res.data.paket_price)
+                                        setBaner(res.data.paket_photo)
+                                        setDemoVideos(res.data.demo_videos)
+                                        setDays(res.data.days)
+                                    })
                                 } else {
                                     setAlert(`${res.data}`, 'error')
                                     setShow(false)

@@ -1,8 +1,52 @@
 import React, { useContext, useState } from 'react'
 import axios from 'axios'
 import AlertContext from '../../../context/alerts/AlertContext'
+import "react-image-crop/dist/ReactCrop.css";
+import ReactCrop from "react-image-crop";
+
 
 export default function Profili() {
+
+
+    const [srcImg, setSrcImg] = useState(null);
+    const [image, setImage] = useState(null);
+    const [crop, setCrop] = useState({
+        unit: 'px', // default, can be 'px' or '%'
+        x: 130,
+        y: 50,
+        width: 800,
+        height: 400,
+        resize: false
+    });
+    const [result, setResult] = useState(null);
+
+    const getCroppedImg = () => {
+        const canvas = document.createElement("canvas");
+        const scaleX = image.naturalWidth / image.width;
+        const scaleY = image.naturalHeight / image.height;
+        canvas.width = crop.width;
+        canvas.height = crop.height;
+        const ctx = canvas.getContext("2d");
+        ctx.drawImage(
+            image,
+            crop.x * scaleX,
+            crop.y * scaleY,
+            crop.width * scaleX,
+            crop.height * scaleY,
+            0,
+            0,
+            crop.width,
+            crop.height
+        );
+
+        const base64Image = canvas.toDataURL("image/jpeg", 1);
+        setResult(base64Image);
+        console.log(result);
+
+    }
+
+
+
 
     const alertContext = useContext(AlertContext);
     const { setAlert } = alertContext
@@ -36,6 +80,32 @@ export default function Profili() {
                     }}
                 >Ruaj</button>
             </div>
+
+            {srcImg &&
+                <ReactCrop
+                    src={srcImg}
+                    style={{ maxWidth: "100%" }}
+                    crop={crop}
+                    onChange={setCrop}
+                    maxHeight={400}
+                    maxWidth={800}
+                    minHeight={400}
+                    minWidth={800}
+                    onImageLoaded={setImage}
+                />
+            }
+
+            {console.log(image)}
+
+            <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => {
+                    setSrcImg(URL.createObjectURL(e.target.files[0]))
+                }}
+            />
+            <img src={result} className='img-res' alt="" />
+            <button onClick={getCroppedImg} >Crop</button>
         </div>
     )
 }
