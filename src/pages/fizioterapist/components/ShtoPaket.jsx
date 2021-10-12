@@ -11,8 +11,10 @@ export default function ShtoPaket() {
 
     const [crop, setCrop] = useState({
         unit: 'px', // default, can be 'px' or '%'
-        x: 0,
-        y: 0,
+        x: 130,
+        y: 50,
+        width: 800,
+        height: 400,
 
     });
     const [result, setResult] = useState(null);
