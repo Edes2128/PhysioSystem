@@ -22,9 +22,8 @@ export default function HeaderMobile() {
         getCart()
     }, [])
     return (
-        <div className="header-mobile" >
+        <div className="header-mobile flex ai-center jc-spaceb" >
             <div className="headerbanner-top flex ai-center jc-start">
-                <MenuIcon onClick={() => setCollapse(true)} className="headerbanner-top-ham-menu" />
                 <div className="headerbanner-top-left flex ai-center">
                     <div className="headerbanner-top-left-widget flex ai-center jc-center"  >
                         {miniCart && <MiniCart />}
@@ -45,6 +44,7 @@ export default function HeaderMobile() {
                     <p className="fs-16 fw-medium" >{currentUser && currentUser.name}</p>
                 </div>
             </div>
+            <MenuIcon onClick={() => setCollapse(true)} className="headerbanner-top-ham-menu" />
         </div>
     )
 }

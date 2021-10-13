@@ -39,7 +39,7 @@ export default function SingleDay({ match }) {
                                 <p className="singleday-details-right-text fs-16 fw-regular" >{dita.pershkrimi}</p>
                             </div>
                             {dita.pdf &&
-                                <a className="singleday-details-right-pdf" href={dita.pdf} download target="_blank" rel="noreferrer" >
+                                <a className="singleday-details-right-pdf" href={dita.pdf} download  >
                                     <Pdf />
                                 </a>
                             }
