@@ -4,7 +4,6 @@ import MediaContext from '../../../context/media/MediaContext';
 import AlertContext from '../../../context/alerts/AlertContext';
 import LoadingContext from '../../../context/loading/LoadingContext';
 import Loading from '../../../components/Loading'
-import "react-image-crop/dist/ReactCrop.css";
 
 export default function ShtoPaket() {
 
