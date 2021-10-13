@@ -277,7 +277,18 @@
 }
 .mypackages {
   width: 100%;
-
+  &-empty {
+    margin-top: 50px;
+    a {
+      background-color: $orange;
+      color: white;
+      margin-top: 20px;
+      padding: 10px 40px;
+      border: 0;
+      outline: none;
+      text-decoration: none;
+    }
+  }
   &-header {
     width: 100%;
     &-title {
@@ -316,6 +327,19 @@
 }
 .orders {
   width: 100%;
+  &-empty {
+    margin-top: 50px;
+    a {
+      text-decoration: none;
+      color: white;
+      background-color: $orange;
+      padding: 10px 40px;
+      border: 0;
+      outline: none;
+      margin-top: 20px;
+    }
+  }
+
   &-header {
     width: 100%;
     &-title {

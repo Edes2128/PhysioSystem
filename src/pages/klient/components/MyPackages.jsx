@@ -26,16 +26,23 @@ export default function MyPackages() {
                     <input className="fs-16 fw-regular" type="text" placeholder="Search..." onChange={(e) => setSearch(e.target.value)} />
                 </div>
             </div>
-            <div className="mypackages-paketat ">
-                {packages && packageFiltered.map(paket => (
-                    <div className="mypackages-paketat-item  flex fd-column ai-center">
-                        <Link to={`/shop/mypackages/${paket.id}`} className="mypackages-paketat-item-image">
+            { packages && packages.length !== 0 ?
+                <div className="mypackages-paketat ">
+                    {packages && packageFiltered.map(paket => (
+                        <div className="mypackages-paketat-item  flex fd-column ai-center">
+                            <Link to={`/shop/mypackages/${paket.id}`} className="mypackages-paketat-item-image">
                                 <img src={`https://physiosystem.alcodeit.com/files/${paket.photo}`} loading='lazy' className="img-res" alt="" />
-                        </Link>
-                        <p className="mypackages-paketat-item-title fs-22 fw-bold">{paket.name}</p>
-                    </div>
-                ))}
-            </div>
+                            </Link>
+                            <p className="mypackages-paketat-item-title fs-22 fw-bold">{paket.name}</p>
+                        </div>
+                    ))}
+                </div>
+                :
+                <div className='mypackages-empty flex fd-column ai-start'>
+                    <p className='fs-28 fw-medium' >You have no packages!</p>
+                    <Link to='/shop'className='fs-16 fw-regular'  >Buy Package</Link>
+                </div>
+            }
         </div>
     )
 }

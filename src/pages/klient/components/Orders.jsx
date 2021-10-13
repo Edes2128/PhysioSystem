@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { ReactComponent as Search } from '../../../images/loupe.svg'
+import { Link } from 'react-router-dom';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -45,36 +46,41 @@ export default function Orders() {
                 </div>
             </div>
 
-
-            <div className="orders-datatable">
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>ID</TableCell>
-                            <TableCell>Package</TableCell>
-                            <TableCell>Bought Day</TableCell>
-                            <TableCell>Expire Date</TableCell>
-                            <TableCell>Price</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {orders && packageFiltered.slice(start, end).map((item, index) => (
+            {orders.length !== 0 ?
+                <div className="orders-datatable">
+                    <Table>
+                        <TableHead>
                             <TableRow>
-                                <TableCell>#{index + 1}</TableCell>
-                                <TableCell>{item.packages[0].name}</TableCell>
-                                <TableCell>{item.bought_at}</TableCell>
-                                <TableCell>{item.expires_at}</TableCell>
-                                <TableCell> {item.price_bought} €</TableCell>
+                                <TableCell>ID</TableCell>
+                                <TableCell>Package</TableCell>
+                                <TableCell>Bought Day</TableCell>
+                                <TableCell>Expire Date</TableCell>
+                                <TableCell>Price</TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </div>
+                        </TableHead>
+                        <TableBody>
+                            {orders && packageFiltered.slice(start, end).map((item, index) => (
+                                <TableRow>
+                                    <TableCell>#{index + 1}</TableCell>
+                                    <TableCell>{item.packages[0].name}</TableCell>
+                                    <TableCell>{item.bought_at}</TableCell>
+                                    <TableCell>{item.expires_at}</TableCell>
+                                    <TableCell> {item.price_bought} €</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </div>
+                :
+                <div className="orders-empty flex ai-start fd-column">
+                    <p className='fs-28 fw-medium' >You have no orders yet!</p>
+                    <Link className='fs-16 fw-regular' to='/shop' >Make your first order</Link>
+                </div>
 
-            <div className="pagination flex jc-end">
+            }
+            {orders.length !== 0 && <div className="pagination flex jc-end">
                 <Pagination count={Math.ceil(packageFiltered.length / itemPage)} size="medium" onChange={handleChange} page={page} />
-            </div>
-
+            </div>}
         </div>
     )
 }

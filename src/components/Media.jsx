@@ -143,7 +143,6 @@ export default function Media() {
                                             preload="metadata" 
                                             className="img-res" 
                                             muted
-                                            controls
                                             src={`https://physiosystem.alcodeit.com/files/${video.src}`}
                                             >
                                             </video>                                           
