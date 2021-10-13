@@ -1135,6 +1135,12 @@
     transform: translate(200%);
     transition: all 0.4s ease;
     padding: 10px 5px 20px;
+    &-top-logo {
+      width: 40%;
+    }
+    &-top-links {
+      margin-top: 40px;
+    }
   }
   .show-klient-sidebar {
     transform: translate(0);
