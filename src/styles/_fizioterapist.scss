@@ -141,6 +141,11 @@
     margin-bottom: 50px;
     &-image {
       width: 100%;
+      height: 400px;
+      max-height: 400px;
+      img {
+        object-fit: cover;
+      }
     }
     &-texts {
       padding: 20px;
@@ -314,7 +319,7 @@
             margin-left: 10px;
           }
         }
-        &-crop{
+        &-crop {
           margin-top: 20px;
           margin-left: 30px;
           border: 0;
@@ -1597,16 +1602,15 @@
     right: 0;
     transform: translateX(200%);
     transition: all 0.4s ease;
-    &-logo{
+    &-logo {
       width: 50%;
     }
-    &-links{
+    &-links {
       margin-top: 20px;
     }
   }
   .show-fizio-sidebar {
     transform: translate(0);
-    
   }
   .fizio-body {
     max-width: 100%;

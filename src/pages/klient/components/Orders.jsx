@@ -38,7 +38,10 @@ export default function Orders() {
                 <p className="orders-header-title fs-38 fw-semib">Orders</p>
                 <div className="header-search flex ai-center">
                     <Search />
-                    <input className="fs-16 fw-regular" type="text" placeholder="Search..." onChange={(e) => setSearch(e.target.value)} />
+                    <input className="fs-16 fw-regular" type="text" placeholder="Search..." onChange={(e) => {
+                        setSearch(e.target.value)
+                        setPage(1)
+                    }} />
                 </div>
             </div>
 
@@ -69,7 +72,7 @@ export default function Orders() {
             </div>
 
             <div className="pagination flex jc-end">
-                <Pagination count={Math.ceil(packageFiltered.length / itemPage)} size="medium" onChange={handleChange} />
+                <Pagination count={Math.ceil(packageFiltered.length / itemPage)} size="medium" onChange={handleChange} page={page} />
             </div>
 
         </div>
