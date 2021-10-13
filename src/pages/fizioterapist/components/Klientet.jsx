@@ -24,7 +24,6 @@ export default function Klientet() {
     const handleChange = (event, value) => {
         setPage(value);
     };
-    const [video,setVideo] = useState('')
     useEffect(() => {
         getClients()
     }, [])
@@ -40,89 +39,97 @@ export default function Klientet() {
     return (
         <div className="klientet flex fd-column ai-start">
 
-            <div className="klientet-top flex ai-center jc-spaceb">
-                <p className="klientet-top-title fs-30 fw-medium" >Klientet <sup className="fs-20">({clients.length})</sup></p>
-                <div className="header-search flex ai-center">
-                    <Search />
-                    <input className="fs-16 fw-regular" type="text" placeholder="Search..." onChange={(e) => {
-                        setSearch(e.target.value)
-                        setPage(1)
-                    }} />
-                </div>
-            </div>
+            {clients.length !== 0 ?
+                <>
 
-            <div className="klientet-datatable">
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Name</TableCell>
-                            <TableCell>Email</TableCell>
-                            <TableCell>Country</TableCell>
-                            <TableCell>City</TableCell>
-                            <TableCell>Postal Code</TableCell>
-                            <TableCell>Status</TableCell>
-                            <TableCell>Veprime</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {klientetFiltered.slice(start, end).map((client, index) => (
-                            <TableRow key={client.id} >
-                                <TableCell>{client.name}</TableCell>
-                                <TableCell> {client.email} </TableCell>
-                                <TableCell>{client.contry}</TableCell>
-                                <TableCell>{client.city}</TableCell>
-                                <TableCell>{client.postal_code}</TableCell>
-                                <TableCell>
-                                    <span style={{
-                                        color: client.status === 1 ? 'black' : 'white',
-                                        backgroundColor: client.status === 1 ? '#28FFBF' : '#FF4848',
-                                        padding: '10px 15px',
-                                    }} >
-                                        {client.status === 1 ? 'Active' : 'Close'}
-                                    </span>
-                                </TableCell>
-                                <TableCell>
-                                    <div className="flex ai-center">
-                                        <Link to={`/fizio/klientet/${client.id}`} className="table-action flex jc-center ai-center">
-                                            <Edit />
-                                        </Link>
-                                        {client.status === 1 &&
-                                            <div className="table-action flex jc-center ai-center">
-                                                {activeIndex === index &&
-                                                    <div className="table-action-del-offer flex fd-column ai-center">
-                                                        <p className="table-action-del-offer-title">Doni te fshini kete user?</p>
-                                                        <div className="table-action-del-offer-buttons">
-                                                            <button onClick={() => {
-                                                                axios.post('https://physiosystem.alcodeit.com/user/deleteUser',
-                                                                    { id: client.id }).then(res => {
-                                                                        if (res.data.status === 1) {
-                                                                            getClients()
-                                                                            setActiveIndex(-1)
-                                                                        }
-                                                                    })
-                                                            }} >Po</button>
-                                                            <button onClick={() => {
-                                                                setActiveIndex(-1)
-                                                            }} >Jo</button>
-                                                        </div>
-                                                    </div>}
-                                                <Delete onClick={() => {
-                                                    setActiveIndex(index)
-                                                }} />
+                    <div className="klientet-top flex ai-center jc-spaceb">
+                        <p className="klientet-top-title fs-30 fw-medium" >Klientet <sup className="fs-20">({clients.length})</sup></p>
+                        <div className="header-search flex ai-center">
+                            <Search />
+                            <input className="fs-16 fw-regular" type="text" placeholder="Search..." onChange={(e) => {
+                                setSearch(e.target.value)
+                                setPage(1)
+                            }} />
+                        </div>
+                    </div>
+
+                    <div className="klientet-datatable">
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell>Name</TableCell>
+                                    <TableCell>Email</TableCell>
+                                    <TableCell>Country</TableCell>
+                                    <TableCell>City</TableCell>
+                                    <TableCell>Postal Code</TableCell>
+                                    <TableCell>Status</TableCell>
+                                    <TableCell>Veprime</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {klientetFiltered.slice(start, end).map((client, index) => (
+                                    <TableRow key={client.id} >
+                                        <TableCell>{client.name}</TableCell>
+                                        <TableCell> {client.email} </TableCell>
+                                        <TableCell>{client.contry}</TableCell>
+                                        <TableCell>{client.city}</TableCell>
+                                        <TableCell>{client.postal_code}</TableCell>
+                                        <TableCell>
+                                            <span style={{
+                                                color: client.status === 1 ? 'black' : 'white',
+                                                backgroundColor: client.status === 1 ? '#28FFBF' : '#FF4848',
+                                                padding: '10px 15px',
+                                            }} >
+                                                {client.status === 1 ? 'Active' : 'Close'}
+                                            </span>
+                                        </TableCell>
+                                        <TableCell>
+                                            <div className="flex ai-center">
+                                                <Link to={`/fizio/klientet/${client.id}`} className="table-action flex jc-center ai-center">
+                                                    <Edit />
+                                                </Link>
+                                                {client.status === 1 &&
+                                                    <div className="table-action flex jc-center ai-center">
+                                                        {activeIndex === index &&
+                                                            <div className="table-action-del-offer flex fd-column ai-center">
+                                                                <p className="table-action-del-offer-title">Doni te fshini kete user?</p>
+                                                                <div className="table-action-del-offer-buttons">
+                                                                    <button onClick={() => {
+                                                                        axios.post('https://physiosystem.alcodeit.com/user/deleteUser',
+                                                                            { id: client.id }).then(res => {
+                                                                                if (res.data.status === 1) {
+                                                                                    getClients()
+                                                                                    setActiveIndex(-1)
+                                                                                }
+                                                                            })
+                                                                    }} >Po</button>
+                                                                    <button onClick={() => {
+                                                                        setActiveIndex(-1)
+                                                                    }} >Jo</button>
+                                                                </div>
+                                                            </div>}
+                                                        <Delete onClick={() => {
+                                                            setActiveIndex(index)
+                                                        }} />
+                                                    </div>
+                                                }
+
+
                                             </div>
-                                        }
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
+                    <div className="oferta-datatable-pagination flex jc-end">
+                        <Pagination count={Math.ceil(klientetFiltered.length / itemPage)} onChange={handleChange} page={page} />
+                    </div>
+                </>
+                :
+                <p className='fs-28 fw-regular' style={{ color: 'white' }} >Asnje klient i regjistruar!</p>
+            }
 
-
-                                    </div>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </div>
-            <div className="oferta-datatable-pagination flex jc-end">
-                <Pagination count={Math.ceil(klientetFiltered.length / itemPage)} onChange={handleChange} page={page} />
-            </div>
         </div>
     )
 }

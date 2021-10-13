@@ -24,6 +24,7 @@ export default function Porosit() {
     useEffect(() => {
         getOrders()
     }, [])
+
     const orderFiltered = orders.filter(
         (order) =>
             order.user.toLowerCase().includes(search.toLowerCase()) ||
@@ -35,45 +36,53 @@ export default function Porosit() {
     return (
         <>
             <div className="orders" >
-                <div className="orders-top flex ai-center jc-spaceb">
-                    <p className="orders-top-title fs-30 fw-medium">Porosit <sup className="fs-20" >({orders.length})</sup> </p>
-                    <div className="header-search flex ai-center">
-                        <Search />
-                        <input className="fs-16 fw-regular" type="text" placeholder="Search..." onChange={(e) => {
-                            setSearch(e.target.value)
-                            setPage(1)
-                        }} />
-                    </div>
-                </div>
-                <div className="orders-table">
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell>Klient</TableCell>
-                                <TableCell>Package</TableCell>
-                                <TableCell>Bought at</TableCell>
-                                <TableCell>Expires at</TableCell>
-                                <TableCell>Price Bought</TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {orderFiltered.slice(start, end).map((order, index) => (
-                                <TableRow>
-                                    <TableCell>{order.user}</TableCell>
-                                    <TableCell>{order.package}</TableCell>
-                                    <TableCell>{order.bought_at}</TableCell>
-                                    <TableCell>{order.expires_at}</TableCell>
-                                    <TableCell>{order.price_bought} €</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </div>
-                <div className="oferta-datatable-pagination flex jc-end">
-                    <Pagination count={Math.ceil(orderFiltered.length / itemPage)} onChange={handleChange} page={page} />
-                </div>
-            </div>
 
+                {orders.length !== 0 ?
+                    <>
+                        <div className="orders-top flex ai-center jc-spaceb">
+                            <p className="orders-top-title fs-30 fw-medium">Porosit <sup className="fs-20" >({orders.length})</sup> </p>
+                            <div className="header-search flex ai-center">
+                                <Search />
+                                <input className="fs-16 fw-regular" type="text" placeholder="Search..." onChange={(e) => {
+                                    setSearch(e.target.value)
+                                    setPage(1)
+                                }} />
+                            </div>
+                        </div>
+                        <div className="orders-table">
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Klient</TableCell>
+                                        <TableCell>Package</TableCell>
+                                        <TableCell>Bought at</TableCell>
+                                        <TableCell>Expires at</TableCell>
+                                        <TableCell>Price Bought</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {orderFiltered.slice(start, end).map((order, index) => (
+                                        <TableRow>
+                                            <TableCell>{order.user}</TableCell>
+                                            <TableCell>{order.package}</TableCell>
+                                            <TableCell>{order.bought_at}</TableCell>
+                                            <TableCell>{order.expires_at}</TableCell>
+                                            <TableCell>{order.price_bought} €</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </div>
+                        <div className="oferta-datatable-pagination flex jc-end">
+                            <Pagination count={Math.ceil(orderFiltered.length / itemPage)} onChange={handleChange} page={page} />
+                        </div>
+                    </>
+                    :
+                    <div className='porosi-empty' >
+                        <p className='fs-28 fw-medium' style={{ color: 'white' }} >Lista e porosive eshte 0</p>
+                    </div>
+                }
+            </div>
         </>
     )
 }
