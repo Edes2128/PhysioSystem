@@ -59,7 +59,7 @@ export default function ForgoPassword() {
                         </div> :
                             <form ref={form} onSubmit={onSubmit} className='flex fd-column ai-center' >
                                 <input type="text" hidden value={user && user.fullname} name='fullname' />
-                                <input type="text" hidden value={user && `https://localhost:3000/resetpassword?user_id=${user.id}`} name='link' />
+                                <input type="text" hidden value={user && `https://physiosystem.netlify.app/resetpassword?user_id=${user.id}`} name='link' />
                                 <input type="text" hidden value={user && user.email} name='email' />
                                 <p className='fs-20 fw-regular' >Your email is : {user && user.email}</p>
                                 <button className='fs-18 fw-regular' type='submit'>Send link</button>
