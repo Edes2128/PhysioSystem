@@ -40,12 +40,17 @@ export default function RegisterWeb({ history }) {
                     localStorage.setItem("el", 3);
                     axios.post('https://physiosystem.alcodeit.com/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
                         setCurrentUser(res.data[0])
-                        axios.post('https://physiosystem.alcodeit.com/client/addCart', { user_id: localStorage.getItem('op'), package_id: productId.product_id }).then(res => {
+                        axios.post('https://physiosystem.alcodeit.com/client/checkPaketLogin', { user_id: res.data[0].id, package_id: productId.product_id }).then(res => {
+                            if (res.data.status === 2) {
+                                setAlert(`${res.data.message}`, 'info')
+                            } else if (res.data.status === 1) {
+                                setAlert(`${res.data.message}`, 'success')
+                            } else {
+                                setAlert(`${res.data.message}`, 'error')
+                            }
                             setTimeout(() => history.push('/shop/cart'), 1500)
                         })
                     })
-                    setAlert(`${res.data.message}`, 'success')
-
                 } else {
                     setAlert(`${res.data.message}`, "error")
                 }
