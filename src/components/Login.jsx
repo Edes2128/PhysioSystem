@@ -21,17 +21,43 @@ export default function Login({ history }) {
             e.preventDefault()
         } else {
             e.preventDefault();
-            let payload = {
+            var payload = {
                 username,
                 password
             }
-            
             if (location.search) {
-                alert('yesx')
-            } else {
-            
+                axios.post('https://physiosystem.alcodeit.com/user/login', payload).then(res => {
+                    if (res.data.status === 1 && res.data.role === 3) {
+                        axios.post('https://physiosystem.alcodeit.com/client/checkPaketLogin', { user_id: res.data.id, package_id: productId.product_id }).then(res => {
+                            if (res.data.status === 2) {
+                                setAlert(`${res.data.message}`, 'info')
+                            } else if (res.data.status === 1) {
+                                setAlert(`${res.data.message}`, 'success')
+                            } else {
+                                setAlert(`${res.data.message}`, 'error')
+                            }
+                        })
+                        setTimeout(() => history.push('/shop/cart'), 1500)
+                        localStorage.setItem("token", JSON.stringify(res.data.token));
+                        localStorage.setItem("op", res.data.id);
+                        axios.post('https://physiosystem.alcodeit.com/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
+                            setCurrentUser(res.data[0])
+                        })
+                        localStorage.setItem("el", res.data.role);
+                    } else if (res.data.status === 1 && res.data.role === 2) {
+                        history.push('/fizio')
+                        body.classList.remove('white-body')
+                        localStorage.setItem("token", JSON.stringify(res.data.token));
+                        localStorage.setItem("op", res.data.id);
+                        localStorage.setItem("el", res.data.role);
+                        setAlert(`${res.data.message}`, 'success')
 
-                const body = document.querySelector('#body');
+                    } else {
+                        setAlert(`${res.data.message}`, 'error')
+                    }
+                })
+            } else {
+                var body = document.querySelector('#body');
                 axios.post('https://physiosystem.alcodeit.com/user/login', payload).then(res => {
                     if (res.data.status === 1 && res.data.role === 2) {
                         history.push('/fizio')
