@@ -8,6 +8,7 @@ export default function Klient({ history }) {
         history.push('/')
         localStorage.removeItem('token')
         localStorage.removeItem('op')
+        localStorage.removeItem('el')
     }
     return (
         <div className="klient" >

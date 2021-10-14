@@ -102,7 +102,7 @@ export default function Login({ history }) {
                 <button className="login-form-login fs-16 fw-regular" >Login</button>
                 <div className="login-form-links flex jc-spaceb ai-center" >
                     <Link className="login-form-links-register-link fs-14 fw-medium" to="/register" >Doesn't have an account?</Link>
-                    <p className="login-form-links-password-forget fs-14 fw-medium" >Forgot password?</p>
+                    <Link className="login-form-links-password-forget fs-14 fw-medium" to='/forgot' >Forgot password?</Link>
                 </div>
             </form>
         </div>

@@ -9,6 +9,7 @@ export default function Fizioterapist({ history }) {
         history.push('/')
         localStorage.removeItem('token')
         localStorage.removeItem('op')
+        localStorage.removeItem('el')
     }
 
     return (

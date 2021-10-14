@@ -13,11 +13,16 @@ import FizioState from './context/fizioterapist/FizioState'
 import LoadingState from './context/loading/LoadingState'
 import Loading from './components/Loading';
 import RegisterWeb from './components/RegisterWeb';
+import ForgoPassword from './components/ForgoPassword';
+import ResetPassword from './components/ResetPassword';
 
 function App() {
   useEffect(() => {
     const role = JSON.parse(localStorage.getItem('el'))
     const body = document.querySelector('#body')
+    if(!role){
+      body.classList.remove('white-body')
+    }
     if (role === 3) {
       body.classList.add('white-body')
     } else {
@@ -39,8 +44,10 @@ function App() {
                   <Route exact path="/" component={Login} />
                   <Route path="/register" component={Register} />
                   <Route path="/registerweb" component={RegisterWeb} />
+                  <Route path="/forgot" component={ForgoPassword} />
                   <Route path="/shop" component={Klient} />
                   <Route path="/fizio" component={Fizioterapist} />
+                  <Route path='/resetpassword' component={ResetPassword} />
                 </Switch>
               </LoadingState>
             </AlertState>
