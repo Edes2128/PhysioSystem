@@ -12,6 +12,7 @@ import MediaState from './context/media/MediaState';
 import FizioState from './context/fizioterapist/FizioState'
 import LoadingState from './context/loading/LoadingState'
 import Loading from './components/Loading';
+import RegisterWeb from './components/RegisterWeb';
 
 function App() {
   useEffect(() => {
@@ -37,6 +38,7 @@ function App() {
                 <Switch>
                   <Route exact path="/" component={Login} />
                   <Route path="/register" component={Register} />
+                  <Route path="/registerweb" component={RegisterWeb} />
                   <Route path="/shop" component={Klient} />
                   <Route path="/fizio" component={Fizioterapist} />
                 </Switch>

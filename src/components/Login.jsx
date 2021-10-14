@@ -1,11 +1,14 @@
 import React, { useState, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import ClientContext from '../context/klient/klientContext'
 import AlertContext from '../context/alerts/AlertContext'
+import queryString from 'query-string'
 
 export default function Login({ history }) {
 
+    const location = useLocation()
+    const productId = queryString.parse(location.search)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const clientContext = useContext(ClientContext);
@@ -13,37 +16,47 @@ export default function Login({ history }) {
     const alertContext = useContext(AlertContext);
     const { setAlert } = alertContext;
     const login = (e) => {
-        e.preventDefault();
-
-        let payload = {
-            username,
-            password
-        }
-
-        const body = document.querySelector('#body');
-        axios.post('https://physiosystem.alcodeit.com/user/login', payload).then(res => {
-            if (res.data.status === 1 && res.data.role === 2) {
-                history.push('/fizio')
-                body.classList.remove('white-body')
-                localStorage.setItem("token", JSON.stringify(res.data.token));
-                localStorage.setItem("op", res.data.id);
-                localStorage.setItem("el", res.data.role);
-                setAlert(`${res.data.message}`, 'success')
-                body.classList.remove('white-body')
-            } else if (res.data.status === 1 && res.data.role === 3) {
-                history.push('/shop')
-                localStorage.setItem("token", JSON.stringify(res.data.token));
-                localStorage.setItem("op", res.data.id);
-                axios.post('https://physiosystem.alcodeit.com/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
-                    setCurrentUser(res.data[0])
-                })
-                localStorage.setItem("el", res.data.role);
-                body.classList.add('white-body')
-                setAlert(`${res.data.message}`, 'success')
-            } else {
-                setAlert(`${res.data.message}`, 'error')
+        if (username === "" || password === "") {
+            setAlert('Fill all the fields', 'error')
+            e.preventDefault()
+        } else {
+            e.preventDefault();
+            let payload = {
+                username,
+                password
             }
-        })
+            
+            if (location.search) {
+                alert('yesx')
+            } else {
+            
+
+                const body = document.querySelector('#body');
+                axios.post('https://physiosystem.alcodeit.com/user/login', payload).then(res => {
+                    if (res.data.status === 1 && res.data.role === 2) {
+                        history.push('/fizio')
+                        body.classList.remove('white-body')
+                        localStorage.setItem("token", JSON.stringify(res.data.token));
+                        localStorage.setItem("op", res.data.id);
+                        localStorage.setItem("el", res.data.role);
+                        setAlert(`${res.data.message}`, 'success')
+                        body.classList.remove('white-body')
+                    } else if (res.data.status === 1 && res.data.role === 3) {
+                        history.push('/shop')
+                        localStorage.setItem("token", JSON.stringify(res.data.token));
+                        localStorage.setItem("op", res.data.id);
+                        axios.post('https://physiosystem.alcodeit.com/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
+                            setCurrentUser(res.data[0])
+                        })
+                        localStorage.setItem("el", res.data.role);
+                        body.classList.add('white-body')
+                        setAlert(`${res.data.message}`, 'success')
+                    } else {
+                        setAlert(`${res.data.message}`, 'error')
+                    }
+                })
+            }
+        }
     }
 
     return (
