@@ -42,20 +42,21 @@ export default function MiniCarItem({ image, title, oferta, new_price, price, pa
 
     return (
         <div className="minicart-item flex fd-column ai-center">
-            <div className='flex ai-center jc-spaceb' >
+            <div className='flex ai-center jc-spaceb' style={{width:'100%'}} >
                 <div className="minicart-item-image flex">
                     <img className="img-res" src={`https://physiosystem.alcodeit.com/files/${image}`} loading='lazy' alt="" />
                 </div>
                 <div className="minicart-item-texts flex fd-column ai-center">
-                    <p className="fs-14 fw-regular" >{title}</p>
+                    <p className="fs-24 fw-medium" >{title}</p>
                     {oferta === false ?
                         <p>{price} €</p>
                         :
-                        <p className="fs-14 fw-light" >{new_price} € <sup><del>{price} €</del></sup> </p>
+                        <p className="fs-18 fw-light" >{new_price} € <sup><del>{price} €</del></sup> </p>
                     }
 
                 </div>
                 <RemoveCart
+                style={{width:'30px'}}
                     onClick={() => {
                         axios.post('https://physiosystem.alcodeit.com/client/removeCart', { user_id: localStorage.getItem('op'), package_id: package_id }).then(res => {
                             getCart()

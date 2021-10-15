@@ -1,6 +1,7 @@
 .header-mobile {
   display: none;
 }
+
 .close-sidebar {
   display: none;
 }
@@ -938,13 +939,14 @@
   }
   &-item {
     width: 100%;
-    padding-right: 20px;
     margin-bottom: 10px;
+    padding:  10px 20px;
     &:last-child {
       margin-bottom: 0;
     }
     &-image {
       width: 30%;
+      height: 80px;
       img {
         object-fit: cover;
       }
@@ -952,6 +954,7 @@
     &-texts {
       padding: 0 20px;
     }
+
   }
 }
 

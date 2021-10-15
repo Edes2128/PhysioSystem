@@ -19,34 +19,42 @@ export default function Register({ history }) {
     const { setCurrentUser } = clientContext;
 
     const register = (e) => {
-        e.preventDefault()
-        let payload = {
-            username,
-            name,
-            email,
-            password,
-            country,
-            city,
-            postal_code: postalCode
+
+        if (name === "" || email === "" || username === "" || password === "" || country === "" || city === "" || postalCode === "") {
+            setAlert('Please fill the fields', 'error')
+            e.preventDefault()
+        } else {
+            e.preventDefault()
+            let payload = {
+                username,
+                name,
+                email,
+                password,
+                country,
+                city,
+                postal_code: postalCode
+            }
+
+            axios.post('https://physiosystem.alcodeit.com/user/addClient', payload).then(res => {
+                if (res.data.status === 1) {
+                    const body = document.querySelector('#body');
+                    body.classList.add('white-body')
+                    history.push('/shop')
+                    localStorage.setItem("token", JSON.stringify(res.data.token));
+                    localStorage.setItem("op", res.data.id);
+                    localStorage.setItem("el", 3);
+                    axios.post('https://physiosystem.alcodeit.com/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
+                        setCurrentUser(res.data[0])
+                    })
+                    setAlert(`${res.data.message}`, 'success')
+
+                } else {
+                    setAlert(`${res.data.message}`, "error")
+                }
+            })
         }
 
-        axios.post('https://physiosystem.alcodeit.com/user/addClient', payload).then(res => {
-            if (res.data.status === 1) {
-                const body = document.querySelector('#body');
-                body.classList.add('white-body')
-                history.push('/shop')
-                localStorage.setItem("token", JSON.stringify(res.data.token));
-                localStorage.setItem("op", res.data.id);
-                localStorage.setItem("el", 3);
-                axios.post('https://physiosystem.alcodeit.com/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
-                    setCurrentUser(res.data[0])
-                })
-                setAlert(`${res.data.message}`, 'success')
 
-            } else {
-                setAlert(`${res.data.message}`, "error")
-            }
-        })
     }
 
     return (
