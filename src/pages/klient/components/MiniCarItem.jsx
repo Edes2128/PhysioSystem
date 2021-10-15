@@ -27,6 +27,11 @@ export default function MiniCarItem({ image, title, oferta, new_price, price, pa
             onApprove: async (data, actions) => {
                 const order = await actions.order.capture();
                 console.log(order)
+                axios.post('https://physiosystem.alcodeit.com/client/buySinglePackage', { user_id: localStorage.getItem('op'), package_id, price_bought: oferta ? new_price : price }).then(res => {
+                    axios.post('https://physiosystem.alcodeit.com/client/removeCart', { user_id: localStorage.getItem('op'), package_id: package_id }).then(res => {
+                        getCart()
+                    })
+                })
             },
             onError: (err) => {
                 console.log(err)
@@ -37,27 +42,27 @@ export default function MiniCarItem({ image, title, oferta, new_price, price, pa
     return (
         <div className="minicart-item flex fd-column ai-center">
             <div className='flex ai-center jc-spaceb' >
-            <div className="minicart-item-image flex">
-                <img className="img-res" src={`https://physiosystem.alcodeit.com/files/${image}`} loading='lazy' alt="" />
+                <div className="minicart-item-image flex">
+                    <img className="img-res" src={`https://physiosystem.alcodeit.com/files/${image}`} loading='lazy' alt="" />
+                </div>
+                <div className="minicart-item-texts flex fd-column ai-center">
+                    <p className="fs-14 fw-regular" >{title}</p>
+                    {oferta === false ?
+                        <p>{price} €</p>
+                        :
+                        <p className="fs-14 fw-light" >{new_price} € <sup><del>{price} €</del></sup> </p>
+                    }
+
+                </div>
+                <RemoveCart
+                    onClick={() => {
+                        axios.post('https://physiosystem.alcodeit.com/client/removeCart', { user_id: localStorage.getItem('op'), package_id: package_id }).then(res => {
+                            getCart()
+                        })
+                    }}
+                />
             </div>
-            <div className="minicart-item-texts flex fd-column ai-center">
-                <p className="fs-14 fw-regular" >{title}</p>
-                {oferta === false ?
-                    <p>{price}</p>
-                    :
-                    <p className="fs-14 fw-light" >{new_price} € <sup><del>{price} €</del></sup> </p>
-                }
-          
-            </div>
-            <RemoveCart
-                onClick={() => {
-                    axios.post('https://physiosystem.alcodeit.com/client/removeCart', { user_id: localStorage.getItem('op'), package_id: package_id }).then(res => {
-                        getCart()
-                    })
-                }}
-            />
-            </div>
-            <div style={{marginTop:'20px'}} ref={paypal}></div>
+            <div style={{ marginTop: '20px', width: '100%' }} ref={paypal}></div>
         </div>
     )
 }
