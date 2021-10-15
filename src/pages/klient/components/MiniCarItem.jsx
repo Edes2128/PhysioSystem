@@ -5,7 +5,7 @@ import axios from 'axios'
 
 export default function MiniCarItem({ image, title, oferta, new_price, price, package_id }) {
     const clientContext = useContext(ClientContext);
-    const { getCart } = clientContext
+    const { getCart ,getMyPackages } = clientContext
     const paypal = useRef()
 
     useEffect(() => {
@@ -30,6 +30,7 @@ export default function MiniCarItem({ image, title, oferta, new_price, price, pa
                 axios.post('https://physiosystem.alcodeit.com/client/buySinglePackage', { user_id: localStorage.getItem('op'), package_id, price_bought: oferta ? new_price : price }).then(res => {
                     axios.post('https://physiosystem.alcodeit.com/client/removeCart', { user_id: localStorage.getItem('op'), package_id: package_id }).then(res => {
                         getCart()
+                        getMyPackages()        
                     })
                 })
             },
