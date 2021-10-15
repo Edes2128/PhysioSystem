@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef, useEffect } from 'react'
 import ClientContext from '../../../context/klient/klientContext'
 import { ReactComponent as RemoveCart } from '../../../images/remove-cart.svg'
 import axios from 'axios'
@@ -6,9 +6,37 @@ import axios from 'axios'
 export default function MiniCarItem({ image, title, oferta, new_price, price, package_id }) {
     const clientContext = useContext(ClientContext);
     const { getCart } = clientContext
+    const paypal = useRef()
+
+    useEffect(() => {
+        window.paypal.Buttons({
+            createOrder: (data, actions, err) => {
+                return actions.order.create({
+                    intent: "CAPTURE",
+                    purchase_units: [
+                        {
+                            description: "Cool Video",
+                            amount: {
+                                value: oferta ? new_price : price,
+                                currency_code: "EUR"
+                            }
+                        }
+                    ]
+                })
+            },
+            onApprove: async (data, actions) => {
+                const order = await actions.order.capture();
+                console.log(order)
+            },
+            onError: (err) => {
+                console.log(err)
+            }
+        }).render(paypal.current)
+    }, [])
 
     return (
-        <div className="minicart-item flex ai-center jc-spaceb">
+        <div className="minicart-item flex fd-column ai-center">
+            <div className='flex ai-center jc-spaceb' >
             <div className="minicart-item-image flex">
                 <img className="img-res" src={`https://physiosystem.alcodeit.com/files/${image}`} loading='lazy' alt="" />
             </div>
@@ -19,7 +47,7 @@ export default function MiniCarItem({ image, title, oferta, new_price, price, pa
                     :
                     <p className="fs-14 fw-light" >{new_price} € <sup><del>{price} €</del></sup> </p>
                 }
-                
+          
             </div>
             <RemoveCart
                 onClick={() => {
@@ -28,6 +56,8 @@ export default function MiniCarItem({ image, title, oferta, new_price, price, pa
                     })
                 }}
             />
+            </div>
+            <div style={{marginTop:'20px'}} ref={paypal}></div>
         </div>
     )
 }
