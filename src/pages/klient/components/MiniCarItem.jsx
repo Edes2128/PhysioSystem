@@ -5,11 +5,19 @@ import axios from 'axios'
 
 export default function MiniCarItem({ image, title, oferta, new_price, price, package_id }) {
     const clientContext = useContext(ClientContext);
-    const { getCart ,getMyPackages } = clientContext
+    const { getCart, getMyPackages } = clientContext
     const paypal = useRef()
 
     useEffect(() => {
         window.paypal.Buttons({
+            style: {
+                layout: 'vertical',
+                color: 'blue',
+                shape: 'pill',
+                label: 'buynow',
+                tagline: false,
+                height : 35
+            },
             createOrder: (data, actions, err) => {
                 return actions.order.create({
                     intent: "CAPTURE",
@@ -30,7 +38,7 @@ export default function MiniCarItem({ image, title, oferta, new_price, price, pa
                 axios.post('https://physiosystem.alcodeit.com/client/buySinglePackage', { user_id: localStorage.getItem('op'), package_id, price_bought: oferta ? new_price : price }).then(res => {
                     axios.post('https://physiosystem.alcodeit.com/client/removeCart', { user_id: localStorage.getItem('op'), package_id: package_id }).then(res => {
                         getCart()
-                        getMyPackages()        
+                        getMyPackages()
                     })
                 })
             },
@@ -42,7 +50,7 @@ export default function MiniCarItem({ image, title, oferta, new_price, price, pa
 
     return (
         <div className="minicart-item flex fd-column ai-center">
-            <div className='flex ai-center jc-spaceb' style={{width:'100%'}} >
+            <div className='flex ai-center jc-spaceb' style={{ width: '100%' }} >
                 <div className="minicart-item-image flex">
                     <img className="img-res" src={`https://physiosystem.alcodeit.com/files/${image}`} loading='lazy' alt="" />
                 </div>
@@ -56,7 +64,7 @@ export default function MiniCarItem({ image, title, oferta, new_price, price, pa
 
                 </div>
                 <RemoveCart
-                style={{width:'30px'}}
+                    style={{ width: '30px' }}
                     onClick={() => {
                         axios.post('https://physiosystem.alcodeit.com/client/removeCart', { user_id: localStorage.getItem('op'), package_id: package_id }).then(res => {
                             getCart()
