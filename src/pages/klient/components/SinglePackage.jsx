@@ -12,43 +12,46 @@ export default function SinglePackage({ match }) {
         })
     }, [match.params.id])
 
-    console.log(singlePackage.price)
-
     useEffect(() => {
-        window.paypal.Buttons({
-            style: {
-                layout: 'vertical',
-                color: 'blue',
-                shape: 'pill',
-                label: 'buynow',
-                tagline: false,
-                height: 35
-            },
-            createOrder: (data, actions, err) => {
-                return actions.order.create({
-                    intent: "CAPTURE",
-                    purchase_units: [
-                        {
-                            description: "iPhysioCare package",
-                            amount: {
-                                value: singlePackage.price,
-                                currency_code: "EUR"
-                            }
-                        }
-                    ]
-                })
-            },
-            onApprove: async (data, actions) => {
-                const order = await actions.order.capture();
-                console.log(order)
 
-            },
-            onError: (err) => {
-                console.log(err)
-            }
-        }).render(paypal.current)
+        if (singlePackage.price) {
+            setTimeout(() => {
+                window.paypal.Buttons({
+                    style: {
+                        layout: 'vertical',
+                        color: 'blue',
+                        shape: 'pill',
+                        label: 'buynow',
+                        tagline: false,
+                        height: 35
+                    },
+                    createOrder: (data, actions, err) => {
+                        return actions.order.create({
+                            intent: "CAPTURE",
+                            purchase_units: [
+                                {
+                                    description: "iPhysioCare package",
+                                    amount: {
+                                        value: singlePackage.price,
+                                        currency_code: "EUR"
+                                    }
+                                }
+                            ]
+                        })
+                    },
+                    onApprove: async (data, actions) => {
+                        const order = await actions.order.capture();
+                        console.log(order)
 
-    }, [])
+                    },
+                    onError: (err) => {
+                        console.log(err)
+                    }
+                }).render(paypal.current)
+            }, 1000)
+        }
+
+    }, [singlePackage.price])
     return (
         <div className="singlepackage flex fd-column ai-start" >
             <div className="singlepackage-links flex ai-center" >
@@ -64,7 +67,7 @@ export default function SinglePackage({ match }) {
                     <img loading='lazy' src={`https://physiosystem.alcodeit.com/files/${singlePackage.photo}`} className="img-res" alt="" />
                 </div>
                 <div className="singlepackage-details-right flex fd-column ai-start">
-                    <p className="singlepackage-details-right-title fs-28 fw-semib">{singlePackage.package_name}</p>
+                    <p className="singlepackage-details-right-title fs-28 fw-semib">{singlePackage.name}</p>
                     <p className="singlepackage-details-right-text">
                         {singlePackage.pershkrimi}
                     </p>
