@@ -51,7 +51,6 @@ export default function Orders() {
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>ID</TableCell>
                                 <TableCell>Package</TableCell>
                                 <TableCell>Bought Day</TableCell>
                                 <TableCell>Expire Date</TableCell>
@@ -61,7 +60,6 @@ export default function Orders() {
                         <TableBody>
                             {orders && packageFiltered.slice(start, end).map((item, index) => (
                                 <TableRow>
-                                    <TableCell>#{index + 1}</TableCell>
                                     <TableCell>{item.packages[0].name}</TableCell>
                                     <TableCell>{item.bought_at}</TableCell>
                                     <TableCell>{item.expires_at}</TableCell>
