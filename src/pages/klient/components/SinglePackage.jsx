@@ -1,9 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useContext } from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom'
+import ClientContext from '../../../context/klient/klientContext'
 
-export default function SinglePackage({ match }) {
+export default function SinglePackage({ match, history }) {
     const paypal = useRef()
+    const clientContext = useContext(ClientContext);
+    const { getMyPackages } = clientContext
 
     const [singlePackage, setSinglePakcage] = useState({})
     useEffect(() => {
@@ -42,6 +45,10 @@ export default function SinglePackage({ match }) {
                     onApprove: async (data, actions) => {
                         const order = await actions.order.capture();
                         console.log(order)
+                        axios.post('https://physiosystem.alcodeit.com/client/buySinglePackage', { user_id: localStorage.getItem('op'), package_id: singlePackage.id, price_bought: singlePackage.price }).then(res => {
+                            setTimeout(() => history.push(`/shop/mypackages/${singlePackage.id}`), 1000)
+                            getMyPackages()
+                        })
 
                     },
                     onError: (err) => {
