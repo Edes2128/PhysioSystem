@@ -940,20 +940,19 @@
   &-item {
     width: 100%;
     margin-bottom: 10px;
-    padding:  10px 20px;
+    padding: 10px 20px;
     position: relative;
-    &::after{
-      content: '';
+    &::after {
+      content: "";
       width: 100%;
       height: 1px;
       position: absolute;
       bottom: 0;
       left: 0;
-      background-color: rgba(0, 0, 0, 0.297);      
+      background-color: rgba(0, 0, 0, 0.297);
     }
     &:last-child {
       margin-bottom: 0;
-      
     }
     &-image {
       width: 30%;
@@ -965,7 +964,6 @@
     &-texts {
       padding: 0 20px;
     }
-
   }
 }
 
@@ -1018,6 +1016,10 @@
 }
 
 @media (max-width: 1400px) {
+  .minicart {
+    width: 290px;
+    left: -37px;
+  }
   .shop-packages {
     grid-template-columns: repeat(1, 1fr);
     &-item {
@@ -1133,6 +1135,9 @@
 }
 
 @media (max-width: 1000px) {
+  .minicart {
+    left: -67px;
+  }
   .close-sidebar {
     position: absolute;
     display: block;
@@ -1174,6 +1179,9 @@
 }
 
 @media (max-width: 750px) {
+  .minicart {
+    left: 0;
+  }
   .header-mobile {
     width: 100%;
     position: fixed;
