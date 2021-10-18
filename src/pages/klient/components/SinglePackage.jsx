@@ -6,7 +6,7 @@ import ClientContext from '../../../context/klient/klientContext'
 export default function SinglePackage({ match, history }) {
     const paypal = useRef()
     const clientContext = useContext(ClientContext);
-    const { getMyPackages } = clientContext
+    const { getMyPackages, getCart, getWishtlist } = clientContext
 
     const [singlePackage, setSinglePakcage] = useState({})
     useEffect(() => {
@@ -48,7 +48,14 @@ export default function SinglePackage({ match, history }) {
                         axios.post('https://physiosystem.alcodeit.com/client/buySinglePackage', { user_id: localStorage.getItem('op'), package_id: singlePackage.id, price_bought: singlePackage.price }).then(res => {
                             setTimeout(() => history.push(`/shop/mypackages/${singlePackage.id}`), 1000)
                             getMyPackages()
+                            axios.post('https://physiosystem.alcodeit.com/client/removeWishlist', { user_id: localStorage.getItem('op'), id: singlePackage.id }).then(res => {
+                                getWishtlist()
+                            })
+                            axios.post('https://physiosystem.alcodeit.com/client/removeCart', { user_id: localStorage.getItem('op'), package_id: singlePackage.id }).then(res => {
+                                getCart()
+                            })
                         })
+
 
                     },
                     onError: (err) => {

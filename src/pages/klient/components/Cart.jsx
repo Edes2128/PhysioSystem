@@ -60,6 +60,7 @@ export default function Cart() {
                 console.log(order)
                 axios.post('https://physiosystem.alcodeit.com/client/buyPackage', { user_id: localStorage.getItem('op'), packages, total: finalTotal }).then(res => {
                     if(res.status === 200){
+                        axios.post('https://physiosystem.alcodeit.com/client/removeAllWishlist',{user_id: localStorage.getItem('op')})
                         setShow(true)
                         axios.post('https://physiosystem.alcodeit.com/client/removeAllCart', { user_id: localStorage.getItem('op') }).then(res => {
                             if(res.status === 200){
