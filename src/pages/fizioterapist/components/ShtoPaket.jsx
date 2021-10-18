@@ -5,7 +5,7 @@ import AlertContext from '../../../context/alerts/AlertContext';
 import LoadingContext from '../../../context/loading/LoadingContext';
 import Loading from '../../../components/Loading'
 
-export default function ShtoPaket() {
+export default function ShtoPaket({history}) {
 
     const loadingContext = useContext(LoadingContext);
     const { show, setShow } = loadingContext;
@@ -90,6 +90,7 @@ export default function ShtoPaket() {
                     }])
                     setBtnSub(false)
                     setShow(false)
+                    setTimeout(() => history.push('/fizio'),1000)
                 } else {
                     setBtnSub(false)
                 }
