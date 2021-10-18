@@ -1,16 +1,54 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 
 export default function SinglePackage({ match }) {
+    const paypal = useRef()
 
     const [singlePackage, setSinglePakcage] = useState({})
     useEffect(() => {
         axios.post('https://physiosystem.alcodeit.com/client/getSinglePackageTrial', { id: match.params.id }).then(res => {
-            setSinglePakcage(res.data[0])
+            setSinglePakcage(res.data)
         })
     }, [match.params.id])
 
+    console.log(singlePackage.price)
+
+    useEffect(() => {
+        window.paypal.Buttons({
+            style: {
+                layout: 'vertical',
+                color: 'blue',
+                shape: 'pill',
+                label: 'buynow',
+                tagline: false,
+                height: 35
+            },
+            createOrder: (data, actions, err) => {
+                return actions.order.create({
+                    intent: "CAPTURE",
+                    purchase_units: [
+                        {
+                            description: "iPhysioCare package",
+                            amount: {
+                                value: singlePackage.price,
+                                currency_code: "EUR"
+                            }
+                        }
+                    ]
+                })
+            },
+            onApprove: async (data, actions) => {
+                const order = await actions.order.capture();
+                console.log(order)
+
+            },
+            onError: (err) => {
+                console.log(err)
+            }
+        }).render(paypal.current)
+
+    }, [])
     return (
         <div className="singlepackage flex fd-column ai-start" >
             <div className="singlepackage-links flex ai-center" >
@@ -18,7 +56,7 @@ export default function SinglePackage({ match }) {
                 <svg xmlns="http://www.w3.org/2000/svg" width="1" height="29.501" viewBox="0 0 1 29.501">
                     <line id="Line_6" data-name="Line 6" y2="29.501" transform="translate(0.5)" fill="none" stroke="#707070" stroke-width="1" />
                 </svg>
-                <p className="fs-20 fw-regular" >{singlePackage.package_name}</p>
+                <p className="fs-20 fw-regular" >{singlePackage.name}</p>
             </div>
 
             <div className="singlepackage-details flex ai-start">
@@ -30,6 +68,7 @@ export default function SinglePackage({ match }) {
                     <p className="singlepackage-details-right-text">
                         {singlePackage.pershkrimi}
                     </p>
+                    <div style={{ marginTop: '40px', width: '100%' }} ref={paypal} ></div>
                 </div>
             </div>
             {singlePackage.videos_demo && <p className="singlepackage-demo-title fs-28 fw-semib">Video Demo</p>}
