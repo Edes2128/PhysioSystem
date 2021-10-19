@@ -1,5 +1,4 @@
-import React, { useRef, useState, useContext } from 'react'
-import emailjs from 'emailjs-com';
+import React, { useState, useContext } from 'react'
 import axios from 'axios'
 import AlertContext from '../context/alerts/AlertContext';
 import LoadingContext from '../context/loading/LoadingContext';
@@ -10,10 +9,6 @@ export default function ForgoPassword() {
     const { show, setShow } = loadingContext
     const alertContext = useContext(AlertContext)
     const { setAlert } = alertContext;
-    const form = useRef()
-    const service_id = 'service_7p4zwu2'
-    const template_id = 'template_nckhaug'
-    const user_id = 'user_wFM4BRSbqWS35PxOiUTq7'
     const [showForm, setShowForm] = useState(false)
     const [showMesage, setShowMesage] = useState(false)
     const [user, setUser] = useState({})
@@ -38,15 +33,11 @@ export default function ForgoPassword() {
     const onSubmit = (e) => {
         e.preventDefault();
         setShow(true)
-        emailjs.sendForm(service_id, template_id, form.current, user_id).then(res => {
-            console.log(res)
-            if (res.status === 200) {
-                setShow(false)
-                setShowMesage(true)
-            }
-        }, (error) => {
-            console.log(error)
+        axios.post('https://physiosystem.alcodeit.com/user/sendMail', { email: user.email, link: `https://physiosystem.netlify.app/resetpassword?user_id=${user.id}`, fullname: user.fullname }).then(res => {
+            setShowMesage(true)
+            setShow(false)
         })
+
     }
     return (
         <>
@@ -57,10 +48,7 @@ export default function ForgoPassword() {
                         {showMesage ? <div className='forgot-password-message flex fd-column ai-center' >
                             <p className='fs-20 fw-regular' >Check your email!</p>
                         </div> :
-                            <form ref={form} onSubmit={onSubmit} className='flex fd-column ai-center' >
-                                <input type="text" hidden value={user && user.fullname} name='fullname' />
-                                <input type="text" hidden value={user && `https://physiosystem.netlify.app/resetpassword?user_id=${user.id}`} name='link' />
-                                <input type="text" hidden value={user && user.email} name='email' />
+                            <form onSubmit={onSubmit} className='flex fd-column ai-center' >
                                 <p className='fs-20 fw-regular' >Your email is : {user && user.email}</p>
                                 <button className='fs-18 fw-regular' type='submit'>Send link</button>
                             </form>
