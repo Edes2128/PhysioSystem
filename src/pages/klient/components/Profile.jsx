@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { ReactComponent as SepTabs } from '../../../images/sep-tabs.svg'
-import { ReactComponent as HidePass } from '../../../images/hide-pass.svg'
+// import { ReactComponent as HidePass } from '../../../images/hide-pass.svg'
 import { ReactComponent as Pencil } from '../../../images/pencil.svg'
 import ClientContext from '../../../context/klient/klientContext';
 import axios from 'axios';
@@ -18,15 +18,19 @@ export default function Profile() {
     const [preview, setPreview] = useState('')
 
     const changePas = () => {
-        axios.post('https://physiosystem.alcodeit.com/user/changePassword', { oldPassword, newPassword, token: JSON.parse(localStorage.getItem('token')) }).then(res => {
-            if (res.data.status === 1) {
-                setAlert(`${res.data.message}`, 'success')
-                setOldPassword('')
-                setNewPassword('')
-            } else {
-                setAlert(`${res.data.message}`, 'error')
-            }
-        })
+        if (newPassword === "" || oldPassword === "") {
+            setAlert('Please fill the fields', 'error')
+        } else {
+            axios.post('https://physiosystem.alcodeit.com/user/changePassword', { oldPassword, newPassword, token: JSON.parse(localStorage.getItem('token')) }).then(res => {
+                if (res.data.status === 1) {
+                    setAlert(`${res.data.message}`, 'success')
+                    setOldPassword('')
+                    setNewPassword('')
+                } else {
+                    setAlert(`${res.data.message}`, 'error')
+                }
+            })
+        }
     }
 
     const changeGeneral = () => {
@@ -183,7 +187,7 @@ export default function Profile() {
                                     <input className="fs-20 fw-regular" type="password" onChange={(e) => {
                                         setOldPassword(e.target.value)
                                     }} />
-                                    <HidePass />
+                                    {/* <HidePass /> */}
                                 </div>
                             </div>
                             <div className="profile-password-inputs-item flex fd-column ai-start">
@@ -194,7 +198,7 @@ export default function Profile() {
                                             setNewPassword(e.target.value)
                                         }}
                                     />
-                                    <HidePass />
+                                    {/* <HidePass /> */}
                                 </div>
                             </div>
                         </div>
