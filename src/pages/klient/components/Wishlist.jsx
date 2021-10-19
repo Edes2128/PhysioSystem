@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { ReactComponent as CartWhite } from '../../../images/cart-white-fill.svg'
 import { ReactComponent as RemoveWish } from '../../../images/remove-wish.svg'
 import ClientContext from '../../../context/klient/klientContext'
+import LoadingContext from '../../../context/loading/LoadingContext'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
@@ -10,6 +11,8 @@ export default function Wishlist() {
     const clientContext = useContext(ClientContext);
     const { wishlist, getWishtlist, cart, getCart } = clientContext
 
+    const loadingContext = useContext(LoadingContext)
+    const { setShow } = loadingContext
     useEffect(() => {
         getWishtlist()
     }, [])
@@ -44,8 +47,10 @@ export default function Wishlist() {
                                     <p className="fs-22 fw-bold" >€ {wish.package[0].price}</p>
                                 </div>
                                 <button type="button" onClick={() => {
+                                    setShow(true)
                                     axios.post('https://physiosystem.alcodeit.com/client/removeWishlist', { user_id: localStorage.getItem('op'), id: wish.package_id }).then(res => {
                                         getWishtlist()
+                                        setTimeout(() => setShow(false), 1000)
                                     })
                                 }} className="wishlist-paketat-item-bottom-remove-btn flex ai-center jc-center fs-16 fw-medium"  >
                                     <RemoveWish />
@@ -57,10 +62,12 @@ export default function Wishlist() {
                                         type="button"
                                         className="wishlist-paketat-item-bottom-add-btn flex ai-center jc-center fs-16 fw-medium"
                                         onClick={() => {
+                                            setShow(true)
                                             axios.post('https://physiosystem.alcodeit.com/client/addCart', { user_id: localStorage.getItem('op'), package_id: wish.package_id }).then(res => {
                                                 getCart()
                                                 axios.post('https://physiosystem.alcodeit.com/client/removeWishlist', { user_id: localStorage.getItem('op'), id: wish.package_id }).then(res => {
                                                     getWishtlist()
+                                                    setTimeout(() => setShow(false), 1000)
                                                 })
                                             })
 

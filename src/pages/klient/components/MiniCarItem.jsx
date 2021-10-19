@@ -1,11 +1,15 @@
 import React, { useContext, useRef, useEffect } from 'react'
 import ClientContext from '../../../context/klient/klientContext'
+import LoadingContext from '../../../context/loading/LoadingContext'
 import { ReactComponent as RemoveCart } from '../../../images/remove-cart.svg'
 import axios from 'axios'
 
 export default function MiniCarItem({ image, title, oferta, new_price, price, package_id }) {
     const clientContext = useContext(ClientContext);
     const { getCart, getMyPackages } = clientContext
+
+    const loadingContext = useContext(LoadingContext)
+    const { setShow } = loadingContext
     const paypal = useRef()
 
     useEffect(() => {
@@ -16,7 +20,7 @@ export default function MiniCarItem({ image, title, oferta, new_price, price, pa
                 shape: 'pill',
                 label: 'buynow',
                 tagline: false,
-                height : 35
+                height: 35
             },
             createOrder: (data, actions, err) => {
                 return actions.order.create({
@@ -66,8 +70,10 @@ export default function MiniCarItem({ image, title, oferta, new_price, price, pa
                 <RemoveCart
                     style={{ width: '30px' }}
                     onClick={() => {
+                        setShow(true)
                         axios.post('https://physiosystem.alcodeit.com/client/removeCart', { user_id: localStorage.getItem('op'), package_id: package_id }).then(res => {
                             getCart()
+                            setShow(false)
                         })
                     }}
                 />
