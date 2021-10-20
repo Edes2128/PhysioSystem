@@ -10,7 +10,7 @@ import axios from 'axios'
 
 export default function HaderBanner() {
     const collapseContext = useContext(LoadingContext)
-    const { setCollapse } = collapseContext
+    const { setCollapse, showMinicart } = collapseContext
     const clientContext = useContext(ClientContext);
     const { currentUser, cart, getCart } = clientContext;
     const [offers, setOffers] = useState([])
@@ -32,7 +32,7 @@ export default function HaderBanner() {
                         {cart.length > 0 &&
                             <div className="headerbanner-top-left-widget-nof flex ai-center jc-center"> <p className="fs-14 fw-light" > {cart.length} </p> </div>
                         }
-                        <Cart  />
+                        <Cart onClick={() => showMinicart(true)} />
                     </div>
                 </div>
                 <Line />
@@ -57,7 +57,7 @@ export default function HaderBanner() {
                                 <p className="fs-16 fw-regular" >{oferta.titulli_ofertes}</p>
                                 <span className="fs-32 fw-semib" > - {oferta.ulja}  {oferta.ulja_type === 1 ? '%' : '€'} </span>
                             </div>
-                            <img  loading='lazy' src={`https://physiosystem.alcodeit.com/files/${oferta.baner_oferta}`} className="img-res" alt="" />
+                            <img loading='lazy' src={`https://physiosystem.alcodeit.com/files/${oferta.baner_oferta}`} className="img-res" alt="" />
                         </Link>
                     ))}
                 </div>

@@ -927,6 +927,14 @@
   width: 100%;
   z-index: 101;
   overflow: auto;
+ &-top{
+   width: 100%;
+   background-color: $purple-dark;
+   padding: 10px ;
+  p{
+    color: white;
+  }
+  }
   &-link {
     width: 100%;
     padding: 10px 0;
@@ -1016,10 +1024,7 @@
 }
 
 @media (max-width: 1400px) {
-  .minicart {
-    width: 290px;
-    left: -37px;
-  }
+
   .shop-packages {
     grid-template-columns: repeat(1, 1fr);
     &-item {
@@ -1135,9 +1140,7 @@
 }
 
 @media (max-width: 1000px) {
-  .minicart {
-    left: -67px;
-  }
+
   .close-sidebar {
     position: absolute;
     display: block;
@@ -1179,9 +1182,7 @@
 }
 
 @media (max-width: 750px) {
-  .minicart {
-    left: 0;
-  }
+
   .header-mobile {
     width: 100%;
     position: fixed;

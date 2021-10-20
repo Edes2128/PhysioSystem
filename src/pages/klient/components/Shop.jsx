@@ -114,7 +114,7 @@ export default function Shop() {
                                                 })
                                             }}
                                         >
-                                            Add to Cart
+                                         Buy Now
                                         </button>
                                     }
                                 </div>

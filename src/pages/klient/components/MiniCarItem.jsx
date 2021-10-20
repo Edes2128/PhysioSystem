@@ -68,7 +68,7 @@ export default function MiniCarItem({ image, title, oferta, new_price, price, pa
 
                 </div>
                 <RemoveCart
-                    style={{ width: '30px' }}
+                    style={{ width: '30px', cursor: 'pointer' }}
                     onClick={() => {
                         setShow(true)
                         axios.post('https://physiosystem.alcodeit.com/client/removeCart', { user_id: localStorage.getItem('op'), package_id: package_id }).then(res => {
