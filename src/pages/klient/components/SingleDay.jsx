@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect ,useRef , createRef } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { ReactComponent as Pdf } from '../../../images/pdf-file.svg'
@@ -9,10 +9,14 @@ export default function SingleDay({ match }) {
             setSingle(res.data)
         })
     }, [match.params.id])
+
+
     if (single) {
         var day = [];
         day = single.package.days.filter(item => item.id === parseInt(match.params.dayid))
+
     }
+
     return (
         <>
             {day && day.map(dita => (
@@ -51,9 +55,9 @@ export default function SingleDay({ match }) {
                         <p className="singleday-videos-title fs-24 fw-semib">Videos <sup> ({dita.videos.length})</sup> </p>
 
                         <div className="singleday-videos-items flex ai-center fd-column">
-                            {dita.videos.map(video => (
+                            {dita && dita.videos.map(video => (
                                 <div className="singleday-videos-item" onContextMenu={e => e.preventDefault()} >
-                                    <video preload='metadata' controls className="img-res" controlsList="nodownload" src={`https://physiosystem.alcodeit.com/files/${single && video.video_src}`}></video>
+                                    <video  id='videos' preload='metadata' controls className="img-res" controlsList="nodownload" src={`https://physiosystem.alcodeit.com/files/${single && video.video_src}`}></video>
                                 </div>
                             ))}
                         </div>
