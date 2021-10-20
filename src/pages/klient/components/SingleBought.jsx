@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import LoadingContext from '../../../context/loading/LoadingContext';
 
 export default function SingleBought({ match }) {
-
+    const loadingContext = useContext(LoadingContext)
+    const { setShow } = loadingContext
     const [single, setSingle] = useState()
 
     useEffect(() => {
+        setShow(true)
         axios.post('https://physiosystem.alcodeit.com/client/getSingleBought', { user_id: localStorage.getItem('op'), package_id: match.params.id }).then(res => {
             setSingle(res.data)
+            setTimeout(() => setShow(false), 1000)
         })
     }, [match.params.id])
 
@@ -39,8 +43,8 @@ export default function SingleBought({ match }) {
                 <p className="singlepackage-days-link fs-30 fw-semib">Days <sup className="fs-18 fw-regular" >({`${single && single.package.days.length}`})</sup> </p>
                 <div className="singlepackage-days-items flex">
                     {single && single.package.days.map(day => (
-                        <Link style={{ color: 'black', textDecoration: 'none' }} to={`/shop/mypackages/${match.params.id}/days/${day.id}`}  className="singlepackage-days-items-content flex ai-center fd-column">
-                            <img src={`https://physiosystem.alcodeit.com/files/${single.package.photo}`} className="img-res" alt=""  loading='lazy'/>
+                        <Link style={{ color: 'black', textDecoration: 'none' }} to={`/shop/mypackages/${match.params.id}/days/${day.id}`} className="singlepackage-days-items-content flex ai-center fd-column">
+                            <img src={`https://physiosystem.alcodeit.com/files/${single.package.photo}`} className="img-res" alt="" loading='lazy' />
                             <p style={{ marginTop: '10px' }} className="fs-20 fw-regular" >{day.titulli}</p>
                         </Link>
                     ))}
