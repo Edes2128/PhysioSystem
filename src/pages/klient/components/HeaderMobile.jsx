@@ -5,7 +5,6 @@ import { ReactComponent as MenuIcon } from '../../../images/icons8-menu-orange.s
 import ClientContext from '../../../context/klient/klientContext'
 import LoadingContext from '../../../context/loading/LoadingContext'
 import axios from 'axios'
-import MiniCart from './MiniCart'
 
 export default function HeaderMobile() {
     const collapseContext = useContext(LoadingContext)
@@ -13,7 +12,6 @@ export default function HeaderMobile() {
     const clientContext = useContext(ClientContext);
     const { currentUser, cart, getCart } = clientContext;
     const [offers, setOffers] = useState([])
-    const [miniCart, showMiniCart] = useState(false)
 
     useEffect(() => {
         axios.get('https://physiosystem.alcodeit.com/client/testOfferPackages').then(res => {
@@ -26,14 +24,10 @@ export default function HeaderMobile() {
             <div className="headerbanner-top flex ai-center jc-start">
                 <div className="headerbanner-top-left flex ai-center">
                     <div className="headerbanner-top-left-widget flex ai-center jc-center"  >
-                        {miniCart && <MiniCart />}
                         {cart.length > 0 &&
                             <div className="headerbanner-top-left-widget-nof flex ai-center jc-center"> <p className="fs-14 fw-light" > {cart.length} </p> </div>
                         }
-                        <Cart onClick={() => {
-                            showMiniCart(!miniCart)
-                        }
-                        } />
+                        <Cart />
                     </div>
                 </div>
                 <Line />

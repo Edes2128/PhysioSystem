@@ -917,16 +917,16 @@
   }
 }
 .minicart {
-  position: absolute;
+  position: fixed;
   background-color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  top: 100%;
-  left: -100px;
-  max-height: 600px;
-  width: 400px;
+  top: 0;
+  right: 0;
+  height: 100%;
+  max-width: 500px;
+  width: 100%;
   z-index: 101;
   overflow: auto;
-  margin-top: 10px;
   &-link {
     width: 100%;
     padding: 10px 0;

@@ -3,6 +3,7 @@ import Sidebar from './components/Sidebar'
 import Body from './components/Body'
 import HaderBanner from './components/HaderBanner'
 import HeaderMobile from './components/HeaderMobile'
+import MiniCart from './components/MiniCart'
 export default function Klient({ history }) {
     const logout = () => {
         history.push('/')
@@ -12,6 +13,7 @@ export default function Klient({ history }) {
     }
     return (
         <div className="klient" >
+            <MiniCart />
             <Sidebar logout={logout} />
             <Body />
             <HaderBanner />
