@@ -927,13 +927,13 @@
   width: 100%;
   z-index: 101;
   overflow: auto;
- &-top{
-   width: 100%;
-   background-color: $purple-dark;
-   padding: 10px ;
-  p{
-    color: white;
-  }
+  &-top {
+    width: 100%;
+    background-color: $purple-dark;
+    padding: 10px;
+    p {
+      color: white;
+    }
   }
   &-link {
     width: 100%;
@@ -1024,7 +1024,6 @@
 }
 
 @media (max-width: 1400px) {
-
   .shop-packages {
     grid-template-columns: repeat(1, 1fr);
     &-item {
@@ -1140,7 +1139,6 @@
 }
 
 @media (max-width: 1000px) {
-
   .close-sidebar {
     position: absolute;
     display: block;
@@ -1182,7 +1180,6 @@
 }
 
 @media (max-width: 750px) {
-
   .header-mobile {
     width: 100%;
     position: fixed;
