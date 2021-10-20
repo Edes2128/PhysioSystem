@@ -48,7 +48,7 @@ export default function Shop() {
                     <>
                         {packages.some(item => item.id === paket.id) === false &&
 
-                            <div className="shop-packages-item flex fd-column ai-center">
+                            <div key={paket.id} className="shop-packages-item flex fd-column ai-center">
                                 <div className="shop-packages-item-top">
                                     <Link to={`/shop/${paket.id}`} className="shop-packages-item-top-image flex" onClick={() => {
 

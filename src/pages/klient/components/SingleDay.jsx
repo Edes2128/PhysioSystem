@@ -10,7 +10,7 @@ export default function SingleDay({ match }) {
 
     useEffect(() => {
         setShow(true)
-        axios.post('https://physiosystem.alcodeit.com/client/getSingleDay', { day_id: match.params.dayid, package_id: match.params.id }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com/client/getSingleDay', { user_id :localStorage.getItem('op') , day_id: match.params.dayid, package_id: match.params.id }).then(res => {
             setSingle(res.data)
             setTimeout(() => setShow(false), 1000)
         })
@@ -51,7 +51,7 @@ export default function SingleDay({ match }) {
                         <p className="singleday-videos-title fs-24 fw-semib">Videos <sup> ({single.videos && single.videos.length})</sup> </p>
                         <div className="singleday-videos-items flex ai-center fd-column">
                             {single.videos && single.videos.map(video => (
-                                <div className="singleday-videos-item" onContextMenu={e => e.preventDefault()} >
+                                <div key={video.src} className="singleday-videos-item" onContextMenu={e => e.preventDefault()} >
                                     <video id='videos' preload='metadata' controls className="img-res" controlsList="nodownload" src={`https://physiosystem.alcodeit.com/files/${single && video.src}`}></video>
                                 </div>
                             ))}

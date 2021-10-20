@@ -92,7 +92,7 @@ export default function SinglePackage({ match, history }) {
 
             <div className="singlepackage-demo t">
                 {singlePackage.videos_demo && singlePackage.videos_demo.map(video => (
-                    <div className="singlepackage-demo-item" onContextMenu={e => e.preventDefault()} >
+                    <div key={video.video_src} className="singlepackage-demo-item" onContextMenu={e => e.preventDefault()} >
                         <video preload='metadata' className="img-res" src={`https://physiosystem.alcodeit.com/files/${video.video_src}`} controlsList="nodownload" controls></video>
                     </div>
                 ))}
@@ -101,7 +101,7 @@ export default function SinglePackage({ match, history }) {
                 <p className="singlepackage-days-link fs-30 fw-semib">Days <sup className="fs-18 fw-regular" >({`${singlePackage.days && singlePackage.days.length}`})</sup> </p>
                 <div className="singlepackage-days-items">
                     {singlePackage.days && singlePackage.days.map(day => (
-                        <div className="singlepackage-days-items-content">
+                        <div className="singlepackage-days-items-content" key={day.id} >
                             <div className="singlepackage-days-items-content-shape flex ai-center jc-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="29.422" height="40.679" viewBox="0 0 29.422 40.679">
                                     <g id="lock-padlock-symbol-for-security-interface" transform="translate(-80.994)">

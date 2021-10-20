@@ -59,7 +59,7 @@ export default function Orders() {
                         </TableHead>
                         <TableBody>
                             {orders && packageFiltered.slice(start, end).map((item, index) => (
-                                <TableRow>
+                                <TableRow key={item.id} >
                                     <TableCell>{item.packages[0].name}</TableCell>
                                     <TableCell>{item.bought_at}</TableCell>
                                     <TableCell>{item.expires_at}</TableCell>
