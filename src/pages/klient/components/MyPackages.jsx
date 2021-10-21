@@ -37,7 +37,7 @@ export default function MyPackages() {
                                     <p className='fs-18 fw-regular' > - {paket.days_left} days left </p>
                                 </div>
                                 <p className='fs-18 fw-regular' style={{ marginTop: '15px' }} >
-                                    {paket.days.filter(item => item.day_status === "1").length} /{paket.days.length} days completed
+                                    {paket.days.filter(item => item.day_status === "1").length}/{paket.days.length} days completed
                                 </p>
                             </div>
                         </div>
