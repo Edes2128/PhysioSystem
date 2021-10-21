@@ -25,9 +25,6 @@ export default function Shop() {
         })
     }, [])
 
-    if (mypackages) {
-        var packages = mypackages.map(item => item.packages[0]);
-    }
 
     const packageFiltered = trialPackages.filter((paket) => paket.package_name.toLowerCase().includes(search.toLowerCase()));
 
@@ -41,12 +38,12 @@ export default function Shop() {
                 </div>
             </div>
             <div className="shop-packages ">
-                {trialPackages.length === packages.length &&
+                {trialPackages.length === mypackages.length &&
                     <p className="fs-24 fw-medium" >Wow you have bought all packages!</p>
                 }
                 {packageFiltered.map(paket => (
                     <>
-                        {packages.some(item => item.id === paket.id) === false &&
+                        {mypackages.some(item => item.id === paket.id) === false &&
 
                             <div key={paket.id} className="shop-packages-item flex fd-column ai-center">
                                 <div className="shop-packages-item-top">
@@ -114,7 +111,7 @@ export default function Shop() {
                                                 })
                                             }}
                                         >
-                                         Buy Now
+                                            Buy Now
                                         </button>
                                     }
                                 </div>

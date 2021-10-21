@@ -320,8 +320,14 @@
           height: 100%;
         }
       }
-      &-title {
-        margin-top: 18px;
+      
+      &-bottom{
+        width: 100%;
+        background-color: $orange;
+        padding: 10px;
+        p{
+          color: white;
+        }
       }
     }
   }

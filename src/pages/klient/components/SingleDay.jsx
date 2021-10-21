@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, createRef, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { ReactComponent as Pdf } from '../../../images/pdf-file.svg'
@@ -18,12 +18,9 @@ export default function SingleDay({ match }) {
 
 
     useEffect(() => {
-
         if (single.day_status !== undefined && single.day_status === 0) {
             setTimeout(() => axios.post('https://physiosystem.alcodeit.com/client/updateDayStatus', { user_id: localStorage.getItem('op'), day_id: match.params.dayid, package_id: match.params.id }), 10000)
         }
-
-        console.log(single.day_status)
     }, [single.day_status])
 
     return (
@@ -61,7 +58,7 @@ export default function SingleDay({ match }) {
                         <div className='singleday-track flex fd-column ai-center' >
                             <p className='fs-26 fw-medium'>You have completed this day!</p>
                             <div className='flex' >
-                            <img className='img-res' src="/images/fireworks.png" alt="" />
+                                <img className='img-res' src="/images/fireworks.png" alt="" />
                             </div>
                         </div>
                     }
