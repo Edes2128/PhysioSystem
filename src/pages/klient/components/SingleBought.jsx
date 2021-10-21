@@ -7,14 +7,38 @@ export default function SingleBought({ match }) {
     const loadingContext = useContext(LoadingContext)
     const { setShow } = loadingContext
     const [single, setSingle] = useState()
+    const [days, setDays] = useState([])
 
     useEffect(() => {
         setShow(true)
         axios.post('https://physiosystem.alcodeit.com/client/getSingleBought', { user_id: localStorage.getItem('op'), package_id: match.params.id }).then(res => {
             setSingle(res.data)
+            setDays(res.data.package.days)
             setTimeout(() => setShow(false), 1000)
         })
+
     }, [match.params.id])
+
+
+    if (days.length !== 0 && days !== undefined) {
+        const reducer = (accumulator, curr) => accumulator + curr;
+        var allMins = days.map(item => item.videos_total_min);
+        var totalMins = allMins.reduce(reducer)
+
+        var statusFalse = days.filter(item => item.day_status === 0)
+
+        if (statusFalse.length !== 0) {
+            var unWatched = statusFalse.map(item => {
+                return {
+                    videos_total_min: item.videos_total_min
+                }
+            })
+            var unWatchedAllMins = unWatched.map(item => item.videos_total_min)
+            var totalUnwatchedMins = unWatchedAllMins.reduce(reducer)
+        }
+
+        console.log(totalUnwatchedMins)
+    }
 
     return (
         <div className="singlebought flex fd-column ai-start" >
@@ -39,6 +63,11 @@ export default function SingleBought({ match }) {
                     </p>
                 </div>
             </div>
+            {days.length !== 0 && days !== undefined &&
+                <div className='singlebought-minutes' style={{ marginTop: '50px' }} >
+                    <p className='fs-24 fw-regular' >{statusFalse.length !== 0 ? totalMins - totalUnwatchedMins : totalMins}/{totalMins} minutes watched</p>
+                </div>
+            }
             <div className="singlepackage-days flex fd-column ai-start">
                 <p className="singlepackage-days-link fs-30 fw-semib">Days <sup className="fs-18 fw-regular" >({`${single && single.package.days.length}`})</sup> </p>
                 <div className="singlepackage-days-items flex">
