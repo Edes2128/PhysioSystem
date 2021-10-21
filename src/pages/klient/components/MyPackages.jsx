@@ -13,6 +13,7 @@ export default function MyPackages() {
         expireMyPackage()
     }, [])
 
+    const packageFiltered = mypackages.filter((paket) => paket.name.toLowerCase().includes(search.toLowerCase()));
 
     return (
         <div className="mypackages" >
@@ -25,7 +26,7 @@ export default function MyPackages() {
             </div>
             {mypackages && mypackages.length !== 0 ?
                 <div className="mypackages-paketat ">
-                    {mypackages && mypackages.map(paket => (
+                    {mypackages && packageFiltered.map(paket => (
                         <div className="mypackages-paketat-item  flex fd-column ai-center">
                             <Link to={`/shop/mypackages/${paket.id}`} className="mypackages-paketat-item-image">
                                 <img src={`https://physiosystem.alcodeit.com/files/${paket.photo}`} loading='lazy' className="img-res" alt="" />
@@ -35,8 +36,8 @@ export default function MyPackages() {
                                     <p className="mypackages-paketat-item-title fs-22 fw-medium">{paket.name}</p>
                                     <p className='fs-18 fw-regular' > - {paket.days_left} days left </p>
                                 </div>
-                                <p className='fs-18 fw-regular' style={{ marginTop: '15px' }} > 
-                                {paket.days.filter(item => item.day_status === "1").length} /{paket.days.length} days completed 
+                                <p className='fs-18 fw-regular' style={{ marginTop: '15px' }} >
+                                    {paket.days.filter(item => item.day_status === "1").length} /{paket.days.length} days completed
                                 </p>
                             </div>
                         </div>
