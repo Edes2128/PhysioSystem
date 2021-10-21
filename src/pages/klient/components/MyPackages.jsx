@@ -30,9 +30,14 @@ export default function MyPackages() {
                             <Link to={`/shop/mypackages/${paket.id}`} className="mypackages-paketat-item-image">
                                 <img src={`https://physiosystem.alcodeit.com/files/${paket.photo}`} loading='lazy' className="img-res" alt="" />
                             </Link>
-                            <div className="mypackages-paketat-item-bottom flex ai-center jc-spaceb">
-                                <p className="mypackages-paketat-item-title fs-22 fw-medium">{paket.name}</p>
-                                <p className='fs-18 fw-regular' > - {paket.days_left} days left </p>
+                            <div className="mypackages-paketat-item-bottom flex fd-column ai-start">
+                                <div style={{ width: '100%' }} className='flex ai-center jc-spaceb' >
+                                    <p className="mypackages-paketat-item-title fs-22 fw-medium">{paket.name}</p>
+                                    <p className='fs-18 fw-regular' > - {paket.days_left} days left </p>
+                                </div>
+                                <p className='fs-18 fw-regular' style={{ marginTop: '15px' }} > 
+                                {paket.days.filter(item => item.day_status === "1").length} /{paket.days.length} days completed 
+                                </p>
                             </div>
                         </div>
                     ))}
