@@ -823,6 +823,9 @@
   }
 }
 .singleday {
+  &-track{
+    margin-top: 40px;
+  }
   &-links {
     a {
       color: black;

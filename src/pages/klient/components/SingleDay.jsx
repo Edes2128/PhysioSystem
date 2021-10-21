@@ -10,11 +10,21 @@ export default function SingleDay({ match }) {
 
     useEffect(() => {
         setShow(true)
-        axios.post('https://physiosystem.alcodeit.com/client/getSingleDay', { user_id :localStorage.getItem('op') , day_id: match.params.dayid, package_id: match.params.id }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com/client/getSingleDay', { user_id: localStorage.getItem('op'), day_id: match.params.dayid, package_id: match.params.id }).then(res => {
             setSingle(res.data)
             setTimeout(() => setShow(false), 1000)
         })
     }, [match.params.id, match.params.dayid])
+
+
+    useEffect(() => {
+
+        if (single.day_status !== undefined && single.day_status === 0) {
+            setTimeout(() => axios.post('https://physiosystem.alcodeit.com/client/updateDayStatus', { user_id: localStorage.getItem('op'), day_id: match.params.dayid, package_id: match.params.id }), 10000)
+        }
+
+        console.log(single.day_status)
+    }, [single.day_status])
 
     return (
         <>
@@ -47,6 +57,14 @@ export default function SingleDay({ match }) {
                             }
                         </div>
                     </div>
+                    {single.day_status === 1 &&
+                        <div className='singleday-track flex fd-column ai-center' >
+                            <p className='fs-26 fw-medium'>You have completed this day!</p>
+                            <div className='flex' >
+                            <img className='img-res' src="/images/fireworks.png" alt="" />
+                            </div>
+                        </div>
+                    }
                     <div className="singleday-videos flex fd-column ai-start">
                         <p className="singleday-videos-title fs-24 fw-semib">Videos <sup> ({single.videos && single.videos.length})</sup> </p>
                         <div className="singleday-videos-items flex ai-center fd-column">
