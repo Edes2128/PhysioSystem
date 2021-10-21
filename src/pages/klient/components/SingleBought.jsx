@@ -66,6 +66,7 @@ export default function SingleBought({ match }) {
             {days.length !== 0 && days !== undefined &&
                 <div className='singlebought-minutes' style={{ marginTop: '50px' }} >
                     <p className='fs-24 fw-regular' >{statusFalse.length !== 0 ? totalMins - totalUnwatchedMins : totalMins}/{totalMins} minutes watched</p>
+                    <p>{ days.length === statusFalse.length ? days.length : days.length - statusFalse.length} days you have completed and you have done {statusFalse.length !== 0 ? totalMins - totalUnwatchedMins : totalMins} minutes  </p>
                 </div>
             }
             <div className="singlepackage-days flex fd-column ai-start">
