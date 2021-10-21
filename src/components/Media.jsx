@@ -13,6 +13,8 @@ export default function Media() {
     const { setShow, show } = loadingContext
     const [activeTab, setActiveTab] = useState('post')
     const mediaContext = useContext(MediaContext);
+    var minutes = [];
+
     const {
         files,
         setFiles,
@@ -33,6 +35,8 @@ export default function Media() {
         Array.from(files).forEach(file => {
             fd.append('files[]', file)
         })
+        let finalMinutes = JSON.stringify(minutes)
+        fd.append('minutes[]',finalMinutes)
         axios.post('https://physiosystem.alcodeit.com/fizio/uploadVideos', fd).then(res => {
             if (res.status === 200) {
                 setFiles([])
@@ -52,6 +56,18 @@ export default function Media() {
         })
 
     }, [])
+
+    useEffect(() => {
+        if(localFiles.length !== 0){
+            var videosLocal = Array.from(document.querySelectorAll('#video-locales'));
+            setTimeout(() => {
+                videosLocal.forEach(item => {
+                    let min = (item.duration / 60).toFixed(2)   ;
+                    minutes.push(parseFloat(min) )
+                })
+            },1000)    
+        }
+    },[localFiles.length,minutes])
 
     return (
         <>
@@ -108,7 +124,7 @@ export default function Media() {
                                     <div className="media-library-content-upload-preview flex" >
                                         {localFiles.map(item => (
                                             <div className="media-library-content-upload-preview-item  flex">
-                                                <video className="img-res" controls src={item}></video>
+                                                <video id='video-locales' className="img-res" controls src={item}></video>
                                             </div>
                                         ))}
 
