@@ -4,6 +4,7 @@ import { ReactComponent as User } from '../../../images/gray-user.svg';
 import { ReactComponent as Paketat } from '../../../images/gray-box.svg';
 import { ReactComponent as Order } from '../../../images/gray-order.svg';
 import { ReactComponent as Offer } from '../../../images/gray-offer.svg';
+import { ReactComponent as Raport } from '../../../images/raport-1.svg'
 import LoadingContext from '../../../context/loading/LoadingContext';
 
 export default function Sidebar({ logout }) {
@@ -54,6 +55,13 @@ export default function Sidebar({ logout }) {
 
                     </div>
 
+
+                    <div onClick={() => setCollapse(false)} className={activeLink === '/fizio/raporte' ? "fizio-sidebar-links-item fizio-sidebar-links-item-active flex ai-center jc-start" : "fizio-sidebar-links-item  flex ai-center jc-start"}>
+                        <Raport />
+
+                        <Link to="/fizio/raporte" className="fs-18 fw-medium" >Raporte</Link>
+
+                    </div>
 
                     <div onClick={() => setCollapse(false)} className={activeLink === '/fizio/profili' ? "fizio-sidebar-links-item fizio-sidebar-links-item-active flex ai-center jc-start" : "fizio-sidebar-links-item  flex ai-center jc-start"}>
                         <User />
