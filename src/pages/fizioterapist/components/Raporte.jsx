@@ -29,7 +29,7 @@ export default function Raporte() {
     const [dataFillimi, setDataFillimit] = useState(date.toISOString().substring(0, 10))
     const [dataMbarimit, setDataMbarimit] = useState(date.toISOString().substring(0, 10))
     const [paketat, setPaketat] = useState([])
-    const [showAll, setShowAll] = useState(false)
+    const [showAll, setShowAll] = useState(true)
     const [page, setPage] = useState(1);
     const itemPage = 10;
     const start = (page - 1) * itemPage;
