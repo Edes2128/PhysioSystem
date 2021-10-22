@@ -1594,9 +1594,18 @@
   &-paketat {
     margin-top: 40px;
     width: 100%;
-    p {
-      color: white;
+    div {
+      &:first-child {
+        p {
+          color: white;
+          margin-right: 20px;
+          &:nth-child(2) {
+            margin-right: 10px;
+          }
+        }
+      }
     }
+
     &-items {
       margin-top: 20px;
       display: grid;

@@ -7,7 +7,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { CSVDownload, CSVLink } from 'react-csv'
+import { CSVLink } from 'react-csv'
+import { Switch } from '@material-ui/core';
 
 export default function Raporte() {
 
@@ -27,6 +28,7 @@ export default function Raporte() {
     const [dataFillimi, setDataFillimit] = useState(date.toISOString().substring(0, 10))
     const [dataMbarimit, setDataMbarimit] = useState(date.toISOString().substring(0, 10))
     const [paketat, setPaketat] = useState([])
+    const [showAll, setShowAll] = useState(false)
 
     useEffect(() => {
         getPackages()
@@ -64,21 +66,27 @@ export default function Raporte() {
                 </div>
             </div>
             <div className="raporte-paketat flex fd-column ai-start">
-                <p className='fs-22 fw-medium' > Zgjidh paketat</p>
-                <div className="raporte-paketat-items">
-                    {packages && packages.map(item => (
-                        <label htmlFor={item.id}>
-                            <input type="checkbox" name="" id={item.id} value={item.id} onChange={(e) => {
-                                if (e.target.checked) {
-                                    setPaketat(prev => [...prev, parseInt(e.target.value)])
-                                } else {
-                                    setPaketat(paketat.filter(item => item !== parseInt(e.target.value)))
-                                }
-                            }} />
-                            {item.titulli}
-                        </label>
-                    ))}
+                <div className='flex ai-center'>
+                    <p className='fs-22 fw-medium' > Zgjidh paketat</p>
+                    <p className='fs-18 fw-regular' >Te gjitha </p>
+                    <Switch color='secondary' checked={showAll} onChange={() => setShowAll(!showAll)} />
                 </div>
+                {!showAll &&
+                    <div className="raporte-paketat-items">
+                        {packages && packages.map(item => (
+                            <label htmlFor={item.id}>
+                                <input type="checkbox" name="" id={item.id} value={item.id} onChange={(e) => {
+                                    if (e.target.checked) {
+                                        setPaketat(prev => [...prev, parseInt(e.target.value)])
+                                    } else {
+                                        setPaketat(paketat.filter(item => item !== parseInt(e.target.value)))
+                                    }
+                                }} />
+                                {item.titulli}
+                            </label>
+                        ))}
+                    </div>
+                }
             </div>
             <button onClick={gjeneroRaport} className='raporte-button fs-18 fw-regular'>Gjenero</button>
             {raporte.length !== 0 &&
