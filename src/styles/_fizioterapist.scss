@@ -1568,9 +1568,19 @@
 }
 .raporte {
   width: 100%;
-  &-datatable{
+  &-datatable {
     width: 100%;
     overflow: auto;
+    &-btn {
+      align-self: end;
+      color: white;
+      text-decoration: none;
+      background-color: #363348;
+      padding: 10px 40px;
+      svg {
+        margin-right: 10px;
+      }
+    }
   }
   &-button {
     margin-top: 30px;
