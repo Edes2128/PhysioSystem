@@ -7,6 +7,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Pagination from '@material-ui/lab/Pagination';
+import ArrowUpwardOutlinedIcon from '@material-ui/icons/ArrowUpwardOutlined';
+import ArrowDownwardOutlinedIcon from '@material-ui/icons/ArrowDownwardOutlined';
 
 export default function Porosit() {
 
@@ -23,7 +25,7 @@ export default function Porosit() {
     const [propertyName, setProperty] = useState({
         key: 'user',
         direction: 'ascending'
-      });
+    });
 
     useEffect(() => {
         getOrders()
@@ -38,18 +40,29 @@ export default function Porosit() {
             order.price_bought.toString().toLowerCase().includes(search.toLowerCase())
     );
 
-          
-  if (propertyName !== null) {
-    orderFiltered.sort((a, b) => {
-      if (a[propertyName.key] < b[propertyName.key]) {
-        return propertyName.direction === 'ascending' ? -1 : 1;
-      }
-      if (a[propertyName.key] > b[propertyName.key]) {
-        return propertyName.direction === 'ascending' ? 1 : -1;
-      }
-      return 0;
-    });
-  }
+
+    if (propertyName !== null) {
+        orderFiltered.sort((a, b) => {
+            if (a[propertyName.key] < b[propertyName.key]) {
+                return propertyName.direction === 'ascending' ? -1 : 1;
+            }
+            if (a[propertyName.key] > b[propertyName.key]) {
+                return propertyName.direction === 'ascending' ? 1 : -1;
+            }
+            return 0;
+        });
+    }
+    const requestSort = (key) => {
+        let direction = 'ascending';
+        if (
+            propertyName &&
+            propertyName.key === key &&
+            propertyName.direction === 'ascending'
+        ) {
+            direction = 'descending';
+        }
+        setProperty({ key, direction });
+    };
     return (
         <>
             <div className="orders" >
@@ -70,11 +83,79 @@ export default function Porosit() {
                             <Table>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Klient</TableCell>
-                                        <TableCell>Package</TableCell>
-                                        <TableCell>Bought at</TableCell>
-                                        <TableCell>Expires at</TableCell>
-                                        <TableCell>Price Bought</TableCell>
+                                        <TableCell onClick={() => requestSort('user')}>
+                                            Klient
+                                            {propertyName.key === 'user' &&
+                                                propertyName.direction === 'ascending' && (
+                                                    <ArrowUpwardOutlinedIcon
+                                                        style={{ fontSize: '17px' }}
+                                                    />
+                                                )}
+                                            {propertyName.key === 'user' &&
+                                                propertyName.direction === 'descending' && (
+                                                    <ArrowDownwardOutlinedIcon
+                                                        style={{ fontSize: '17px' }}
+                                                    />
+                                                )}
+                                        </TableCell>
+                                        <TableCell onClick={() => requestSort('package')}  >
+                                            Package
+                                            {propertyName.key === 'package' &&
+                                                propertyName.direction === 'ascending' && (
+                                                    <ArrowUpwardOutlinedIcon
+                                                        style={{ fontSize: '17px' }}
+                                                    />
+                                                )}
+                                            {propertyName.key === 'package' &&
+                                                propertyName.direction === 'descending' && (
+                                                    <ArrowDownwardOutlinedIcon
+                                                        style={{ fontSize: '17px' }}
+                                                    />
+                                                )}
+                                        </TableCell>
+                                        <TableCell onClick={() => requestSort('bought_at')} >Bought at
+
+                                            {propertyName.key === 'bought_at' &&
+                                                propertyName.direction === 'ascending' && (
+                                                    <ArrowUpwardOutlinedIcon
+                                                        style={{ fontSize: '17px' }}
+                                                    />
+                                                )}
+                                            {propertyName.key === 'bought_at' &&
+                                                propertyName.direction === 'descending' && (
+                                                    <ArrowDownwardOutlinedIcon
+                                                        style={{ fontSize: '17px' }}
+                                                    />
+                                                )}
+                                        </TableCell>
+                                        <TableCell onClick={() => requestSort('expires_at')}>Expires at
+                                            {propertyName.key === 'expires_at' &&
+                                                propertyName.direction === 'ascending' && (
+                                                    <ArrowUpwardOutlinedIcon
+                                                        style={{ fontSize: '17px' }}
+                                                    />
+                                                )}
+                                            {propertyName.key === 'expires_at' &&
+                                                propertyName.direction === 'descending' && (
+                                                    <ArrowDownwardOutlinedIcon
+                                                        style={{ fontSize: '17px' }}
+                                                    />
+                                                )}
+                                        </TableCell>
+                                        <TableCell onClick={() => requestSort('price_bought')}>Price Bought
+                                            {propertyName.key === 'price_bought' &&
+                                                propertyName.direction === 'ascending' && (
+                                                    <ArrowUpwardOutlinedIcon
+                                                        style={{ fontSize: '17px' }}
+                                                    />
+                                                )}
+                                            {propertyName.key === 'price_bought' &&
+                                                propertyName.direction === 'descending' && (
+                                                    <ArrowDownwardOutlinedIcon
+                                                        style={{ fontSize: '17px' }}
+                                                    />
+                                                )}
+                                        </TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
