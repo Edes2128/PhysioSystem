@@ -9,6 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { CSVLink } from 'react-csv'
 import { Switch } from '@material-ui/core';
+import Pagination from '@material-ui/lab/Pagination';
 
 export default function Raporte() {
 
@@ -29,23 +30,30 @@ export default function Raporte() {
     const [dataMbarimit, setDataMbarimit] = useState(date.toISOString().substring(0, 10))
     const [paketat, setPaketat] = useState([])
     const [showAll, setShowAll] = useState(false)
+    const [page, setPage] = useState(1);
+    const itemPage = 10;
+    const start = (page - 1) * itemPage;
+    const end = page * itemPage;
 
+    const handleChange = (event, value) => {
+        setPage(value);
+    };
     useEffect(() => {
         getPackages()
     }, [])
 
     const gjeneroRaport = () => {
-            setShow(true)
-            setRaporte([])
-            axios.post('https://physiosystem.alcodeit.com/fizio/generateReport', { dataFillimi, dataMbarimit, paketat }).then(res => {
-                if (res.data.length === 0) {
-                    setShow(false)
-                    alert('Nuk gjetem dot te dhena per keto dite ose paket')
-                } else {
-                    setRaporte(res.data)
-                    setShow(false)
-                }
-            })
+        setShow(true)
+        setRaporte([])
+        axios.post('https://physiosystem.alcodeit.com/fizio/generateReport', { dataFillimi, dataMbarimit, paketat }).then(res => {
+            if (res.data.length === 0) {
+                setShow(false)
+                alert('Nuk gjetem dot te dhena per keto dite ose paket')
+            } else {
+                setRaporte(res.data)
+                setShow(false)
+            }
+        })
     }
 
     return (
@@ -64,8 +72,8 @@ export default function Raporte() {
             <div className="raporte-paketat flex fd-column ai-start">
                 <div className='flex ai-center'>
                     <p className='fs-22 fw-medium' > Zgjidh paketat</p>
-                    <p className='fs-18 fw-regular' >Te gjitha </p>
-                    <Switch color='secondary' checked={showAll} onChange={() => setShowAll(!showAll)} />
+                    <p className='fs-18 fw-regular' >Te gjitha <Switch color='secondary' checked={showAll} onChange={() => setShowAll(!showAll)} /></p>
+
                 </div>
                 {!showAll &&
                     <div className="raporte-paketat-items">
@@ -116,8 +124,8 @@ export default function Raporte() {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {raporte.map(item => (
-                                    <TableRow>
+                                {raporte.slice(start, end).map((item, index) => (
+                                    <TableRow key={index} >
                                         <TableCell>{item.paket}</TableCell>
                                         <TableCell>{item.price_bought}</TableCell>
                                         <TableCell>{item.user}</TableCell>
@@ -126,6 +134,9 @@ export default function Raporte() {
                                 ))}
                             </TableBody>
                         </Table>
+                    </div>
+                    <div className="oferta-datatable-pagination flex jc-end">
+                        <Pagination count={Math.ceil(raporte.length / itemPage)} onChange={handleChange} page={page} />
                     </div>
                 </>
             }

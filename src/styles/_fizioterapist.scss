@@ -1570,13 +1570,14 @@
   width: 100%;
   &-datatable {
     width: 100%;
-    overflow: auto;
+    overflow-x: auto;
     &-btn {
       align-self: end;
       color: white;
       text-decoration: none;
       background-color: #363348;
       padding: 10px 40px;
+      margin-top: 30px;
       svg {
         margin-right: 10px;
       }
@@ -1652,9 +1653,18 @@
   .add-offer-form-inputs-multi-input-items {
     grid-template-columns: repeat(4, 1fr);
   }
+  .raporte-paketat-items {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 @media (max-width: 1300px) {
+  .raporte-paketat-items {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .raporte-inputs-item {
+    width: 50%;
+  }
   .edit-offer-packages-items {
     grid-template-columns: repeat(2, 1fr);
     &-item {
@@ -1732,6 +1742,9 @@
   }
 }
 @media (max-width: 750px) {
+  .raporte-paketat-items {
+    grid-template-columns: repeat(2, 1fr);
+  }
   .edit-offer-packages-items {
     grid-template-columns: repeat(1, 1fr);
   }
@@ -1875,5 +1888,24 @@
   }
   .fizio-paketat-body {
     grid-template-columns: repeat(1, 1fr);
+  }
+  .raporte-inputs {
+    flex-direction: column;
+    &-item {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  }
+  .raporte-paketat {
+    div {
+      &:first-child {
+        flex-direction: column;
+        align-items: flex-start;
+        p {
+          margin-bottom: 20px;
+        }
+      }
+    }
   }
 }
