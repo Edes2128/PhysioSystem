@@ -1566,7 +1566,65 @@
     }
   }
 }
-
+.raporte {
+  width: 100%;
+  &-button {
+    margin-top: 30px;
+    background-color: #363348;
+    color: white;
+    padding: 10px 40px;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+  }
+  &-paketat {
+    margin-top: 40px;
+    width: 100%;
+    p {
+      color: white;
+    }
+    &-items {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      column-gap: 30px;
+      row-gap: 1em;
+      grid-auto-rows: 1fr;
+      width: 100%;
+      label {
+        color: white;
+        input {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+  &-title {
+    color: white;
+  }
+  &-inputs {
+    width: 100%;
+    margin-top: 40px;
+    &-item {
+      width: 35%;
+      margin-right: 30px;
+      label {
+        color: white;
+        margin-bottom: 10px;
+      }
+      input {
+        background-color: transparent;
+        border: 1px solid #363348;
+        color: white;
+        padding: 10px 5px;
+        width: 100%;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
 @media (max-width: 1500px) {
   .add-offer-form-inputs-multi-input-items {
     grid-template-columns: repeat(4, 1fr);
