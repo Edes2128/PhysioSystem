@@ -2,6 +2,11 @@ import React, { useState, useContext, useEffect } from 'react'
 import axios from 'axios'
 import FizioContext from '../../../context/fizioterapist/FizioContext'
 import LoadingContext from '../../../context/loading/LoadingContext'
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 export default function Raporte() {
     let date = new Date()
@@ -23,12 +28,20 @@ export default function Raporte() {
             alert('Duhet te zgjidhni te pakten 1 paket')
         } else {
             setShow(true)
+            setRaporte([])
             axios.post('https://physiosystem.alcodeit.com/fizio/generateReport', { dataFillimi, dataMbarimit, paketat }).then(res => {
-                setRaporte(res.data)
-                setShow(false)
+                if (res.data.length === 0) {
+                    setShow(false)
+                    alert('Nuk gjetem dot te dhena per keto dite ose paket')
+                } else {
+                    setRaporte(res.data)
+                    setShow(false)
+                }
             })
         }
     }
+
+    console.log(raporte)
 
     return (
         <div className='raporte flex fd-column ai-start' >
@@ -61,6 +74,30 @@ export default function Raporte() {
                 </div>
             </div>
             <button onClick={gjeneroRaport} className='raporte-button fs-18 fw-regular'>Gjenero</button>
+            {raporte.length !== 0 &&
+                <div className='raporte-datatable'>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Paketa</TableCell>
+                                <TableCell>Cmimi Blerjes</TableCell>
+                                <TableCell>Klienti</TableCell>
+                                <TableCell>Data e Blerjes</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {raporte.map(item => (
+                                <TableRow>
+                                    <TableCell>{item.paket}</TableCell>
+                                    <TableCell>{item.price_bought}</TableCell>
+                                    <TableCell>{item.user}</TableCell>
+                                    <TableCell>{item.bought_at}</TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </div>
+            }
         </div>
     )
 }

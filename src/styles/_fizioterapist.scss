@@ -1568,6 +1568,10 @@
 }
 .raporte {
   width: 100%;
+  &-datatable{
+    width: 100%;
+    overflow: auto;
+  }
   &-button {
     margin-top: 30px;
     background-color: #363348;
