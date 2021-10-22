@@ -10,6 +10,8 @@ import TableRow from '@material-ui/core/TableRow';
 import { CSVLink } from 'react-csv'
 import { Switch } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
+import ArrowUpwardOutlinedIcon from '@material-ui/icons/ArrowUpwardOutlined';
+import ArrowDownwardOutlinedIcon from '@material-ui/icons/ArrowDownwardOutlined';
 
 export default function Raporte() {
 
@@ -34,6 +36,32 @@ export default function Raporte() {
     const itemPage = 10;
     const start = (page - 1) * itemPage;
     const end = page * itemPage;
+    const [propertyName, setProperty] = useState({
+        key: '',
+        direction: 'ascending'
+    });
+    if (propertyName !== null) {
+        raporte.sort((a, b) => {
+            if (a[propertyName.key] < b[propertyName.key]) {
+                return propertyName.direction === 'ascending' ? -1 : 1;
+            }
+            if (a[propertyName.key] > b[propertyName.key]) {
+                return propertyName.direction === 'ascending' ? 1 : -1;
+            }
+            return 0;
+        });
+    }
+    const requestSort = (key) => {
+        let direction = 'ascending';
+        if (
+            propertyName &&
+            propertyName.key === key &&
+            propertyName.direction === 'ascending'
+        ) {
+            direction = 'descending';
+        }
+        setProperty({ key, direction });
+    };
 
     const handleChange = (event, value) => {
         setPage(value);
@@ -117,10 +145,62 @@ export default function Raporte() {
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Paketa</TableCell>
-                                    <TableCell>Cmimi Blerjes</TableCell>
-                                    <TableCell>Klienti</TableCell>
-                                    <TableCell>Data e Blerjes</TableCell>
+                                    <TableCell onClick={() => requestSort('paket')} >Paketa
+                                        {propertyName.key === 'paket' &&
+                                            propertyName.direction === 'ascending' && (
+                                                <ArrowUpwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                        {propertyName.key === 'paket' &&
+                                            propertyName.direction === 'descending' && (
+                                                <ArrowDownwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                    </TableCell>
+                                    <TableCell onClick={() => requestSort('price_bought')}>Cmimi Blerjes
+                                        {propertyName.key === 'price_bought' &&
+                                            propertyName.direction === 'ascending' && (
+                                                <ArrowUpwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                        {propertyName.key === 'price_bought' &&
+                                            propertyName.direction === 'descending' && (
+                                                <ArrowDownwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                    </TableCell>
+                                    <TableCell onClick={() => requestSort('user')}>Klienti
+                                        {propertyName.key === 'user' &&
+                                            propertyName.direction === 'ascending' && (
+                                                <ArrowUpwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                        {propertyName.key === 'user' &&
+                                            propertyName.direction === 'descending' && (
+                                                <ArrowDownwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                    </TableCell>
+                                    <TableCell onClick={() => requestSort('bought_at')}>Data e Blerjes
+                                        {propertyName.key === 'bought_at' &&
+                                            propertyName.direction === 'ascending' && (
+                                                <ArrowUpwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                        {propertyName.key === 'bought_at' &&
+                                            propertyName.direction === 'descending' && (
+                                                <ArrowDownwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                    </TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>

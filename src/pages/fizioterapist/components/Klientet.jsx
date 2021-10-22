@@ -11,6 +11,8 @@ import Pagination from '@material-ui/lab/Pagination';
 import { ReactComponent as Edit } from '../../../images/edit-icon.svg'
 import { ReactComponent as Delete } from '../../../images/delete-icon.svg'
 import axios from 'axios';
+import ArrowUpwardOutlinedIcon from '@material-ui/icons/ArrowUpwardOutlined';
+import ArrowDownwardOutlinedIcon from '@material-ui/icons/ArrowDownwardOutlined';
 
 export default function Klientet() {
     const fizioContext = useContext(FizioContext);
@@ -24,6 +26,12 @@ export default function Klientet() {
     const handleChange = (event, value) => {
         setPage(value);
     };
+
+    const [propertyName, setProperty] = useState({
+        key: '',
+        direction: 'ascending'
+    });
+
     useEffect(() => {
         getClients()
     }, [])
@@ -35,6 +43,29 @@ export default function Klientet() {
             order.postal_code.toString().toLowerCase().includes(search.toLowerCase()) ||
             order.city.toString().toLowerCase().includes(search.toLowerCase())
     );
+
+    if (propertyName !== null) {
+        klientetFiltered.sort((a, b) => {
+            if (a[propertyName.key] < b[propertyName.key]) {
+                return propertyName.direction === 'ascending' ? -1 : 1;
+            }
+            if (a[propertyName.key] > b[propertyName.key]) {
+                return propertyName.direction === 'ascending' ? 1 : -1;
+            }
+            return 0;
+        });
+    }
+    const requestSort = (key) => {
+        let direction = 'ascending';
+        if (
+            propertyName &&
+            propertyName.key === key &&
+            propertyName.direction === 'ascending'
+        ) {
+            direction = 'descending';
+        }
+        setProperty({ key, direction });
+    };
 
     return (
         <div className="klientet flex fd-column ai-start">
@@ -57,12 +88,94 @@ export default function Klientet() {
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Name</TableCell>
-                                    <TableCell>Email</TableCell>
-                                    <TableCell>Country</TableCell>
-                                    <TableCell>City</TableCell>
-                                    <TableCell>Postal Code</TableCell>
-                                    <TableCell>Status</TableCell>
+                                    <TableCell onClick={() => requestSort('name')} >
+                                        Name
+                                        {propertyName.key === 'name' &&
+                                            propertyName.direction === 'ascending' && (
+                                                <ArrowUpwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                        {propertyName.key === 'name' &&
+                                            propertyName.direction === 'descending' && (
+                                                <ArrowDownwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                    </TableCell>
+                                    <TableCell onClick={() => requestSort('email')}>Email
+
+                                        {propertyName.key === 'email' &&
+                                            propertyName.direction === 'ascending' && (
+                                                <ArrowUpwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                        {propertyName.key === 'email' &&
+                                            propertyName.direction === 'descending' && (
+                                                <ArrowDownwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                    </TableCell>
+                                    <TableCell onClick={() => requestSort('contry')}>Country
+                                        {propertyName.key === 'contry' &&
+                                            propertyName.direction === 'ascending' && (
+                                                <ArrowUpwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                        {propertyName.key === 'contry' &&
+                                            propertyName.direction === 'descending' && (
+                                                <ArrowDownwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                    </TableCell>
+                                    <TableCell onClick={() => requestSort('city')} >City
+                                        {propertyName.key === 'city' &&
+                                            propertyName.direction === 'ascending' && (
+                                                <ArrowUpwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                        {propertyName.key === 'city' &&
+                                            propertyName.direction === 'descending' && (
+                                                <ArrowDownwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+
+                                    </TableCell>
+                                    <TableCell onClick={() => requestSort('postal_code')}>Postal Code
+                                        {propertyName.key === 'postal_code' &&
+                                            propertyName.direction === 'ascending' && (
+                                                <ArrowUpwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                        {propertyName.key === 'postal_code' &&
+                                            propertyName.direction === 'descending' && (
+                                                <ArrowDownwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                    </TableCell>
+                                    <TableCell onClick={() => requestSort('status')}>Status
+                                        {propertyName.key === 'status' &&
+                                            propertyName.direction === 'ascending' && (
+                                                <ArrowUpwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                        {propertyName.key === 'status' &&
+                                            propertyName.direction === 'descending' && (
+                                                <ArrowDownwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+
+                                    </TableCell>
                                     <TableCell>Veprime</TableCell>
                                 </TableRow>
                             </TableHead>
@@ -129,7 +242,6 @@ export default function Klientet() {
                 :
                 <p className='fs-28 fw-regular' style={{ color: 'white' }} >Asnje klient i regjistruar!</p>
             }
-
         </div>
     )
 }
