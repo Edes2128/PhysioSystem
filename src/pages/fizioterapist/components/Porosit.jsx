@@ -20,6 +20,10 @@ export default function Porosit() {
     const handleChange = (event, value) => {
         setPage(value);
     };
+    const [propertyName, setProperty] = useState({
+        key: 'user',
+        direction: 'ascending'
+      });
 
     useEffect(() => {
         getOrders()
@@ -33,6 +37,19 @@ export default function Porosit() {
             order.expires_at.toString().toLowerCase().includes(search.toLowerCase()) ||
             order.price_bought.toString().toLowerCase().includes(search.toLowerCase())
     );
+
+          
+  if (propertyName !== null) {
+    orderFiltered.sort((a, b) => {
+      if (a[propertyName.key] < b[propertyName.key]) {
+        return propertyName.direction === 'ascending' ? -1 : 1;
+      }
+      if (a[propertyName.key] > b[propertyName.key]) {
+        return propertyName.direction === 'ascending' ? 1 : -1;
+      }
+      return 0;
+    });
+  }
     return (
         <>
             <div className="orders" >

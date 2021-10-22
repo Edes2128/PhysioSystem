@@ -62,11 +62,11 @@ export default function Raporte() {
             <div className="raporte-inputs flex ai-center ">
                 <div className="raporte-inputs-item flex fd-column ai-start">
                     <label className='fs-18 fw-regular' htmlFor="#">Data Fillimit</label>
-                    <input className='fs-18 fw-regular' type="date" value={dataFillimi} onChange={(e) => setDataFillimit(e.target.value)} />
+                    <input className='fs-18 fw-regular' max={date.toISOString().substring(0, 10)} type="date" value={dataFillimi} onChange={(e) => setDataFillimit(e.target.value)} />
                 </div>
                 <div className="raporte-inputs-item flex fd-column ai-start">
                     <label className='fs-18 fw-regular' htmlFor="#">Data Mbarimit</label>
-                    <input className='fs-18 fw-regular' type="date" value={dataMbarimit} onChange={(e) => setDataMbarimit(e.target.value)} />
+                    <input className='fs-18 fw-regular' max={date.toISOString().substring(0, 10)} type="date" value={dataMbarimit} onChange={(e) => setDataMbarimit(e.target.value)} />
                 </div>
             </div>
             <div className="raporte-paketat flex fd-column ai-start">
@@ -127,7 +127,7 @@ export default function Raporte() {
                                 {raporte.slice(start, end).map((item, index) => (
                                     <TableRow key={index} >
                                         <TableCell>{item.paket}</TableCell>
-                                        <TableCell>{item.price_bought}</TableCell>
+                                        <TableCell>{item.price_bought} €</TableCell>
                                         <TableCell>{item.user}</TableCell>
                                         <TableCell>{item.bought_at}</TableCell>
                                     </TableRow>
