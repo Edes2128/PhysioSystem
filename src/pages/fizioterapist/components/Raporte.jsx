@@ -16,7 +16,7 @@ export default function Raporte() {
     const headers = [
         { label: "Paketa", key: "paket" },
         { label: "Cmimi Blerjes", key: "price_bought" },
-        { label: "klienti", key: "user" },
+        { label: "Klienti", key: "user" },
         { label: "Data e Blerjes", key: "bought_at" }
     ];
 
