@@ -35,9 +35,6 @@ export default function Raporte() {
     }, [])
 
     const gjeneroRaport = () => {
-        if (paketat.length === 0) {
-            alert('Duhet te zgjidhni te pakten 1 paket')
-        } else {
             setShow(true)
             setRaporte([])
             axios.post('https://physiosystem.alcodeit.com/fizio/generateReport', { dataFillimi, dataMbarimit, paketat }).then(res => {
@@ -49,7 +46,6 @@ export default function Raporte() {
                     setShow(false)
                 }
             })
-        }
     }
 
     return (
