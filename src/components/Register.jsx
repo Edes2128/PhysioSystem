@@ -64,7 +64,7 @@ export default function Register({ history }) {
                     <img src="/images/orange.png" alt="" />
                 </div>
                 <div className="register-form-inputs flex ai-start fd-column">
-                    <label className="fs-16 fw-regular" htmlFor="#">Name</label>
+                    <label className="fs-16 fw-regular" htmlFor="#">Fullname</label>
                     <input className="fs-16 fw-regular" type="text" value={name} onChange={(e) => setName(e.target.value)} />
                 </div>
                 <div className="register-form-inputs flex ai-start fd-column">
