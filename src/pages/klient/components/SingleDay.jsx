@@ -64,11 +64,14 @@ export default function SingleDay({ match }) {
                     }
                     <div className="singleday-videos flex fd-column ai-start">
                         <p className="singleday-videos-title fs-24 fw-semib">Videos <sup> ({single.videos && single.videos.length})</sup> </p>
-                        <div className="singleday-videos-items flex ai-center fd-column">
+                        <div className="singleday-videos-items flex ai-start fd-column" style={{marginTop:'30px'}}>
                             {single.videos && single.videos.map(video => (
+                                <>
+                                <p className='fs-18 fw-regular' style={{marginBottom:'20px'}} > {video.reps} reps / {video.sets} sets </p>
                                 <div key={video.src} className="singleday-videos-item" onContextMenu={e => e.preventDefault()} >
                                     <video id='videos' preload='metadata' controls className="img-res" controlsList="nodownload" src={`https://physiosystem.alcodeit.com/files/${single && video.src}`}></video>
                                 </div>
+                                </>
                             ))}
                         </div>
                     </div>
