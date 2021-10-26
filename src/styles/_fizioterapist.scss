@@ -1585,15 +1585,53 @@
           color: $orange;
         }
         &-items {
-          flex-wrap: wrap;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          column-gap: 30px;
+          row-gap: 1em;
+          grid-auto-rows: 1fr;
           width: 100%;
           margin-top: 20px;
           &-video {
             max-width: 400px;
-            margin-right: 145px;
             margin-bottom: 20px;
-            &:nth-child(3n) {
-              margin-right: 0;
+            position: relative;
+  
+            &-stats{
+              width: 100%;
+              margin-top: 10px;
+              &-input{
+                width: 100%;
+                margin-right: 20px;
+                &:last-child{
+                  margin-right: 0;
+                }
+                label{
+                  color: white;
+                  margin-bottom: 10px;
+                  background-color: #363348;
+                  padding: 10px;
+                }
+                input{
+                  border: 1px solid #363348;
+                  background-color: transparent;
+                  padding: 10px;
+                  color: white;
+                  outline: none;
+                }
+              }
+            }
+            button{
+              background-color: red;
+              border: 0;
+              outline: none;
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              position: absolute;
+              top: 10px;
+              right: 10px;
+              cursor: pointer;
             }
           }
         }
