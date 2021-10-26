@@ -135,7 +135,7 @@ export default function Media() {
                         {activeTab === 'get' &&
                             <div className="media-library-content-get ">
                                 {videos.map((video, index) => (
-                                    <>
+                               
                                         <div
                                             key={video.id}
                                             onClick={() => {
@@ -144,7 +144,6 @@ export default function Media() {
                                                 } else {
                                                     let newData = [...arrCompare];
                                                     setArrCompare(newData.filter(item => item !== video))
-
                                                 }
                                             }}
                                             className={arrCompare.some(item => item === video) === true ? "media-library-content-get-item active flex" : "media-library-content-get-item  flex"}>
@@ -163,7 +162,7 @@ export default function Media() {
                                             >
                                             </video>                                           
                                         </div>
-                                    </>
+                              
                                 ))}
                             </div>
                         }

@@ -33,8 +33,6 @@ export default function EditPackage({ match }) {
         type
     } = mediaContext;
 
-
-
     useEffect(() => {
         axios.post('https://physiosystem.alcodeit.com/fizio/getSinglePackage', { package_id: match.params.package_id }).then(res => {
             setPackage(res.data)
@@ -324,9 +322,64 @@ export default function EditPackage({ match }) {
                                                 <div className="flex" >
                                                     <video controls className="img-res" src={`https://physiosystem.alcodeit.com/files/${video.src}`}></video>
                                                 </div>
-                                                <button className="fs-18 fw-regular" onClick={() => {
+                                                <button className="fs-18 fw-regular flex ai-center jc-center" onClick={() => {
                                                     removeVideoDay(index, index2, video)
-                                                }} >Fshi</button>
+                                                }} >
+                                                                       <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                                    width="20" height="20" viewBox="0 0 788.000000 980.000000"
+                                                    preserveAspectRatio="xMidYMid meet">
+                                                    <metadata>
+                                                        Created by potrace 1.16, written by Peter Selinger 2001-2019
+                                                    </metadata>
+                                                    <g transform="translate(0.000000,980.000000) scale(0.100000,-0.100000)"
+                                                        fill="#ffffff" stroke="none">
+                                                        <path d="M2445 9785 c-232 -51 -410 -208 -493 -437 l-27 -73 -3 -347 -3 -347
+                                                    -687 -3 -687 -3 -70 -24 c-112 -37 -193 -87 -281 -175 -65 -65 -89 -98 -122
+                                                    -166 -64 -134 -72 -193 -72 -540 l0 -300 3941 0 3940 0 -3 333 c-4 314 -5 336
+                                                    -27 402 -36 110 -87 193 -170 276 -85 85 -149 124 -266 166 l-80 28 -592 3
+                                                    -591 3 -5 332 c-5 373 -8 392 -80 532 -58 114 -172 226 -287 282 -157 77 -56
+                                                    73 -1757 72 -1219 0 -1530 -3 -1578 -14z m3095 -910 l0 -305 -1512 2 -1513 3
+                                                    -3 303 -2 302 1515 0 1515 0 0 -305z"/>
+                                                        <path d="M612 3643 l3 -3098 23 -70 c40 -118 81 -184 172 -276 70 -71 100 -94
+                                                    170 -127 163 -78 -81 -72 2970 -72 3051 0 2807 -6 2970 72 153 73 283 226 342
+                                                    403 l23 70 3 3098 2 3097 -3340 0 -3340 0 2 -3097z m1808 -248 l0 -2155 -295
+                                                    0 -295 0 0 2155 0 2155 295 0 295 0 0 -2155z m1210 0 l0 -2155 -300 0 -300 0
+                                                    0 2155 0 2155 300 0 300 0 0 -2155z m1210 0 l0 -2155 -295 0 -295 0 0 2155 0
+                                                    2155 295 0 295 0 0 -2155z m1210 0 l0 -2155 -300 0 -300 0 0 2155 0 2155 300
+                                                    0 300 0 0 -2155z"/>
+                                                    </g>
+                                                </svg>
+                                                </button>
+                                                <div className="edit-package-ditet-items-item-bottom-videos-content-stats flex ai-center">
+                                                    <div className="edit-package-ditet-items-item-bottom-videos-content-stats-input flex fd-column ai-start">
+                                                        <label className='fs-16 fw-regular' htmlFor="#">Reps</label>
+                                                        <input 
+                                                        className='fs-16 fw-regular' 
+                                                        value={video.reps} 
+                                                        type="number" 
+                                                        onChange={(e) => {
+                                                            let newdata = [...days];
+                                                            const item = newdata[index].videos[index2];
+                                                            item.reps = parseInt(e.target.value);
+                                                            setDays(prev => [...prev], item)
+                                                        }}
+                                                        />
+                                                    </div>
+                                                    <div className="edit-package-ditet-items-item-bottom-videos-content-stats-input flex fd-column ai-start">
+                                                        <label className='fs-16 fw-regular' htmlFor="#">Sets</label>
+                                                        <input 
+                                                        className='fs-16 fw-regular' 
+                                                        type="number" 
+                                                        value={video.sets} 
+                                                        onChange={(e) => {
+                                                            let newdata = [...days];
+                                                            const item = newdata[index].videos[index2];
+                                                            item.sets = parseInt(e.target.value);
+                                                            setDays(prev => [...prev], item)
+                                                        }}
+                                                        />
+                                                    </div>
+                                                </div>
                                             </div>
                                         ))}
                                     </div>

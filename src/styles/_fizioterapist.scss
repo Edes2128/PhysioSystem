@@ -499,18 +499,45 @@
             row-gap: 1em;
             grid-auto-rows: 1fr;
             &-item {
+              
               max-width: 500px;
               margin-bottom: 20px;
+              position: relative;
               button {
-                margin-top: 15px;
                 background-color: red;
                 color: white;
                 border: 0;
                 outline: none;
-                padding: 14px 0;
-                width: 50%;
-                border-radius: 20px;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
                 cursor: pointer;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+              }
+              &-stats{
+                width: 100%;
+                margin-top: 10px;
+                &-input{
+                  margin-right: 20px;
+                  label{
+                    padding: 10px !important;
+                    width: auto;
+                    border-radius: 0 !important;
+                    margin-bottom: 10px;
+                  }
+                  input{
+                    background-color: transparent;
+                    border: 1px solid #363348;
+                    padding: 10px;
+                    color: white;
+                    outline: none;
+                  }
+                  &:last-child{
+                    margin-right: 0;
+                  }
+                } 
               }
             }
           }
@@ -1388,16 +1415,42 @@
             &-content {
               max-width: 500px;
               margin-bottom: 20px;
+              position: relative;
               button {
-                width: 50%;
+                width: 40px;
+                height: 40px;
                 background-color: red;
                 color: white;
                 border: 0;
                 outline: none;
+                position: absolute;
+                top: 10px;
+                right: 10px;
                 cursor: pointer;
-                margin-top: 20px;
-                padding: 10px 0;
-                border-radius: 10px;
+                border-radius: 50%;
+              }
+              &-stats{
+                width: 100%;
+                margin-top: 10px;
+                &-input{
+                  margin-right: 20px;
+                  label{
+                    color: white;
+                    background-color: #363348;
+                    padding: 10px;
+                    margin-bottom: 10px;
+                  }
+                  input{
+                    color: white;
+                    padding: 10px;
+                    border: 1px solid #363348;
+                    outline: none;
+                    background-color: transparent;
+                  }
+                  &:last-child{
+                    margin-right: 0;
+                  }
+                }
               }
             }
           }

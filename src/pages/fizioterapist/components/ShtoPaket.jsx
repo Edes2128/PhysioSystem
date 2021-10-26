@@ -4,6 +4,7 @@ import MediaContext from '../../../context/media/MediaContext';
 import AlertContext from '../../../context/alerts/AlertContext';
 import LoadingContext from '../../../context/loading/LoadingContext';
 import Loading from '../../../components/Loading'
+import {ReactComponent as Close} from '../../../images/CLOSE.svg'
 
 export default function ShtoPaket({history}) {
 
@@ -97,7 +98,7 @@ export default function ShtoPaket({history}) {
             })
         }
     }
-
+console.log(days)
     const removeVideo = (index2, video) => {
         let newdata2 = [...videos];
         setVideos(newdata2.filter((item, index) => index !== index2))
@@ -435,7 +436,6 @@ export default function ShtoPaket({history}) {
                                                 setShowMedia(true)
                                                 setArrCompare(day.day_videos)
                                                 setArrName(index)
-
                                             }} >Ngarko Videot</label>
                                         </>
                                         :
@@ -448,12 +448,9 @@ export default function ShtoPaket({history}) {
 
                                                 }}
                                                 htmlFor={`video-extra-day-${index}`}>Shto Video Te Tjera</label>
-
                                         </>
                                     }
-
                                     {day.day_videos.length !== 0 &&
-
                                         <div className="shtopaket-form-days-item-bottom-preview " >
 
                                             {day.day_videos.map((video, index2) => (
@@ -465,7 +462,65 @@ export default function ShtoPaket({history}) {
                                                         onClick={() => {
                                                             removeVideoDay(index, index2, video)
                                                         }}
-                                                        className="fs-16 fw-regular" type="button" >Fshi Videon </button>
+                                                        className="flex ai-center jc-center fs-16 fw-regular" type="button" > 
+                                                                  <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                                    width="20" height="20" viewBox="0 0 788.000000 980.000000"
+                                                    preserveAspectRatio="xMidYMid meet">
+                                                    <metadata>
+                                                        Created by potrace 1.16, written by Peter Selinger 2001-2019
+                                                    </metadata>
+                                                    <g transform="translate(0.000000,980.000000) scale(0.100000,-0.100000)"
+                                                        fill="#ffffff" stroke="none">
+                                                        <path d="M2445 9785 c-232 -51 -410 -208 -493 -437 l-27 -73 -3 -347 -3 -347
+                                                    -687 -3 -687 -3 -70 -24 c-112 -37 -193 -87 -281 -175 -65 -65 -89 -98 -122
+                                                    -166 -64 -134 -72 -193 -72 -540 l0 -300 3941 0 3940 0 -3 333 c-4 314 -5 336
+                                                    -27 402 -36 110 -87 193 -170 276 -85 85 -149 124 -266 166 l-80 28 -592 3
+                                                    -591 3 -5 332 c-5 373 -8 392 -80 532 -58 114 -172 226 -287 282 -157 77 -56
+                                                    73 -1757 72 -1219 0 -1530 -3 -1578 -14z m3095 -910 l0 -305 -1512 2 -1513 3
+                                                    -3 303 -2 302 1515 0 1515 0 0 -305z"/>
+                                                        <path d="M612 3643 l3 -3098 23 -70 c40 -118 81 -184 172 -276 70 -71 100 -94
+                                                    170 -127 163 -78 -81 -72 2970 -72 3051 0 2807 -6 2970 72 153 73 283 226 342
+                                                    403 l23 70 3 3098 2 3097 -3340 0 -3340 0 2 -3097z m1808 -248 l0 -2155 -295
+                                                    0 -295 0 0 2155 0 2155 295 0 295 0 0 -2155z m1210 0 l0 -2155 -300 0 -300 0
+                                                    0 2155 0 2155 300 0 300 0 0 -2155z m1210 0 l0 -2155 -295 0 -295 0 0 2155 0
+                                                    2155 295 0 295 0 0 -2155z m1210 0 l0 -2155 -300 0 -300 0 0 2155 0 2155 300
+                                                    0 300 0 0 -2155z"/>
+                                                    </g>
+                                                </svg>
+                                                        </button>
+                                                        <div className="shtopaket-form-days-item-bottom-preview-item-stats flex ai-center ">
+                                                        <div className="shtopaket-form-days-item-bottom-preview-item-stats-input flex fd-column ai-start">
+                                                                <label htmlFor="#">Reps</label>
+                                                                <input  
+                                                                className='fs-16 fw-regular' 
+
+                                                                type="number" 
+                                                                onChange={(e) => {
+                                                                    let newdata = [...days];
+                                                                    const item = newdata[index];
+                                                                    let videos = [...item.day_videos];
+                                                                    let itemVideo = videos[index2]
+                                                                    itemVideo.reps = parseInt(e.target.value) 
+                                                                    
+                                                                }}
+                                                                />
+                                                            </div>
+                                                            <div className="shtopaket-form-days-item-bottom-preview-item-stats-input flex fd-column ai-start">
+                                                                <label htmlFor="#">Sets</label>
+                                                                <input 
+                                                                className='fs-16 fw-regular' 
+                                                                type="number" 
+                                                                onChange={(e) => {
+                                                                    let newdata = [...days];
+                                                                    const item = newdata[index];
+                                                                    let videos = [...item.day_videos];
+                                                                    let itemVideo = videos[index2]
+                                                                    itemVideo.sets = parseInt(e.target.value) 
+                                                                    
+                                                                }}
+                                                                />
+                                                            </div>
+                                                        </div>
                                                 </div>
                                             ))}
 
