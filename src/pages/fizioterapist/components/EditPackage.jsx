@@ -6,10 +6,8 @@ import Loading from '../../../components/Loading'
 import { Link } from 'react-router-dom'
 import LoadingContext from '../../../context/loading/LoadingContext'
 export default function EditPackage({ match }) {
-
     const loadingContext = useContext(LoadingContext)
     const { show, setShow } = loadingContext
-
     const alertContext = useContext(AlertContext)
     const { setAlert } = alertContext
     const [singlePackage, setPackage] = useState({})

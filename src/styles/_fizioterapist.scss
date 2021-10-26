@@ -499,7 +499,6 @@
             row-gap: 1em;
             grid-auto-rows: 1fr;
             &-item {
-              
               max-width: 500px;
               margin-bottom: 20px;
               position: relative;
@@ -516,28 +515,28 @@
                 top: 10px;
                 right: 10px;
               }
-              &-stats{
+              &-stats {
                 width: 100%;
                 margin-top: 10px;
-                &-input{
+                &-input {
                   margin-right: 20px;
-                  label{
+                  label {
                     padding: 10px !important;
                     width: auto;
                     border-radius: 0 !important;
                     margin-bottom: 10px;
                   }
-                  input{
+                  input {
                     background-color: transparent;
                     border: 1px solid #363348;
                     padding: 10px;
                     color: white;
                     outline: none;
                   }
-                  &:last-child{
+                  &:last-child {
                     margin-right: 0;
                   }
-                } 
+                }
               }
             }
           }
@@ -1429,25 +1428,25 @@
                 cursor: pointer;
                 border-radius: 50%;
               }
-              &-stats{
+              &-stats {
                 width: 100%;
                 margin-top: 10px;
-                &-input{
+                &-input {
                   margin-right: 20px;
-                  label{
+                  label {
                     color: white;
                     background-color: #363348;
                     padding: 10px;
                     margin-bottom: 10px;
                   }
-                  input{
+                  input {
                     color: white;
                     padding: 10px;
                     border: 1px solid #363348;
                     outline: none;
                     background-color: transparent;
                   }
-                  &:last-child{
+                  &:last-child {
                     margin-right: 0;
                   }
                 }
@@ -1596,23 +1595,23 @@
             max-width: 400px;
             margin-bottom: 20px;
             position: relative;
-  
-            &-stats{
+
+            &-stats {
               width: 100%;
               margin-top: 10px;
-              &-input{
+              &-input {
                 width: 100%;
                 margin-right: 20px;
-                &:last-child{
+                &:last-child {
                   margin-right: 0;
                 }
-                label{
+                label {
                   color: white;
                   margin-bottom: 10px;
                   background-color: #363348;
                   padding: 10px;
                 }
-                input{
+                input {
                   border: 1px solid #363348;
                   background-color: transparent;
                   padding: 10px;
@@ -1621,7 +1620,7 @@
                 }
               }
             }
-            button{
+            button {
               background-color: red;
               border: 0;
               outline: none;
