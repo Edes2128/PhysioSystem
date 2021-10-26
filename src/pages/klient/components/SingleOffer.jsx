@@ -8,10 +8,10 @@ export default function SingleOffer({ match }) {
     const clientContext = useContext(ClientContext);
     const { getMyPackages, mypackages, cart, getCart } = clientContext
     const [packages, setPackages] = useState([])
-    if (mypackages) {
-        var packages2 = mypackages.map(item => item.packages[0]);
+    if (mypackages.length !== 0) {
+        var packages2 = mypackages.map(item => item);
         var checker = (arr, target) => target.every(v => arr.includes(v));
-        var myids = packages2.map(item => item.id)
+        var myids = mypackages.map(item => item.id)
         var pacids = packages.map(item => item.id)
     }
     useEffect(() => {
@@ -21,11 +21,12 @@ export default function SingleOffer({ match }) {
         getMyPackages()
         getCart()
     }, [match.params.offerid])
+
     return (
         <div className="single-offer" >
             <>
 
-                {checker(myids, pacids) === true ?
+                {mypackages.length !== 0 && checker(myids, pacids) === true ?
                     <p className="fs-30 fw-regular" >You have all packages of this offer!</p>
                     :
                     <>

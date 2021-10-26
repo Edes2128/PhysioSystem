@@ -32,7 +32,7 @@ export default function EditPackage({ match }) {
         setType,
         type
     } = mediaContext;
-
+console.log(newDays)
     useEffect(() => {
         axios.post('https://physiosystem.alcodeit.com/fizio/getSinglePackage', { package_id: match.params.package_id }).then(res => {
             setPackage(res.data)
