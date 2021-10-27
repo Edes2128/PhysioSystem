@@ -83,8 +83,8 @@ export default function RegisterWeb({ history }) {
 
                 <button className="register-form-submit-btn fs-16 fw-regular" >Register</button>
                 <div className="register-form-links flex ai-center jc-spaceb">
-                    <Link className="fs-14 fw-medium" to={`/?product_id=${productId.product_id}`} >Already a member?</Link>
                     <a className='fs-14 fw-medium' href="https://onphysiopal.alcodeit.com/why-login/">Why signup?</a>
+                    <Link className="fs-14 fw-medium" to={`/?product_id=${productId.product_id}`} >Already a member?</Link>
                 </div>
             </form>
         </div>

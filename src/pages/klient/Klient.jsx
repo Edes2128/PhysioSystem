@@ -16,11 +16,27 @@ export default function Klient({ history }) {
         localStorage.removeItem('el')
     }
     const checkLogin = () => {
-        axios.post('https://physiosystem.alcodeit.com/user/checkIsLoggedIN', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
-            if(res.data.status === 0){
-                logout()
-            }
-        })
+        if (!localStorage.getItem('el') ||
+            localStorage.getItem('el') === null ||
+            localStorage.getItem('el') === "" ||
+            localStorage.getItem('token') === "" ||
+            localStorage.getItem('token') === null ||
+            !localStorage.getItem('token') === null ||
+            JSON.parse(localStorage.getItem('token')) === null ||
+            JSON.parse(localStorage.getItem('token')) === "" ||
+            !JSON.parse(localStorage.getItem('token')) ||
+            localStorage.getItem('op') === null ||
+            localStorage.getItem('op') === "" ||
+            !localStorage.getItem('op')
+        ) {
+            logout();
+        } else {
+            axios.post('https://physiosystem.alcodeit.com/user/checkIsLoggedIN', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
+                if (res.data.status === 0) {
+                    logout()
+                }
+            })
+        }
     }
     useEffect(() => {
         setInterval(() => checkLogin(), 60000)
