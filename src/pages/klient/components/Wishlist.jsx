@@ -48,7 +48,7 @@ export default function Wishlist() {
                                 </div>
                                 <button type="button" onClick={() => {
                                     setShow(true)
-                                    axios.post('https://physiosystem.alcodeit.com/client/removeWishlist', { user_id: localStorage.getItem('op'), id: wish.package_id }).then(res => {
+                                    axios.post('https://physiosystem.alcodeit.com/client/removeWishlist', { token: JSON.parse(localStorage.getItem('token')), id: wish.package_id }).then(res => {
                                         getWishtlist()
                                         setTimeout(() => setShow(false), 1000)
                                     })
@@ -63,9 +63,9 @@ export default function Wishlist() {
                                         className="wishlist-paketat-item-bottom-add-btn flex ai-center jc-center fs-16 fw-medium"
                                         onClick={() => {
                                             setShow(true)
-                                            axios.post('https://physiosystem.alcodeit.com/client/addCart', { user_id: localStorage.getItem('op'), package_id: wish.package_id }).then(res => {
+                                            axios.post('https://physiosystem.alcodeit.com/client/addCart', { token: JSON.parse(localStorage.getItem('token')), package_id: wish.package_id }).then(res => {
                                                 getCart()
-                                                axios.post('https://physiosystem.alcodeit.com/client/removeWishlist', { user_id: localStorage.getItem('op'), id: wish.package_id }).then(res => {
+                                                axios.post('https://physiosystem.alcodeit.com/client/removeWishlist', { token: JSON.parse(localStorage.getItem('token')), id: wish.package_id }).then(res => {
                                                     getWishtlist()
                                                     setTimeout(() => setShow(false), 1000)
                                                 })
