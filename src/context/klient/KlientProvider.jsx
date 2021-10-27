@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import ClientContext from './klientContext'
 import axios from 'axios'
 
@@ -10,12 +10,6 @@ export default function KlientProvider({ children }) {
     const [cart, setCart] = useState([]);
     const [mypackages, setMypackages] = useState([])
     const [orders, setOrders] = useState([])
-
-    useEffect(() => {
-        axios.post('https://physiosystem.alcodeit.com/user/getCurrentUser', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
-            setCurrentUser(res.data[0])
-        })
-    }, [])
 
 
     const getOrders = () => {
