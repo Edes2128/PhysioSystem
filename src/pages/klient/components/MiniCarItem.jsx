@@ -39,8 +39,8 @@ export default function MiniCarItem({ image, title, oferta, new_price, price, pa
             onApprove: async (data, actions) => {
                 const order = await actions.order.capture();
                 console.log(order)
-                axios.post('https://physiosystem.alcodeit.com/client/buySinglePackage', { user_id: localStorage.getItem('op'), package_id, price_bought: oferta ? new_price : price }).then(res => {
-                    axios.post('https://physiosystem.alcodeit.com/client/removeCart', { user_id: localStorage.getItem('op'), package_id: package_id }).then(res => {
+                axios.post('https://physiosystem.alcodeit.com/client/buySinglePackage', { token: JSON.parse(localStorage.getItem('token')), package_id, price_bought: oferta ? new_price : price }).then(res => {
+                    axios.post('https://physiosystem.alcodeit.com/client/removeCart', { token: JSON.parse(localStorage.getItem('token')), package_id: package_id }).then(res => {
                         getCart()
                         getMyPackages()
                     })
@@ -71,7 +71,7 @@ export default function MiniCarItem({ image, title, oferta, new_price, price, pa
                     style={{ width: '30px', cursor: 'pointer' }}
                     onClick={() => {
                         setShow(true)
-                        axios.post('https://physiosystem.alcodeit.com/client/removeCart', { user_id: localStorage.getItem('op'), package_id: package_id }).then(res => {
+                        axios.post('https://physiosystem.alcodeit.com/client/removeCart', { token: JSON.parse(localStorage.getItem('token')), package_id: package_id }).then(res => {
                             getCart()
                             setShow(false)
                         })

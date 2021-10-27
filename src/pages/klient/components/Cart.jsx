@@ -110,7 +110,7 @@ export default function Cart() {
                                         <Separator />
                                         <RemoveCart onClick={() => {
                                             setShow(true)
-                                            axios.post('https://physiosystem.alcodeit.com/client/removeCart', { user_id: localStorage.getItem('op'), package_id: item.package_id }).then(res => {
+                                            axios.post('https://physiosystem.alcodeit.com/client/removeCart', { token: JSON.parse(localStorage.getItem('token')), package_id: item.package_id }).then(res => {
                                                 if (res.status === 200) {
                                                     setTimeout(() => setShow(false), 1000)
                                                     getCart()

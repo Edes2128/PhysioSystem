@@ -2,9 +2,12 @@ import React, { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import ClientContext from '../../../context/klient/klientContext'
+import LoadingContext from '../../../context/loading/LoadingContext'
 
 export default function SingleOffer({ match }) {
 
+    const loadingContext = useContext(LoadingContext);
+    const { setShow } = loadingContext
     const clientContext = useContext(ClientContext);
     const { getMyPackages, mypackages, cart, getCart } = clientContext
     const [packages, setPackages] = useState([])
@@ -15,8 +18,10 @@ export default function SingleOffer({ match }) {
         var pacids = packages.map(item => item.id)
     }
     useEffect(() => {
+        setShow(true)
         axios.post('https://physiosystem.alcodeit.com/client/getOfferPackages', { id: match.params.offerid }).then(res => {
             setPackages(res.data)
+            setShow(false)
         })
         getMyPackages()
         getCart()
@@ -55,8 +60,11 @@ export default function SingleOffer({ match }) {
                                                 :
                                                 <button className="fs-18 fw-regular"
                                                     onClick={() => {
-                                                        axios.post('https://physiosystem.alcodeit.com/client/addCart', { user_id: localStorage.getItem('op'), package_id: paket.id }).then(res => {
+                                                        setShow(true)
+                                                        axios.post('https://physiosystem.alcodeit.com/client/addCart', { token: JSON.parse(localStorage.getItem('token')), package_id: paket.id }).then(res => {
                                                             getCart()
+                                                            setShow(false)
+
                                                         })
                                                     }}
                                                 >Add to Cart</button>
