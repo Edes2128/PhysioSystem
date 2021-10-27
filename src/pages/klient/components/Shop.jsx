@@ -20,7 +20,7 @@ export default function Shop() {
         getWishtlist()
         getMyPackages()
         expireMyPackage()
-        axios.get('https://physiosystem.alcodeit.com/client/getTrialPackages').then(res => {
+        axios.post('https://physiosystem.alcodeit.com/client/getTrialPackages', { token: JSON.parse(localStorage.getItem('token')) }).then(res => {
             setTrialPackages(res.data)
         })
     }, [])

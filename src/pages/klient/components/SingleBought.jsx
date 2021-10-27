@@ -11,7 +11,7 @@ export default function SingleBought({ match }) {
 
     useEffect(() => {
         setShow(true)
-        axios.post('https://physiosystem.alcodeit.com/client/getSingleBought', { user_id: localStorage.getItem('op'), package_id: match.params.id }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com/client/getSingleBought', { token: JSON.parse(localStorage.getItem('token')), package_id: match.params.id }).then(res => {
             setSingle(res.data)
             setDays(res.data.package.days)
             setTimeout(() => setShow(false), 1000)
@@ -36,8 +36,6 @@ export default function SingleBought({ match }) {
             var unWatchedAllMins = unWatched.map(item => item.videos_total_min)
             var totalUnwatchedMins = unWatchedAllMins.reduce(reducer)
         }
-
-        console.log(totalUnwatchedMins)
     }
 
     return (

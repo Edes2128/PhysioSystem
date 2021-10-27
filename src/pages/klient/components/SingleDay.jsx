@@ -10,7 +10,7 @@ export default function SingleDay({ match }) {
 
     useEffect(() => {
         setShow(true)
-        axios.post('https://physiosystem.alcodeit.com/client/getSingleDay', { user_id: localStorage.getItem('op'), day_id: match.params.dayid, package_id: match.params.id }).then(res => {
+        axios.post('https://physiosystem.alcodeit.com/client/getSingleDay', { token: JSON.parse(localStorage.getItem('token')), day_id: match.params.dayid, package_id: match.params.id }).then(res => {
             setSingle(res.data)
             setTimeout(() => setShow(false), 1000)
         })
@@ -19,7 +19,7 @@ export default function SingleDay({ match }) {
 
     useEffect(() => {
         if (single.day_status !== undefined && single.day_status === 0) {
-            setTimeout(() => axios.post('https://physiosystem.alcodeit.com/client/updateDayStatus', { user_id: localStorage.getItem('op'), day_id: match.params.dayid, package_id: match.params.id }), 10000)
+            setTimeout(() => axios.post('https://physiosystem.alcodeit.com/client/updateDayStatus', { token: JSON.parse(localStorage.getItem('token')), day_id: match.params.dayid, package_id: match.params.id }), 10000)
         }
     }, [single.day_status])
 
