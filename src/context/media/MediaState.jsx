@@ -5,7 +5,7 @@ export default function MediaState({ children }) {
     const [showMedia, setShowMedia] = useState(false)
     const [files, setFiles] = useState([]);
     const [localFiles, setLocalFiles] = useState([])
-    const [videos, setVideos] = useState([])
+    const [videos, setVideos] = useState([{title: ''}])
     const [arrCompare, setArrCompare] = useState([])
     const [arrName, setArrName] = useState('')
     const [type, setType] = useState(0)

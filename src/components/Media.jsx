@@ -53,7 +53,9 @@ export default function Media() {
 
         axios.get('https://physiosystem.alcodeit.com/fizio/getVideos').then(res => {
             setVideos(res.data)
+
         })
+
 
     }, [])
 
@@ -134,8 +136,7 @@ export default function Media() {
                         }
                         {activeTab === 'get' &&
                             <div className="media-library-content-get ">
-                                {videos.map((video, index) => (
-                               
+                                {videos && videos.map((video, index) => (
                                         <div
                                             key={video.id}
                                             onClick={() => {

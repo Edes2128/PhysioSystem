@@ -518,6 +518,37 @@ export default function ShtoPaket({ history }) {
                                                                 }}
                                                             />
                                                         </div>
+                                                        <div className="shtopaket-form-days-item-bottom-preview-item-stats-input flex fd-column ai-start">
+                                                            <label htmlFor="#">Hold</label>
+                                                            <input
+                                                                className='fs-16 fw-regular'
+                                                                type="number"
+                                                                onChange={(e) => {
+                                                                    let newdata = [...days];
+                                                                    const item = newdata[index];
+                                                                    let videos = [...item.day_videos];
+                                                                    let itemVideo = videos[index2]
+                                                                    itemVideo.hold = parseInt(e.target.value)
+
+                                                                }}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div className="shtopaket-form-days-item-bottom-preview-item-title flex fd-column ai-start">
+                                                        <label htmlFor="#">Titulli Videos</label>
+                                                        <input 
+                                                        className='fs-16 fw-regular' 
+                                                        type="text"
+                                                        onChange={(e) => {
+                                                            let newdata = [...days];
+                                                            const item = newdata[index];
+                                                            let videos = [...item.day_videos];
+                                                            let itemVideo = videos[index2]
+                                                            itemVideo.title = e.target.value
+                                                            console.log(days)
+
+                                                        }}
+                                                        />
                                                     </div>
                                                 </div>
                                             ))}

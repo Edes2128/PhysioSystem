@@ -19,7 +19,9 @@ export default function Raporte() {
         { label: "Paketa", key: "paket" },
         { label: "Cmimi Blerjes", key: "price_bought" },
         { label: "Klienti", key: "user" },
+        { label: "Email", key: "email" },
         { label: "Data e Blerjes", key: "bought_at" }
+
     ];
 
     let date = new Date()
@@ -187,6 +189,20 @@ export default function Raporte() {
                                                 />
                                             )}
                                     </TableCell>
+                                    <TableCell onClick={() => requestSort('email')}>Email
+                                        {propertyName.key === 'email' &&
+                                            propertyName.direction === 'ascending' && (
+                                                <ArrowUpwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                        {propertyName.key === 'email' &&
+                                            propertyName.direction === 'descending' && (
+                                                <ArrowDownwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                    </TableCell>
                                     <TableCell onClick={() => requestSort('bought_at')}>Data e Blerjes
                                         {propertyName.key === 'bought_at' &&
                                             propertyName.direction === 'ascending' && (
@@ -209,6 +225,7 @@ export default function Raporte() {
                                         <TableCell>{item.paket}</TableCell>
                                         <TableCell>{item.price_bought} €</TableCell>
                                         <TableCell>{item.user}</TableCell>
+                                        <TableCell>{item.email}</TableCell>
                                         <TableCell>{item.bought_at}</TableCell>
                                     </TableRow>
                                 ))}

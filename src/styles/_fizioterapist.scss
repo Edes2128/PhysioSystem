@@ -515,11 +515,29 @@
                 top: 10px;
                 right: 10px;
               }
+              &-title{
+                margin-top: 20px;
+                width: 100%;
+                label{
+                  padding: 10px !important;
+                  border-radius: 0 !important;
+                  margin-bottom: 10px;
+                }
+                input{
+                  background-color: transparent;
+                  border: 1px solid #363348;
+                  width: 100%;
+                  outline: none;
+                  padding: 10px;
+                  color: white;
+                }
+              }
               &-stats {
                 width: 100%;
                 margin-top: 10px;
                 &-input {
                   margin-right: 20px;
+                  width: 30%;
                   label {
                     padding: 10px !important;
                     width: auto;
@@ -532,6 +550,7 @@
                     padding: 10px;
                     color: white;
                     outline: none;
+                    width: 100%;
                   }
                   &:last-child {
                     margin-right: 0;
@@ -1428,11 +1447,30 @@
                 cursor: pointer;
                 border-radius: 50%;
               }
+              &-title{
+                margin-top: 20px;
+                width: 100%;
+                label{
+                  padding: 10px;
+                  color: white;
+                  background-color: #363348;
+                  margin-bottom: 10px;
+                }
+                input{
+                  width: 100%;
+                  background-color: transparent;
+                  border: 1px solid #363348;
+                  outline: none;
+                  color: white;
+                  padding: 10px;
+                }
+              }
               &-stats {
                 width: 100%;
                 margin-top: 10px;
                 &-input {
                   margin-right: 20px;
+                  width: 30%;
                   label {
                     color: white;
                     background-color: #363348;
@@ -1440,6 +1478,7 @@
                     margin-bottom: 10px;
                   }
                   input {
+                    width: 100%;
                     color: white;
                     padding: 10px;
                     border: 1px solid #363348;
@@ -1595,12 +1634,29 @@
             max-width: 400px;
             margin-bottom: 20px;
             position: relative;
-
+            &-title{
+              margin-top: 20px;
+              width: 100%;
+              label{
+                background-color: #363348;
+                color: white;
+                padding: 10px;
+                margin-bottom: 10px;
+              }
+              input{
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #363348;
+                background-color: transparent;
+                outline: none;
+                color: white;
+              }
+            }
             &-stats {
               width: 100%;
               margin-top: 10px;
               &-input {
-                width: 100%;
+                width: 30%;
                 margin-right: 20px;
                 &:last-child {
                   margin-right: 0;
@@ -1617,6 +1673,7 @@
                   padding: 10px;
                   color: white;
                   outline: none;
+                  width: 100%;
                 }
               }
             }

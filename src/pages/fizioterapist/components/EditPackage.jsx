@@ -377,6 +377,35 @@ export default function EditPackage({ match }) {
                                                             }}
                                                         />
                                                     </div>
+                                                    <div className="edit-package-ditet-items-item-bottom-videos-content-stats-input flex fd-column ai-start">
+                                                        <label className='fs-16 fw-regular' htmlFor="#">Hold</label>
+                                                        <input
+                                                            className='fs-16 fw-regular'
+                                                            type="number"
+                                                            value={video.hold}
+                                                            onChange={(e) => {
+                                                                let newdata = [...days];
+                                                                const item = newdata[index].videos[index2];
+                                                                item.hold = parseInt(e.target.value);
+                                                                setDays(prev => [...prev], item)
+                                                            }}
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="edit-package-ditet-items-item-bottom-videos-content-title flex fd-column ai-start">
+                                                    <label htmlFor="#">Titulli i Videos</label>
+                                                    <input
+                                                        className='fs-16 fw-regular'
+                                                        type="text"
+                                                        value={video.title}
+
+                                                        onChange={(e) => {
+                                                            let newdata = [...days];
+                                                            const item = newdata[index].videos[index2];
+                                                            item.title = e.target.value;
+                                                            setDays(prev => [...prev], item)
+                                                        }}
+                                                    />
                                                 </div>
                                             </div>
                                         ))}
@@ -595,6 +624,32 @@ export default function EditPackage({ match }) {
                                                                 }}
                                                             />
                                                         </div>
+                                                        <div className="edit-package-add-days-item-bottom-items-video-stats-input flex fd-column ai-start">
+                                                            <label className='fs-16 fw-regular' htmlFor="#">Hold</label>
+                                                            <input
+                                                                className='fs-16 fw-regular'
+                                                                type="number"
+                                                                onChange={(e) => {
+                                                                    let newdata = [...newDays];
+                                                                    const item = newdata[index].day_videos[index2];
+                                                                    item.hold = parseInt(e.target.value);
+                                                                    setDays(prev => [...prev], item)
+                                                                }}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div className="edit-package-add-days-item-bottom-items-video-title flex fd-column ai-start">
+                                                        <label htmlFor="#">Titulli i Videos</label>
+                                                        <input
+                                                            type="text"
+                                                            className='fs-16 fw-regular'
+                                                            onChange={(e) => {
+                                                                let newdata = [...newDays];
+                                                                const item = newdata[index].day_videos[index2];
+                                                                item.title = e.target.value;
+                                                                setDays(prev => [...prev], item)
+                                                            }}
+                                                        />
                                                     </div>
                                                 </div>
                                             ))}
