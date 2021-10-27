@@ -37,9 +37,11 @@ export default function Klient({ history }) {
                 }
             })
         }
+
     }
     useEffect(() => {
-        setInterval(() => checkLogin(), 60000)
+        let interval = setInterval(checkLogin, 60000)
+        return () => clearInterval(interval)
     }, [])
     return (
         <div className="klient" >
