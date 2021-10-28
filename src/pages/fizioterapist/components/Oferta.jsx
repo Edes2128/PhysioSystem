@@ -11,7 +11,8 @@ import { ReactComponent as Edit } from '../../../images/edit-icon.svg'
 import { ReactComponent as Delete } from '../../../images/delete-icon.svg'
 import { ReactComponent as AddOffer } from '../../../images/add-offer.svg'
 import axios from 'axios'
-
+import ArrowUpwardOutlinedIcon from '@material-ui/icons/ArrowUpwardOutlined';
+import ArrowDownwardOutlinedIcon from '@material-ui/icons/ArrowDownwardOutlined';
 
 export default function Oferta() {
     const fizioContext = useContext(FizioContext)
@@ -24,6 +25,34 @@ export default function Oferta() {
     const handleChange = (event, value) => {
         setPage(value);
     };
+    const [propertyName, setProperty] = useState({
+        key: '',
+        direction: 'ascending'
+    });
+
+    if (propertyName !== null) {
+        offers.sort((a, b) => {
+            if (a[propertyName.key] < b[propertyName.key]) {
+                return propertyName.direction === 'ascending' ? -1 : 1;
+            }
+            if (a[propertyName.key] > b[propertyName.key]) {
+                return propertyName.direction === 'ascending' ? 1 : -1;
+            }
+            return 0;
+        });
+    }
+    const requestSort = (key) => {
+        let direction = 'ascending';
+        if (
+            propertyName &&
+            propertyName.key === key &&
+            propertyName.direction === 'ascending'
+        ) {
+            direction = 'descending';
+        }
+        setProperty({ key, direction });
+    };
+
     useEffect(() => {
         getOffers()
         expireOffer()
@@ -68,11 +97,81 @@ export default function Oferta() {
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Titulli Ofertes</TableCell>
-                                    <TableCell>Data Krijimit</TableCell>
-                                    <TableCell>Data Mbarimit</TableCell>
-                                    <TableCell>Ulja</TableCell>
-                                    <TableCell>Status</TableCell>
+                                    <TableCell onClick={() => requestSort('titulli')}>
+                                        Titulli Ofertes
+                                        {propertyName.key === 'titulli' &&
+                                            propertyName.direction === 'ascending' && (
+                                                <ArrowUpwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                        {propertyName.key === 'titulli' &&
+                                            propertyName.direction === 'descending' && (
+                                                <ArrowDownwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                    </TableCell>
+                                    <TableCell onClick={() => requestSort('date_created')}>
+                                        Data Krijimit
+                                        {propertyName.key === 'date_created' &&
+                                            propertyName.direction === 'ascending' && (
+                                                <ArrowUpwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                        {propertyName.key === 'date_created' &&
+                                            propertyName.direction === 'descending' && (
+                                                <ArrowDownwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                    </TableCell>
+                                    <TableCell onClick={() => requestSort('end_date')}>
+                                        Data Mbarimit
+                                        {propertyName.key === 'end_date' &&
+                                            propertyName.direction === 'ascending' && (
+                                                <ArrowUpwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                        {propertyName.key === 'end_date' &&
+                                            propertyName.direction === 'descending' && (
+                                                <ArrowDownwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                    </TableCell>
+                                    <TableCell onClick={() => requestSort('ulja')}>
+                                        Ulja
+                                        {propertyName.key === 'ulja' &&
+                                            propertyName.direction === 'ascending' && (
+                                                <ArrowUpwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                        {propertyName.key === 'ulja' &&
+                                            propertyName.direction === 'descending' && (
+                                                <ArrowDownwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                    </TableCell>
+                                    <TableCell onClick={() => requestSort('status')}>
+                                        Status
+                                        {propertyName.key === 'status' &&
+                                            propertyName.direction === 'ascending' && (
+                                                <ArrowUpwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                        {propertyName.key === 'status' &&
+                                            propertyName.direction === 'descending' && (
+                                                <ArrowDownwardOutlinedIcon
+                                                    style={{ fontSize: '17px' }}
+                                                />
+                                            )}
+                                    </TableCell>
                                     <TableCell>Veprime</TableCell>
                                 </TableRow>
                             </TableHead>
